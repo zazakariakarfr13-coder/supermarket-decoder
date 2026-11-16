@@ -19,7 +19,7 @@ A public educational website and marketing hub by Zakaria Froud. It helps everyd
 
 The complete 53-page paid PDF is **not included** in this repository. Do not upload the paid PDF, customer information, order exports, or private Gumroad files here. This is a public repository.
 
-The landing-page purchase buttons currently point to an on-page notice. Add the verified Gumroad product URL before promoting this page as a live sales destination.
+The four landing-page purchase buttons point to the Gumroad product URL currently configured in `index.html`: https://zakarfr.gumroad.com/l/supermarket-decoder. I verified the four button destinations in the repository source; confirm the checkout page itself is active in Gumroad before sending paid traffic.
 
 ## Publish with GitHub Pages
 
