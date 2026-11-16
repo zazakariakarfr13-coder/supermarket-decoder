@@ -317,7 +317,7 @@
         <div class="item reveal"><div class="ic" aria-hidden="true">🧭</div><div><h3>What "ultra-processed" really means</h3><p>The 4-level scale scientists use, and what the research does and doesn't prove.</p></div></div>
         <div class="item reveal"><div class="ic" aria-hidden="true">⏱️</div><div><h3>The 30-second scan</h3><p>A 3-step method that works on any pack, in any country.</p></div></div>
         <div class="item reveal"><div class="ic" aria-hidden="true">🍬</div><div><h3>Sugar's many names</h3><p>Syrups, dextrose, maltodextrin and the "splitting" trick that hides sugar.</p></div></div>
-        <div class="item reveal"><div class="ic" aria-hidden="true">🔢</div><div><h3>Every E-number family</h3><p>Which are harmless (E300 is vitamin C) and which are worth limiting.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">🔢</div><div><h3>Every E-number family</h3><p>What additive codes identify, what functions they serve, and how to assess them in context.</p></div></div>
         <div class="item reveal"><div class="ic" aria-hidden="true">🏷️</div><div><h3>Marketing claims decoded</h3><p>What "light" and "high protein" legally mean, and when a "natural" claim is defined or just marketing.</p></div></div>
         <div class="item reveal"><div class="ic" aria-hidden="true">🛒</div><div><h3>7 aisles of swaps</h3><p>Bread, cereals, dairy, drinks, snacks, sauces, ready meals: better picks, same budget.</p></div></div>
         <div class="item reveal"><div class="ic" aria-hidden="true">🧒</div><div><h3>Kids' food and lunchboxes</h3><p>Sugar shown in sugar cubes, lunchbox ideas and a "label detective" card.</p></div></div>
@@ -440,12 +440,12 @@
     { n: "Palm fat", k: "warn", t: "Factory fat", d: "Semi-solid, cheap and stable. Keeps the bar firm for months. Rich in saturated fat." },
     { n: "Humectant: glycerol", k: "sig", t: "Texture additive", d: "Holds water so the bar stays soft. You would never add it at home. Signal of ultra-processing." },
     { n: "Dextrose", k: "sig", t: "Another sugar", d: "Another name for glucose. Using several sugars keeps each one lower in the list: the 'splitting' trick." },
-    { n: "Emulsifier: soy lecithin", k: "ok", t: "Friendly E-number (E322)", d: "From soya. Helps chocolate stay smooth. Among the harmless additives explained in Chapter 4." },
+    { n: "Emulsifier: soy lecithin", k: "ok", t: "Emulsifier (E322)", d: "Lecithins help ingredients such as oil and water stay mixed. E322 identifies lecithins; its presence alone does not make a product good or bad." },
     { n: "Flavouring", k: "sig", t: "Taste replacement", d: "Puts back the taste lost in processing. 'Flavouring' alone may be made by chemical synthesis. Signal of ultra-processing." }
   ];
   var box = document.getElementById("tokens"), ex = document.getElementById("explain"), sc = document.getElementById("score");
   var seen = {};
-  var label = { ok: "Kitchen / friendly", warn: "Worth a look", sig: "Industrial signal" };
+  var label = { ok: "Basic ingredient", warn: "Read the context", sig: "Processing clue" };
   items.forEach(function (it, i) {
     var b = document.createElement("button");
     b.type = "button"; b.className = "tok " + it.k; b.textContent = it.n; b.setAttribute("aria-pressed", "false");
@@ -459,9 +459,9 @@
       ex.querySelector(".d").textContent = it.d;
       var keys = Object.keys(seen), sig = keys.filter(function (k) { return seen[k] === "sig"; }).length;
       if (keys.length === items.length) {
-        sc.innerHTML = 'Verdict: <span>' + sig + ' industrial signals → Swap.</span> The guide shows three better picks at a similar price.';
+        sc.innerHTML = 'Result: <span>' + sig + ' processing clues.</span> Compare the full ingredient list, nutrition values and price before deciding.';
       } else {
-        sc.textContent = "Decoded " + keys.length + " of " + items.length + " · signals found: " + sig;
+        sc.textContent = "Decoded " + keys.length + " of " + items.length + " · processing clues found: " + sig;
       }
     });
     box.appendChild(b);
