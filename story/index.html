@@ -260,6 +260,21 @@ footer a{color:#e7b94c;text-decoration:none}
   *,*:before,*:after{animation:none!important;transition:none!important}
 }
 
+
+/* New recurring investigator artwork: same two redesigned characters in every case */
+.hero-art{padding:0;aspect-ratio:3/2;background:#c6ad7d}
+.hero-comic-image{display:block;width:100%;height:100%;background-image:url('../assets/label-detective-cases.jpg');background-size:300% auto;background-position:50% 100%;background-repeat:no-repeat}
+.art{aspect-ratio:1;min-height:0;height:auto;display:block;position:relative}
+.art-case{background-image:url('../assets/label-detective-cases.jpg');background-size:300% 200%;background-repeat:no-repeat;background-color:#c5ab7a}
+.art-case-01{background-position:0 0}
+.art-case-02{background-position:50% 0}
+.art-case-03{background-position:100% 0}
+.art-case-04{background-position:0 100%}
+.art-case-05{background-position:50% 100%}
+.art-case-06{background-position:100% 100%}
+.art-case:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(7deg,transparent 0 8px,rgba(32,43,40,.10) 9px,transparent 10px 16px);mix-blend-mode:multiply}
+@media(max-width:820px){.art{aspect-ratio:1;min-height:0;height:auto}}
+
 </style>
 </head>
 <body>
@@ -275,145 +290,8 @@ footer a{color:#e7b94c;text-decoration:none}
     <h1>Let's visualise this scenario… <span>The Snack Aisle Plot Twist</span></h1>
     <p class="intro">One bold package. One curious shopper. Six tiny clues. And a movie night that gets saved by the humble act of turning a packet around.</p>
     <div class="stamp">Case file 07 · Snack aisle mystery</div>
-    <div class="hero-art" role="img" aria-label="Comic illustration of Maya and Nico in a supermarket snack aisle, inspecting a colourful snack packet">
-      <svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn animated supermarket aisle: two young food detectives investigate a snack packet while a cheeky cracker mascot peeks from the shopping basket">
-<defs>
-  <linearGradient id="aisleSky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f2e4bf"/><stop offset="1" stop-color="#b4c0a0"/></linearGradient>
-  <linearGradient id="leftShelf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#314b42"/><stop offset=".55" stop-color="#61704d"/><stop offset="1" stop-color="#263b32"/></linearGradient>
-  <linearGradient id="rightShelf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a97942"/><stop offset=".55" stop-color="#d1aa67"/><stop offset="1" stop-color="#6a573d"/></linearGradient>
-  <linearGradient id="floorWood" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c9a977"/><stop offset="1" stop-color="#77664c"/></linearGradient>
-  <linearGradient id="packet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4cb56"/><stop offset=".6" stop-color="#d99b37"/><stop offset="1" stop-color="#9c472d"/></linearGradient>
-  <linearGradient id="hoodie" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#cc6e43"/><stop offset="1" stop-color="#8e3b2d"/></linearGradient>
-  <linearGradient id="jacket" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#66775b"/><stop offset="1" stop-color="#2d3d35"/></linearGradient>
-  <filter id="softInk" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="2" seed="9" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.15" xChannelSelector="R" yChannelSelector="G"/></filter>
-  <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur stdDeviation="7"/></filter>
-  <pattern id="hatch" width="14" height="14" patternUnits="userSpaceOnUse"><path d="M0 14L14 0" stroke="#202b28" stroke-opacity=".18" stroke-width="1.5"/></pattern>
-  <g id="tin"><rect x="0" y="0" width="52" height="70" rx="6" fill="#d6b66d" stroke="#242e28" stroke-width="4"/><path d="M0 18h52M6 11h40" stroke="#242e28" stroke-width="3"/><path d="M9 31h34M9 40h26M9 49h30" stroke="#76573b" stroke-width="2.5"/></g>
-</defs>
-<g filter="url(#softInk)">
-  <rect width="1200" height="620" fill="url(#aisleSky)"/>
-  <path d="M0 0H1200V85L760 290H450L0 100Z" fill="#f7edcf"/>
-  <path d="M0 0L355 0L505 455L0 525Z" fill="url(#leftShelf)" stroke="#202b28" stroke-width="10"/>
-  <path d="M1200 0H855L705 455L1200 520Z" fill="url(#rightShelf)" stroke="#202b28" stroke-width="10"/>
-  <!-- left shelf structure -->
-  <g stroke="#1d2a27" stroke-width="8" fill="none">
-    <path d="M25 100L340 90M17 215L382 205M10 335L423 320M0 450L468 420"/>
-    <path d="M88 0L173 505M223 0L303 495"/>
-  </g>
-  <g stroke="#202b28" stroke-width="4">
-    <rect x="36" y="22" width="78" height="76" rx="7" fill="#bf7a43" transform="rotate(-5 36 22)"/>
-    <rect x="139" y="26" width="82" height="68" rx="7" fill="#d9bd76"/>
-    <rect x="246" y="26" width="72" height="70" rx="7" fill="#8d9c72"/>
-    <rect x="29" y="132" width="92" height="72" rx="7" fill="#b75b3b"/>
-    <rect x="144" y="127" width="86" height="78" rx="7" fill="#e5bb5a"/>
-    <rect x="255" y="127" width="104" height="76" rx="7" fill="#728d75"/>
-    <rect x="18" y="254" width="116" height="68" rx="7" fill="#e2c57c"/>
-    <rect x="154" y="245" width="105" height="73" rx="7" fill="#b25d3c"/>
-    <rect x="281" y="237" width="115" height="76" rx="7" fill="#8c9c7b"/>
-    <rect x="13" y="372" width="125" height="64" rx="7" fill="#a8ae86"/>
-    <rect x="159" y="360" width="120" height="68" rx="7" fill="#e1b65f"/>
-    <rect x="303" y="348" width="105" height="70" rx="7" fill="#bb7546"/>
-  </g>
-  <g stroke="#202b28" stroke-width="3" fill="none" opacity=".7">
-    <path d="M47 51h50m-50 15h34m75-25h45m-45 16h35m-177 111h58m-58 15h45m109-18h59m-59 16h42m82-14h62m-62 17h45m-220 111h78m-78 17h50m91-18h67m-67 17h52m-188 117h81m-81 16h55"/>
-  </g>
-  <!-- right shelf -->
-  <g stroke="#2b2b21" stroke-width="8" fill="none">
-    <path d="M860 92L1187 120M822 205L1193 237M782 320L1198 348M742 425L1200 458"/>
-    <path d="M1004 0L935 495M1110 0L1051 512"/>
-  </g>
-  <g stroke="#292a23" stroke-width="4">
-    <rect x="878" y="24" width="78" height="75" rx="8" fill="#d9b45c"/>
-    <rect x="970" y="21" width="90" height="79" rx="8" fill="#8c9b70"/>
-    <rect x="1073" y="30" width="98" height="76" rx="8" fill="#bc6340"/>
-    <rect x="843" y="132" width="86" height="72" rx="8" fill="#bc6741"/>
-    <rect x="942" y="138" width="96" height="72" rx="8" fill="#e2c47a"/>
-    <rect x="1050" y="147" width="128" height="76" rx="8" fill="#768a70"/>
-    <rect x="805" y="252" width="90" height="65" rx="8" fill="#839473"/>
-    <rect x="910" y="260" width="118" height="63" rx="8" fill="#b56a45"/>
-    <rect x="1043" y="272" width="135" height="65" rx="8" fill="#e0bd6c"/>
-    <rect x="766" y="368" width="100" height="64" rx="8" fill="#e1ba65"/>
-    <rect x="884" y="377" width="118" height="62" rx="8" fill="#748b71"/>
-    <rect x="1023" y="390" width="155" height="66" rx="8" fill="#b96342"/>
-  </g>
-  <!-- center aisle and light -->
-  <path d="M0 515L472 366H748L1200 520V620H0Z" fill="url(#floorWood)" stroke="#202b28" stroke-width="8"/>
-  <path d="M0 558L475 407M1200 559L725 407M0 600L505 447M1200 603L700 447" stroke="#403e2e" stroke-width="3" opacity=".55"/>
-  <path d="M0 620L1200 620" stroke="#202b28" stroke-width="10"/>
-  <path d="M525 0L535 84L576 110L615 83L626 0" fill="#d1b783" stroke="#202b28" stroke-width="7"/>
-  <path d="M535 110L516 164M615 110L637 165" stroke="#202b28" stroke-width="4"/>
-  <path d="M548 96H610L600 129H559Z" fill="#e7c56f" stroke="#202b28" stroke-width="5"/>
-  <path d="M570 130L545 272H647L587 130Z" fill="#f8e5b0" opacity=".35"/>
-  <!-- cart and motion -->
-  <ellipse cx="660" cy="555" rx="295" ry="33" fill="#292d27" opacity=".35" filter="url(#shadow)"/>
-  <g id="hero-cart" stroke="#202b28" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M774 381L987 398L946 546L746 529Z" fill="#a54832"/>
-    <path d="M767 382L720 349" fill="none" stroke-width="11"/>
-    <path d="M791 405L955 418M778 443L943 456M765 481L932 494" stroke="#d28a4e" stroke-width="4"/>
-    <circle cx="793" cy="553" r="28" fill="#333b35"/><circle cx="793" cy="553" r="11" fill="#bca16a"/>
-    <circle cx="926" cy="560" r="28" fill="#333b35"/><circle cx="926" cy="560" r="11" fill="#bca16a"/>
-  </g>
-  <!-- crumb mascot peeking over basket -->
-  <g id="hero-crumb" stroke="#282e27" stroke-width="6" stroke-linejoin="round">
-    <path d="M806 382Q797 344 825 328Q840 314 859 330Q886 318 897 347Q914 369 895 390Z" fill="#d9ad55"/>
-    <circle cx="837" cy="356" r="6" fill="#202b28" stroke="none"/><circle cx="868" cy="354" r="6" fill="#202b28" stroke="none"/>
-    <path d="M840 372Q855 386 874 370" fill="none" stroke="#202b28" stroke-width="5"/>
-    <path d="M822 335l-13-13m72 1 10-14" stroke="#202b28" stroke-width="4"/>
-  </g>
-  <!-- Nico / the label detective -->
-  <g id="hero-nico" stroke="#202b28" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M420 478Q422 370 497 348Q575 335 637 402L681 540H434Z" fill="url(#jacket)"/>
-    <path d="M457 393Q431 425 425 478L478 485Q504 436 535 415" fill="#415746"/>
-    <path d="M501 340Q463 302 476 251Q486 201 554 199Q615 207 625 269Q631 331 571 351Q522 362 501 340Z" fill="#c98e68"/>
-    <path d="M474 271Q452 211 507 181Q536 163 580 179Q625 196 628 250Q607 227 574 225Q533 223 498 261L481 285Z" fill="#27342e"/>
-    <path d="M487 214q-14-19 7-31m35 0q-10-22 8-28m38 20q12-21 26-10m-123 67q-19-4-25-19" fill="none" stroke-width="9"/>
-    <path d="M520 265q9-9 20 0m40 0q8-8 18 0" fill="none" stroke-width="5"/>
-    <ellipse cx="533" cy="271" rx="5" ry="8" fill="#202b28" stroke="none"/><ellipse cx="568" cy="271" rx="5" ry="8" fill="#202b28" stroke="none"/>
-    <path d="M536 300q18 13 35-1" fill="none" stroke-width="5"/>
-    <path d="M518 342L559 370L590 343" fill="#f2e5ce" stroke-width="5"/>
-    <path d="M527 375L552 405L581 374" fill="#a84834" stroke-width="5"/>
-    <path d="M520 419Q573 446 615 411" fill="none" stroke="#1e2c27" stroke-width="6"/>
-  </g>
-  <!-- Maya / partner holding magnifier -->
-  <g id="hero-maya" stroke="#202b28" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M735 402Q760 337 831 328Q900 338 928 418L945 535H735Z" fill="url(#hoodie)"/>
-    <path d="M761 360Q741 306 780 257Q820 208 877 242Q922 266 917 320Q909 371 862 381Q801 388 761 360Z" fill="#c98d69"/>
-    <path d="M758 287Q737 239 788 202Q822 160 883 196Q935 225 919 284Q900 255 883 251Q842 237 821 260Q793 286 758 287Z" fill="#2a322b"/>
-    <path d="M770 218q-23-18-8-43m37 18q-8-31 18-42m42 42q24-19 39-2m-121 70q-22-12-25-29" fill="none" stroke-width="10"/>
-    <path d="M810 295q12-12 24-1m42 0q12-12 23 0" fill="none" stroke-width="5"/>
-    <ellipse cx="823" cy="300" rx="5" ry="8" fill="#202b28" stroke="none"/><ellipse cx="865" cy="300" rx="5" ry="8" fill="#202b28" stroke="none"/>
-    <path d="M828 332q22 20 46 0" fill="none" stroke-width="6"/>
-    <path d="M795 356Q764 385 723 410" fill="none" stroke-width="24"/>
-    <path d="M892 362Q921 381 947 408" fill="none" stroke-width="22"/>
-  </g>
-  <!-- magnifier lens -->
-  <g stroke="#202b28" stroke-linecap="round">
-    <circle cx="714" cy="382" r="66" fill="#dfe0c9" fill-opacity=".65" stroke-width="10"/>
-    <circle cx="714" cy="382" r="53" fill="none" stroke="#efe7c9" stroke-width="4"/>
-    <path d="M757 426L799 476" stroke-width="19" stroke="#5a513c"/>
-    <path d="M697 354Q719 338 739 356" fill="none" stroke="#fff5dc" stroke-width="6" opacity=".8"/>
-  </g>
-  <!-- package being inspected -->
-  <g id="hero-package" transform="translate(624 323) rotate(-8)" stroke="#202b28" stroke-width="7" stroke-linejoin="round">
-    <path d="M0 0L145 -10L156 152L14 165Z" fill="url(#packet)"/>
-    <path d="M7 16L143 7L145 34L9 43Z" fill="#a84731"/>
-    <path d="M18 57L134 48L137 116L24 128Z" fill="#f5e5bf" stroke-width="4"/>
-    <text x="78" y="83" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-weight="900" font-size="19" fill="#26352e" stroke="none">NATURAL!</text>
-    <path d="M44 96L115 91M40 108L121 103" stroke="#677354" stroke-width="3"/>
-    <path d="M31 143q45-21 95-13" stroke="#a84731" stroke-width="5" fill="none"/>
-  </g>
-  <!-- yellow discovery rays -->
-  <g id="hero-rays" stroke="#f1c64e" stroke-width="9" stroke-linecap="round">
-    <path d="M602 270l-16-28M651 251l-3-35M700 244l12-31M748 260l28-19M583 306l-32-4"/>
-  </g>
-  <!-- action scuffs and ink marks -->
-  <g fill="none" stroke="#202b28" stroke-width="5" stroke-linecap="round" opacity=".78">
-    <path d="M346 423q-25 11-35 31m29-54q-28 4-41 18m600-207q22-17 46-14m-15 33q22-5 37-2"/>
-    <path d="M388 557l-28 8m55 10l-42 16m471-8l42 11m-19-29l35 4"/>
-  </g>
-  <path d="M0 0H1200V620H0Z" fill="url(#hatch)" opacity=".12" pointer-events="none"/>
-</g>
-</svg>
+    <div class="hero-art" role="img" aria-label="Comic illustration of Leo and Rami in a supermarket snack aisle, inspecting a colourful snack packet">
+      <div class="hero-comic-image" role="img" aria-label="The redesigned Label Detective duo examining supermarket food labels in six illustrated moments"></div>
     </div>
     <div class="hero-note">Characters and package shown are fictional. The label examples below are teaching props, not real products.</div>
   </div>
@@ -422,41 +300,24 @@ footer a{color:#e7b94c;text-decoration:none}
 <main class="wrap">
   <section class="story-intro">
     <div class="eyebrow">Previously, in the snack aisle…</div>
-    <h2>Maya came in for one snack. She left with a new superpower.</h2>
+    <h2>Leo came in for one snack. She left with a new superpower.</h2>
     <p>Not X-ray vision. Not the ability to hear a crisp packet open from three rooms away. Just a simple way to read the information already printed on a food label.</p>
   </section>
 
   <section class="comic" aria-label="The six-scene comic story">
     <article class="scene" id="case-01">
-      <div class="art">
-        <svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Maya picks a bright snack pack from a supermarket shelf">
-          <rect width="520" height="330" fill="#f4dca1"/><path d="M0 260h520v70H0z" fill="#d4c5a7"/>
-          <path d="M30 45h460v195H30z" fill="#fff8e9" stroke="#13321f" stroke-width="7" rx="18"/>
-          <path d="M30 145h460M30 210h460" stroke="#13321f" stroke-width="7"/>
-          <g stroke="#13321f" stroke-width="4"><rect x="53" y="70" width="56" height="62" rx="7" fill="#f2b51c"/><rect x="119" y="70" width="56" height="62" rx="7" fill="#d9481c"/><rect x="185" y="70" width="56" height="62" rx="7" fill="#a8c78e"/><rect x="280" y="70" width="56" height="62" rx="7" fill="#e8a3a3"/><rect x="346" y="70" width="56" height="62" rx="7" fill="#f2b51c"/><rect x="412" y="70" width="56" height="62" rx="7" fill="#a8c78e"/></g>
-          <g transform="translate(170 155)" stroke="#13321f" stroke-width="6" stroke-linejoin="round"><path d="M0 0h118l-8 150H9z" fill="#f2b51c"/><path d="M6 20h105" stroke="#d9481c" stroke-width="17"/><text x="59" y="61" fill="#13321f" stroke="none" text-anchor="middle" font-size="15" font-weight="900">NATURAL</text><text x="59" y="84" fill="#13321f" stroke="none" text-anchor="middle" font-size="12" font-weight="900">REAL FRUIT</text><circle cx="59" cy="115" r="19" fill="#d79a62"/></g>
-          <g stroke="#13321f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M40 322q0-78 55-78t58 78" fill="#d9481c"/><circle cx="95" cy="212" r="43" fill="#d7a27f"/><path d="M52 206q0-53 47-52 38 0 42 46-32-24-89 6z" fill="#263d2c"/><path d="M81 217q7 6 14 0m13 0q7 6 14 0" fill="none"/><path d="M86 233q13 11 26 0" fill="none"/></g>
-          <path d="M278 28q0-17 18-17h190q18 0 18 17v43q0 17-18 17H296q-18 0-18-17z" fill="#fffdf8" stroke="#13321f" stroke-width="5"/><text x="383" y="56" text-anchor="middle" font-family="Arial" font-size="18" font-weight="900" fill="#13321f">OHHH. SHINY.</text>
-        </svg>
-      </div>
+      <div class="art art-case art-case-01" role="img" aria-label="The dark-haired detective and goggle-helmeted partner investigate a snack package with a natural claim"></div>
       <div class="copy">
         <div class="case">Scene 01 · The opening claim</div>
         <h3>“This snack looks like it has a personal trainer.”</h3>
-        <div class="bubble"><small>Maya</small>“Natural! Real fruit! Power bite! It practically came with a motivational podcast.”</div>
-        <div class="bubble alt"><small>Nico</small>“The front is doing a lot of talking. Let's hear the other side.”</div>
-        <p>Maya turns the packet around. The investigation begins.</p>
+        <div class="bubble"><small>Leo</small>“Natural! Real fruit! Power bite! It practically came with a motivational podcast.”</div>
+        <div class="bubble alt"><small>Rami</small>“The front is doing a lot of talking. Let's hear the other side.”</div>
+        <p>Leo turns the packet around. The investigation begins.</p>
       </div>
     </article>
 
     <article class="scene" id="case-02">
-      <div class="art">
-        <svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A magnifying glass enlarges the ingredient list on a snack package">
-          <rect width="520" height="330" fill="#dcebdd"/>
-          <g transform="translate(95 35)" stroke="#13321f" stroke-width="7"><rect width="240" height="255" rx="14" fill="#fffdf8"/><path d="M0 48h240" stroke="#d9481c" stroke-width="12"/><text x="18" y="30" font-family="Arial" font-size="16" font-weight="900" fill="#13321f" stroke="none">INGREDIENTS</text><g stroke="#7b8979" stroke-width="3"><path d="M18 78h198M18 111h198M18 144h198M18 177h198M18 210h150"/></g><g fill="#13321f" stroke="none" font-family="Arial" font-size="14" font-weight="800"><text x="18" y="101">Rolled oats</text><text x="18" y="134">Dates</text><text x="18" y="167">Peanut butter</text><text x="18" y="200">Cocoa · honey · salt</text></g></g>
-          <circle cx="354" cy="153" r="78" fill="rgba(255,255,255,.4)" stroke="#13321f" stroke-width="10"/><path d="M411 212l63 69" stroke="#13321f" stroke-width="20" stroke-linecap="round"/><circle cx="354" cy="153" r="61" fill="none" stroke="#f2b51c" stroke-width="6"/>
-          <path d="M348 42q0-20 20-20h118q20 0 20 20v38q0 20-20 20H368q-20 0-20-20z" fill="#fffdf8" stroke="#13321f" stroke-width="5"/><text x="427" y="66" text-anchor="middle" font-family="Arial" font-size="17" font-weight="900" fill="#13321f">ZOOM!</text>
-        </svg>
-      </div>
+      <div class="art art-case art-case-02" role="img" aria-label="The two detectives examine ingredient names and clues about different sugars"></div>
       <div class="copy">
         <div class="case">Scene 02 · Read the recipe</div>
         <h3>The first few ingredients tell a story.</h3>
@@ -464,44 +325,26 @@ footer a{color:#e7b94c;text-decoration:none}
           <b>INGREDIENTS</b>
           <ol><li>Rolled oats</li><li>Dates</li><li>Peanut butter</li><li>Cocoa</li><li>Honey</li><li>Sea salt</li></ol>
         </div>
-        <div class="bubble"><small>Nico</small>“In the U.S., ingredients are generally listed from most to least by weight. Start with the first few, then read the whole list.”</div>
+        <div class="bubble"><small>Rami</small>“In the U.S., ingredients are generally listed from most to least by weight. Start with the first few, then read the whole list.”</div>
         <div class="fact">Clue: the order helps you understand what makes up more of this recipe. It is not a complete nutrition score.</div>
       </div>
     </article>
 
     <article class="scene" id="case-03">
-      <div class="art">
-        <svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sugar-related ingredient names pinned on a detective clue board">
-          <rect width="520" height="330" fill="#f6e9db"/>
-          <rect x="40" y="36" width="440" height="256" rx="20" fill="#b78051" stroke="#13321f" stroke-width="8"/>
-          <path d="M58 91h404M58 239h404" stroke="#e9c79e" stroke-width="5" stroke-dasharray="10 8"/>
-          <g stroke="#13321f" stroke-width="5"><rect x="63" y="111" width="112" height="82" rx="9" fill="#fffdf8" transform="rotate(-5 119 152)"/><rect x="204" y="105" width="112" height="82" rx="9" fill="#fffdf8" transform="rotate(4 260 146)"/><rect x="345" y="111" width="112" height="82" rx="9" fill="#fffdf8" transform="rotate(-3 401 152)"/></g>
-          <g font-family="Arial" font-size="14" font-weight="900" fill="#13321f" text-anchor="middle"><text x="119" y="151">HONEY</text><text x="260" y="151">DEXTROSE</text><text x="401" y="151">GLUCOSE</text><text x="401" y="169">SYRUP</text></g>
-          <g fill="#d9481c" stroke="#13321f" stroke-width="3"><circle cx="119" cy="113" r="7"/><circle cx="260" cy="108" r="7"/><circle cx="401" cy="113" r="7"/></g>
-          <path d="M100 210l80 30m70-28 85 30m10-28 70 28" stroke="#f2b51c" stroke-width="5"/>
-          <text x="260" y="274" font-family="Arial" font-size="15" font-weight="900" fill="#fffdf8" text-anchor="middle">CLUE BOARD: CHECK THE SUGARS LINE</text>
-        </svg>
-      </div>
+      <div class="art art-case art-case-03" role="img" aria-label="The detective duo studies an additive code with a magnifying glass"></div>
       <div class="copy">
         <div class="case">Scene 03 · The name game</div>
         <h3>Sugar has more than one name.</h3>
         <p>Some ingredient names you may spot include:</p>
         <div class="tags"><span class="tag">Honey</span><span class="tag">Cane sugar</span><span class="tag">Glucose syrup</span><span class="tag">Dextrose</span></div>
-        <div class="bubble alt"><small>Maya</small>“Wait. Honey is a sweetener too?”</div>
-        <div class="bubble"><small>Nico</small>“Exactly. Use the ingredient list as a clue, then check Total Sugars and Includes Added Sugars on the Nutrition Facts label.”</div>
+        <div class="bubble alt"><small>Leo</small>“Wait. Honey is a sweetener too?”</div>
+        <div class="bubble"><small>Rami</small>“Exactly. Use the ingredient list as a clue, then check Total Sugars and Includes Added Sugars on the Nutrition Facts label.”</div>
         <p>The goal is not to panic at a word. It is to understand the full picture.</p>
       </div>
     </article>
 
     <article class="scene" id="case-04">
-      <div class="art">
-        <svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A magnified Nutrition Facts panel highlights serving size and servings per container">
-          <rect width="520" height="330" fill="#e6e9d9"/>
-          <g transform="translate(113 22) rotate(-2 145 142)"><rect width="280" height="286" rx="8" fill="#fff" stroke="#111" stroke-width="7"/><text x="18" y="39" font-family="Arial" font-size="29" font-weight="900" fill="#111">Nutrition Facts</text><path d="M16 54h248" stroke="#111" stroke-width="9"/><text x="18" y="79" font-family="Arial" font-size="13" fill="#111" font-weight="700">2 servings per container</text><rect x="12" y="91" width="256" height="44" fill="#fff0bc" stroke="#d9481c" stroke-width="3"/><text x="20" y="109" font-family="Arial" font-size="12" fill="#111" font-weight="900">Serving size</text><text x="20" y="125" font-family="Arial" font-size="13" fill="#111" font-weight="900">1 bar (40g)</text><path d="M16 146h248" stroke="#111" stroke-width="7"/><text x="18" y="170" font-family="Arial" font-size="13" fill="#111" font-weight="700">Amount per serving</text><text x="18" y="201" font-family="Arial" font-size="23" fill="#111" font-weight="900">Calories 170</text><path d="M16 211h248" stroke="#111" stroke-width="5"/><text x="18" y="236" font-family="Arial" font-size="12" fill="#111">Includes Added Sugars</text><text x="239" y="236" text-anchor="end" font-family="Arial" font-size="12" fill="#111" font-weight="900">6g</text><text x="18" y="264" font-family="Arial" font-size="11" fill="#111">Illustrative label only</text></g>
-          <path d="M55 70q0-15 17-15h50q17 0 17 15v30q0 17-17 17H72q-17 0-17-17z" fill="#f2b51c" stroke="#13321f" stroke-width="4"/><text x="93" y="91" text-anchor="middle" font-family="Arial" font-size="13" font-weight="900" fill="#13321f">ONE BAR?</text>
-          <path d="M390 220q0-17 18-17h76q18 0 18 17v38q0 17-18 17h-76q-18 0-18-17z" fill="#fffdf8" stroke="#13321f" stroke-width="4"/><text x="448" y="244" text-anchor="middle" font-family="Arial" font-size="14" font-weight="900" fill="#13321f">TWO?</text>
-        </svg>
-      </div>
+      <div class="art art-case art-case-04" role="img" aria-label="The partners check a food package for allergen wording"></div>
       <div class="copy">
         <div class="case">Scene 04 · The serving-size plot twist</div>
         <h3>“I thought the whole pouch was one serving!”</h3>
@@ -515,58 +358,31 @@ footer a{color:#e7b94c;text-decoration:none}
           <div class="nf-line indent"><span>Includes Added Sugars</span><span>6g</span></div>
           <div class="nf-foot">Fictional example for learning — not a real product.</div>
         </div>
-        <div class="bubble"><small>Nico</small>“Nutrition Facts numbers are shown per serving. Check how many servings are in the pack—and how much you're actually eating.”</div>
+        <div class="bubble"><small>Rami</small>“Nutrition Facts numbers are shown per serving. Check how many servings are in the pack—and how much you're actually eating.”</div>
         <div class="fact">Quick % Daily Value guide: 5% DV or less is low; 20% DV or more is high for a nutrient.</div>
       </div>
     </article>
 
     <article class="scene" id="case-05">
-      <div class="art">
-        <svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An imaginary courtroom where an E-number is shown on a witness stand">
-          <rect width="520" height="330" fill="#d9e3ef"/>
-          <path d="M0 255h520v75H0z" fill="#b98d61"/>
-          <path d="M90 66h340v176H90z" fill="#f3e4c8" stroke="#13321f" stroke-width="7"/>
-          <path d="M120 100h280M120 135h280" stroke="#13321f" stroke-width="5"/>
-          <rect x="196" y="155" width="128" height="85" rx="13" fill="#f2b51c" stroke="#13321f" stroke-width="7"/>
-          <text x="260" y="209" font-family="Arial" font-size="39" font-weight="900" text-anchor="middle" fill="#13321f">E330?</text>
-          <path d="M35 257h450" stroke="#13321f" stroke-width="10" stroke-linecap="round"/>
-          <g stroke="#13321f" stroke-width="7" stroke-linecap="round"><path d="M75 260v45m370-45v45" /><path d="M54 306h42m350 0h42" /></g>
-          <path d="M345 63l44 22-23 42-44-22z" fill="#d9481c" stroke="#13321f" stroke-width="5"/>
-          <path d="M367 70l50 26" stroke="#f2b51c" stroke-width="12" stroke-linecap="round"/>
-          <path d="M25 36q0-17 18-17h147q18 0 18 17v35q0 18-18 18H43q-18 0-18-18z" fill="#fffdf8" stroke="#13321f" stroke-width="4"/>
-          <text x="108" y="58" text-anchor="middle" font-family="Arial" font-size="16" font-weight="900" fill="#13321f">OBJECTION?</text>
-        </svg>
-      </div>
+      <div class="art art-case art-case-05" role="img" aria-label="The two detectives compare a pair of snack packets"></div>
       <div class="copy">
         <div class="case">Scene 05 · The additive courtroom</div>
         <h3>An E-number is an ID—not a verdict.</h3>
-        <div class="bubble alt"><small>Maya</small>“E-number? Is this ingredient on trial?”</div>
-        <div class="bubble"><small>Nico</small>“Not at all. An E-number identifies an additive. Ask what job it does.”</div>
+        <div class="bubble alt"><small>Leo</small>“E-number? Is this ingredient on trial?”</div>
+        <div class="bubble"><small>Rami</small>“Not at all. An E-number identifies an additive. Ask what job it does.”</div>
         <div class="tags"><span class="tag">Preserve</span><span class="tag">Colour</span><span class="tag">Thicken</span><span class="tag">Regulate acidity</span><span class="tag">Help ingredients mix</span></div>
         <p>Different places may display additive names and codes differently. The useful question is what the ingredient does—not whether the code looks mysterious.</p>
       </div>
     </article>
 
     <article class="scene" id="case-06">
-      <div class="art">
-        <svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Maya and Nico celebrate a sensible snack choice with popcorn for movie night">
-          <rect width="520" height="330" fill="#f7df9c"/><path d="M0 255h520v75H0z" fill="#d4c5a7"/>
-          <path d="M50 54h420v190H50z" rx="18" fill="#fff8e9" stroke="#13321f" stroke-width="7"/>
-          <path d="M75 84h370" stroke="#d9481c" stroke-width="13"/>
-          <g stroke="#13321f" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M89 250q0-63 48-63t49 63" fill="#d9481c"/><circle cx="137" cy="151" r="38" fill="#d7a27f"/><path d="M101 149q0-45 39-44 34 1 37 42-31-20-76 2z" fill="#263d2c"/><path d="M123 161q8 6 15 0m9 0q7 6 14 0" fill="none"/><path d="M115 177q21 16 41 0" fill="none"/>
-          <path d="M295 250q0-63 48-63t49 63" fill="#457a59"/><circle cx="343" cy="151" r="38" fill="#a86f4c"/><path d="M307 149q0-45 39-44 34 1 37 42-31-20-76 2z" fill="#263d2c"/><path d="M329 161q8 6 15 0m9 0q7 6 14 0" fill="none"/><path d="M321 177q21 16 41 0" fill="none"/></g>
-          <g transform="translate(204 170)" stroke="#13321f" stroke-width="6"><path d="M0 26h80l-11 79H10z" fill="#fffdf8"/><path d="M8 26l14-33h40l15 33" fill="#d9481c"/><g fill="#f2b51c"><circle cx="18" cy="12" r="13"/><circle cx="39" cy="6" r="15"/><circle cx="61" cy="13" r="13"/></g><path d="M17 54q22 15 46 0" fill="none"/></g>
-          <path d="M105 28q0-17 18-17h245q18 0 18 17v34q0 18-18 18H123q-18 0-18-18z" fill="#fffdf8" stroke="#13321f" stroke-width="5"/>
-          <text x="245" y="53" font-family="Arial" font-size="17" font-weight="900" fill="#13321f" text-anchor="middle">CASE CLOSED. MOVIE NIGHT SAVED.</text>
-          <path d="M427 132l10 19 22 3-16 15 4 22-20-11-20 11 4-22-16-15 22-3z" fill="#f2b51c" stroke="#13321f" stroke-width="4"/>
-        </svg>
-      </div>
+      <div class="art art-case art-case-06" role="img" aria-label="The investigators read a nutrition panel and check serving size"></div>
       <div class="copy">
         <div class="case">Scene 06 · The good ending</div>
         <h3>No food panic. Just a smarter choice.</h3>
-        <div class="bubble"><small>Maya</small>“So the label didn't tell me what to think. It gave me better information to decide.”</div>
-        <div class="bubble alt"><small>Nico</small>“Exactly. Compare similar products, check the serving size, read the ingredients, then think about your taste, needs and budget.”</div>
-        <p>Maya picks the snack she actually wants. Nico gets the popcorn. The movie starts on time.</p>
+        <div class="bubble"><small>Leo</small>“So the label didn't tell me what to think. It gave me better information to decide.”</div>
+        <div class="bubble alt"><small>Rami</small>“Exactly. Compare similar products, check the serving size, read the ingredients, then think about your taste, needs and budget.”</div>
+        <p>Leo picks the snack she actually wants. Rami gets the popcorn. The movie starts on time.</p>
         <p><strong>Crumb, the tiny snack mascot:</strong> “A happy ending. And not one dramatic courtroom appeal.”</p>
       </div>
     </article>
