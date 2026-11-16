@@ -82,6 +82,7 @@ h1 span{display:block;color:var(--accent)}
 .pin-card{display:grid;grid-template-columns:155px 1fr;gap:17px;align-items:center;background:var(--paper);border:2px solid var(--ink);border-radius:18px;padding:13px;box-shadow:5px 6px 0 var(--ink);text-decoration:none;transition:transform .15s ease}
 .pin-card:hover{transform:translateY(-3px)}
 .pin-card img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:#e8e2d5}
+.pin-embed-card{background:var(--paper);border:2px solid var(--ink);border-radius:18px;padding:14px;box-shadow:5px 6px 0 var(--ink);overflow:hidden}.pin-embed-card h3{font:700 23px/1.1 var(--serif);margin:4px 0 8px}.pin-embed-card p{font-size:13px;color:var(--muted);margin:0 0 12px}.pin-embed-card iframe{display:block;width:100%;height:720px;border:0;border-radius:11px;background:#eee8dc}.pin-embed-link{display:inline-block;margin-top:12px;color:var(--accent);font-size:13px;font-weight:900;text-decoration:none}
 .pin-card strong{font:700 21px/1.12 var(--serif);display:block;margin-bottom:7px}
 .pin-card span{font-size:13px;color:var(--muted);display:block}
 .pin-card em{display:inline-block;margin-top:10px;color:var(--accent);font-style:normal;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}
@@ -341,15 +342,20 @@ footer a{color:#F2B51C;text-decoration:none}
     <h2>The original Pinterest cases</h2>
     <p>These are the Canva pin collections behind this little detective universe. Open a file to browse the complete set.</p>
     <div class="pin-grid">
-      <a class="pin-card" href="https://www.canva.com/d/V17sBmrWp_0Fy5d" target="_blank" rel="noopener">
-        <img src="https://design.canva.ai/nVMN5Nlwo21fXQg" alt="Cover of the Supermarket Decoder Supermarket Chaos Comic Pins collection" loading="lazy">
-        <span><strong>Supermarket Chaos Comic Pins</strong><span>Six illustrated pin concepts built around supermarket label surprises.</span><em>Open the Canva pin set ↗</em></span>
-      </a>
-      <a class="pin-card" href="https://www.canva.com/d/sOBwJ90rI9WAFdg" target="_blank" rel="noopener">
-        <img src="https://design.canva.ai/_OG5R84dY8fr_5B" alt="Cover of the Label Detective Files Pinterest pin collection" loading="lazy">
-        <span><strong>The Label Detective Files</strong><span>Five pin cases about ingredient lists, sugar names, additives and label clues.</span><em>Open the Canva pin set ↗</em></span>
-      </a>
+      <article class="pin-embed-card">
+        <h3>Supermarket Chaos Comic Pins</h3>
+        <p>Browse all six comic pins: front-of-pack claims, hidden sugar names, additives, allergen wording, smart comparisons and serving-size clues.</p>
+        <iframe src="https://www.canva.com/design/DAHbGG-o63w/view?embed" title="Supermarket Chaos Comic Pins — six-page Canva pin collection" loading="lazy" allowfullscreen></iframe>
+        <a class="pin-embed-link" href="https://www.canva.com/d/AVQpg-LrNDieqvN" target="_blank" rel="noopener">Open the six-pin Canva collection ↗</a>
+      </article>
+      <article class="pin-embed-card">
+        <h3>The Label Detective Files</h3>
+        <p>Browse all five detective pins with illustrated explanations of allergen statements, ingredient order, sugar names and E-numbers.</p>
+        <iframe src="https://www.canva.com/design/DAHbGLklNK0/view?embed" title="The Label Detective Files — five-page Canva pin collection" loading="lazy" allowfullscreen></iframe>
+        <a class="pin-embed-link" href="https://www.canva.com/d/sOBwJ90rI9WAFdg" target="_blank" rel="noopener">Open the five-pin Canva collection ↗</a>
+      </article>
     </div>
+    <p class="sources">Canva requires each design owner to enable <strong>Share → See all → Embed</strong> once before its pages can appear in an external website. Enabling an embed makes that design public; the Canva links above remain available as direct fallbacks.</p>div>
   </section>
 
   <section class="cta">
