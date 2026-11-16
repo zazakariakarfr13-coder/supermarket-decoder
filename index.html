@@ -1,2 +1,448 @@
-# Zakaria
-I collect the evidence, connect the dots, and hand you a clear conclusion you can put in your own words.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supermarket Decoder — Read any food label in 30 seconds</title>
+<meta name="description" content="Learn to read food labels in 30 seconds, understand ingredient lists and E-numbers, compare nutrition panels, and make practical supermarket swaps.">
+<style>
+  :root {
+    --bg: #F4EFE4; --paper: #FFFDF8; --ink: #13321F; --ink-2: #2B4A37; --muted: #5A7363;
+    --line: #E2DCCF; --accent: #D9481C; --accent-ink: #ffffff; --gold: #F2B51C;
+    --mint: #DCEBDD; --peach: #FBE9E1; --butter: #FCF3DC; --card: #FFFFFF;
+    --shadow: 0 10px 30px rgba(19,50,31,.10);
+    --radius: 16px;
+    --serif: "Lora", Georgia, "Times New Roman", serif;
+    --sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0E1F15; --paper: #13281B; --ink: #F1ECE0; --ink-2: #D7D1C3; --muted: #A9B8AD;
+      --line: #27402F; --accent: #F06A3E; --accent-ink: #1A0E08; --gold: #F5C443;
+      --mint: #1C3B27; --peach: #3A2219; --butter: #36301A; --card: #172F21;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  .wrap { width: min(1120px, 100% - 40px); margin-inline: auto; }
+  .skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 8px; z-index: 100; }
+  .skip:focus { left: 8px; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+
+  /* top bar */
+  .bar { background: var(--ink); color: var(--bg); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; }
+  @media (prefers-color-scheme: dark) { .bar { background: #07130C; color: var(--ink); } }
+  .bar .wrap { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; flex-wrap: wrap; }
+  .bar .dot { color: var(--gold); }
+  .launch { display: none; }
+  .launch.on { display: inline; }
+  .launch b { color: var(--gold); }
+
+  /* buttons */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: var(--accent-ink); font-weight: 800; font-size: 17px; padding: 16px 26px; border-radius: 999px; text-decoration: none; border: 0; cursor: pointer; box-shadow: 0 8px 20px rgba(217,72,28,.28); transition: transform .15s ease, box-shadow .15s ease; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(217,72,28,.34); }
+  .btn .p { background: rgba(255,255,255,.22); padding: 3px 10px; border-radius: 999px; font-size: 15px; }
+  @media (prefers-color-scheme: dark) { .btn .p { background: rgba(0,0,0,.18); } }
+  .btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
+
+  /* hero */
+  .hero { padding: 64px 0 40px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  .kicker { color: var(--accent); font-weight: 800; letter-spacing: .2em; text-transform: uppercase; font-size: 13px; }
+  h1 { font-size: clamp(42px, 7vw, 84px); line-height: .92; letter-spacing: -.035em; margin: 14px 0 18px; font-weight: 900; }
+  h1 .acc { color: var(--accent); display: block; }
+  .tagline { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.4vw, 26px); color: var(--ink-2); margin: 0 0 10px; }
+  .lead { font-family: var(--serif); font-size: 19px; color: var(--ink-2); max-width: 34ch; margin: 0 0 28px; }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .meta { margin-top: 18px; display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; color: var(--muted); font-weight: 600; }
+  .meta span::before { content: "✓ "; color: var(--accent); font-weight: 900; }
+  .rating { font-size: 14px; color: var(--muted); margin-top: 10px; }
+  .cover { position: relative; }
+  .cover img { border-radius: 14px; box-shadow: var(--shadow); transform: rotate(2deg); transition: transform .4s ease; width: 100%; max-width: 420px; margin-inline: auto; background: #F4EFE4; }
+  .cover:hover img { transform: rotate(0deg) scale(1.01); }
+  .cover .badge { position: absolute; left: 0; bottom: 30px; background: var(--gold); color: #13321F; font-weight: 900; font-size: 14px; padding: 10px 14px; border-radius: 12px; box-shadow: var(--shadow); transform: rotate(-4deg); }
+
+  /* sections */
+  section { padding: 72px 0; }
+  .alt { background: var(--paper); border-block: 1px solid var(--line); }
+  h2 { font-size: clamp(30px, 4vw, 46px); line-height: 1.05; letter-spacing: -.025em; margin: 10px 0 14px; font-weight: 900; }
+  .sub { font-family: var(--serif); font-size: 19px; color: var(--ink-2); max-width: 60ch; margin: 0 0 34px; }
+
+  /* problem */
+  .problem { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .pack { border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
+  .pack.front { background: var(--ink); color: var(--bg); }
+  @media (prefers-color-scheme: dark) { .pack.front { background: #07130C; color: var(--ink); } }
+  .pack.back { background: var(--card); border: 1px solid var(--line); }
+  .pack h3 { margin: 0 0 6px; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; }
+  .pack .big { font-size: 34px; font-weight: 900; letter-spacing: -.02em; margin: 6px 0 16px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { background: var(--gold); color: #13321F; font-weight: 800; font-size: 13px; padding: 6px 12px; border-radius: 999px; }
+  .ing { font-size: 15px; line-height: 1.8; }
+
+  /* interactive decoder */
+  .decoder { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
+  .decoder .lbl { font-size: 12px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .tokens { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .tok { font: inherit; font-size: 15px; font-weight: 600; padding: 8px 12px; border-radius: 10px; border: 2px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; transition: background .15s, border-color .15s; }
+  .tok:hover { border-color: var(--ink-2); }
+  .tok[aria-pressed="true"] { border-color: var(--accent); background: var(--peach); }
+  .tok.ok[aria-pressed="true"] { border-color: #2E7D46; background: var(--mint); }
+  .tok.warn[aria-pressed="true"] { border-color: #C7861A; background: var(--butter); }
+  .explain { min-height: 92px; border-radius: 12px; padding: 16px 18px; background: var(--bg); border: 1px dashed var(--line); }
+  .explain .t { font-weight: 900; margin-bottom: 4px; }
+  .explain .v { display: inline-block; font-size: 12px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; margin-left: 8px; vertical-align: 2px; }
+  .v.ok { background: var(--mint); color: #2E7D46; } .v.warn { background: var(--butter); color: #A06A0B; } .v.sig { background: var(--peach); color: var(--accent); }
+  @media (prefers-color-scheme: dark) { .v.ok { color: #8FD3A3; } .v.warn { color: #F5C443; } }
+  .score { margin-top: 16px; font-weight: 800; }
+  .score span { color: var(--accent); }
+
+  /* steps */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .step { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+  .step .n { width: 46px; height: 46px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-weight: 900; font-size: 22px; }
+  .step .time { float: right; font-size: 12px; font-weight: 900; letter-spacing: .12em; color: var(--muted); }
+  .step h3 { margin: 16px 0 6px; font-size: 21px; }
+  .step p { margin: 0; color: var(--ink-2); }
+
+  /* inside grid */
+  .inside { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .item { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: start; transition: transform .2s ease; }
+  .item:hover { transform: translateY(-3px); }
+  .item .ic { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; font-size: 20px; background: var(--bg); }
+  .item h3 { margin: 0 0 4px; font-size: 16px; }
+  .item p { margin: 0; font-size: 14px; color: var(--muted); }
+
+  /* who */
+  .who { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .list { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+  .list h3 { margin: 0 0 12px; }
+  .list ul { margin: 0; padding: 0; list-style: none; }
+  .list li { padding: 9px 0 9px 30px; border-top: 1px solid var(--line); position: relative; }
+  .list li:first-child { border-top: 0; }
+  .list.yes li::before { content: "✓"; position: absolute; left: 0; color: #2E7D46; font-weight: 900; }
+  .list.no li::before { content: "✕"; position: absolute; left: 0; color: var(--accent); font-weight: 900; }
+  @media (prefers-color-scheme: dark) { .list.yes li::before { color: #8FD3A3; } }
+
+  /* author */
+  .author { display: grid; grid-template-columns: 90px 1fr; gap: 22px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; max-width: 820px; }
+  .mono { width: 90px; height: 90px; border-radius: 50%; background: var(--ink); color: var(--gold); display: grid; place-items: center; font-weight: 900; font-size: 30px; letter-spacing: -.02em; }
+  @media (prefers-color-scheme: dark) { .mono { background: #07130C; } }
+  .author p { margin: 0; font-family: var(--serif); font-size: 17px; color: var(--ink-2); }
+  .author b { font-family: var(--sans); color: var(--ink); }
+
+  /* faq */
+  .faq { max-width: 820px; }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 0 22px; margin-bottom: 12px; }
+  summary { cursor: pointer; list-style: none; padding: 18px 0; font-weight: 800; font-size: 17px; display: flex; justify-content: space-between; gap: 12px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--accent); font-weight: 900; font-size: 22px; line-height: 1; transition: transform .2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin: 0 0 18px; color: var(--ink-2); }
+
+  /* final */
+  .final { background: var(--ink); color: var(--bg); text-align: center; padding: 84px 0; }
+  @media (prefers-color-scheme: dark) { .final { background: #07130C; color: var(--ink); } }
+  .final h2 { font-size: clamp(36px, 6vw, 68px); }
+  .final h2 span { color: var(--gold); display: block; }
+  .final p { font-family: var(--serif); font-size: 19px; opacity: .9; max-width: 52ch; margin: 0 auto 30px; }
+  .final .small { font-family: var(--sans); font-size: 13px; opacity: .7; margin-top: 18px; }
+  .code { display: inline-block; font-family: ui-monospace, Menlo, monospace; background: var(--gold); color: #13321F; padding: 2px 8px; border-radius: 6px; font-weight: 800; }
+
+  footer { padding: 30px 0 110px; font-size: 13px; color: var(--muted); }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* sticky buy bar (mobile) */
+  .sticky { position: fixed; left: 12px; right: 12px; bottom: 12px; display: none; align-items: center; justify-content: space-between; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 10px 10px 10px 16px; box-shadow: var(--shadow); z-index: 50; transform: translateY(140%); transition: transform .3s ease; }
+  .sticky.show { transform: translateY(0); }
+  .sticky .nm { font-weight: 900; font-size: 15px; line-height: 1.2; }
+  .sticky .nm small { display: block; font-weight: 600; color: var(--muted); font-size: 12px; }
+  .sticky .btn { padding: 12px 18px; font-size: 15px; }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  .no-js .reveal { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) {
+    .hero .wrap, .problem, .who { grid-template-columns: 1fr; }
+    .hero { padding-top: 40px; }
+    .cover { order: -1; }
+    .cover img { max-width: 300px; }
+    .steps, .inside { grid-template-columns: 1fr 1fr; }
+    .sticky { display: flex; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 54px 0; }
+    .steps, .inside { grid-template-columns: 1fr; }
+    .author { grid-template-columns: 1fr; text-align: center; }
+    .mono { margin-inline: auto; }
+    .bar .wrap { justify-content: center; text-align: center; }
+    .bar .r { display: none; }
+  }
+</style>
+<meta property="og:title" content="Supermarket Decoder — The front sells. The back tells.">
+<meta property="og:description" content="A practical food-label reading project by food-industry technician in training Zakaria Froud.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#13321F">
+</head>
+<body class="no-js">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="bar" role="note">
+  <div class="wrap">
+    <span><span id="defaultBar">A practical label guide</span></span>
+    <span class="r">Read <span class="dot">●</span> Decode <span class="dot">●</span> Swap <span class="dot">●</span> <a href="#free-resources" style="text-decoration:none">Free resources</a></span>
+  </div>
+</div>
+
+<main id="main">
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap">
+      <div>
+        <div class="kicker">The food-industry insider's guide</div>
+        <h1>Supermarket <span class="acc">Decoder</span></h1>
+        <p class="tagline">The front sells. The back tells.</p>
+        <p class="lead">Read any food label in 30 seconds, spot ultra-processed foods, and swap them for better choices on the same shelf, at the same budget.</p>
+        <div class="cta-row">
+          <a class="btn" href="#purchase" data-gumroad-action="buy">Get the guide <span class="p">$9</span></a>
+          <a class="btn ghost" href="#inside">See what's inside</a>
+        </div>
+        <div class="meta"><span>53-page PDF</span><span>Printable cheat-sheet</span><span>14-day plan</span></div>
+        <div class="rating">New educational guide</div>
+      </div>
+      <div class="cover">
+        <img src="https://public-files.gumroad.com/nbbfx502vssnurktwmojzb6uuqz2" alt="Cover of Supermarket Decoder: an ingredient label under a magnifying glass highlighting glucose syrup, emulsifier E471 and flavouring." width="420" height="594">
+        <div class="badge">Read any label in 30 sec</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PROBLEM -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="kicker reveal">Sound familiar?</div>
+      <h2 class="reveal">You pick up a yogurt. Is it a good choice?</h2>
+      <p class="sub reveal">The front of the pack is the most expensive advertising in the store. The back is where the truth is, but it's written for factories and regulators, not for you.</p>
+      <div class="problem">
+        <div class="pack front reveal">
+          <h3>The front</h3>
+          <div class="big">Strawberry Yogurt</div>
+          <div class="chips"><span class="chip">Natural</span><span class="chip">Made with real fruit</span><span class="chip">Source of calcium</span></div>
+        </div>
+        <div class="pack back reveal">
+          <h3>The back</h3>
+          <div class="ing">Milk, <b>sugar</b>, strawberries <b>(8%)</b>, cream, <b>modified maize starch</b>, <b>flavouring</b>, concentrated carrot juice, stabiliser (pectin), live cultures.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE -->
+  <section>
+    <div class="wrap">
+      <div class="kicker reveal">Try it now</div>
+      <h2 class="reveal">Decode a real-world label</h2>
+      <p class="sub reveal">Tap each ingredient of this typical chocolate cereal bar. The guide teaches you to do this in your head, in seconds.</p>
+      <div class="decoder reveal">
+        <div class="lbl">Ingredients · chocolate cereal bar</div>
+        <div class="tokens" id="tokens" role="group" aria-label="Ingredients to decode"></div>
+        <div class="explain" id="explain" aria-live="polite"><div class="t">Tap an ingredient above</div><div>You'll see what it is, why a factory uses it, and whether it's a signal of ultra-processing.</div></div>
+        <div class="score" id="score" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="kicker reveal">The method</div>
+      <h2 class="reveal">The 30-second scan</h2>
+      <p class="sub reveal">Three steps, always in the same order. After a week of practice, you'll do it without thinking.</p>
+      <div class="steps">
+        <div class="step reveal"><span class="time">2 SEC</span><div class="n">1</div><h3>Turn it over</h3><p>Ignore the front. The back is information; go straight to the ingredient list.</p></div>
+        <div class="step reveal"><span class="time">10 SEC</span><div class="n">2</div><h3>Read the first three</h3><p>Ingredients are listed by weight. The first three are most of what you're buying.</p></div>
+        <div class="step reveal"><span class="time">15 SEC</span><div class="n">3</div><h3>Hunt for signals</h3><p>One ingredient you'd never use at home is enough to mark a product as ultra-processed.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIDE -->
+  <section id="inside">
+    <div class="wrap">
+      <div class="kicker reveal">What's inside</div>
+      <h2 class="reveal">10 chapters. 53 pages. Zero fear.</h2>
+      <p class="sub reveal">Short, visual, and every technical word explained in plain language.</p>
+      <div class="inside">
+        <div class="item reveal"><div class="ic" aria-hidden="true">🧭</div><div><h3>What "ultra-processed" really means</h3><p>The 4-level scale scientists use, and what the research does and doesn't prove.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">⏱️</div><div><h3>The 30-second scan</h3><p>A 3-step method that works on any pack, in any country.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">🍬</div><div><h3>Sugar's many names</h3><p>Syrups, dextrose, maltodextrin and the "splitting" trick that hides sugar.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">🔢</div><div><h3>Every E-number family</h3><p>Which are harmless (E300 is vitamin C) and which are worth limiting.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">🏷️</div><div><h3>Marketing claims decoded</h3><p>What "light" and "high protein" legally mean, and why "natural" means nothing.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">🛒</div><div><h3>7 aisles of swaps</h3><p>Bread, cereals, dairy, drinks, snacks, sauces, ready meals: better picks, same budget.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">🧒</div><div><h3>Kids' food and lunchboxes</h3><p>Sugar shown in sugar cubes, lunchbox ideas and a "label detective" card.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">🌍</div><div><h3>Labels around the world</h3><p>US, EU/UK, Morocco and the Middle East: same scan, different layouts.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">📅</div><div><h3>14-day plan + cheat-sheet</h3><p>One small swap a day, a printable tracker and a one-page cheat-sheet.</p></div></div>
+      </div>
+      <div class="cta-row" style="margin-top:34px">
+        <a class="btn" href="#" data-gumroad-action="buy">Get Supermarket Decoder <span class="p" data-gumroad-field="price">$9</span></a>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="free-resources" class="alt">
+    <div class="wrap">
+      <div class="kicker reveal">Read · learn · share</div>
+      <h2 class="reveal">Free food-label resources</h2>
+      <p class="sub reveal">Start with a practical checklist, then explore short explainers. These resources are educational and do not replace medical or personalised nutrition advice.</p>
+      <div class="inside">
+        <a class="item" href="free-resources/30-second-label-checklist.html" style="color:inherit;text-decoration:none"><div class="ic">⏱️</div><div><h3>30-second label checklist</h3><p>A printable shelf-side routine: turn it over, read the first three, then look for signals.</p></div></a>
+        <a class="item" href="free-resources/food-label-glossary.html" style="color:inherit;text-decoration:none"><div class="ic">📖</div><div><h3>Food-label glossary</h3><p>Plain-language definitions for ingredients, nutrition panels and common label terms.</p></div></a>
+        <a class="item" href="articles/read-food-labels-in-30-seconds.html" style="color:inherit;text-decoration:none"><div class="ic">🔎</div><div><h3>Read a label in 30 seconds</h3><p>Learn the three-step scan and see how to apply it to a typical packaged food.</p></div></a>
+        <a class="item" href="articles/hidden-sugars-five-names.html" style="color:inherit;text-decoration:none"><div class="ic">🍬</div><div><h3>Five names for sugar</h3><p>Recognise glucose syrup, dextrose, invert sugar, fruit juice concentrate and maltodextrin.</p></div></a>
+        <a class="item" href="articles/e-numbers-explained.html" style="color:inherit;text-decoration:none"><div class="ic">🔢</div><div><h3>E-numbers explained</h3><p>Understand what an additive code identifies and why its technological function matters.</p></div></a>
+        <a class="item" href="articles/nova-food-processing-levels.html" style="color:inherit;text-decoration:none"><div class="ic">🌾</div><div><h3>The four NOVA levels</h3><p>Understand the processing scale without treating processing as a simple good-or-bad label.</p></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="kicker reveal">Is it for you?</div>
+      <h2 class="reveal">Made for busy people who want to eat a little better</h2>
+      <div class="who" style="margin-top:28px">
+        <div class="list yes reveal"><h3>Perfect if you…</h3><ul>
+          <li>Want to understand labels without a nutrition degree</li>
+          <li>Are a parent tired of guessing in the kids' aisle</li>
+          <li>Shop on a budget and don't have time to cook everything</li>
+          <li>Buy imported products with labels in several languages</li>
+          <li>Prefer calm facts to scary headlines</li>
+        </ul></div>
+        <div class="list no reveal"><h3>Not for you if you want…</h3><ul>
+          <li>A diet plan or weight-loss promise</li>
+          <li>Medical advice for a specific condition</li>
+          <li>A list of "forbidden" foods</li>
+          <li>A 300-page textbook</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTHOR -->
+  <section>
+    <div class="wrap">
+      <div class="kicker reveal">From inside the industry</div>
+      <h2 class="reveal">Why trust this guide?</h2>
+      <div class="author reveal" style="margin-top:24px">
+        <div class="mono" aria-hidden="true">ZF</div>
+        <p><b>Written by Zakaria Froud</b>, a food-industry technician in training. The guide explains not only what's on the label, but <em>why</em> factories add it: shelf life, texture, cost. Every fact is sourced from the WHO, EFSA, EU law and peer-reviewed studies, with a full source list in Chapter 10.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="kicker reveal">Questions</div>
+      <h2 class="reveal">Good to know</h2>
+      <div class="faq" style="margin-top:24px">
+        <details><summary>What format is it?</summary><p>A 53-page PDF (A4), designed to read on a phone, tablet or computer. The cheat-sheet and the 14-day tracker are printable.</p></details>
+        <details><summary>Will it tell me what to eat?</summary><p>No. It teaches you to read labels and compare products, then suggests simple swaps. You decide. It is for education only and is not medical or nutritional advice.</p></details>
+        <details><summary>Does it work outside Europe?</summary><p>Yes. Chapter 8 compares US, EU/UK and Moroccan/Middle Eastern labels, and shows how to convert sodium to salt, per serving to per 100 g, and more.</p></details>
+        <details><summary>Do I need to buy expensive organic food?</summary><p>No. Every swap in the guide is marked as cheaper, similar or a little more than what you buy now. Most are cheaper.</p></details>
+        <details><summary>How do I get it?</summary><p>Right after checkout, you get instant access to the download on Gumroad and by email.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="final" id="purchase">
+    <div class="wrap">
+      <h2>The front sells. <span>The back tells.</span></h2>
+      <p>Learn to read the back in 30 seconds, and make every shopping trip a little smarter.</p><p class="small">The secure Gumroad checkout link still needs to be connected. The paid 53-page PDF is not hosted in this public repository.</p>
+      <a class="btn" href="#" data-gumroad-action="buy">Get the guide <span class="p" data-gumroad-field="price">$9</span></a>
+      <div class="small"><span class="launch" id="launchFinal">Launch week: enter <span class="code">LAUNCH40</span> at checkout for 40% off, until 19 November. · </span>Instant PDF download · Secure checkout by Gumroad</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Zakaria Froud · Supermarket Decoder</span>
+    <span>Educational content only · Not medical or nutritional advice · The paid PDF is not hosted here.</span>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky" aria-hidden="true">
+  <div class="nm">Supermarket Decoder<small>53-page guide + cheat-sheet</small></div>
+  <a class="btn" href="#" data-gumroad-action="buy" tabindex="-1">Get it <span class="p" data-gumroad-field="price">$9</span></a>
+</div>
+
+<script>
+(function () {
+  document.body.classList.remove("no-js");
+
+  // Interactive decoder
+  var items = [
+    { n: "Oat flakes (25%)", k: "ok", t: "Kitchen food", d: "Whole oats, level 1. The real food in the bar, but only a quarter of it." },
+    { n: "Glucose syrup", k: "sig", t: "Industrial sugar", d: "Starch broken down into a sweet syrup. Cheaper than sugar and keeps bars chewy. Signal of ultra-processing." },
+    { n: "Milk chocolate", k: "warn", t: "Compound ingredient", d: "A recipe inside the recipe: sugar, cocoa butter, milk powder, cocoa mass and an emulsifier. Always read inside the brackets." },
+    { n: "Palm fat", k: "warn", t: "Factory fat", d: "Semi-solid, cheap and stable. Keeps the bar firm for months. Rich in saturated fat." },
+    { n: "Humectant: glycerol", k: "sig", t: "Texture additive", d: "Holds water so the bar stays soft. You would never add it at home. Signal of ultra-processing." },
+    { n: "Dextrose", k: "sig", t: "Another sugar", d: "Another name for glucose. Using several sugars keeps each one lower in the list: the 'splitting' trick." },
+    { n: "Emulsifier: soy lecithin", k: "ok", t: "Friendly E-number (E322)", d: "From soya. Helps chocolate stay smooth. Among the harmless additives explained in Chapter 4." },
+    { n: "Flavouring", k: "sig", t: "Taste replacement", d: "Puts back the taste lost in processing. 'Flavouring' alone may be made by chemical synthesis. Signal of ultra-processing." }
+  ];
+  var box = document.getElementById("tokens"), ex = document.getElementById("explain"), sc = document.getElementById("score");
+  var seen = {};
+  var label = { ok: "Kitchen / friendly", warn: "Worth a look", sig: "Industrial signal" };
+  items.forEach(function (it, i) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "tok " + it.k; b.textContent = it.n; b.setAttribute("aria-pressed", "false");
+    b.addEventListener("click", function () {
+      Array.prototype.forEach.call(box.children, function (c) { c.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true");
+      seen[i] = it.k;
+      ex.innerHTML = '<div class="t"></div><div class="d"></div>';
+      ex.querySelector(".t").textContent = it.t;
+      var v = document.createElement("span"); v.className = "v " + it.k; v.textContent = label[it.k]; ex.querySelector(".t").appendChild(v);
+      ex.querySelector(".d").textContent = it.d;
+      var keys = Object.keys(seen), sig = keys.filter(function (k) { return seen[k] === "sig"; }).length;
+      if (keys.length === items.length) {
+        sc.innerHTML = 'Verdict: <span>' + sig + ' industrial signals → Swap.</span> The guide shows three better picks at a similar price.';
+      } else {
+        sc.textContent = "Decoded " + keys.length + " of " + items.length + " · signals found: " + sig;
+      }
+    });
+    box.appendChild(b);
+  });
+
+  // Reveal on scroll
+  var els = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: 0.12 });
+    els.forEach(function (el) { io.observe(el); });
+  } else { els.forEach(function (el) { el.classList.add("in"); }); }
+
+  // Sticky buy bar after the hero
+  var sticky = document.getElementById("sticky"), hero = document.querySelector(".hero");
+  if ("IntersectionObserver" in window && sticky && hero) {
+    new IntersectionObserver(function (es) {
+      var show = !es[0].isIntersecting;
+      sticky.classList.toggle("show", show);
+      sticky.setAttribute("aria-hidden", show ? "false" : "true");
+      sticky.querySelector("a").tabIndex = show ? 0 : -1;
+    }).observe(hero);
+  }
+})();
+</script>
+</body>
+</html>
