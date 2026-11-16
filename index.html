@@ -374,6 +374,13 @@
 (function () {
   document.body.classList.remove("no-js");
 
+  // Display the source-file launch promotion only through its stated end date.
+  var end = Date.UTC(2026, 10, 19, 22, 59, 0);
+  if (Date.now() < end) {
+    ["launchBar", "launchFinal"].forEach(function (id) { var el = document.getElementById(id); if (el) el.classList.add("on"); });
+    var d = document.getElementById("defaultBar"); if (d) d.style.display = "none";
+  }
+
   // Launch-week messages, shown only until the code expires (19 Nov 2026, 23:59 Paris)
   var end = Date.UTC(2026, 10, 19, 22, 59, 0);
   if (Date.now() < end) {
