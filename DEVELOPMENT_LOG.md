@@ -65,5 +65,6 @@ The most recent inspected commits on 16 November 2026 refined the US Nutrition F
 - **Repository:** `zazakariakarfr13-coder/Zakaria`, default branch `main`.
 - **Review:** inspected repository structure, README, homepage, key resource page, sources page, marketing plans, validation script and Pages workflow.
 - **Status:** latest inspected Pages build/deploy runs succeeded; local link and sitemap validation is part of the deployment workflow.
-- **New changes:** established this development log and baseline review.
+- **New changes:** added this development log, updated the README, strengthened the site validator, and added a scheduled GitHub Actions quality-check workflow.
+- **Validation:** the Pages deployment run for commit `d64af4617ead75ca15f37550906b2798a6bfd439` passed its local validation step; at the last check the deployment job was still running. The scheduled quality workflow will also run daily at 08:00 Africa/Casablanca (subject to GitHub Actions schedule availability).
 - **Priority next:** verify analytics and checkout-click measurement, then audit SEO/indexing and the accessibility of the core landing page.
