@@ -15,21 +15,29 @@ A public educational website and marketing hub by Zakaria Froud. It helps everyd
 - `articles/` — short explainers on food labels, hidden sugars, E-numbers and NOVA.
 - `marketing/` — Pinterest, LinkedIn, Reddit and content-planning material.
 - `assets/site.css` — shared styling for educational pages.
+- `scripts/check_site.py` — dependency-free local link, fragment, sitemap and metadata validation.
+- `DEVELOPMENT_LOG.md` — product definition, dated development reviews and next priorities.
 - `favicon.svg` and `404.html` — site icon and custom not-found page.
 - `robots.txt` and `sitemap.xml` — search-engine discovery files.
-- `.github/workflows/pages.yml` — automatic GitHub Pages deployment after updates to `main`.
+- `.github/workflows/` — automatic GitHub Pages deployment and scheduled site-quality checks.
 
 ## Paid product protection
 
-The complete 53-page paid PDF is **not included** in this public repository. Do not upload the paid PDF, customer information, order exports, or private Gumroad files here.
+The complete 53-page paid PDF is **not included** in this public repository. Do not upload the paid PDF, customer information, order exports, credentials, or private Gumroad files here.
 
 The landing page checkout buttons link directly to the published Gumroad product. Each button has a distinct UTM content label so Gumroad analytics can distinguish the hero, guide-details, final-section and sticky-bar links.
 
 **Product page:** https://zakarfr.gumroad.com/l/supermarket-decoder
 
-## Deployment
+## Deployment and quality checks
 
-GitHub Pages is deployed through **GitHub Actions**. Keep the Pages source set to **GitHub Actions** in repository Settings → Pages. A successful workflow run confirms that GitHub accepted and deployed the static-site artifact.
+GitHub Pages is deployed through **GitHub Actions**. Keep the Pages source set to **GitHub Actions** in repository Settings → Pages. The deployment workflow runs:
+
+```bash
+python scripts/check_site.py
+```
+
+A successful workflow run confirms that GitHub accepted and deployed the static-site artifact. The separate daily quality workflow checks site structure and links; it does not claim to measure traffic, search ranking or sales.
 
 ## Marketing flow
 
