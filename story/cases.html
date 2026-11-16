@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Snack Aisle Plot Twist | Supermarket Decoder</title>
+<meta name="description" content="Let's visualise this scenario: a funny six-scene supermarket comic that teaches you how to read ingredient lists, serving sizes and food-label clues without food panic.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://zazakariakarfr13-coder.github.io/Zakaria/story/">
+<meta name="theme-color" content="#13321F">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Snack Aisle Plot Twist — a Supermarket Decoder comic">
+<meta property="og:description" content="One bold package. Six little clues. A much happier movie night.">
+<meta property="og:url" content="https://zazakariakarfr13-coder.github.io/Zakaria/story/">
+<meta property="og:image" content="https://design.canva.ai/nVMN5Nlwo21fXQg">
+<style>
+:root{--bg:#F4EFE4;--paper:#FFFDF8;--ink:#13321F;--ink2:#2B4A37;--muted:#5A7363;--line:#D8D0C1;--accent:#D9481C;--gold:#F2B51C;--mint:#DCEBDD;--peach:#FBE9E1;--shadow:0 12px 0 rgba(19,50,31,.10);--serif:Georgia,"Times New Roman",serif;--sans:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6}
+a{color:inherit}
+.wrap{width:min(1080px,calc(100% - 34px));margin:auto}
+.topline{background:var(--ink);color:#fff7e8;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.topline .wrap{display:flex;justify-content:space-between;gap:12px;padding:11px 0;flex-wrap:wrap}
+.topline a{text-decoration:none;color:#F2B51C}
+.hero{padding:56px 0 34px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;width:360px;height:360px;border-radius:50%;background:rgba(242,181,28,.18);right:-150px;top:-170px}
+.eyebrow{font-size:12px;font-weight:900;letter-spacing:.19em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(44px,7vw,82px);line-height:.95;letter-spacing:-.055em;margin:13px 0 18px;max-width:900px}
+h1 span{display:block;color:var(--accent)}
+.intro{font:clamp(20px,2.5vw,25px)/1.4 var(--serif);color:var(--ink2);max-width:700px;margin:0 0 24px}
+.hero-art{border:3px solid var(--ink);border-radius:24px;background:#E7EEDC;box-shadow:8px 9px 0 var(--ink);overflow:hidden;margin:30px 0 18px}
+.hero-art svg{display:block;width:100%;height:auto}
+.hero-note{font-size:13px;color:var(--muted);font-weight:700}
+.stamp{display:inline-flex;align-items:center;gap:8px;background:var(--gold);padding:8px 13px;border:2px solid var(--ink);border-radius:999px;font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;transform:rotate(-2deg)}
+.story-intro{padding:24px 0 8px}
+.story-intro h2{font:700 clamp(27px,4vw,42px)/1.1 var(--serif);margin:12px 0}
+.story-intro p{color:var(--ink2);max-width:720px}
+.comic{padding:14px 0 50px}
+.scene{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:22px;align-items:stretch;margin:22px 0 30px}
+.scene:nth-child(even){grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}
+.scene:nth-child(even) .art{order:2}
+.art{border:3px solid var(--ink);border-radius:20px;overflow:hidden;background:#E9E6D7;box-shadow:6px 7px 0 var(--ink);min-height:260px;display:grid;place-items:center}
+.art svg{width:100%;height:100%;display:block;min-height:260px}
+.copy{border:2px solid var(--ink);border-radius:20px;background:var(--paper);padding:22px 23px;box-shadow:var(--shadow);position:relative}
+.case{font-size:11px;color:var(--accent);font-weight:900;letter-spacing:.18em;text-transform:uppercase}
+.copy h3{font:700 clamp(24px,3vw,33px)/1.08 var(--serif);margin:8px 0 13px}
+.copy p{margin:9px 0;color:var(--ink2)}
+.bubble{background:var(--mint);border:2px solid var(--ink);border-radius:15px 15px 15px 4px;padding:12px 14px;margin:13px 0;font-weight:750;color:var(--ink);position:relative}
+.bubble.alt{background:var(--butter);border-radius:15px 15px 4px 15px}
+.bubble small{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);margin-bottom:4px;font-weight:900}
+.fact{background:#F8F0DA;border-left:5px solid var(--gold);padding:11px 13px;border-radius:0 11px 11px 0;font-size:14px;margin-top:14px}
+.mock-label{background:#fff;border:2px solid var(--ink);border-radius:9px;padding:12px 14px;color:#142316;font-size:13px;box-shadow:4px 4px 0 rgba(19,50,31,.2)}
+.mock-label b{display:block;border-bottom:2px solid #142316;padding-bottom:5px;margin-bottom:6px;font-size:15px}
+.mock-label ol{margin:0;padding-left:18px}
+.mock-label li{padding:2px 0}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.tag{background:var(--peach);border:1.5px solid var(--ink);border-radius:999px;padding:6px 10px;font-size:12px;font-weight:850}
+.nutrition{background:#fff;color:#111;border:3px solid #111;padding:12px;border-radius:8px;font-family:Arial,sans-serif;max-width:310px;box-shadow:5px 5px 0 rgba(19,50,31,.17)}
+.nutrition .nf-title{font-size:23px;font-weight:950;line-height:1.05;border-bottom:8px solid #111;padding-bottom:7px}
+.nutrition .nf-line{display:flex;justify-content:space-between;border-bottom:1px solid #111;padding:4px 0;font-size:12px;font-weight:700}
+.nutrition .nf-line.big{font-size:17px;border-bottom:5px solid #111}
+.nutrition .nf-line.indent{padding-left:14px;font-weight:500}
+.nutrition .nf-foot{font-size:10px;margin-top:5px}
+.case-closed{background:var(--ink);color:#FFF7E8;border-radius:24px;padding:35px 28px;margin:42px 0 30px;position:relative;overflow:hidden}
+.case-closed:after{content:"✓";position:absolute;right:25px;top:-20px;font-size:170px;line-height:1;color:rgba(242,181,28,.14);font-weight:900}
+.case-closed h2{font:700 clamp(32px,5vw,54px)/1.02 var(--serif);margin:8px 0 12px;max-width:700px}
+.case-closed p{max-width:700px;color:#F3EBD9}
+.checklist{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:22px 0 0}
+.check{background:var(--paper);color:var(--ink);border:2px solid #F2B51C;border-radius:13px;padding:12px;font-size:13px;font-weight:800}
+.check strong{display:block;font-size:18px;margin-bottom:3px}
+.quiz{background:var(--paper);border:3px solid var(--ink);border-radius:22px;box-shadow:7px 8px 0 var(--ink);padding:24px;margin:42px 0}
+.quiz h2{font:700 clamp(26px,4vw,38px)/1.1 var(--serif);margin:7px 0}
+.answers{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.answers button{appearance:none;background:var(--gold);border:2px solid var(--ink);border-radius:999px;padding:10px 19px;font:850 15px var(--sans);cursor:pointer;box-shadow:3px 3px 0 var(--ink)}
+.answers button:hover{transform:translateY(-2px)}
+.answers button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#quiz-feedback{min-height:28px;font-weight:800;color:var(--ink2)}
+.pin-files{padding:35px 0 55px}
+.pin-files h2{font:700 clamp(28px,4vw,42px)/1.1 var(--serif);margin:8px 0 10px}
+.pin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:20px}
+.pin-card{display:grid;grid-template-columns:155px 1fr;gap:17px;align-items:center;background:var(--paper);border:2px solid var(--ink);border-radius:18px;padding:13px;box-shadow:5px 6px 0 var(--ink);text-decoration:none;transition:transform .15s ease}
+.pin-card:hover{transform:translateY(-3px)}
+.pin-card img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:#e8e2d5}
+.pin-embed-card{background:var(--paper);border:2px solid var(--ink);border-radius:18px;padding:14px;box-shadow:5px 6px 0 var(--ink);overflow:hidden}.pin-embed-card h3{font:700 23px/1.1 var(--serif);margin:4px 0 8px}.pin-embed-card p{font-size:13px;color:var(--muted);margin:0 0 12px}.pin-embed-card iframe{display:block;width:100%;height:720px;border:0;border-radius:11px;background:#eee8dc}.pin-embed-link{display:inline-block;margin-top:12px;color:var(--accent);font-size:13px;font-weight:900;text-decoration:none}
+.pin-card strong{font:700 21px/1.12 var(--serif);display:block;margin-bottom:7px}
+.pin-card span{font-size:13px;color:var(--muted);display:block}
+.pin-card em{display:inline-block;margin-top:10px;color:var(--accent);font-style:normal;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+.cta{padding:45px 0 56px;text-align:center}
+.cta-box{background:var(--gold);border:3px solid var(--ink);border-radius:25px;padding:30px 22px;box-shadow:8px 8px 0 var(--ink)}
+.cta h2{font:700 clamp(30px,5vw,48px)/1.03 var(--serif);margin:8px auto 12px;max-width:750px}
+.cta p{max-width:620px;margin:0 auto 20px;color:var(--ink2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--accent);color:#fff;text-decoration:none;padding:14px 22px;border-radius:999px;border:2px solid var(--ink);font-weight:900;box-shadow:4px 4px 0 var(--ink);margin:5px}
+.btn.secondary{background:var(--paper);color:var(--ink)}
+.sources{font-size:12px;color:var(--muted);max-width:850px;margin:22px auto 0}
+.sources a{font-weight:800}
+footer{background:var(--ink);color:#e6eadf;padding:23px 0;font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{color:#F2B51C;text-decoration:none}
+@media(max-width:760px){.scene,.scene:nth-child(even){grid-template-columns:1fr;gap:14px}.scene:nth-child(even) .art{order:0}.art,.art svg{min-height:220px}.copy{padding:19px}.pin-grid{grid-template-columns:1fr}.checklist{grid-template-columns:repeat(2,1fr)}.pin-card{grid-template-columns:125px 1fr}.hero{padding-top:38px}}
+@media(max-width:420px){.pin-card{grid-template-columns:105px 1fr}.pin-card strong{font-size:18px}.checklist{gap:8px}.check{font-size:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+.case-archive{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}.case-archive-link{display:flex;flex-direction:column;gap:7px;padding:17px;background:var(--paper);border:2px solid var(--ink);border-radius:16px;box-shadow:4px 5px 0 var(--ink);text-decoration:none;min-height:142px;transition:transform .15s ease}.case-archive-link:hover{transform:translateY(-3px)}.case-archive-link span{font-size:11px;letter-spacing:.14em;font-weight:950;color:var(--accent)}.case-archive-link strong{font:700 21px/1.08 var(--serif);color:var(--ink)}.case-archive-link em{font-size:13px;font-style:normal;color:var(--muted)}.scene[id]{scroll-margin-top:20px}@media(max-width:760px){.case-archive{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:460px){.case-archive{grid-template-columns:1fr}.case-archive-link{min-height:0}}
+</style>
+</head>
+<body>
+<div class="topline"><div class="wrap"><span>Supermarket Decoder · The Label Detective Files</span><a href="../">← Back to the guide</a></div></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">A six-scene supermarket comic · about 2 minutes</div>
+    <h1>Let's visualise this scenario… <span>The Snack Aisle Plot Twist</span></h1>
+    <p class="intro">One bold package. One curious shopper. Six tiny clues. And a movie night that gets saved by the humble act of turning a packet around.</p>
+    <div class="stamp">Case file 07 · Snack aisle mystery</div>
+    <div class="hero-art" role="img" aria-label="Comic illustration of Maya and Nico in a supermarket snack aisle, inspecting a colourful snack packet">
+      <svg viewBox="0 0 1000 430" xmlns="http://www.w3.org/2000/svg">
+        <rect width="1000" height="430" fill="#e8efdf"/>
+        <path d="M0 0h1000v74H0z" fill="#d9e6cd"/>
+        <path d="M0 332h1000v98H0z" fill="#d6cbb5"/>
+        <path d="M40 90h920v215H40z" fill="#f9f4e7" stroke="#13321f" stroke-width="8" rx="16"/>
+        <path d="M55 178h890M55 258h890" stroke="#13321f" stroke-width="8"/>
+        <g stroke="#13321f" stroke-width="4">
+          <rect x="78" y="105" width="72" height="60" rx="8" fill="#f2b51c"/><rect x="164" y="110" width="70" height="55" rx="8" fill="#d9481c"/><rect x="248" y="103" width="76" height="62" rx="8" fill="#9dbd83"/><rect x="340" y="111" width="76" height="54" rx="8" fill="#efc7ac"/>
+          <rect x="520" y="105" width="74" height="60" rx="8" fill="#f1c85a"/><rect x="610" y="109" width="76" height="56" rx="8" fill="#e7a0a0"/><rect x="700" y="103" width="74" height="62" rx="8" fill="#9dbd83"/><rect x="790" y="110" width="100" height="55" rx="8" fill="#f2b51c"/>
+          <rect x="80" y="195" width="78" height="54" rx="8" fill="#e7a0a0"/><rect x="174" y="192" width="72" height="58" rx="8" fill="#f2b51c"/><rect x="262" y="195" width="75" height="54" rx="8" fill="#9dbd83"/><rect x="354" y="192" width="70" height="58" rx="8" fill="#d9481c"/>
+          <rect x="530" y="192" width="74" height="58" rx="8" fill="#f2b51c"/><rect x="620" y="195" width="75" height="54" rx="8" fill="#9dbd83"/><rect x="711" y="192" width="74" height="58" rx="8" fill="#d9481c"/><rect x="801" y="195" width="87" height="54" rx="8" fill="#e7a0a0"/>
+        </g>
+        <g font-family="Arial,sans-serif" font-weight="900" fill="#13321f" font-size="11" text-anchor="middle"><text x="114" y="141">OATS</text><text x="199" y="142">CRUNCH</text><text x="286" y="140">FRUIT</text><text x="379" y="143">NUTS</text><text x="558" y="140">BARS</text><text x="648" y="140">BITES</text><text x="737" y="140">MIX</text><text x="840" y="142">SNACKS</text></g>
+        <!-- Maya -->
+        <g stroke="#13321f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M230 377q0-88 65-88t68 88v38H230z" fill="#d9481c"/>
+          <circle cx="294" cy="242" r="57" fill="#d7a27f"/>
+          <path d="M240 235q-2-72 61-69 50 2 55 61-25-27-52-27-29 0-64 35z" fill="#253b2b"/>
+          <path d="M276 248q8 8 16 0m15 0q8 8 16 0" fill="none"/><path d="M294 265q16 15 30 0" fill="none"/>
+          <path d="M247 316l-40 52m148-52 42 40" fill="none"/>
+        </g>
+        <!-- snack bag -->
+        <g transform="translate(395 212) rotate(-8)" stroke="#13321f" stroke-width="7" stroke-linejoin="round">
+          <path d="M0 0h112l-8 160H10z" fill="#f2b51c"/>
+          <path d="M9 20h94" stroke="#d9481c" stroke-width="18"/>
+          <text x="56" y="59" text-anchor="middle" fill="#13321f" stroke="none" font-size="13" font-weight="900" font-family="Arial">NATURAL!</text>
+          <text x="56" y="82" text-anchor="middle" fill="#13321f" stroke="none" font-size="11" font-weight="900" font-family="Arial">POWER BITE</text>
+          <circle cx="56" cy="116" r="21" fill="#e4a45d"/><path d="M46 116q10-17 20 0" fill="none"/>
+        </g>
+        <!-- Nico -->
+        <g stroke="#13321f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M660 380q0-88 65-88t68 88v35H660z" fill="#457a59"/>
+          <circle cx="725" cy="239" r="56" fill="#a86f4c"/>
+          <path d="M670 237q3-67 61-66 51 0 55 57-33-24-62-23-26 0-54 32z" fill="#263d2c"/>
+          <path d="M707 244q9 7 17 0m15 0q9 7 17 0" fill="none"/><path d="M716 264q12 8 24 0" fill="none"/>
+          <path d="M684 313l-39 46m141-46 38 47" fill="none"/>
+          <circle cx="790" cy="215" r="28" fill="none" stroke="#f2b51c" stroke-width="10"/><path d="M810 236l25 29" stroke="#f2b51c" stroke-width="10"/>
+        </g>
+        <path d="M72 33q0-18 20-18h255q20 0 20 18v35q0 18-20 18H92q-20 0-20-18z" fill="#fffdf8" stroke="#13321f" stroke-width="5"/>
+        <text x="200" y="56" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" font-weight="900" fill="#13321f">THE FRONT IS VERY CONFIDENT.</text>
+        <path d="M760 36q0-18 20-18h170q20 0 20 18v43q0 18-20 18H780q-20 0-20-18z" fill="#fffdf8" stroke="#13321f" stroke-width="5"/>
+        <text x="865" y="54" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="900" fill="#13321f">THE DETECTIVE</text><text x="865" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="900" fill="#13321f">HAS QUESTIONS.</text>
+      </svg>
+    </div>
+    <div class="hero-note">Characters and package shown are fictional. The label examples below are teaching props, not real products.</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="story-intro">
+    <div class="eyebrow">Previously, in the snack aisle…</div>
+    <h2>Maya came in for one snack. She left with a new superpower.</h2>
+    <p>Not X-ray vision. Not the ability to hear a crisp packet open from three rooms away. Just a simple way to read the information already printed on a food label.</p>
+  </section>
+
+  <section class="comic" aria-label="The six-scene comic story">
+    <article class="scene" id="case-01">
+      <div class="art">
+        <svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Maya picks a bright snack pack from a supermarket shelf">
+          <rect width="520" height="330" fill="#f4dca1"/><path d="M0 260h520v70H0z" fill="#d4c5a7"/>
+          <path d="M30 45h460v195H30z" fill="#fff8e9" stroke="#13321f" stroke-width="7" rx="18"/>
+          <path d="M30 145h460M30 210h460" stroke="#13321f" stroke-width="7"/>
+          <g stroke="#13321f" stroke-width="4"><rect x="53" y="70" width="56" height="62" rx="7" fill="#f2b51c"/><rect x="119" y="70" width="56" height="62" rx="7" fill="#d9481c"/><rect x="185" y="70" width="56" height="62" rx="7" fill="#a8c78e"/><rect x="280" y="70" width="56" height="62" rx="7" fill="#e8a3a3"/><rect x="346" y="70" width="56" height="62" rx="7" fill="#f2b51c"/><rect x="412" y="70" width="56" height="62" rx="7" fill="#a8c78e"/></g>
+          <g transform="translate(170 155)" stroke="#13321f" stroke-width="6" stroke-linejoin="round"><path d="M0 0h118l-8 150H9z" fill="#f2b51c"/><path d="M6 20h105" stroke="#d9481c" stroke-width="17"/><text x="59" y="61" fill="#13321f" stroke="none" text-anchor="middle" font-size="15" font-weight="900">NATURAL</text><text x="59" y="84" fill="#13321f" stroke="none" text-anchor="middle" font-size="12" font-weight="900">REAL FRUIT</text><circle cx="59" cy="115" r="19" fill="#d79a62"/></g>
+          <g stroke="#13321f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M40 322q0-78 55-78t58 78" fill="#d9481c"/><circle cx="95" cy="212" r="43" fill="#d7a27f"/><path d="M52 206q0-53 47-52 38 0 42 46-32-24-89 6z" fill="#263d2c"/><path d="M81 217q7 6 14 0m13 0q7 6 14 0" fill="none"/><path d="M86 233q13 11 26 0" fill="none"/></g>
+          <path d="M278 28q0-17 18-17h190q18 0 18 17v43q0 17-18 17H296q-18 0-18-17z" fill="#fffdf8" stroke="#13321f" stroke-width="5"/><text x="383" y="56" text-anchor="middle" font-family="Arial" font-size="18" font-weight="900" fill="#13321f">OHHH. SHINY.</text>
+        </svg>
+      </div>
+      <div class="copy">
+        <div class="case">Scene 01 · The opening claim</div>
+        <h3>“This snack looks like it has a personal trainer.”</h3>
+        <div class="bubble"><small>Maya</small>“Natural! Real fruit! Power bite! It practically came with a motivational podcast.”</div>
+        <div class="bubble alt"><small>Nico</small>“The front is doing a lot of talking. Let's hear the other side.”</div>
+        <p>Maya turns the packet around. The investigation begins.</p>
+      </div>
+    </article>
+
+    <article class="scene" id="case-02">
+      <div class="art">
+        <svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A magnifying glass enlarges the ingredient list on a snack package">
+          <rect width="520" height="330" fill="#dcebdd"/>
+          <g transform="translate(95 35)" stroke="#13321f" stroke-width="7"><rect width="240" height="255" rx="14" fill="#fffdf8"/><path d="M0 48h240" stroke="#d9481c" stroke-width="12"/><text x="18" y="30" font-family="Arial" font-size="16" font-weight="900" fill="#13321f" stroke="none">INGREDIENTS</text><g stroke="#7b8979" stroke-width="3"><path d="M18 78h198M18 111h198M18 144h198M18 177h198M18 210h150"/></g><g fill="#13321f" stroke="none" font-family="Arial" font-size="14" font-weight="800"><text x="18" y="101">Rolled oats</text><text x="18" y="134">Dates</text><text x="18" y="167">Peanut butter</text><text x="18" y="200">Cocoa · honey · salt</text></g></g>
+          <circle cx="354" cy="153" r="78" fill="rgba(255,255,255,.4)" stroke="#13321f" stroke-width="10"/><path d="M411 212l63 69" stroke="#13321f" stroke-width="20" stroke-linecap="round"/><circle cx="354" cy="153" r="61" fill="none" stroke="#f2b51c" stroke-width="6"/>
+          <path d="M348 42q0-20 20-20h118q20 0 20 20v38q0 20-20 20H368q-20 0-20-20z" fill="#fffdf8" stroke="#13321f" stroke-width="5"/><text x="427" y="66" text-anchor="middle" font-family="Arial" font-size="17" font-weight="900" fill="#13321f">ZOOM!</text>
+        </svg>
+      </div>
+      <div class="copy">
+        <div class="case">Scene 02 · Read the recipe</div>
+        <h3>The first few ingredients tell a story.</h3>
+        <div class="mock-label">
+          <b>INGREDIENTS</b>
+          <ol><li>Rolled oats</li><li>Dates</li><li>Peanut butter</li><li>Cocoa</li><li>Honey</li><li>Sea salt</li></ol>
+        </div>
+        <div class="bubble"><small>Nico</small>“In the U.S., ingredients are generally listed from most to least by weight. Start with the first few, then read the whole list.”</div>
+        <div class="fact">Clue: the order helps you understand what makes up more of this recipe. It is not a complete nutrition score.</div>
+      </div>
+    </article>
+
+    <article class="scene" id="case-03">
+      <div class="art">
+        <svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sugar-related ingredient names pinned on a detective clue board">
+          <rect width="520" height="330" fill="#f6e9db"/>
+          <rect x="40" y="36" width="440" height="256" rx="20" fill="#b78051" stroke="#13321f" stroke-width="8"/>
+          <path d="M58 91h404M58 239h404" stroke="#e9c79e" stroke-width="5" stroke-dasharray="10 8"/>
+          <g stroke="#13321f" stroke-width="5"><rect x="63" y="111" width="112" height="82" rx="9" fill="#fffdf8" transform="rotate(-5 119 152)"/><rect x="204" y="105" width="112" height="82" rx="9" fill="#fffdf8" transform="rotate(4 260 146)"/><rect x="345" y="111" width="112" height="82" rx="9" fill="#fffdf8" transform="rotate(-3 401 152)"/></g>
+          <g font-family="Arial" font-size="14" font-weight="900" fill="#13321f" text-anchor="middle"><text x="119" y="151">HONEY</text><text x="260" y="151">DEXTROSE</text><text x="401" y="151">GLUCOSE</text><text x="401" y="169">SYRUP</text></g>
+          <g fill="#d9481c" stroke="#13321f" stroke-width="3"><circle cx="119" cy="113" r="7"/><circle cx="260" cy="108" r="7"/><circle cx="401" cy="113" r="7"/></g>
+          <path d="M100 210l80 30m70-28 85 30m10-28 70 28" stroke="#f2b51c" stroke-width="5"/>
+          <text x="260" y="274" font-family="Arial" font-size="15" font-weight="900" fill="#fffdf8" text-anchor="middle">CLUE BOARD: CHECK THE SUGARS LINE</text>
+        </svg>
+      </div>
+      <div class="copy">
+        <div class="case">Scene 03 · The name game</div>
+        <h3>Sugar has more than one name.</h3>
+        <p>Some ingredient names you may spot include:</p>
+        <div class="tags"><span class="tag">Honey</span><span class="tag">Cane sugar</span><span class="tag">Glucose syrup</span><span class="tag">Dextrose</span></div>
+        <div class="bubble alt"><small>Maya</small>“Wait. Honey is a sweetener too?”</div>
+        <div class="bubble"><small>Nico</small>“Exactly. Use the ingredient list as a clue, then check Total Sugars and Includes Added Sugars on the Nutrition Facts label.”</div>
+        <p>The goal is not to panic at a word. It is to understand the full picture.</p>
+      </div>
+    </article>
+
+    <article class="scene" id="case-04">
+      <div class="art">
+        <svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A magnified Nutrition Facts panel highlights serving size and servings per container">
+          <rect width="520" height="330" fill="#e6e9d9"/>
+          <g transform="translate(113 22) rotate(-2 145 142)"><rect width="280" height="286" rx="8" fill="#fff" stroke="#111" stroke-width="7"/><text x="18" y="39" font-family="Arial" font-size="29" font-weight="900" fill="#111">Nutrition Facts</text><path d="M16 54h248" stroke="#111" stroke-width="9"/><text x="18" y="79" font-family="Arial" font-size="13" fill="#111" font-weight="700">2 servings per container</text><rect x="12" y="91" width="256" height="44" fill="#fff0bc" stroke="#d9481c" stroke-width="3"/><text x="20" y="109" font-family="Arial" font-size="12" fill="#111" font-weight="900">Serving size</text><text x="20" y="125" font-family="Arial" font-size="13" fill="#111" font-weight="900">1 bar (40g)</text><path d="M16 146h248" stroke="#111" stroke-width="7"/><text x="18" y="170" font-family="Arial" font-size="13" fill="#111" font-weight="700">Amount per serving</text><text x="18" y="201" font-family="Arial" font-size="23" fill="#111" font-weight="900">Calories 170</text><path d="M16 211h248" stroke="#111" stroke-width="5"/><text x="18" y="236" font-family="Arial" font-size="12" fill="#111">Includes Added Sugars</text><text x="239" y="236" text-anchor="end" font-family="Arial" font-size="12" fill="#111" font-weight="900">6g</text><text x="18" y="264" font-family="Arial" font-size="11" fill="#111">Illustrative label only</text></g>
+          <path d="M55 70q0-15 17-15h50q17 0 17 15v30q0 17-17 17H72q-17 0-17-17z" fill="#f2b51c" stroke="#13321f" stroke-width="4"/><text x="93" y="91" text-anchor="middle" font-family="Arial" font-size="13" font-weight="900" fill="#13321f">ONE BAR?</text>
+          <path d="M390 220q0-17 18-17h76q18 0 18 17v38q0 17-18 17h-76q-18 0-18-17z" fill="#fffdf8" stroke="#13321f" stroke-width="4"/><text x="448" y="244" text-anchor="middle" font-family="Arial" font-size="14" font-weight="900" fill="#13321f">TWO?</text>
+        </svg>
+      </div>
+      <div class="copy">
+        <div class="case">Scene 04 · The serving-size plot twist</div>
+        <h3>“I thought the whole pouch was one serving!”</h3>
+        <div class="nutrition" aria-label="Illustrative Nutrition Facts mock label">
+          <div class="nf-title">Nutrition Facts</div>
+          <div class="nf-line"><span>2 servings per container</span></div>
+          <div class="nf-line big"><span>Serving size</span><span>1 bar (40g)</span></div>
+          <div class="nf-line"><span>Amount per serving</span></div>
+          <div class="nf-line big"><span>Calories</span><span>170</span></div>
+          <div class="nf-line"><span>Total Sugars</span><span>10g</span></div>
+          <div class="nf-line indent"><span>Includes Added Sugars</span><span>6g</span></div>
+          <div class="nf-foot">Fictional example for learning — not a real product.</div>
+        </div>
+        <div class="bubble"><small>Nico</small>“Nutrition Facts numbers are shown per serving. Check how many servings are in the pack—and how much you're actually eating.”</div>
+        <div class="fact">Quick % Daily Value guide: 5% DV or less is low; 20% DV or more is high for a nutrient.</div>
+      </div>
+    </article>
+
+    <article class="scene" id="case-05">
+      <div class="art">
+        <svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An imaginary courtroom where an E-number is shown on a witness stand">
+          <rect width="520" height="330" fill="#d9e3ef"/>
+          <path d="M0 255h520v75H0z" fill="#b98d61"/>
+          <path d="M90 66h340v176H90z" fill="#f3e4c8" stroke="#13321f" stroke-width="7"/>
+          <path d="M120 100h280M120 135h280" stroke="#13321f" stroke-width="5"/>
+          <rect x="196" y="155" width="128" height="85" rx="13" fill="#f2b51c" stroke="#13321f" stroke-width="7"/>
+          <text x="260" y="209" font-family="Arial" font-size="39" font-weight="900" text-anchor="middle" fill="#13321f">E330?</text>
+          <path d="M35 257h450" stroke="#13321f" stroke-width="10" stroke-linecap="round"/>
+          <g stroke="#13321f" stroke-width="7" stroke-linecap="round"><path d="M75 260v45m370-45v45" /><path d="M54 306h42m350 0h42" /></g>
+          <path d="M345 63l44 22-23 42-44-22z" fill="#d9481c" stroke="#13321f" stroke-width="5"/>
+          <path d="M367 70l50 26" stroke="#f2b51c" stroke-width="12" stroke-linecap="round"/>
+          <path d="M25 36q0-17 18-17h147q18 0 18 17v35q0 18-18 18H43q-18 0-18-18z" fill="#fffdf8" stroke="#13321f" stroke-width="4"/>
+          <text x="108" y="58" text-anchor="middle" font-family="Arial" font-size="16" font-weight="900" fill="#13321f">OBJECTION?</text>
+        </svg>
+      </div>
+      <div class="copy">
+        <div class="case">Scene 05 · The additive courtroom</div>
+        <h3>An E-number is an ID—not a verdict.</h3>
+        <div class="bubble alt"><small>Maya</small>“E-number? Is this ingredient on trial?”</div>
+        <div class="bubble"><small>Nico</small>“Not at all. An E-number identifies an additive. Ask what job it does.”</div>
+        <div class="tags"><span class="tag">Preserve</span><span class="tag">Colour</span><span class="tag">Thicken</span><span class="tag">Regulate acidity</span><span class="tag">Help ingredients mix</span></div>
+        <p>Different places may display additive names and codes differently. The useful question is what the ingredient does—not whether the code looks mysterious.</p>
+      </div>
+    </article>
+
+    <article class="scene" id="case-06">
+      <div class="art">
+        <svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Maya and Nico celebrate a sensible snack choice with popcorn for movie night">
+          <rect width="520" height="330" fill="#f7df9c"/><path d="M0 255h520v75H0z" fill="#d4c5a7"/>
+          <path d="M50 54h420v190H50z" rx="18" fill="#fff8e9" stroke="#13321f" stroke-width="7"/>
+          <path d="M75 84h370" stroke="#d9481c" stroke-width="13"/>
+          <g stroke="#13321f" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M89 250q0-63 48-63t49 63" fill="#d9481c"/><circle cx="137" cy="151" r="38" fill="#d7a27f"/><path d="M101 149q0-45 39-44 34 1 37 42-31-20-76 2z" fill="#263d2c"/><path d="M123 161q8 6 15 0m9 0q7 6 14 0" fill="none"/><path d="M115 177q21 16 41 0" fill="none"/>
+          <path d="M295 250q0-63 48-63t49 63" fill="#457a59"/><circle cx="343" cy="151" r="38" fill="#a86f4c"/><path d="M307 149q0-45 39-44 34 1 37 42-31-20-76 2z" fill="#263d2c"/><path d="M329 161q8 6 15 0m9 0q7 6 14 0" fill="none"/><path d="M321 177q21 16 41 0" fill="none"/></g>
+          <g transform="translate(204 170)" stroke="#13321f" stroke-width="6"><path d="M0 26h80l-11 79H10z" fill="#fffdf8"/><path d="M8 26l14-33h40l15 33" fill="#d9481c"/><g fill="#f2b51c"><circle cx="18" cy="12" r="13"/><circle cx="39" cy="6" r="15"/><circle cx="61" cy="13" r="13"/></g><path d="M17 54q22 15 46 0" fill="none"/></g>
+          <path d="M105 28q0-17 18-17h245q18 0 18 17v34q0 18-18 18H123q-18 0-18-18z" fill="#fffdf8" stroke="#13321f" stroke-width="5"/>
+          <text x="245" y="53" font-family="Arial" font-size="17" font-weight="900" fill="#13321f" text-anchor="middle">CASE CLOSED. MOVIE NIGHT SAVED.</text>
+          <path d="M427 132l10 19 22 3-16 15 4 22-20-11-20 11 4-22-16-15 22-3z" fill="#f2b51c" stroke="#13321f" stroke-width="4"/>
+        </svg>
+      </div>
+      <div class="copy">
+        <div class="case">Scene 06 · The good ending</div>
+        <h3>No food panic. Just a smarter choice.</h3>
+        <div class="bubble"><small>Maya</small>“So the label didn't tell me what to think. It gave me better information to decide.”</div>
+        <div class="bubble alt"><small>Nico</small>“Exactly. Compare similar products, check the serving size, read the ingredients, then think about your taste, needs and budget.”</div>
+        <p>Maya picks the snack she actually wants. Nico gets the popcorn. The movie starts on time.</p>
+        <p><strong>Crumb, the tiny snack mascot:</strong> “A happy ending. And not one dramatic courtroom appeal.”</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="case-closed">
+    <div class="eyebrow" style="color:#F2B51C">The takeaway · Keep this little checklist</div>
+    <h2>Four clues. One calmer supermarket trip.</h2>
+    <p>You don't need to memorise every ingredient or judge a food by one word. Use the label to ask better questions.</p>
+    <div class="checklist">
+      <div class="check"><strong>01 · Ingredients</strong>Start with the first few. Read the full list.</div>
+      <div class="check"><strong>02 · Sugars</strong>Notice sweetener names; check Total and Added Sugars.</div>
+      <div class="check"><strong>03 · Serving</strong>Check the serving size and servings per container.</div>
+      <div class="check"><strong>04 · Context</strong>Ask what an additive does. Compare like with like.</div>
+    </div>
+  </section>
+
+  <section class="quiz" aria-labelledby="quiz-title">
+    <div class="eyebrow">Quick detective test</div>
+    <h2 id="quiz-title">One bar = one serving. You eat two bars. How many servings is that?</h2>
+    <p>No trick question. Crumb promises not to object.</p>
+    <div class="answers">
+      <button type="button" data-answer="1">One serving</button>
+      <button type="button" data-answer="2">Two servings</button>
+      <button type="button" data-answer="3">A small mountain</button>
+    </div>
+    <div id="quiz-feedback" role="status" aria-live="polite"></div>
+  </section>
+
+  <section class="pin-files">
+    <div class="wrap">
+      <div class="eyebrow">The case archive · Keep investigating</div>
+      <h2>All six cases, right here on this page.</h2>
+      <p>No Canva sign-in or embedded viewer needed. Choose a case to jump straight to its illustrated scene.</p>
+      <div class="case-archive">
+        <a class="case-archive-link" href="#case-01"><span>CASE 01</span><strong>The front says “Natural”</strong><em>Look beyond the front-of-pack claim</em></a>
+        <a class="case-archive-link" href="#case-02"><span>CASE 02</span><strong>Read the ingredient list</strong><em>Start with the first few ingredients</em></a>
+        <a class="case-archive-link" href="#case-03"><span>CASE 03</span><strong>Sugar has many names</strong><em>Spot sweeteners and check the sugars line</em></a>
+        <a class="case-archive-link" href="#case-04"><span>CASE 04</span><strong>Serving size plot twist</strong><em>Check servings per container</em></a>
+        <a class="case-archive-link" href="#case-05"><span>CASE 05</span><strong>The additive courtroom</strong><em>Ask what an additive does</em></a>
+        <a class="case-archive-link" href="#case-06"><span>CASE 06</span><strong>Movie night saved</strong><em>Compare products and choose with context</em></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-box">
+      <div class="eyebrow">Want the full detective toolkit?</div>
+      <h2>Learn to read almost any food label in about 30 seconds.</h2>
+      <p>Explore the complete 53-page Supermarket Decoder guide, with ingredient explainers, practical examples, a printable cheat sheet and a 14-day shopping plan.</p>
+      <a class="btn" href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=story_page&utm_medium=website&utm_campaign=supermarket_decoder&utm_content=comic_cta" target="_blank" rel="noopener">Get Supermarket Decoder · $9 ↗</a>
+      <a class="btn secondary" href="../#tokens">Try the free ingredient decoder</a>
+    </div>
+    <p class="sources">Label-reading note: U.S. ingredient lists are generally presented in descending order of predominance by weight. The % Daily Value guide uses 5% or less as low and 20% or more as high. See the <a href="https://www.fda.gov/food/food-additives-and-gras-ingredients-information-consumers/types-food-ingredients" target="_blank" rel="noopener">FDA overview of food ingredients</a> and the <a href="https://www.fda.gov/food/nutrition-facts-label/how-understand-and-use-nutrition-facts-label" target="_blank" rel="noopener">FDA guide to the Nutrition Facts label</a>. This story is for education, not individual dietary or medical advice. Real labels vary; check the exact package, especially for allergen information.</p>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Supermarket Decoder</span><span><a href="../">Main guide</a> · <a href="../sources.html">Sources</a> · <a href="https://zakarfr.gumroad.com/l/supermarket-decoder">Get the guide</a></span></div></footer>
+
+<script>
+document.querySelectorAll("[data-answer]").forEach(function(button){
+  button.addEventListener("click",function(){
+    var feedback=document.getElementById("quiz-feedback");
+    if(button.getAttribute("data-answer")==="2"){
+      feedback.textContent="Exactly. Two bars at one serving each = two servings. Case closed. 🍿";
+      feedback.style.color="#27613a";
+    }else{
+      feedback.textContent="Not quite. If one bar is one serving, two bars add up to two servings. Try again, detective.";
+      feedback.style.color="#b23b1f";
+    }
+  });
+});
+</script>
+</body>
+</html>
