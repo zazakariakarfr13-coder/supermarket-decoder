@@ -4,39 +4,44 @@
 
 A public educational website and marketing hub by Zakaria Froud. It helps everyday shoppers understand packaged-food labels, ingredient lists, additive codes, nutrition panels and practical supermarket swaps.
 
-**Expected GitHub Pages URL (after activation):** https://zazakariakarfr13-coder.github.io/Zakaria/
+**Live website:** https://zazakariakarfr13-coder.github.io/Zakaria/
 
 ## What is in this repository
 
-- `index.html` — product introduction and interactive label-decoder preview.
-- `articles/` — short educational explainers.
-- `free-resources/` — printable and shareable label-reading tools.
+- `index.html` — product landing page and interactive ingredient-decoder preview.
+- `about.html` — author background, purpose and editorial principles.
+- `sources.html` — linked public-health, regulatory and scientific references.
+- `free-resources/` — checklist, glossary and an index of free learning resources.
+- `articles/` — short explainers on food labels, hidden sugars, E-numbers and NOVA.
 - `marketing/` — Pinterest, LinkedIn, Reddit and content-planning material.
 - `assets/site.css` — shared styling for educational pages.
-- `.github/workflows/pages.yml` — automatic GitHub Pages deployment on updates to `main`.
+- `favicon.svg` and `404.html` — site icon and custom not-found page.
+- `robots.txt` and `sitemap.xml` — search-engine discovery files.
+- `.github/workflows/pages.yml` — automatic GitHub Pages deployment after updates to `main`.
 
 ## Paid product protection
 
-The complete 53-page paid PDF is **not included** in this repository. Do not upload the paid PDF, customer information, order exports, or private Gumroad files here. This is a public repository.
+The complete 53-page paid PDF is **not included** in this public repository. Do not upload the paid PDF, customer information, order exports, or private Gumroad files here.
 
-The four landing-page purchase buttons point to the Gumroad product URL currently configured in `index.html`: https://zakarfr.gumroad.com/l/supermarket-decoder. I verified the four button destinations in the repository source; confirm the checkout page itself is active in Gumroad before sending paid traffic.
+The landing page checkout buttons link directly to the published Gumroad product. Each button has a distinct UTM content label so Gumroad analytics can distinguish the hero, guide-details, final-section and sticky-bar links.
 
-## Publish with GitHub Pages
+**Product page:** https://zakarfr.gumroad.com/l/supermarket-decoder
 
-1. Open **Settings → Pages** in this repository.
-2. Under **Build and deployment**, choose **GitHub Actions** as the source.
-3. The workflow deploys the website after commits to `main`.
-4. Once the first deployment succeeds, use the Pages URL shown in repository settings.
+## Deployment
+
+GitHub Pages is deployed through **GitHub Actions**. Keep the Pages source set to **GitHub Actions** in repository Settings → Pages. A successful workflow run confirms that GitHub accepted and deployed the static-site artifact.
 
 ## Marketing flow
 
-Free checklist/article → relevant Pinterest, LinkedIn or community post → website → Gumroad product page.
+Free checklist or explainer → relevant social/community post → free-resource library or landing page → Gumroad product page.
 
-Do not post repetitive link-only comments. Join discussions genuinely, follow each community's self-promotion rules, and share a free resource only when it answers the question.
+Use the free pages to earn attention and demonstrate the teaching style. Avoid repetitive link-only comments; follow each community's self-promotion rules and share a free resource only when it answers the discussion.
 
 ## Accuracy and scope
 
-The pages are educational summaries of the guide's label-reading method. Food-label rules differ by country and can change. NOVA processing groups are not a complete nutritional or medical score. Ingredient signals and additive codes should be read in context, not treated as proof that a food is harmful.
+Food-label rules differ by country and can change. The EU sources on the website explain EU requirements only; they are not a substitute for current Moroccan, UK, US or other national rules. NOVA is a processing classification, not a complete nutritional or medical score. Ingredient signals and additive codes should be read in context, not treated as proof that a food is harmful.
+
+The site is educational and does not provide medical, dietetic or personalised nutrition advice.
 
 ## Ownership
 
