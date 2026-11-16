@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 340">
+<title>Supermarket Decoder — comic scene illustrations</title>
+<desc>Six original flat-vector comic scenes featuring Leo and Rami investigating food labels in a supermarket.</desc>
+<defs>
+  <linearGradient id="storeWall" x2="0" y2="1"><stop stop-color="#e7dfbf"/><stop offset="1" stop-color="#c9c39f"/></linearGradient>
+  <linearGradient id="floor" x2="0" y2="1"><stop stop-color="#f5dca0"/><stop offset="1" stop-color="#c9ab73"/></linearGradient>
+  <linearGradient id="skin" x2="0" y2="1"><stop stop-color="#f6c08e"/><stop offset="1" stop-color="#dc9569"/></linearGradient>
+  <linearGradient id="redPack" x2="0" y2="1"><stop stop-color="#f2b34e"/><stop offset="1" stop-color="#d77b39"/></linearGradient>
+  <style>
+    .ink{stroke:#28302b;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+    .thin{stroke:#28302b;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+    .cream{fill:#fff3d2}.olive{fill:#50654f}.red{fill:#b84f3b}.gold{fill:#f1c95f}
+    .caption{font-family:Arial,sans-serif;font-weight:900;fill:#28302b}
+    .small{font-family:Arial,sans-serif;font-weight:700;fill:#384138}
+    .shelf{fill:#465c4b;stroke:#28302b;stroke-width:8}
+    .box-a{fill:#d58a5e;stroke:#28302b;stroke-width:4}
+    .box-b{fill:#f2cf68;stroke:#28302b;stroke-width:4}
+    .box-c{fill:#a9674d;stroke:#28302b;stroke-width:4}
+  </style>
+  <symbol id="store" viewBox="0 0 520 340">
+    <rect width="520" height="340" fill="url(#storeWall)"/>
+    <rect x="0" y="0" width="520" height="250" fill="#d9d7b9"/>
+    <path d="M0 0H520V36H0Z" fill="#344a3d"/>
+    <path d="M0 45H205V231H0Z" fill="#506451" stroke="#28302b" stroke-width="7"/>
+    <path d="M315 45H520V231H315Z" fill="#ad8959" stroke="#28302b" stroke-width="7"/>
+    <path d="M0 112H205M0 178H205M315 112H520M315 178H520" class="ink" fill="none"/>
+    <g>
+      <rect x="16" y="58" width="45" height="45" class="box-a"/><rect x="73" y="58" width="49" height="45" class="box-b"/><rect x="135" y="58" width="52" height="45" fill="#a5a08e" class="thin"/>
+      <rect x="18" y="128" width="51" height="39" class="box-b"/><rect x="82" y="128" width="45" height="39" class="box-c"/><rect x="140" y="128" width="46" height="39" fill="#d4b58b" class="thin"/>
+      <rect x="330" y="58" width="49" height="45" class="box-b"/><rect x="391" y="58" width="45" height="45" class="box-a"/><rect x="448" y="58" width="55" height="45" class="box-c"/>
+      <rect x="331" y="128" width="46" height="39" class="box-c"/><rect x="390" y="128" width="52" height="39" class="box-b"/><rect x="455" y="128" width="48" height="39" fill="#9a9b82" class="thin"/>
+    </g>
+    <path d="M0 250H520V340H0Z" fill="url(#floor)"/>
+    <path d="M0 252H520" stroke="#28302b" stroke-width="7"/>
+    <path d="M255 0V44" stroke="#28302b" stroke-width="5"/>
+    <path d="M226 44H284L272 67H238Z" fill="#ffe9a0" stroke="#28302b" stroke-width="4"/>
+  </symbol>
+  <symbol id="leo" viewBox="0 0 170 250">
+    <g class="ink">
+      <path d="M20 248Q24 181 43 151Q64 133 88 137Q128 137 145 166Q160 195 160 248Z" fill="#303b37"/>
+      <path d="M57 143L85 176L113 143L133 248H39Z" fill="#f4ecd5" stroke-width="4"/>
+      <path d="M78 169L93 169L105 224L86 242L66 224Z" fill="#b84c3a" stroke-width="4"/>
+      <path d="M81 154L86 168L94 168L101 154" fill="none" stroke-width="4"/>
+      <path d="M58 145Q43 126 39 96Q31 49 79 31Q123 25 141 66Q156 111 119 145Q88 163 58 145Z" fill="url(#skin)" stroke-width="5"/>
+      <path d="M39 91Q16 48 49 23Q59 9 76 19Q95 -3 111 15Q132 7 145 32Q166 52 139 92Q124 69 105 62Q83 79 66 58Q55 80 39 91Z" fill="#252c29"/>
+      <path d="M46 42Q24 24 33 8M69 29Q59 6 77 1M103 27Q105 3 120 7M130 38Q147 20 155 42" fill="none" stroke-width="9"/>
+      <path d="M65 88Q76 80 86 88M105 88Q116 80 126 89" fill="none" stroke-width="4"/>
+      <ellipse cx="76" cy="99" rx="5" ry="8" fill="#28302b" stroke="none"/><ellipse cx="115" cy="99" rx="5" ry="8" fill="#28302b" stroke="none"/>
+      <path d="M86 112Q96 121 104 112" fill="none" stroke-width="4"/>
+      <path d="M68 132Q91 148 115 131" fill="none" stroke-width="4"/>
+      <path d="M42 164L16 202Q10 220 25 225L55 185M130 165L154 195Q166 211 151 221L122 185" fill="#303b37" stroke-width="12"/>
+      <path d="M18 215Q26 207 39 213L47 224Q34 238 19 230Z" fill="url(#skin)" stroke-width="4"/>
+    </g>
+  </symbol>
+  <symbol id="rami" viewBox="0 0 180 250">
+    <g class="ink">
+      <path d="M18 248Q22 185 45 158Q71 137 112 145Q151 153 164 248Z" fill="#866347"/>
+      <path d="M43 164Q78 179 111 161L138 248H32Z" fill="#a06f4e" stroke-width="4"/>
+      <path d="M47 170L66 187M125 169L108 190" fill="none" stroke="#d2a56b" stroke-width="4"/>
+      <path d="M50 139Q35 111 43 76Q52 37 93 37Q139 40 145 82Q151 126 116 149Q80 162 50 139Z" fill="url(#skin)" stroke-width="5"/>
+      <path d="M45 111Q27 80 49 54Q58 30 88 36Q121 26 143 59Q156 81 134 116Q125 91 109 86Q89 100 69 86Q60 103 45 111Z" fill="#292f2b"/>
+      <path d="M43 68Q37 28 81 17Q127 4 151 42Q161 60 143 83L130 77Q121 44 91 42Q60 45 54 79Z" fill="#b79a63"/>
+      <path d="M43 58Q88 35 148 58L145 78Q92 57 47 81Z" fill="#7c6c4f"/>
+      <path d="M54 49Q69 25 93 34L94 67Q71 72 55 63Z" fill="#e6dcc1"/>
+      <path d="M106 34Q132 28 144 52L140 68Q119 70 104 60Z" fill="#e6dcc1"/>
+      <path d="M54 48Q68 24 94 33L93 64Q71 71 54 61Z" fill="none" stroke="#303a35" stroke-width="8"/>
+      <path d="M104 34Q132 25 146 51L141 68Q117 70 104 60Z" fill="none" stroke="#303a35" stroke-width="8"/>
+      <path d="M93 47L106 45" fill="none" stroke-width="8"/>
+      <path d="M60 94Q73 85 83 94M106 94Q119 85 130 94" fill="none" stroke-width="4"/>
+      <ellipse cx="76" cy="105" rx="4.5" ry="7" fill="#28302b" stroke="none"/><ellipse cx="117" cy="105" rx="4.5" ry="7" fill="#28302b" stroke="none"/>
+      <path d="M84 119Q100 130 113 117" fill="none" stroke-width="4"/>
+      <path d="M37 161Q88 183 139 158L152 185Q93 211 27 184Z" fill="#b34e3b"/>
+      <path d="M33 177L8 212L17 231L57 189M143 174L172 204L163 225L126 187" fill="#b34e3b" stroke-width="5"/>
+    </g>
+  </symbol>
+  <symbol id="magnifier" viewBox="0 0 100 100">
+    <circle cx="39" cy="38" r="28" fill="#dce4d6" fill-opacity=".65" stroke="#28302b" stroke-width="8"/>
+    <path d="M59 60L87 89" stroke="#76563e" stroke-width="13" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fruit-bowl" viewBox="0 0 150 100">
+    <path d="M8 35Q75 53 142 35L126 81Q75 112 24 81Z" fill="#d98b48" stroke="#28302b" stroke-width="6"/>
+    <circle cx="46" cy="30" r="18" fill="#b94f3b" stroke="#28302b" stroke-width="4"/>
+    <circle cx="82" cy="24" r="20" fill="#60784d" stroke="#28302b" stroke-width="4"/>
+    <circle cx="111" cy="31" r="17" fill="#e9c55e" stroke="#28302b" stroke-width="4"/>
+    <path d="M78 4Q90 -5 100 3" stroke="#506b46" stroke-width="5" fill="none"/>
+  </symbol>
+  <symbol id="cover" viewBox="0 0 520 340">
+    <use href="#store"/>
+    <path d="M0 0H520V58H0Z" fill="#253d33" opacity=".96"/>
+    <text x="22" y="27" class="caption" font-size="17" fill="#f7e9c9">SUPERMARKET DECODER</text>
+    <text x="22" y="49" class="caption" font-size="22" fill="#f4c65b">THE SNACK AISLE PLOT TWIST</text>
+    <use href="#leo" x="28" y="76" width="184" height="270"/>
+    <use href="#rami" x="318" y="72" width="185" height="265"/>
+    <g transform="translate(191 135) rotate(-7)">
+      <path d="M0 0L118 -8L135 157L12 166Z" fill="url(#redPack)" class="ink"/>
+      <path d="M8 17L120 9L123 45L11 52Z" fill="#b84835" stroke="#28302b" stroke-width="4"/>
+      <path d="M24 65L113 58L120 125L31 134Z" fill="#fff1ce" class="thin"/>
+      <text x="70" y="96" text-anchor="middle" class="caption" font-size="16">NATURAL</text>
+      <path d="M43 109H101M44 119H103" class="thin" fill="none"/>
+    </g>
+  </symbol>
+  <symbol id="scene-01" viewBox="0 0 520 340">
+    <use href="#store"/>
+    <use href="#leo" x="12" y="88" width="178" height="252"/>
+    <use href="#rami" x="340" y="82" width="174" height="250"/>
+    <g transform="translate(183 116) rotate(-6)">
+      <path d="M0 0L139 -8L151 187L12 194Z" fill="url(#redPack)" class="ink"/>
+      <path d="M9 21L143 13L145 54L11 62Z" fill="#b84f3b" stroke="#28302b" stroke-width="4"/>
+      <path d="M22 80L127 72L132 154L28 163Z" fill="#fff0c7" class="thin"/>
+      <text x="76" y="112" text-anchor="middle" class="caption" font-size="19">NATURAL</text>
+      <path d="M45 126H111M43 137H112" class="thin" fill="none"/>
+    </g>
+    <path d="M159 104Q179 82 196 96M324 103Q340 85 354 100" stroke="#d65d42" stroke-width="6" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="scene-02" viewBox="0 0 520 340">
+    <use href="#store"/>
+    <use href="#leo" x="0" y="99" width="148" height="220"/>
+    <use href="#rami" x="375" y="95" width="143" height="220"/>
+    <g transform="translate(151 38) rotate(-2)">
+      <rect width="220" height="264" rx="4" fill="#fff4d9" class="ink"/>
+      <text x="18" y="37" class="caption" font-size="21">INGREDIENTS</text>
+      <path d="M15 51H204" stroke="#28302b" stroke-width="5"/>
+      <text x="18" y="82" class="small" font-size="16">1. Rolled oats</text>
+      <text x="18" y="112" class="small" font-size="16">2. Dates</text>
+      <text x="18" y="142" class="small" font-size="16">3. Peanut butter</text>
+      <text x="18" y="172" class="small" font-size="16">4. Cocoa</text>
+      <text x="18" y="202" class="small" font-size="16">5. Honey</text>
+      <path d="M17 220H195M17 235H168" stroke="#a59b80" stroke-width="4"/>
+      <path d="M13 78L21 87L34 69" stroke="#5b7a4d" stroke-width="5" fill="none"/>
+    </g>
+    <use href="#magnifier" x="94" y="142" width="90" height="90"/>
+  </symbol>
+  <symbol id="scene-03" viewBox="0 0 520 340">
+    <use href="#store"/>
+    <use href="#leo" x="0" y="112" width="150" height="220"/>
+    <use href="#rami" x="371" y="107" width="145" height="222"/>
+    <g transform="translate(165 45)">
+      <rect width="190" height="224" rx="5" fill="#f9edcf" class="ink"/>
+      <text x="95" y="35" text-anchor="middle" class="caption" font-size="19">SWEETENER CLUES</text>
+      <path d="M16 49H174" stroke="#28302b" stroke-width="4"/>
+      <g class="caption" font-size="17">
+        <text x="23" y="82">HONEY</text><text x="23" y="117">DEXTROSE</text><text x="23" y="152">GLUCOSE SYRUP</text><text x="23" y="187">CANE SUGAR</text>
+      </g>
+      <path d="M14 91H174M14 126H174M14 161H174" stroke="#c6b896" stroke-width="2"/>
+    </g>
+    <g transform="translate(176 249)">
+      <path d="M0 0H35V43H0Z" fill="#fff0ca" class="thin"/><path d="M40 7H70V43H40Z" fill="#fff0ca" class="thin"/><path d="M76 -3H111V43H76Z" fill="#fff0ca" class="thin"/>
+      <path d="M0 0L35 0M40 7L70 7M76 -3L111 -3" stroke="#fff" stroke-width="3"/>
+    </g>
+    <use href="#magnifier" x="302" y="181" width="85" height="85"/>
+  </symbol>
+  <symbol id="scene-04" viewBox="0 0 520 340">
+    <use href="#store"/>
+    <use href="#leo" x="2" y="108" width="145" height="220"/>
+    <use href="#rami" x="390" y="107" width="130" height="220"/>
+    <g transform="translate(146 24) rotate(1)">
+      <rect width="232" height="284" fill="#fff" stroke="#202820" stroke-width="6"/>
+      <text x="15" y="36" font-family="Arial,sans-serif" font-size="25" font-weight="900" fill="#111">Nutrition Facts</text>
+      <path d="M13 49H218" stroke="#111" stroke-width="8"/>
+      <text x="15" y="76" font-family="Arial" font-size="13" fill="#111">2 servings per container</text>
+      <path d="M13 86H218" stroke="#111" stroke-width="2"/>
+      <text x="15" y="110" font-family="Arial" font-size="14" font-weight="700" fill="#111">Serving size</text>
+      <text x="215" y="110" text-anchor="end" font-family="Arial" font-size="14" font-weight="700" fill="#111">1 bar (40g)</text>
+      <path d="M13 120H218" stroke="#111" stroke-width="3"/>
+      <text x="15" y="151" font-family="Arial" font-size="13" fill="#111">Amount per serving</text>
+      <text x="15" y="183" font-family="Arial" font-size="25" font-weight="900" fill="#111">Calories</text>
+      <text x="215" y="183" text-anchor="end" font-family="Arial" font-size="25" font-weight="900" fill="#111">170</text>
+      <path d="M13 195H218" stroke="#111" stroke-width="7"/>
+      <text x="15" y="224" font-family="Arial" font-size="15" fill="#111">Total Sugars</text><text x="215" y="224" text-anchor="end" font-family="Arial" font-size="15" fill="#111">10g</text>
+      <text x="15" y="251" font-family="Arial" font-size="14" fill="#111">Added Sugars</text><text x="215" y="251" text-anchor="end" font-family="Arial" font-size="14" fill="#111">6g</text>
+    </g>
+    <circle cx="135" cy="196" r="37" fill="#fff" fill-opacity=".65" stroke="#28302b" stroke-width="7"/>
+    <path d="M162 224L191 254" stroke="#76563e" stroke-width="13" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="scene-05" viewBox="0 0 520 340">
+    <use href="#store"/>
+    <use href="#leo" x="0" y="113" width="142" height="216"/>
+    <use href="#rami" x="390" y="110" width="130" height="216"/>
+    <g transform="translate(124 62)">
+      <rect width="122" height="172" rx="4" fill="#fff1cf" class="ink"/>
+      <text x="61" y="31" text-anchor="middle" class="caption" font-size="18">E300</text>
+      <circle cx="61" cy="79" r="25" fill="#d6e4c9" stroke="#28302b" stroke-width="4"/>
+      <path d="M47 79L58 90L77 65" stroke="#57794d" stroke-width="6" fill="none"/>
+      <text x="61" y="136" text-anchor="middle" class="small" font-size="13">ANTIOXIDANT</text>
+    </g>
+    <g transform="translate(270 62)">
+      <rect width="122" height="172" rx="4" fill="#fff1cf" class="ink"/>
+      <text x="61" y="31" text-anchor="middle" class="caption" font-size="18">E471</text>
+      <circle cx="61" cy="79" r="25" fill="#f0d58a" stroke="#28302b" stroke-width="4"/>
+      <path d="M43 79Q61 53 79 79Q61 105 43 79Z" fill="#be724b" stroke="#28302b" stroke-width="3"/>
+      <text x="61" y="136" text-anchor="middle" class="small" font-size="13">EMULSIFIER</text>
+    </g>
+    <path d="M248 146L270 146" stroke="#b64b36" stroke-width="7" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="scene-06" viewBox="0 0 520 340">
+    <rect width="520" height="340" fill="#d9dfc9"/>
+    <path d="M0 0H520V230H0Z" fill="#c7d3bd"/>
+    <path d="M0 230H520V340H0Z" fill="url(#floor)"/>
+    <path d="M35 0V230M485 0V230" stroke="#52644f" stroke-width="8"/>
+    <path d="M0 80L520 80M0 155L520 155" stroke="#52644f" stroke-width="5"/>
+    <circle cx="440" cy="48" r="26" fill="#f7d477"/>
+    <use href="#leo" x="18" y="70" width="182" height="267"/>
+    <use href="#rami" x="321" y="72" width="180" height="265"/>
+    <g transform="translate(167 200)">
+      <path d="M0 18H182L164 84H21Z" fill="#6e8390" class="ink"/>
+      <path d="M18 20L36 0H151L171 20" fill="none" class="ink"/>
+      <circle cx="45" cy="91" r="13" fill="#303b37" stroke="#28302b" stroke-width="5"/>
+      <circle cx="147" cy="91" r="13" fill="#303b37" stroke="#28302b" stroke-width="5"/>
+      <use href="#fruit-bowl" x="42" y="-3" width="112" height="75"/>
+    </g>
+    <path d="M200 91L207 65M244 100L257 76M297 93L310 68" stroke="#e2a846" stroke-width="6" stroke-linecap="round"/>
+  </symbol>
+</defs>
+</svg>

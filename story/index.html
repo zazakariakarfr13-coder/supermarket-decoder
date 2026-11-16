@@ -414,75 +414,79 @@ footer{border-top:5px solid #b7894d}
   html{scroll-behavior:auto}
 }
 
+
+/* Clean 2D animated-comic illustration system */
+:root{
+  --bg:#e4e4d5;--paper:#fff7e4;--paper2:#f2e6ca;--ink:#28302b;--ink2:#3f5144;
+  --muted:#66715e;--line:#a69a7b;--accent:#b84f3b;--gold:#f1c95f;--mint:#b9cba9;
+}
+body{background:#e4e4d5;background-image:none;color:var(--ink)}
+.hero{background:linear-gradient(120deg,#263d34 0%,#405844 65%,#68734f 100%);border-bottom:6px solid var(--ink)}
+.hero:before{opacity:.07}
+.hero:after{opacity:.22}
+h1{text-shadow:2px 3px 0 rgba(0,0,0,.24);letter-spacing:-.035em}
+.hero-art{
+  aspect-ratio:520/340;border:5px solid var(--ink);border-radius:2px;
+  box-shadow:10px 10px 0 rgba(23,33,28,.88);background:#d9d7b9;
+  transform:none;overflow:hidden;
+}
+.hero-art:after{display:none}
+.hero-art .panel-art{display:block;width:100%;height:100%;filter:none}
+.scene,.scene:nth-child(even){
+  display:grid;grid-template-columns:minmax(0,1fr);gap:0;
+  width:min(940px,100%);margin:38px auto 54px;align-items:stretch;
+  background:var(--paper);border:4px solid var(--ink);border-radius:2px;
+  box-shadow:9px 10px 0 var(--ink);overflow:hidden;
+}
+.scene:nth-child(even) .art,.scene:nth-child(odd) .art,
+.scene:nth-child(even) .copy,.scene:nth-child(odd) .copy{
+  order:initial;transform:none;
+}
+.art,.art-illustration{
+  display:block;width:100%;height:auto;min-height:0;aspect-ratio:520/340;
+  border:0;border-radius:0;box-shadow:none;background:#d9d7b9;
+  overflow:hidden;position:relative;isolation:isolate;
+}
+.art:before{display:none}
+.art .panel-art{display:block;width:100%;height:100%;min-height:0;filter:none}
+.copy{
+  padding:clamp(22px,3.6vw,35px);border:0;border-top:4px solid var(--ink);
+  border-radius:0;box-shadow:none;background:#fff7e4;background-image:none;
+}
+.copy:before{display:none}
+.case{border-radius:2px;transform:none;box-shadow:3px 3px 0 var(--ink)}
+.copy h3{font-size:clamp(27px,3.6vw,39px);letter-spacing:-.025em}
+.bubble{background:#f2e6ca;border:2.5px solid var(--ink);border-radius:18px 18px 18px 5px;box-shadow:3px 4px 0 rgba(40,48,43,.16)}
+.bubble:after{background:#f2e6ca}
+.bubble.alt{background:#c8d4b9;border-radius:18px 18px 5px 18px}
+.bubble.alt:after{background:#c8d4b9}
+.fact{background:#f5e3ac;border-left:5px solid var(--accent);border-radius:0}
+.case-closed{border:4px solid var(--ink);border-radius:2px;box-shadow:9px 10px 0 var(--ink)}
+.quiz{border:4px solid var(--ink);border-radius:2px;box-shadow:8px 9px 0 var(--ink)}
+.answers button{border-radius:2px;box-shadow:3px 3px 0 var(--ink)}
+.pin-files{border-top:6px solid #b7894d;border-bottom:6px solid #b7894d}
+.case-archive-link{border:3px solid var(--ink);border-radius:2px;box-shadow:5px 6px 0 var(--ink);transform:none;transition:none}
+.case-archive-link:hover{transform:none}
+.cta-box{border:4px solid var(--ink);border-radius:2px;box-shadow:9px 10px 0 var(--ink)}
+.btn{border:3px solid var(--ink);border-radius:2px;box-shadow:4px 4px 0 var(--ink)}
+.stamp,#hero-package,#hero-maya,#hero-rays{animation:none!important}
+*,*:before,*:after{animation:none!important;transition:none!important}
+@media(max-width:820px){
+  .scene,.scene:nth-child(even){width:calc(100% - 4px);margin:28px auto 42px;gap:0}
+  .copy{padding:22px}
+}
+@media(max-width:540px){
+  .hero{padding:35px 0 30px}
+  .hero-art{aspect-ratio:1.18}
+  .copy{padding:19px 17px}
+  .copy h3{font-size:28px}
+}
+
 </style>
 </head>
 <body>
 
-<svg class="character-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute;left:-9999px;overflow:hidden">
-<defs>
-  <symbol id="leo-character" viewBox="0 0 180 250">
-    <g stroke="#202b28" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M27 245Q24 178 48 149Q78 126 112 145Q151 160 160 245Z" fill="#37443d"/>
-      <path d="M64 145L91 171L119 145L136 245H47Z" fill="#f0e8d6" stroke-width="4"/>
-      <path d="M85 167L98 168L106 230L91 241L78 230Z" fill="#a74634" stroke-width="4"/>
-      <path d="M80 151L91 166L103 151" fill="none" stroke="#202b28" stroke-width="4"/>
-      <path d="M62 140Q40 121 40 86Q40 34 91 29Q145 31 146 87Q145 132 116 148Q85 158 62 140Z" fill="#c78e69"/>
-      <path d="M42 89Q19 52 49 24Q59 9 78 18Q92 -1 112 12Q132 3 145 33Q165 50 145 91Q127 67 113 62Q93 76 74 60Q59 82 42 89Z" fill="#25332d"/>
-      <path d="M46 35Q22 28 31 9M68 28Q54 7 69 2M100 24Q93 1 111 3M128 31Q146 13 154 30" fill="none" stroke-width="8"/>
-      <path d="M67 92Q78 84 87 92M105 91Q115 84 125 91" fill="none" stroke-width="4"/>
-      <ellipse cx="78" cy="99" rx="4.5" ry="7" fill="#202b28" stroke="none"/>
-      <ellipse cx="115" cy="99" rx="4.5" ry="7" fill="#202b28" stroke="none"/>
-      <path d="M88 111Q96 118 102 111" fill="none" stroke-width="3.5"/>
-      <path d="M82 129Q99 141 116 127" fill="none" stroke-width="4"/>
-      <path d="M51 161L22 190M130 158L160 181" fill="none" stroke-width="14"/>
-      <path d="M22 190l-4 24M160 181l13 14" fill="none" stroke-width="11"/>
-      <path d="M53 158l-15 24m90-26 19 26" fill="none" stroke="#8c9a82" stroke-width="3"/>
-    </g>
-    <path d="M89 168l11 2-6 18-10-3z" fill="#e9e0c9" stroke="#202b28" stroke-width="3"/>
-  </symbol>
-  <symbol id="rami-character" viewBox="0 0 180 250">
-    <g stroke="#202b28" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M20 246Q24 177 52 153Q86 130 122 151Q155 169 161 246Z" fill="#75533b"/>
-      <path d="M48 161Q75 177 98 164L130 246H37Z" fill="#986a49" stroke-width="4"/>
-      <path d="M45 174L69 188M126 174L108 191" fill="none" stroke="#d2a56b" stroke-width="4"/>
-      <path d="M47 143Q38 116 47 80Q58 39 93 40Q134 43 142 82Q151 126 118 150Q80 166 47 143Z" fill="#c88962"/>
-      <path d="M49 112Q30 85 51 62Q61 37 90 41Q124 32 140 65Q155 83 135 117Q127 91 111 86Q91 98 72 86Q63 105 49 112Z" fill="#292f2a"/>
-      <path d="M58 85Q67 70 80 79M104 78Q119 69 129 82" fill="none" stroke-width="4"/>
-      <ellipse cx="77" cy="91" rx="5" ry="7" fill="#202b28" stroke="none"/>
-      <ellipse cx="116" cy="91" rx="5" ry="7" fill="#202b28" stroke="none"/>
-      <path d="M85 104Q99 115 110 103" fill="none" stroke-width="4"/>
-      <path d="M43 71Q36 30 80 18Q128 4 151 42Q160 60 144 83L130 76Q121 43 91 42Q60 45 54 77Z" fill="#c9b17b"/>
-      <path d="M44 59Q88 36 146 59L145 78Q91 57 48 81Z" fill="#9b8155"/>
-      <path d="M55 51Q68 27 92 35L95 66Q72 73 55 64Z" fill="#d9d0b3"/>
-      <path d="M105 34Q131 29 143 53L139 68Q118 70 103 60Z" fill="#d9d0b3"/>
-      <path d="M56 47Q69 23 93 33L92 62Q71 70 55 60Z" fill="none" stroke="#343a34" stroke-width="7"/>
-      <path d="M104 34Q131 26 145 51L140 67Q117 69 103 59Z" fill="none" stroke="#343a34" stroke-width="7"/>
-      <path d="M92 46L105 44" fill="none" stroke-width="8"/>
-      <path d="M36 159Q85 175 133 155L145 181Q96 210 35 182Z" fill="#a84735"/>
-      <path d="M39 174L9 211L16 231L58 187" fill="#a84735" stroke-width="5"/>
-      <path d="M138 166L169 201L163 220L126 186" fill="#a84735" stroke-width="5"/>
-      <path d="M20 246Q17 214 36 184L59 198L67 246M158 246Q161 210 140 185L120 198L113 246" fill="#6b4c37"/>
-    </g>
-    <path d="M65 183l18 14m31-15-18 15" stroke="#d5b27b" stroke-width="3" fill="none"/>
-  </symbol>
-  <symbol id="shelf-bg" viewBox="0 0 520 340">
-    <rect width="520" height="340" fill="#d8c49a"/>
-    <path d="M0 0H520V340H0Z" fill="url(#none)"/>
-    <path d="M0 26H520M0 128H520M0 228H520" stroke="#293831" stroke-width="9"/>
-    <path d="M12 0V245M505 0V245" stroke="#293831" stroke-width="8"/>
-    <g stroke="#26342e" stroke-width="4">
-      <rect x="22" y="42" width="58" height="73" rx="5" fill="#ba6343"/><rect x="92" y="38" width="60" height="76" rx="5" fill="#d9b55e"/>
-      <rect x="166" y="44" width="60" height="70" rx="5" fill="#879276"/><rect x="240" y="40" width="60" height="73" rx="5" fill="#b96e47"/>
-      <rect x="315" y="42" width="62" height="71" rx="5" fill="#d8b974"/><rect x="392" y="38" width="60" height="76" rx="5" fill="#7d9177"/>
-      <rect x="25" y="145" width="68" height="72" rx="5" fill="#d9b86a"/><rect x="105" y="145" width="60" height="72" rx="5" fill="#839077"/>
-      <rect x="178" y="144" width="70" height="74" rx="5" fill="#bb6a45"/><rect x="263" y="145" width="63" height="72" rx="5" fill="#dbbd77"/>
-      <rect x="342" y="144" width="67" height="74" rx="5" fill="#9b9a72"/><rect x="424" y="146" width="65" height="72" rx="5" fill="#bb7248"/>
-    </g>
-    <path d="M0 255H520V340H0Z" fill="#c0a477"/>
-    <path d="M0 280H520M0 314H520" stroke="#786447" stroke-width="3" opacity=".55"/>
-  </symbol>
-</defs>
-</svg>
+
 <div class="topline"><div class="wrap">
     <span class="brandmark"><span class="lens" aria-hidden="true"></span>Supermarket Decoder</span>
     <nav class="toplinks" aria-label="Main navigation">
@@ -495,24 +499,7 @@ footer{border-top:5px solid #b7894d}
     <h1>Let's visualise this scenario… <span>The Snack Aisle Plot Twist</span></h1>
     <p class="intro">One bold package. One curious shopper. Six tiny clues. And a movie night that gets saved by the humble act of turning a packet around.</p>
     <div class="stamp">Case file 07 · Snack aisle mystery</div>
-    <div class="hero-art" role="img" aria-label="Comic illustration of Leo and Rami in a supermarket snack aisle, inspecting a colourful snack packet">
-      <svg viewBox="0 0 1000 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Leo and Rami enter the supermarket on a mission to inspect food labels">
-<defs><linearGradient id="hero-floor" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d9c493"/><stop offset="1" stop-color="#987d58"/></linearGradient></defs>
-<rect width="1000" height="470" fill="#b9b28b"/>
-<path d="M0 0H1000V470H0Z" fill="#e0d2ac"/>
-<path d="M0 0H360L480 470H0Z" fill="#344b40" stroke="#202b28" stroke-width="10"/>
-<path d="M1000 0H650L530 470H1000Z" fill="#a97f4b" stroke="#202b28" stroke-width="10"/>
-<g stroke="#202b28" stroke-width="8"><path d="M0 112H402M0 240H435M0 366H465M1000 112H598M1000 240H565M1000 366H535"/></g>
-<g stroke="#202b28" stroke-width="4"><rect x="28" y="25" width="72" height="78" fill="#bb6c42"/><rect x="119" y="25" width="76" height="78" fill="#d9b65f"/><rect x="212" y="25" width="78" height="78" fill="#869578"/><rect x="721" y="25" width="78" height="78" fill="#d9b65f"/><rect x="813" y="25" width="78" height="78" fill="#a84e37"/><rect x="908" y="25" width="67" height="78" fill="#829078"/>
-<rect x="35" y="135" width="84" height="89" fill="#dabf7d"/><rect x="143" y="135" width="80" height="88" fill="#a75036"/><rect x="246" y="135" width="85" height="88" fill="#87977d"/><rect x="670" y="135" width="85" height="88" fill="#a75036"/><rect x="775" y="135" width="85" height="88" fill="#dec27b"/><rect x="880" y="135" width="88" height="88" fill="#859476"/></g>
-<path d="M0 390L1000 390V470H0Z" fill="url(#hero-floor)"/>
-<path d="M500 0V90" stroke="#202b28" stroke-width="6"/><path d="M454 90H548L529 130H474Z" fill="#e4bd61" stroke="#202b28" stroke-width="6"/>
-<use href="#leo-character" x="300" y="111" width="235" height="333"/>
-<use href="#rami-character" x="550" y="95" width="255" height="350"/>
-<g transform="translate(487 250) rotate(-12)" stroke="#202b28" stroke-width="7"><path d="M0 0H110L103 150H11Z" fill="#d9a943"/><path d="M8 21H103" stroke="#a84735" stroke-width="18"/><path d="M17 48H91V112H17Z" fill="#f4e7c8" stroke-width="4"/><text x="54" y="73" font-family="Georgia" font-size="14" text-anchor="middle" font-weight="bold" fill="#26332c" stroke="none">NATURAL</text><path d="M28 88H80M28 100H84" stroke="#728269" stroke-width="3"/></g>
-<path d="M220 76l-11-24m37 24 13-27m-90 36-15-17m600 8 12-25m27 32 19-16" stroke="#bd4d34" stroke-width="7" stroke-linecap="round"/>
-</svg>
-    </div>
+    <div class="hero-art" role="img" aria-label="Leo and Rami investigate a snack packet in a supermarket"><svg class="panel-art cover-art" viewBox="0 0 520 340" aria-hidden="true"><use href="../assets/comic-panels.svg#cover"/></svg></div>
     <div class="hero-note">Characters and package shown are fictional. The label examples below are teaching props, not real products.</div>
   </div>
 </header>
@@ -526,7 +513,7 @@ footer{border-top:5px solid #b7894d}
 
   <section class="comic" aria-label="The six-scene comic story">
     <article class="scene" id="case-01">
-      <div class="art art-illustration" role="img" aria-label="Rami and Leo investigate a package carrying a natural claim"><svg viewBox="0 0 520 340" role="img" aria-label="Rami holds up a snack packet with a bold natural claim while Leo checks it with a magnifying glass"><use href="#shelf-bg"/><path d="M0 257H520V340H0Z" fill="#b99a6b"/><g stroke="#202b28" stroke-width="5" stroke-linejoin="round"><path d="M192 87L324 70L346 242L209 257Z" fill="#d9a942"/><path d="M201 100L329 83L333 112L205 129Z" fill="#a84735"/><path d="M217 143L324 130L329 214L225 226Z" fill="#f5e6c3" stroke-width="3"/></g><text x="270" y="170" text-anchor="middle" font-family="Georgia" font-size="18" font-weight="bold" fill="#28352c">NATURAL</text><path d="M240 184h62M235 198h73" stroke="#52654e" stroke-width="3"/><use href="#leo-character" x="20" y="82" width="170" height="240"/><use href="#rami-character" x="320" y="80" width="175" height="245"/><circle cx="180" cy="157" r="42" fill="#eadfbe" fill-opacity=".6" stroke="#26322d" stroke-width="8"/><path d="M210 188l38 42" stroke="#594b39" stroke-width="14" stroke-linecap="round"/><path d="M365 48l10-25m25 29 17-20m-89 11-12-24" stroke="#b34832" stroke-width="6" stroke-linecap="round"/></div>
+      <div class="art art-illustration" role="img" aria-label="Rami and Leo investigate a package carrying a natural claim"><svg class="panel-art" viewBox="0 0 520 340" aria-hidden="true"><use href="../assets/comic-panels.svg#scene-01"/></svg></div>
       <div class="copy">
         <div class="case">Scene 01 · The opening claim</div>
         <h3>“This snack looks like it has a personal trainer.”</h3>
@@ -537,7 +524,7 @@ footer{border-top:5px solid #b7894d}
     </article>
 
     <article class="scene" id="case-02">
-      <div class="art art-illustration" role="img" aria-label="Leo and Rami inspect the ingredient list together"><svg viewBox="0 0 520 340" role="img" aria-label="Leo and Rami study a sample ingredient list on a large card"><use href="#shelf-bg"/><path d="M0 268H520V340H0Z" fill="#b99a6b"/><g transform="translate(150 45) rotate(-4)" stroke="#202b28" stroke-width="6"><rect width="240" height="244" rx="7" fill="#f5e8c9"/><path d="M17 48H223" stroke-width="8"/><path d="M24 80H207M24 111H195M24 142H210M24 173H166M24 204H185" stroke="#8d846e" stroke-width="5"/><path d="M20 78l9 10 15-20m-24 52 9 10 15-20" fill="none" stroke="#a84735" stroke-width="4"/></g><use href="#leo-character" x="8" y="82" width="175" height="240"/><use href="#rami-character" x="340" y="83" width="170" height="238"/><circle cx="336" cy="132" r="33" fill="#e8dfc3" stroke="#26322d" stroke-width="7"/><path d="M359 155l30 42" stroke="#594b39" stroke-width="13" stroke-linecap="round"/></div>
+      <div class="art art-illustration" role="img" aria-label="Leo and Rami inspect the ingredient list together"><svg class="panel-art" viewBox="0 0 520 340" aria-hidden="true"><use href="../assets/comic-panels.svg#scene-02"/></svg></div>
       <div class="copy">
         <div class="case">Scene 02 · Read the recipe</div>
         <h3>The first few ingredients tell a story.</h3>
@@ -551,7 +538,7 @@ footer{border-top:5px solid #b7894d}
     </article>
 
     <article class="scene" id="case-03">
-      <div class="art art-illustration" role="img" aria-label="The detectives examine food additive codes under a magnifying glass"><svg viewBox="0 0 520 340" role="img" aria-label="The detective duo investigates a row of additive codes under a magnifying glass"><use href="#shelf-bg"/><path d="M0 270H520V340H0Z" fill="#b99a6b"/><g transform="translate(277 55) rotate(3)" stroke="#202b28" stroke-width="6"><rect width="183" height="220" rx="5" fill="#f5e8cb"/><path d="M18 38H164M18 84H164M18 130H164M18 176H164" stroke="#8d846e" stroke-width="4"/><text x="92" y="72" text-anchor="middle" font-family="Arial" font-size="27" font-weight="bold" fill="#26332c" stroke="none">E300</text><text x="92" y="118" text-anchor="middle" font-family="Arial" font-size="27" font-weight="bold" fill="#26332c" stroke="none">E471</text><text x="92" y="164" text-anchor="middle" font-family="Arial" font-size="27" font-weight="bold" fill="#26332c" stroke="none">E621</text></g><use href="#leo-character" x="5" y="83" width="177" height="240"/><use href="#rami-character" x="342" y="75" width="170" height="240"/><circle cx="250" cy="170" r="46" fill="#e9e4cf" fill-opacity=".55" stroke="#26322d" stroke-width="8"/><path d="M283 204l36 40" stroke="#594b39" stroke-width="14" stroke-linecap="round"/></div>
+      <div class="art art-illustration" role="img" aria-label="The detectives examine food additive codes under a magnifying glass"><svg class="panel-art" viewBox="0 0 520 340" aria-hidden="true"><use href="../assets/comic-panels.svg#scene-03"/></svg></div>
       <div class="copy">
         <div class="case">Scene 03 · The name game</div>
         <h3>Sugar has more than one name.</h3>
@@ -564,7 +551,7 @@ footer{border-top:5px solid #b7894d}
     </article>
 
     <article class="scene" id="case-04">
-      <div class="art art-illustration" role="img" aria-label="Rami and Leo compare contains and may contain allergen statements"><svg viewBox="0 0 520 340" role="img" aria-label="Rami and Leo compare food allergen labels and the wording contains and may contain"><use href="#shelf-bg"/><path d="M0 270H520V340H0Z" fill="#b99a6b"/><g stroke="#202b28" stroke-width="6"><path d="M38 80h150l-8 170H44Z" fill="#b94f37"/><path d="M335 80h150l-8 170H341Z" fill="#e2c47a"/></g><g font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#fff1d4"><text x="113" y="132">CONTAINS</text><text x="113" y="163">MILK</text></g><g font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#26332c"><text x="410" y="132">MAY</text><text x="410" y="163">CONTAIN</text><text x="410" y="194">NUTS</text></g><use href="#leo-character" x="160" y="86" width="165" height="232"/><use href="#rami-character" x="0" y="89" width="155" height="230"/><path d="M240 58l-8-24m36 24 10-25m21 33 23-14" stroke="#b34832" stroke-width="6" stroke-linecap="round"/></div>
+      <div class="art art-illustration" role="img" aria-label="Rami and Leo compare contains and may contain allergen statements"><svg class="panel-art" viewBox="0 0 520 340" aria-hidden="true"><use href="../assets/comic-panels.svg#scene-04"/></svg></div>
       <div class="copy">
         <div class="case">Scene 04 · The serving-size plot twist</div>
         <h3>“I thought the whole pouch was one serving!”</h3>
@@ -584,7 +571,7 @@ footer{border-top:5px solid #b7894d}
     </article>
 
     <article class="scene" id="case-05">
-      <div class="art art-illustration" role="img" aria-label="The partners compare two similar snack packets"><svg viewBox="0 0 520 340" role="img" aria-label="Leo and Rami compare two similar snack packets side by side"><use href="#shelf-bg"/><path d="M0 270H520V340H0Z" fill="#b99a6b"/><g stroke="#202b28" stroke-width="7" stroke-linejoin="round"><path d="M85 72h126l15 177H94Z" fill="#b94f37"/><path d="M286 72h126l15 177H295Z" fill="#52718a"/></g><text x="151" y="136" text-anchor="middle" font-family="Georgia" font-size="42" font-weight="bold" fill="#f6e8c9">A</text><text x="352" y="136" text-anchor="middle" font-family="Georgia" font-size="42" font-weight="bold" fill="#f6e8c9">B</text><g fill="#e5bc69" stroke="#29342d" stroke-width="3"><ellipse cx="151" cy="195" rx="34" ry="19"/><ellipse cx="351" cy="195" rx="34" ry="19"/></g><use href="#leo-character" x="12" y="83" width="155" height="235"/><use href="#rami-character" x="348" y="78" width="165" height="240"/></div>
+      <div class="art art-illustration" role="img" aria-label="The partners compare two similar snack packets"><svg class="panel-art" viewBox="0 0 520 340" aria-hidden="true"><use href="../assets/comic-panels.svg#scene-05"/></svg></div>
       <div class="copy">
         <div class="case">Scene 05 · The additive courtroom</div>
         <h3>An E-number is an ID—not a verdict.</h3>
@@ -596,7 +583,7 @@ footer{border-top:5px solid #b7894d}
     </article>
 
     <article class="scene" id="case-06">
-      <div class="art art-illustration" role="img" aria-label="The duo reads the serving size and Nutrition Facts panel"><svg viewBox="0 0 520 340" role="img" aria-label="The two detectives check the serving size and nutrition facts together"><use href="#shelf-bg"/><path d="M0 270H520V340H0Z" fill="#b99a6b"/><g transform="translate(258 28) rotate(2)" stroke="#202b28" stroke-width="7"><rect width="215" height="255" rx="5" fill="#fff7e8"/><text x="16" y="42" font-family="Arial" font-size="24" font-weight="bold" fill="#202b28" stroke="none">Nutrition Facts</text><path d="M13 57H202" stroke-width="8"/><text x="16" y="92" font-family="Arial" font-size="17" fill="#202b28" stroke="none">Serving size</text><text x="184" y="92" text-anchor="end" font-family="Arial" font-size="20" font-weight="bold" fill="#202b28" stroke="none">30 g</text><path d="M14 111H201M14 154H201M14 197H201" stroke="#8c8068" stroke-width="4"/><text x="16" y="143" font-family="Arial" font-size="22" font-weight="bold" fill="#202b28" stroke="none">Calories 160</text></g><use href="#leo-character" x="20" y="88" width="170" height="235"/><use href="#rami-character" x="344" y="90" width="170" height="235"/><circle cx="246" cy="118" r="32" fill="#e9e4cf" stroke="#26322d" stroke-width="7"/><path d="M269 142l24 35" stroke="#594b39" stroke-width="13" stroke-linecap="round"/><path d="M180 42l8-20m24 25 17-19m-90 20-13-19" stroke="#b34832" stroke-width="6" stroke-linecap="round"/></div>
+      <div class="art art-illustration" role="img" aria-label="The duo reads the serving size and Nutrition Facts panel"><svg class="panel-art" viewBox="0 0 520 340" aria-hidden="true"><use href="../assets/comic-panels.svg#scene-06"/></svg></div>
       <div class="copy">
         <div class="case">Scene 06 · The good ending</div>
         <h3>No food panic. Just a smarter choice.</h3>
