@@ -135,6 +135,31 @@ def main():
                         f"in {target.relative_to(ROOT)}"
                     )
 
+
+    # Catch mislabeled or damaged raster assets before they become broken page images.
+    image_signatures = {
+        ".jpg": lambda header: header.startswith(b"\\xff\\xd8\\xff"),
+        ".jpeg": lambda header: header.startswith(b"\\xff\\xd8\\xff"),
+        ".png": lambda header: header.startswith(b"\\x89PNG\\r\\n\\x1a\\n"),
+        ".gif": lambda header: header.startswith((b"GIF87a", b"GIF89a")),
+        ".webp": lambda header: len(header) >= 12 and header[:4] == b"RIFF" and header[8:12] == b"WEBP",
+    }
+    for asset in sorted(ROOT.rglob("*")):
+        if not asset.is_file():
+            continue
+        matcher = image_signatures.get(asset.suffix.lower())
+        if matcher is None:
+            continue
+        try:
+            header = asset.read_bytes()[:16]
+        except OSError as exc:
+            errors.append(f"{asset.relative_to(ROOT)}: cannot read image asset: {exc}")
+            continue
+        if not matcher(header):
+            warnings.append(
+                f"{asset.relative_to(ROOT)}: file extension does not match its raster image signature."
+            )
+
     # Canonical URLs should be unique to each page when supplied, and stay on this site.
     seen_canonicals = {}
     for page, parser in parsed_pages.items():
