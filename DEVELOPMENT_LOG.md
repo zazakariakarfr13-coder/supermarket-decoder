@@ -98,3 +98,5 @@ The most recent inspected commits on 16 November 2026 refined the US Nutrition F
 
 - **Promotion timing:** the homepage currently shows the `LAUNCH40` 40%-off message through 19 November 2026 at 23:59 Europe/Paris; the site-side timestamp matches that cutoff. The available read-only Gumroad tools do not expose discount-code lookup, so the code's live validity could not be independently confirmed. Recheck the code in Gumroad before extending or removing the message.
 - **Public-repository check:** no PDF files are present in the repository tree. The paid PDF remains attached only to the Gumroad product delivery.
+
+- **Nutrition-label accuracy:** clarified that both comic mock labels are simplified fictional examples, added Added Sugars grams and %DV to the examples, and linked directly to FDA guidance. For most U.S. packaged foods, Added Sugars is listed in grams and %DV; single-ingredient sugars and syrups have special labeling rules.
