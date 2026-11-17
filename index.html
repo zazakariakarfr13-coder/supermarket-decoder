@@ -76,7 +76,7 @@
   .meta span::before { content: "✓ "; color: var(--accent); font-weight: 900; }
   .rating { font-size: 14px; color: var(--muted); margin-top: 10px; }
   .cover { position: relative; }
-  .cover img { border-radius: 14px; box-shadow: var(--shadow); transform: rotate(2deg); transition: transform .4s ease; width: 100%; max-width: 420px; margin-inline: auto; background: #F4EFE4; }
+  .cover img { border-radius: 14px; box-shadow: var(--shadow); transform: rotate(2deg); transition: transform .4s ease; width: 100%; height: auto; max-width: 420px; margin-inline: auto; background: #F4EFE4; }
   .cover:hover img { transform: rotate(0deg) scale(1.01); }
   .cover .badge { position: absolute; left: 0; bottom: 30px; background: var(--gold); color: #13321F; font-weight: 900; font-size: 14px; padding: 10px 14px; border-radius: 12px; box-shadow: var(--shadow); transform: rotate(-4deg); }
 
@@ -205,6 +205,11 @@
     .mono { margin-inline: auto; }
     .bar .wrap { justify-content: center; text-align: center; }
     .bar .r { display: none; }
+    /* Keep the headline and checkout button on the first phone screen. */
+    .hero { padding-top: 24px; }
+    .hero .wrap { gap: 20px; }
+    .cover img { max-width: 170px; }
+    .cover .badge { font-size: 12px; padding: 7px 10px; bottom: 14px; }
   }
 </style>
 <script type="application/ld+json">

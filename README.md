@@ -15,7 +15,7 @@ A public educational website and marketing hub by Zakaria Froud. It helps everyd
 - `articles/` — short explainers on food labels, hidden sugars, E-numbers and NOVA.
 - `story/` and `stories/` — illustrated food-label stories and case-study pages; the main reader includes a short interactive quiz.
 - `gallery/` — prepared product-preview images for the Gumroad listing.
-- `assets/comic-panels.svg` — reusable SVG artwork for the comic reader.
+- `assets/cast/` — character portraits (Mina, Tariq, Uncle Kamil) for *The Cart Chronicles* comic.
 - `marketing/` — Pinterest, LinkedIn, Reddit and content-planning material.
 - `assets/site.css` — shared styling for educational pages.
 - `scripts/check_site.py` — dependency-free local link, fragment, sitemap, metadata and raster-image-signature validation.
