@@ -138,9 +138,9 @@ def main():
 
     # Catch mislabeled or damaged raster assets before they become broken page images.
     image_signatures = {
-        ".jpg": lambda header: header.startswith(b"\\xff\\xd8\\xff"),
-        ".jpeg": lambda header: header.startswith(b"\\xff\\xd8\\xff"),
-        ".png": lambda header: header.startswith(b"\\x89PNG\\r\\n\\x1a\\n"),
+        ".jpg": lambda header: header.startswith(bytes((255, 216, 255))),
+        ".jpeg": lambda header: header.startswith(bytes((255, 216, 255))),
+        ".png": lambda header: header.startswith(bytes((137, 80, 78, 71, 13, 10, 26, 10))),
         ".gif": lambda header: header.startswith((b"GIF87a", b"GIF89a")),
         ".webp": lambda header: len(header) >= 12 and header[:4] == b"RIFF" and header[8:12] == b"WEBP",
     }
