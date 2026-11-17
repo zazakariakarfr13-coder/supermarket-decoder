@@ -211,6 +211,43 @@
     .cover img { max-width: 170px; }
     .cover .badge { font-size: 12px; padding: 7px 10px; bottom: 14px; }
   }
+
+  /* ---- free-first hero + comic ---- */
+  :root { --comic: #EE4D87; }
+  .btn.comic-btn { background: var(--gold); color: #13321F; box-shadow: 4px 4px 0 #13321F; border: 2px solid #13321F; }
+  .btn.comic-btn:hover { box-shadow: 6px 6px 0 #13321F; }
+  .hero .cover { display: none; }
+  .hero-comic { display: block; position: relative; text-decoration: none; color: #13321F; background: #7BCBB0; border: 4px solid #13321F; box-shadow: 10px 10px 0 var(--comic); padding: 22px 22px 26px; transform: rotate(1.2deg); transition: transform .25s ease, box-shadow .25s ease; background-image: radial-gradient(rgba(19,50,31,.18) 1px, transparent 1.5px); background-size: 9px 9px; }
+  .hero-comic:hover { transform: rotate(0deg) translateY(-3px); box-shadow: 14px 14px 0 var(--comic); }
+  .hc-tag { display: inline-block; background: var(--comic); border: 3px solid #13321F; padding: 5px 10px; font-weight: 900; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; transform: rotate(-2deg); }
+  .hc-title { display: block; font-weight: 900; font-size: clamp(28px, 3.4vw, 40px); line-height: 1; letter-spacing: -.03em; margin: 14px 0 16px; }
+  .hc-cast { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .hc-cast img { width: 100%; height: auto; border: 3px solid #13321F; background: #F2B51C; }
+  .hc-cast img:nth-child(2) { background: var(--comic); transform: translateY(-8px); }
+  .hc-bubble { position: relative; display: block; margin: 18px 0 14px 8%; background: #fff; border: 3px solid #13321F; border-radius: 18px; padding: 12px 16px; font-weight: 800; font-size: 16px; line-height: 1.35; box-shadow: 4px 4px 0 #13321F; }
+  .hc-bubble::before { content: ""; position: absolute; top: -16px; left: 46%; border: 8px solid transparent; border-bottom: 10px solid #13321F; }
+  .hc-go { display: inline-block; background: #13321F; color: #fff; padding: 10px 16px; font-weight: 900; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; }
+  .comic-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .comic-strip { display: grid; grid-template-columns: repeat(3, 1fr); background: #13321F; border: 4px solid #13321F; gap: 6px; box-shadow: 8px 8px 0 var(--comic); text-decoration: none; color: #13321F; transform: rotate(-1deg); }
+  .cs-panel { position: relative; background: #F2B51C; display: flex; flex-direction: column; justify-content: flex-end; min-height: 230px; overflow: hidden; }
+  .cs-panel:nth-child(2) { background: #7BCBB0; } .cs-panel:nth-child(3) { background: var(--comic); }
+  .cs-panel img { width: 100%; height: auto; }
+  .cs-say { position: absolute; top: 10px; left: 8px; right: 8px; background: #fff; border: 2px solid #13321F; border-radius: 12px; padding: 7px 9px; font-size: 13px; font-weight: 800; line-height: 1.25; }
+  .resource-card.all { background: var(--mint); }
+  .inside-head { display: grid; grid-template-columns: 1fr 280px; gap: 40px; align-items: center; margin-bottom: 30px; }
+  .inside-head .cover img { max-width: 280px; }
+  @media (max-width: 900px) {
+    .comic-row { grid-template-columns: 1fr; }
+    .inside-head { grid-template-columns: 1fr; }
+    .inside-head .cover { order: 0; }
+    .inside-head .cover img { max-width: 220px; margin: 0; }
+    .hero-comic { max-width: 460px; }
+  }
+  @media (max-width: 600px) {
+    .hero-comic { padding: 16px; transform: none; box-shadow: 6px 6px 0 var(--comic); }
+    .hc-bubble { font-size: 14px; margin-left: 0; }
+    .cs-panel { min-height: 170px; } .cs-say { font-size: 11px; }
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -237,51 +274,74 @@
 
 <div class="bar" role="note">
   <div class="wrap">
-    <span><span class="launch" id="launchBar">Launch week · <b>LAUNCH40</b> = 40% off until 19 Nov</span><span id="defaultBar">A practical label guide</span></span>
+    <span><a href="#free-resources" style="text-decoration:none">Free food-label guides</a> <span class="dot">●</span> <a href="story/" style="text-decoration:none">New comic</a></span>
     <span class="r">Read <span class="dot">●</span> Decode <span class="dot">●</span> Swap</span>
   </div>
 </div>
 
 <main id="main">
-  <!-- HERO -->
+  <!-- HERO: free learning first -->
   <header class="hero">
     <div class="wrap">
       <div>
-        <div class="kicker">The food-industry insider's guide</div>
+        <div class="kicker">Free food-label school</div>
         <h1>Supermarket <span class="acc">Decoder</span></h1>
         <p class="tagline">The front sells. The back tells.</p>
-        <p class="lead">Read any food label in 30 seconds, spot ultra-processed foods, and swap them for better choices on the same shelf, at the same budget.</p>
+        <p class="lead">Free checklists, plain-language explainers and a supermarket comic to help you read any food label in 30 seconds. No nutrition degree needed.</p>
         <div class="cta-row">
-          <a class="btn" href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&utm_medium=website&utm_campaign=supermarket_decoder&utm_content=hero_cta" target="_blank" rel="noopener" data-gumroad-action="buy">Get the guide <span class="p" data-gumroad-product="supermarket-decoder" data-gumroad-field="price">$9</span></a>
-          <a class="btn ghost" href="#inside">See what's inside</a>
+          <a class="btn" href="#free-resources">Start with the free guides ↓</a>
+          <a class="btn comic-btn" href="story/">📖 Read the comic</a>
         </div>
-        <div class="meta"><span>53-page PDF</span><span>Printable cheat-sheet</span><span>14-day plan</span></div>
-        <div class="rating"><span>Bought the guide? <a href="https://zakarfr.gumroad.com/l/supermarket-decoder" target="_blank" rel="noopener">Leave an honest review on your Gumroad download page</a>.</span></div>
+        <div class="meta"><span>Free to read</span><span>No sign-up</span><span>Calm facts, no food fear</span></div>
       </div>
-      <div class="cover">
-        <img src="https://public-files.gumroad.com/nbbfx502vssnurktwmojzb6uuqz2" alt="Cover of Supermarket Decoder: an ingredient label under a magnifying glass highlighting glucose syrup, emulsifier E471 and flavouring." width="420" height="594">
-        <div class="badge">Read any label in 30 sec</div>
-      </div>
+      <a class="hero-comic" href="story/" aria-label="Read the comic: The Cart Chronicles, Episode 01">
+        <span class="hc-tag">New comic · Episode 01</span>
+        <span class="hc-title">The Cart Chronicles</span>
+        <span class="hc-cast">
+          <img src="assets/cast/mina.webp" alt="" width="160" height="145">
+          <img src="assets/cast/tariq.webp" alt="" width="160" height="145">
+          <img src="assets/cast/kamil.webp" alt="" width="160" height="145">
+        </span>
+        <span class="hc-bubble">“Eight servings in one box? Who is this cereal feeding, a book club?”</span>
+        <span class="hc-go">Read the episode →</span>
+      </a>
     </div>
   </header>
 
-  <!-- PROBLEM -->
-  <section class="alt">
+  <!-- FREE RESOURCES -->
+  <section id="free-resources">
     <div class="wrap">
-      <div class="kicker reveal">Sound familiar?</div>
-      <h2 class="reveal">You pick up a yogurt. Is it a good choice?</h2>
-      <p class="sub reveal">The front of the pack is the most expensive advertising in the store. The back is where the truth is, but it's written for factories and regulators, not for you.</p>
-      <div class="problem">
-        <div class="pack front reveal">
-          <h3>The front</h3>
-          <div class="big">Strawberry Yogurt</div>
-          <div class="chips"><span class="chip">Natural</span><span class="chip">Made with real fruit</span><span class="chip">Source of calcium</span></div>
-        </div>
-        <div class="pack back reveal">
-          <h3>The back</h3>
-          <div class="ing">Milk, <b>sugar</b>, strawberries <b>(8%)</b>, cream, <b>modified maize starch</b>, <b>flavouring</b>, concentrated carrot juice, stabiliser (pectin), live cultures.</div>
-        </div>
+      <div class="kicker reveal">Start here for free</div>
+      <h2 class="reveal">Learn the basics before your next shop.</h2>
+      <p class="sub reveal">Short guides to build confidence with ingredient lists, sugar names, allergen wording, additive codes and food-processing categories.</p>
+      <div class="resource-links">
+        <a class="resource-card reveal" href="free-resources/30-second-label-checklist.html"><strong>30-second label checklist</strong><span>A quick routine to use at the supermarket.</span></a>
+        <a class="resource-card reveal" href="free-resources/us-nutrition-facts-label.html"><strong>How to read a U.S. Nutrition Facts label</strong><span>Serving size, calories, sodium, Added Sugars and % Daily Value.</span></a>
+        <a class="resource-card reveal" href="free-resources/contains-vs-may-contain.html"><strong>“Contains” vs “May contain”</strong><span>What allergen statements mean, and why you still read the full list.</span></a>
+        <a class="resource-card reveal" href="articles/hidden-sugars-five-names.html"><strong>Hidden sugars</strong><span>Recognise common sugars and syrups on a label.</span></a>
+        <a class="resource-card reveal" href="articles/e-numbers-explained.html"><strong>E-numbers explained</strong><span>Understand additive codes without fear-based shortcuts.</span></a>
+        <a class="resource-card reveal" href="articles/nova-food-processing-levels.html"><strong>NOVA processing groups</strong><span>What the framework can, and cannot, tell you.</span></a>
+        <a class="resource-card reveal" href="free-resources/food-label-glossary.html"><strong>Food-label glossary</strong><span>Plain-language definitions for common terms.</span></a>
+        <a class="resource-card reveal" href="articles/read-food-labels-in-30-seconds.html"><strong>Read a label in 30 seconds</strong><span>A simple sequence for comparing products.</span></a>
+        <a class="resource-card all reveal" href="free-resources/"><strong>Browse every free resource →</strong><span>The complete library of checklists and explainers.</span></a>
       </div>
+    </div>
+  </section>
+
+  <!-- COMIC -->
+  <section class="alt" id="comic">
+    <div class="wrap comic-row">
+      <div>
+        <div class="kicker reveal">Learn with a laugh</div>
+        <h2 class="reveal">The Cart Chronicles: a supermarket comic</h2>
+        <p class="sub reveal">Mina wants six items. Tariq wants the cereal with the tiger. Uncle Kamil wants to explain the chemistry of breakfast. Follow their grocery run through 8 scenes, make choices and finish with a 3-question quiz.</p>
+        <a class="btn comic-btn reveal" href="story/">📖 Read Episode 01</a>
+      </div>
+      <a class="comic-strip reveal" href="story/" aria-label="Open the comic">
+        <span class="cs-panel"><img src="assets/cast/tariq.webp" alt="" width="160" height="145"><span class="cs-say">It says “Natural”! Three claims!</span></span>
+        <span class="cs-panel"><img src="assets/cast/kamil.webp" alt="" width="160" height="145"><span class="cs-say">The front is advertising. Turn it over.</span></span>
+        <span class="cs-panel"><img src="assets/cast/mina.webp" alt="" width="160" height="145"><span class="cs-say">Turn it around, Romeo.</span></span>
+      </a>
     </div>
   </section>
 
@@ -314,12 +374,43 @@
     </div>
   </section>
 
-  <!-- INSIDE -->
-  <section id="inside">
+  <!-- PROBLEM: the paid-guide story starts here, mid-page -->
+  <section>
     <div class="wrap">
-      <div class="kicker reveal">What's inside</div>
-      <h2 class="reveal">10 chapters. 53 pages. Zero fear.</h2>
-      <p class="sub reveal">Short, visual, and every technical word explained in plain language.</p>
+      <div class="kicker reveal">Sound familiar?</div>
+      <h2 class="reveal">You pick up a yogurt. Is it a good choice?</h2>
+      <p class="sub reveal">The front of the pack is the most expensive advertising in the store. The back is where the truth is, but it's written for factories and regulators, not for you.</p>
+      <div class="problem">
+        <div class="pack front reveal">
+          <h3>The front</h3>
+          <div class="big">Strawberry Yogurt</div>
+          <div class="chips"><span class="chip">Natural</span><span class="chip">Made with real fruit</span><span class="chip">Source of calcium</span></div>
+        </div>
+        <div class="pack back reveal">
+          <h3>The back</h3>
+          <div class="ing">Milk, <b>sugar</b>, strawberries <b>(8%)</b>, cream, <b>modified maize starch</b>, <b>flavouring</b>, concentrated carrot juice, stabiliser (pectin), live cultures.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIDE -->
+  <section class="alt" id="inside">
+    <div class="wrap">
+      <div class="inside-head">
+        <div>
+          <div class="kicker reveal">Want the complete guide?</div>
+          <h2 class="reveal">10 chapters. 53 pages. Zero fear.</h2>
+          <p class="sub reveal">Everything from the free resources, taken further: short, visual, and every technical word explained in plain language. Printable cheat-sheet and 14-day plan included.</p>
+          <div class="cta-row reveal">
+            <a class="btn" href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&utm_medium=website&utm_campaign=supermarket_decoder&utm_content=hero_cta" target="_blank" rel="noopener" data-gumroad-action="buy">Get the guide <span class="p" data-gumroad-product="supermarket-decoder" data-gumroad-field="price">$9</span></a>
+          </div>
+        </div>
+        <div class="cover reveal">
+          <img src="https://public-files.gumroad.com/nbbfx502vssnurktwmojzb6uuqz2" alt="Cover of Supermarket Decoder: an ingredient label under a magnifying glass highlighting glucose syrup, emulsifier E471 and flavouring." width="420" height="594" loading="lazy">
+          <div class="badge">Read any label in 30 sec</div>
+        </div>
+      </div>
       <div class="inside">
         <div class="item reveal"><div class="ic" aria-hidden="true">🧭</div><div><h3>What "ultra-processed" really means</h3><p>The 4-level scale scientists use, and what the research does and doesn't prove.</p></div></div>
         <div class="item reveal"><div class="ic" aria-hidden="true">⏱️</div><div><h3>The 30-second scan</h3><p>A 3-step method that works on any pack, in any country.</p></div></div>
@@ -338,7 +429,7 @@
   </section>
 
   <!-- WHO -->
-  <section class="alt">
+  <section>
     <div class="wrap">
       <div class="kicker reveal">Is it for you?</div>
       <h2 class="reveal">Made for busy people who want to eat a little better</h2>
@@ -361,7 +452,7 @@
   </section>
 
   <!-- AUTHOR -->
-  <section>
+  <section class="alt">
     <div class="wrap">
       <div class="kicker reveal">From inside the industry</div>
       <h2 class="reveal">Why trust this guide?</h2>
@@ -373,7 +464,7 @@
   </section>
 
   <!-- FAQ -->
-  <section class="alt">
+  <section>
     <div class="wrap">
       <div class="kicker reveal">Questions</div>
       <h2 class="reveal">Good to know</h2>
@@ -387,31 +478,14 @@
     </div>
   </section>
 
-  <!-- FREE RESOURCES -->
-<section class="alt" id="free-resources">
-  <div class="wrap">
-    <div class="kicker reveal">Start here for free</div>
-    <h2 class="reveal">Learn the basics before your next shop.</h2>
-    <p class="sub reveal">Use these short guides to build confidence with ingredient lists, sugar names, additive codes and food-processing categories.</p>
-    <div class="resource-links">
-      <a class="resource-card reveal" href="free-resources/30-second-label-checklist.html"><strong>30-second label checklist</strong><span>A quick routine to use at the supermarket.</span></a>
-      <a class="resource-card reveal" href="free-resources/food-label-glossary.html"><strong>Food-label glossary</strong><span>Plain-language definitions for common terms.</span></a>
-      <a class="resource-card reveal" href="free-resources/us-nutrition-facts-label.html"><strong>How to read a U.S. Nutrition Facts label</strong><span>Free guide to serving size, calories, sodium, Added Sugars and % Daily Value.</span></a>
-      <a class="resource-card reveal" href="articles/hidden-sugars-five-names.html"><strong>Hidden sugars</strong><span>Recognise common sugars and syrups on a label.</span></a>
-      <a class="resource-card reveal" href="articles/e-numbers-explained.html"><strong>E-numbers explained</strong><span>Understand additive codes without fear-based shortcuts.</span></a>
-      <a class="resource-card reveal" href="articles/nova-food-processing-levels.html"><strong>NOVA processing groups</strong><span>Understand what the framework can—and cannot—tell you.</span></a>
-      <a class="resource-card reveal" href="free-resources/"><strong>Browse every free resource →</strong><span>Open the complete library of checklists and explainers.</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL -->
+  <!-- FINAL -->
   <section class="final">
     <div class="wrap">
       <h2>The front sells. <span>The back tells.</span></h2>
       <p>Learn to read the back in 30 seconds, and make every shopping trip a little smarter.</p>
       <a class="btn" href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&utm_medium=website&utm_campaign=supermarket_decoder&utm_content=final_cta" target="_blank" rel="noopener" data-gumroad-action="buy">Get the guide <span class="p" data-gumroad-product="supermarket-decoder" data-gumroad-field="price">$9</span></a>
       <div class="small"><span class="launch" id="launchFinal">Launch week: enter <span class="code">LAUNCH40</span> at checkout for 40% off, until 19 November. · </span>Instant PDF download · Secure checkout by Gumroad</div>
+      <div class="small">Bought the guide? <a href="https://zakarfr.gumroad.com/l/supermarket-decoder" target="_blank" rel="noopener">Leave an honest review on your Gumroad download page</a>.</div>
     </div>
   </section>
 </main>
@@ -482,11 +556,11 @@
     els.forEach(function (el) { io.observe(el); });
   } else { els.forEach(function (el) { el.classList.add("in"); }); }
 
-  // Sticky buy bar after the hero
-  var sticky = document.getElementById("sticky"), hero = document.querySelector(".hero");
+  // Sticky buy bar only once the reader reaches the guide section (mid-page), never on first sight
+  var sticky = document.getElementById("sticky"), hero = document.getElementById("inside");
   if ("IntersectionObserver" in window && sticky && hero) {
     new IntersectionObserver(function (es) {
-      var show = !es[0].isIntersecting;
+      var show = es[0].isIntersecting || es[0].boundingClientRect.top < 0;
       sticky.classList.toggle("show", show);
       sticky.setAttribute("aria-hidden", show ? "false" : "true");
       sticky.querySelector("a").tabIndex = show ? 0 : -1;
