@@ -30,7 +30,7 @@ The system has four connected parts:
 
 The product foundation is coherent: free, useful education earns attention before the checkout offer. The main weakness is not a lack of content ideas; it is the absence of a consolidated, repeatable evidence loop connecting content distribution, site engagement, outbound checkout clicks and Gumroad outcomes.
 
-The repository currently documents what to publish and which metrics to review, but the inspected files do not establish that analytics events or a complete conversion dashboard are configured. Do not claim marketing performance without analytics evidence.
+Gumroad analytics are available through the connected creator account, but the inspected repository does not establish a site-side analytics event system or a consolidated dashboard. Treat checkout-side views/referrers and sales as separate evidence from Pinterest impressions and website sessions.
 
 ### Risks and follow-up opportunities
 
@@ -81,8 +81,17 @@ The most recent inspected commits on 16 November 2026 refined the US Nutrition F
 - **Accessibility fix:** corrected the scene-image accessible labels for scenes 03–06 so the descriptions match the sugar jars, Nutrition Facts panel, additive identifiers, and closing snack scene.
 - **Asset integrity:** `assets/label-detective-cases.jpg` is 15,000 bytes but does not begin with a valid JPEG signature. Repository code search found no references to it, so it was left untouched. The site validator now warns when a raster file's extension does not match its file signature; this is a warning, not a deployment blocker. The five `gallery/*.jpg` preview images have valid JPEG signatures and appear to be prepared assets rather than embedded site images.
 - **SEO/social preview:** `/story/` has a canonical URL and is in the sitemap, but its `og:image` still points to a Canva design URL rather than a verified direct public raster image. The standalone cereal story has no `og:image`. A dedicated, verified share image should be prepared before promoting either story broadly.
-- **Marketing/measurement:** the Pinterest plan still describes a five-Pin weekly mix and separate impression, save, Pin-click, outbound-click and Gumroad conversion checks. No connected analytics evidence was available in this repository review, so traffic or sales performance cannot be inferred.
+- **Marketing/measurement:** the Pinterest plan still describes a five-Pin weekly mix and separate impression, save, Pin-click, outbound-click and Gumroad conversion checks. Gumroad analytics were reviewed separately; detailed performance figures are not written to this public repository. Site-side analytics were not verified.
 - **Issues and pull requests:** no open repository issues or pull requests were found.
-- **Deployment:** the latest inspected Pages build/deployment for `f41e416f` completed successfully. The validator step passed. The daily quality workflow file is present, but no run of that workflow appeared in the inspected Actions history yet.
+- **Deployment:** the latest inspected Pages build/deployment for `0584fbd3` completed successfully. The corrected validator passed and reported three non-blocking warnings: the 404 page lacked a meta description, the legacy redirect lacked an H1, and the unused `assets/label-detective-cases.jpg` did not have a valid JPEG signature. The five gallery JPEGs passed after the signature matcher was corrected. The daily quality workflow file is present, but no run of that workflow appeared in the inspected Actions history yet.
 - **Changes in this review:** updated the comic scene accessible labels and extended `scripts/check_site.py` with raster image-signature warnings. No social posts were published, no purchases were made, and the paid PDF/customer data remain outside the public repository.
 - **Next priorities:** finish the approved creative reset in one focused story revision; decide whether the three removed U.S. guides should be restored; replace the unverified social preview image with a dedicated public raster; review the incomplete U.S. Nutrition Facts mock label in the standalone cereal story; verify analytics and Gumroad conversion tracking; decide whether the unreferenced malformed JPEG should be replaced or removed.
+
+
+### 2026-11-17 — follow-up checks
+
+- **Gumroad delivery check:** the Supermarket Decoder product remains published at $9. The listing has six cover images and one attached PDF delivery file (about 3.97 MB). The paid PDF remains in Gumroad delivery and is not in the public repository. No buyer-level or customer records were accessed.
+- **Gumroad measurement:** the connected analytics were reviewed for the recent 7-day and 30-day periods. Detailed page-view and referrer counts are kept out of this public repository; see the daily review summary in the associated ChatGPT conversation.
+- **Low-risk SEO/structure fixes:** added a meta description to `404.html`; marked the legacy `story/cases.html` instant-refresh page `noindex,follow` and gave it a clear H1 so it is treated as a redirect helper rather than a separate search result; updated this README to document the story and gallery directories and the raster-signature check.
+- **Remaining warning:** `assets/label-detective-cases.jpg` is still an unreferenced malformed raster asset. It was not deleted or replaced because its intended source is unclear.
+- **Next review:** verify the deployment for this follow-up commit; confirm whether the GitHub scheduled quality workflow begins recording runs; prioritise the approved comic story reset and a verified direct share image before promoting the story page.

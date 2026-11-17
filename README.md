@@ -13,9 +13,12 @@ A public educational website and marketing hub by Zakaria Froud. It helps everyd
 - `sources.html` — linked public-health, regulatory and scientific references.
 - `free-resources/` — checklist, glossary and an index of free learning resources.
 - `articles/` — short explainers on food labels, hidden sugars, E-numbers and NOVA.
+- `story/` and `stories/` — illustrated food-label stories and case-study pages; the main reader includes a short interactive quiz.
+- `gallery/` — prepared product-preview images for the Gumroad listing.
+- `assets/comic-panels.svg` — reusable SVG artwork for the comic reader.
 - `marketing/` — Pinterest, LinkedIn, Reddit and content-planning material.
 - `assets/site.css` — shared styling for educational pages.
-- `scripts/check_site.py` — dependency-free local link, fragment, sitemap and metadata validation.
+- `scripts/check_site.py` — dependency-free local link, fragment, sitemap, metadata and raster-image-signature validation.
 - `DEVELOPMENT_LOG.md` — product definition, dated development reviews and next priorities.
 - `favicon.svg` and `404.html` — site icon and custom not-found page.
 - `robots.txt` and `sitemap.xml` — search-engine discovery files.
