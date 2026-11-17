@@ -2,8 +2,9 @@ name: Daily site quality check
 
 on:
   schedule:
-    # 08:17 Africa/Casablanca (UTC+1 during this schedule period); avoid the top-of-hour queue.
-    - cron: "17 7 * * *"
+    # 08:17 local time; timezone-aware and away from the top-of-hour queue.
+    - cron: "17 8 * * *"
+      timezone: "Africa/Casablanca"
   workflow_dispatch:
 
 permissions:
