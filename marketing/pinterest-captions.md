@@ -27,7 +27,7 @@ A balanced weekly mix: three practical education Pins, one free-resource Pin, an
 
 **Description:** Start with serving size and servings per container. Then check calories, Added Sugars, sodium and saturated fat. Learn how the 5% and 20% Daily Value guide works in this quick US label-reading guide. Save it for your next grocery trip.
 
-**Destination:** https://zazakariakarfr13-coder.github.io/Zakaria/free-resources/us-nutrition-facts-label.html?utm_source=pinterest&utm_medium=organic&utm_campaign=us_label_education&utm_content=us_nutrition_facts_30sec
+**Destination:** https://zazakariakarfr13-coder.github.io/supermarket-decoder/free-resources/us-nutrition-facts-label.html?utm_source=pinterest&utm_medium=organic&utm_campaign=us_label_education&utm_content=us_nutrition_facts_30sec
 
 **Board:** US Nutrition Facts Label Explained
 
@@ -39,7 +39,7 @@ A balanced weekly mix: three practical education Pins, one free-resource Pin, an
 
 **Description:** Cane sugar, glucose, fructose, dextrose, maltose, corn syrup and fruit-juice concentrate can appear in ingredient lists. Their role depends on how the ingredient is used. Check the Added Sugars line and read the full list for context.
 
-**Destination:** https://zazakariakarfr13-coder.github.io/Zakaria/articles/hidden-sugars-five-names.html?utm_source=pinterest&utm_medium=organic&utm_campaign=us_label_education&utm_content=added_sugar_names
+**Destination:** https://zazakariakarfr13-coder.github.io/supermarket-decoder/articles/hidden-sugars-five-names.html?utm_source=pinterest&utm_medium=organic&utm_campaign=us_label_education&utm_content=added_sugar_names
 
 **Board:** Ingredients & Hidden Sugars
 
@@ -51,7 +51,7 @@ A balanced weekly mix: three practical education Pins, one free-resource Pin, an
 
 **Description:** Ingredient lists can reveal more than front-of-pack claims. Start with the first three ingredients for a quick snapshot, then read the full list and compare similar products. This simple routine helps you understand how a food is made.
 
-**Destination:** https://zazakariakarfr13-coder.github.io/Zakaria/articles/read-food-labels-in-30-seconds.html?utm_source=pinterest&utm_medium=organic&utm_campaign=us_label_education&utm_content=ingredient_order
+**Destination:** https://zazakariakarfr13-coder.github.io/supermarket-decoder/articles/read-food-labels-in-30-seconds.html?utm_source=pinterest&utm_medium=organic&utm_campaign=us_label_education&utm_content=ingredient_order
 
 **Board:** Food Label Reading Tips
 
@@ -63,7 +63,7 @@ A balanced weekly mix: three practical education Pins, one free-resource Pin, an
 
 **Description:** An E-number identifies a food additive; it is not a danger rating. Learn the functions of examples such as E300, E330, E440 and E500, and why the full product context matters.
 
-**Destination:** https://zazakariakarfr13-coder.github.io/Zakaria/articles/e-numbers-explained.html?utm_source=pinterest&utm_medium=organic&utm_campaign=us_label_education&utm_content=e_numbers_explained
+**Destination:** https://zazakariakarfr13-coder.github.io/supermarket-decoder/articles/e-numbers-explained.html?utm_source=pinterest&utm_medium=organic&utm_campaign=us_label_education&utm_content=e_numbers_explained
 
 **Board:** Ingredients & Hidden Sugars
 

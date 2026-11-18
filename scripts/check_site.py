@@ -8,8 +8,8 @@ import sys
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE_URL = "https://zazakariakarfr13-coder.github.io/Zakaria"
-PROJECT_PREFIX = "/Zakaria/"
+SITE_URL = "https://zazakariakarfr13-coder.github.io/supermarket-decoder"
+PROJECT_PREFIX = "/supermarket-decoder/"
 
 
 class PageParser(HTMLParser):

@@ -4,7 +4,7 @@
 
 A public educational website and marketing hub by Zakaria Froud. It helps everyday shoppers understand packaged-food labels, ingredient lists, additive codes, nutrition panels and practical supermarket swaps.
 
-**Live website:** https://zazakariakarfr13-coder.github.io/Zakaria/
+**Live website:** https://zazakariakarfr13-coder.github.io/supermarket-decoder/
 
 ## What is in this repository
 

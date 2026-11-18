@@ -15,7 +15,7 @@ It also explains common ingredient terms, additive functions, food-processing gr
 
 I am sharing a free checklist for anyone who wants to practise the method:
 
-https://zazakariakarfr13-coder.github.io/Zakaria/free-resources/30-second-label-checklist.html
+https://zazakariakarfr13-coder.github.io/supermarket-decoder/free-resources/30-second-label-checklist.html
 
 The complete educational guide is a separate paid product. This material is for education, not medical or personalised nutrition advice.
 
