@@ -484,7 +484,7 @@
       <h2>The front sells. <span>The back tells.</span></h2>
       <p>Learn to read the back in 30 seconds, and make every shopping trip a little smarter.</p>
       <a class="btn" href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&utm_medium=website&utm_campaign=supermarket_decoder&utm_content=final_cta" target="_blank" rel="noopener" data-gumroad-action="buy">Get the guide <span class="p" data-gumroad-product="supermarket-decoder" data-gumroad-field="price">$9</span></a>
-      <div class="small"><span class="launch" id="launchFinal">Launch week: enter <span class="code">LAUNCH40</span> at checkout for 40% off, until 19 November. · </span>Instant PDF download · Secure checkout by Gumroad</div>
+      <div class="small"><span class="launch" id="launchFinal">Launch offer: enter <span class="code">LAUNCH40</span> at checkout for 40% off, until 3 December. · </span>Instant PDF download · Secure checkout by Gumroad</div>
       <div class="small">Bought the guide? <a href="https://zakarfr.gumroad.com/l/supermarket-decoder" target="_blank" rel="noopener">Leave an honest review on your Gumroad download page</a>.</div>
     </div>
   </section>
@@ -507,8 +507,8 @@
 (function () {
   document.body.classList.remove("no-js");
 
-  // Launch-week messages, shown only until the code expires (19 Nov 2026, 23:59 Paris)
-  var end = Date.UTC(2026, 10, 19, 22, 59, 0);
+  // Launch-offer messages, shown only until the code expires (3 Dec 2026, 23:59 Paris)
+  var end = Date.UTC(2026, 11, 3, 22, 59, 0);
   if (Date.now() < end) {
     ["launchBar", "launchFinal"].forEach(function (id) { var el = document.getElementById(id); if (el) el.classList.add("on"); });
     var d = document.getElementById("defaultBar"); if (d) d.style.display = "none";

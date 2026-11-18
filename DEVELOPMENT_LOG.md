@@ -119,3 +119,7 @@ The most recent inspected commits on 16 November 2026 refined the US Nutrition F
 - **Actions maintenance:** upgraded the Pages and daily-quality workflows to Node 24-compatible major releases (`checkout@v7`, `setup-python@v7`, `configure-pages@v6`, `upload-pages-artifact@v5`, `deploy-pages@v5`). Set Pages deployment concurrency to queue rather than cancel an in-flight deployment. The push run for `2a01eab3` verified the updated actions successfully; the Node.js 20 deprecation warnings are gone, although `deploy-pages@v5` still emits a separate `punycode` deprecation warning.
 
 - **Actions verification result:** Pages deployment run `44045338043` for `2a01eab3` completed successfully with the Node 24-compatible action versions and `cancel-in-progress: false`. The validator passed; the only site warning remains the unused malformed JPEG. The first scheduled quality workflow run (`44045049625`) also completed successfully on the previous workflow revision; the next scheduled run will exercise the timezone-aware schedule and upgraded actions.
+
+### 2026-11-18 — launch offer extended
+
+- **Promotion:** `LAUNCH40` (40% off, Supermarket Decoder only) extended in Gumroad to 3 December 2026, 23:59 Europe/Paris (22:59 UTC); Gumroad confirms the code is active. Homepage message reworded from "Launch week" to "Launch offer" and its client-side cutoff moved to the same time.
