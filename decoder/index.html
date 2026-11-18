@@ -364,6 +364,8 @@
      k: ok (basic food) | kitchen (NOVA group 2) | sugar | warn (additive, read the job) | sig (processing clue)
      clue: counts as a NOVA marker. Order matters: more specific entries first. */
   var A = "../articles/", L_SUG = A + "hidden-sugars-five-names.html", L_E = A + "e-numbers-explained.html", L_N = A + "nova-food-processing-levels.html";
+  // codes that have their own page in ../additives/
+  var PAGES = ["471", "322", "330", "415", "407", "621", "951", "250", "171", "150d", "211", "129"];
   var DICT = [
     // the confusing ones: names that look harmless, or hide what they do (checked first)
     { re: /(fd&c |fd and c )?red( no)? ?40\b/, e: "129" }, { re: /(fd&c |fd and c )?red( no)? ?3\b/, e: "127" }, { re: /(fd&c |fd and c )?yellow( no)? ?5\b/, e: "102" },
@@ -616,7 +618,8 @@
         "Its job here: " + fn.toLowerCase() + ". " + (cls ? cls.why : "") + (e && e[2] ? " " + e[2] : "") +
         (clue ? " This is one of NOVA's \"cosmetic\" additive types, so it counts as a processing clue." : " This type of additive doesn't count as an ultra-processing clue on its own.");
       var nice = e ? e[0].charAt(0).toUpperCase() + e[0].slice(1) : item.name;
-      return { k: clue ? "sig" : "warn", clue: clue, t: fn, d: d, l: L_E, e: "E" + code.toUpperCase(), nice: nice };
+      var page = PAGES.indexOf(code) !== -1 ? "../additives/e" + code + ".html" : L_E;
+      return { k: clue ? "sig" : "warn", clue: clue, t: fn, d: d, l: page, e: "E" + code.toUpperCase(), nice: nice };
     }
     if (entry) {
       if (entry.bf && /cocoa butter|shea butter|peanut butter|nut butter/.test(text)) entry = DICT.filter(function (x) { return x.t === "Cocoa"; })[0];

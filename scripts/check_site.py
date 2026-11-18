@@ -131,7 +131,8 @@ def main():
             if not target.is_file():
                 errors.append(f"{page.relative_to(ROOT)}: missing local target {raw!r}")
                 continue
-            if fragment and target.suffix.lower() == ".html":
+            # "#list=..." is the decoder's prefilled ingredient list, not an anchor
+            if fragment and not fragment.startswith("list=") and target.suffix.lower() == ".html":
                 target_parser = parsed_pages.get(target.resolve())
                 if target_parser is None:
                     target_parser = PageParser()
