@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ingredient Decoder: paste a food label, see what's in it | Supermarket Decoder</title>
+  <meta name="description" content="Free ingredient-list decoder. Paste any food label to spot sugar names, explain E-numbers and additives, flag processing clues and get a NOVA processing estimate. Runs in your browser.">
+  <link rel="canonical" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/decoder/">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#13321F">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zazakariakarfr13-coder.github.io/supermarket-decoder/decoder/">
+  <meta property="og:title" content="Ingredient Decoder: paste a food label, see what's in it">
+  <meta property="og:description" content="Sugar names, E-numbers, processing clues and a NOVA estimate, in seconds. Free, no sign-up.">
+  <link rel="stylesheet" href="../assets/site.css">
+  <style>
+    main { max-width: 900px; }
+    .tool { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 22px; margin: 26px 0; box-shadow: 0 10px 30px rgba(19,50,31,.07); }
+    .tool label { display: block; font-size: 12px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    textarea { width: 100%; min-height: 150px; resize: vertical; font: 16px/1.55 Inter, system-ui, sans-serif; color: var(--ink); background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 14px; }
+    textarea:focus { outline: none; border-color: var(--ink); }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+    .btn { appearance: none; border: 0; cursor: pointer; background: var(--accent); color: #fff; font: 800 16px/1 Inter, system-ui, sans-serif; padding: 14px 22px; border-radius: 999px; text-decoration: none; display: inline-block; }
+    .btn:hover { filter: brightness(1.05); }
+    .btn.ghost { background: transparent; color: var(--ink); border: 2px solid var(--line); padding: 12px 18px; font-size: 14px; }
+    .samples { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; font-size: 14px; color: var(--muted); }
+    .samples button { appearance: none; cursor: pointer; border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 999px; padding: 6px 12px; font: 600 13px/1.2 Inter, system-ui, sans-serif; }
+    .samples button:hover { border-color: var(--ink); }
+    .privacy { font-size: 13px; color: var(--muted); margin: 12px 0 0; }
+    #results[hidden] { display: none; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 8px 0 18px; }
+    .stat { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+    .stat b { display: block; font-size: 30px; line-height: 1.1; letter-spacing: -.03em; }
+    .stat span { font-size: 13px; color: var(--muted); line-height: 1.3; display: block; }
+    .stat.sugar b { color: #A0611A; } .stat.sig b { color: var(--accent); }
+    .nova { border-radius: 14px; padding: 18px 20px; margin: 0 0 18px; color: #fff; background: var(--ink); }
+    .nova .g { font-size: 12px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; opacity: .8; }
+    .nova h3 { margin: 4px 0 6px; font-size: 24px; line-height: 1.2; }
+    .nova p { margin: 0; font-size: 15px; line-height: 1.55; opacity: .92; }
+    .nova.g4 { background: #8E2F12; } .nova.g3 { background: #7A5A12; } .nova.g2 { background: #2F5A41; } .nova.g1 { background: #13321F; }
+    .nova .scale { display: flex; gap: 4px; margin-top: 12px; }
+    .nova .scale i { flex: 1; height: 6px; border-radius: 3px; background: rgba(255,255,255,.25); }
+    .nova .scale i.on { background: var(--gold); }
+    .obs { margin: 0 0 18px; padding: 0; list-style: none; }
+    .obs li { border-left: 5px solid var(--gold); background: #FCF3DC; padding: 10px 14px; margin: 8px 0; border-radius: 0 10px 10px 0; font-size: 15px; line-height: 1.55; }
+    .obs li.allergen { border-color: #6A4BA8; background: #F1ECFA; }
+    .ings { list-style: none; margin: 0; padding: 0; }
+    .ing { background: #fff; border: 1px solid var(--line); border-left: 6px solid #B9B2A3; border-radius: 10px; padding: 10px 14px; margin: 8px 0; }
+    .ing.ok, .ing.kitchen { border-left-color: #3E8E5E; } .ing.sugar { border-left-color: #D58A1E; } .ing.warn { border-left-color: var(--gold); } .ing.sig { border-left-color: var(--accent); }
+    .ing .top { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; }
+    .ing .nm { font-weight: 800; font-size: 16px; }
+    .ing .pos { font-size: 12px; color: var(--muted); font-weight: 700; min-width: 1.6em; }
+    .tag { font-size: 11px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; border-radius: 999px; padding: 3px 9px; background: #EEEAE0; color: #4C5E52; white-space: nowrap; }
+    .tag.ok, .tag.kitchen { background: #E2F1E7; color: #24613D; } .tag.sugar { background: #FBEBD3; color: #8A520F; } .tag.warn { background: #FCF0C8; color: #6E5408; } .tag.sig { background: #FBE1D7; color: #9A3519; }
+    .ing .d { font-size: 14.5px; line-height: 1.55; color: #2B4A37; margin-top: 3px; }
+    .ing .d a { font-weight: 700; }
+    .ing .kids { list-style: none; margin: 8px 0 2px; padding: 0 0 0 14px; border-left: 2px dashed var(--line); }
+    .ing .kids .ing { margin: 6px 0; }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 4px; }
+    .err { color: #9A3519; font-weight: 700; margin-top: 10px; }
+    .toast { font-size: 14px; color: #24613D; font-weight: 700; }
+    @media (max-width: 640px) { .stats { grid-template-columns: repeat(2, 1fr); } .tool { padding: 16px; } }
+    @media print { .tool .row, .samples, .privacy, .share { display: none; } }
+  </style>
+</head>
+<body>
+<header><a href="../index.html">Supermarket Decoder · Read · Decode · Swap</a></header>
+<main>
+  <div class="kicker">Free tool · Ingredient lists</div>
+  <h1>The Ingredient Decoder</h1>
+  <p class="lead">Paste the ingredient list from any packet. In a second you'll see the sugar names, what each additive is there to do, the clues that point to industrial processing, and a NOVA processing estimate.</p>
+
+  <section class="tool" aria-label="Decode an ingredient list">
+    <label for="list">Ingredient list</label>
+    <textarea id="list" spellcheck="false" placeholder="e.g. Oat flakes (25%), glucose syrup, milk chocolate (sugar, cocoa butter, whole milk powder, cocoa mass, emulsifier: soy lecithin), palm fat, dextrose, flavouring."></textarea>
+    <div class="samples"><span>Try an example:</span>
+      <button type="button" data-sample="bar">Chocolate cereal bar</button>
+      <button type="button" data-sample="bread">Sliced white bread</button>
+      <button type="button" data-sample="cola">Cola</button>
+      <button type="button" data-sample="yog">Strawberry yoghurt</button>
+      <button type="button" data-sample="nuts">Salted peanuts</button>
+      <button type="button" data-sample="plain">Plain yoghurt</button>
+    </div>
+    <div class="row">
+      <button type="button" class="btn" id="go">Decode it</button>
+      <button type="button" class="btn ghost" id="clear">Clear</button>
+    </div>
+    <p class="privacy">🔒 Runs entirely in your browser. Nothing you paste is sent or stored anywhere.</p>
+    <div class="err" id="err" role="alert"></div>
+  </section>
+
+  <section id="results" hidden aria-live="polite">
+    <h2>What this label says</h2>
+    <div class="stats">
+      <div class="stat"><b id="sIng">0</b><span>ingredients<br>(incl. inside brackets)</span></div>
+      <div class="stat sugar"><b id="sSug">0</b><span>different<br>sugar names</span></div>
+      <div class="stat"><b id="sAdd">0</b><span>additives<br>(E-numbers &amp; functions)</span></div>
+      <div class="stat sig"><b id="sSig">0</b><span>processing<br>clues</span></div>
+    </div>
+    <div class="nova" id="nova"></div>
+    <ul class="obs" id="obs"></ul>
+    <h2>Ingredient by ingredient</h2>
+    <div class="legend">
+      <span class="tag ok">Basic ingredient</span><span class="tag kitchen">Kitchen staple</span><span class="tag sugar">Sugar name</span><span class="tag warn">Additive: read the job</span><span class="tag sig">Processing clue</span><span class="tag">Not in our list</span>
+    </div>
+    <ul class="ings" id="ings"></ul>
+    <div class="row share">
+      <button type="button" class="btn ghost" id="share">🔗 Copy a link to this result</button>
+      <button type="button" class="btn ghost" onclick="window.print()">🖨 Print</button>
+      <span class="toast" id="toast" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <h2>How the decoder works</h2>
+  <div class="panel">
+    <p><strong>It reads the list the way you would at the shelf.</strong> It splits the list at the commas, opens every bracket (a "recipe inside the recipe"), keeps each percentage, and checks each ingredient against a hand-written list of about 300 ingredient names, additive functions and E-numbers.</p>
+    <ul>
+      <li><strong>Sugar names</strong> are counted separately, because a recipe that uses several sugars can keep each one lower in the list. <a href="../articles/hidden-sugars-five-names.html">Learn the sugar names →</a></li>
+      <li><strong>E-numbers</strong> are explained by their job: colour, preservative, emulsifier, raising agent and so on. A code is an identifier, not a verdict. <a href="../articles/e-numbers-explained.html">E-numbers explained →</a></li>
+      <li><strong>Processing clues</strong> follow the NOVA framework: ingredients and "cosmetic" additives (flavourings, colours, emulsifiers, sweeteners, thickeners and similar) that are rarely used in a home kitchen. <a href="../articles/nova-food-processing-levels.html">The four NOVA groups →</a></li>
+    </ul>
+  </div>
+  <div class="note"><strong>Please read:</strong> this is an educational estimate from words on a label, not a lab test, a health score or an allergen check. Labels can be incomplete, translated or abbreviated, and the decoder only knows the names in its list. NOVA describes processing, not nutrition. If you have an allergy or a medical diet, always read the pack itself and follow your doctor's advice.</div>
+
+  <div class="note" style="margin-top:18px"><strong>Want to do this in your head, in 30 seconds?</strong> Supermarket Decoder is a 53-page illustrated ebook (PDF) with a printable cheat-sheet and a 14-day tracker. <a href="../index.html#inside">See what's inside</a> or <a href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&amp;utm_medium=tool&amp;utm_campaign=supermarket_decoder&amp;utm_content=decoder_tool" target="_blank" rel="noopener">get it on Gumroad</a>.</div>
+  <p><a class="back" href="../free-resources/">← All free resources</a></p>
+</main>
+<footer>© 2026 Zakaria Froud · <a href="../about.html">About</a> · <a href="../sources.html">Sources and method</a> · Educational content only, not medical advice.</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Example labels (typical, not specific brands) ---------- */
+  var SAMPLES = {
+    bar: "Oat flakes (25%), glucose syrup, milk chocolate (12%) (sugar, cocoa butter, whole milk powder, cocoa mass, emulsifier: soy lecithin), palm fat, humectant: glycerol, dextrose, flavouring.",
+    bread: "Wheat flour (with calcium, iron, niacin, thiamin), water, yeast, salt, soya flour, preservative: calcium propionate, emulsifiers: E471, E472e, rapeseed oil, flour treatment agent: ascorbic acid.",
+    cola: "Carbonated water, sugar, colour: caramel E150d, acid: phosphoric acid, natural flavourings including caffeine.",
+    yog: "Yoghurt (milk), sugar, strawberry (7%), modified maize starch, concentrated lemon juice, flavourings, stabiliser: pectin, colour: carmine. May contain traces of nuts.",
+    nuts: "Peanuts (96%), sunflower oil, salt.",
+    plain: "Pasteurised whole milk, live cultures (Streptococcus thermophilus, Lactobacillus bulgaricus)."
+  };
+
+  /* ---------- Additive functions ("class names") ----------
+     clue: true = NOVA "cosmetic" additive class (marker of ultra-processing) */
+  var CLASSES = [
+    { re: /colou?r(s|ing|ings)?\b/, fn: "Colour", clue: true, why: "Adds or restores colour. Colours are one of NOVA's \"cosmetic\" additive classes." },
+    { re: /emulsifying salts?/, fn: "Emulsifying salt", clue: true, why: "Helps proteins and fats stay smooth when heated, as in processed cheese." },
+    { re: /emulsifiers?/, fn: "Emulsifier", clue: true, why: "Keeps oil and water mixed and textures smooth." },
+    { re: /stabili[sz]ers?/, fn: "Stabiliser", clue: true, why: "Keeps a texture stable over shelf life so it doesn't separate." },
+    { re: /thicken(er|ers|ing agents?)/, fn: "Thickener", clue: true, why: "Gives body and thickness without using more of the real ingredient." },
+    { re: /gelling agents?/, fn: "Gelling agent", clue: true, why: "Sets a liquid into a gel." },
+    { re: /(artificial |intense )?sweeteners?/, fn: "Sweetener", clue: true, why: "Adds sweetness with little or no sugar." },
+    { re: /flavou?r enhancers?/, fn: "Flavour enhancer", clue: true, why: "Boosts savoury taste. A NOVA \"cosmetic\" additive class." },
+    { re: /glazing agents?/, fn: "Glazing agent", clue: true, why: "Gives a shiny coating or stops pieces sticking together." },
+    { re: /humectants?/, fn: "Humectant", clue: true, why: "Holds water so a product stays soft. You would rarely use it at home." },
+    { re: /bulking agents?/, fn: "Bulking agent", clue: true, why: "Adds volume without adding much energy." },
+    { re: /(anti-?foaming|foaming) agents?/, fn: "Foam control", clue: true, why: "Creates or prevents foam during manufacture." },
+    { re: /preservatives?/, fn: "Preservative", clue: false, why: "Slows spoilage by moulds, yeasts or bacteria, so the food keeps longer." },
+    { re: /antioxidants?/, fn: "Antioxidant", clue: false, why: "Slows oxidation, so fats don't go rancid and colours don't fade." },
+    { re: /acidity regulators?|acidifiers?|\bacids?\b/, fn: "Acidity regulator", clue: false, why: "Controls sourness and acidity, which also helps preserve the food." },
+    { re: /raising agents?|leavening( agents?)?/, fn: "Raising agent", clue: false, why: "Releases gas to make doughs and batters rise." },
+    { re: /anti-?caking agents?/, fn: "Anti-caking agent", clue: false, why: "Stops powders clumping." },
+    { re: /flour treatment agents?|flour improvers?/, fn: "Flour treatment agent", clue: false, why: "Helps dough strength and volume in bread making." },
+    { re: /firming agents?/, fn: "Firming agent", clue: false, why: "Keeps fruit and vegetable pieces firm." },
+    { re: /sequestrants?/, fn: "Sequestrant", clue: false, why: "Binds metal traces that would otherwise spoil colour or flavour." },
+    { re: /carriers?/, fn: "Carrier", clue: false, why: "Dissolves or carries another additive." },
+    { re: /packaging gas(es)?/, fn: "Packaging gas", clue: false, why: "Replaces air in the pack to keep food fresh." },
+    { re: /vitamins?|minerals?/, fn: "Added nutrients", clue: false, why: "Vitamins or minerals added to the food, sometimes by law (as in UK flour)." }
+  ];
+  function findClass(s) { for (var i = 0; i < CLASSES.length; i++) if (CLASSES[i].re.test(s)) return CLASSES[i]; return null; }
+
+  /* ---------- E-numbers: code -> [name, default function index key, clue?] ---------- */
+  var F = { col: "Colour", pre: "Preservative", aox: "Antioxidant", acd: "Acidity regulator", emu: "Emulsifier", thk: "Thickener / stabiliser", gel: "Gelling agent", swt: "Sweetener", hum: "Humectant", rai: "Raising agent", ant: "Anti-caking agent", fen: "Flavour enhancer", glz: "Glazing agent", flr: "Flour treatment agent", gas: "Gas", mst: "Modified starch", fir: "Firming agent", seq: "Sequestrant", blk: "Bulking agent" };
+  var CLUEF = { col: 1, emu: 1, thk: 1, gel: 1, swt: 1, hum: 1, fen: 1, glz: 1, mst: 1, blk: 1 };
+  var E = {
+    "100": ["curcumin", "col"], "101": ["riboflavin (vitamin B2)", "col"], "102": ["tartrazine", "col"], "104": ["quinoline yellow", "col"], "110": ["sunset yellow FCF", "col"],
+    "120": ["carmine (cochineal)", "col"], "122": ["carmoisine (azorubine)", "col"], "124": ["ponceau 4R", "col"], "129": ["allura red AC", "col"], "131": ["patent blue V", "col"],
+    "132": ["indigo carmine", "col"], "133": ["brilliant blue FCF", "col"], "140": ["chlorophylls", "col"], "141": ["copper chlorophylls", "col"], "150a": ["plain caramel", "col"],
+    "150b": ["caustic sulphite caramel", "col"], "150c": ["ammonia caramel", "col"], "150d": ["sulphite ammonia caramel", "col"], "150": ["caramel colour", "col"], "153": ["vegetable carbon", "col"],
+    "160a": ["carotenes", "col"], "160b": ["annatto", "col"], "160c": ["paprika extract", "col"], "160e": ["beta-apo-8'-carotenal", "col"], "160": ["carotenoid colour", "col"], "161b": ["lutein", "col"],
+    "162": ["beetroot red", "col"], "163": ["anthocyanins", "col"], "170": ["calcium carbonate", "col"], "171": ["titanium dioxide", "col", "No longer authorised as a food additive in the EU since 2022; still permitted in some other countries."],
+    "172": ["iron oxides", "col"],
+    "200": ["sorbic acid", "pre"], "202": ["potassium sorbate", "pre"], "210": ["benzoic acid", "pre"], "211": ["sodium benzoate", "pre"], "220": ["sulphur dioxide", "pre", "A sulphite: one of the 14 allergens that must be declared in the EU above 10 mg/kg."],
+    "221": ["sodium sulphite", "pre"], "222": ["sodium bisulphite", "pre"], "223": ["sodium metabisulphite", "pre", "A sulphite: one of the 14 EU allergens."], "224": ["potassium metabisulphite", "pre", "A sulphite: one of the 14 EU allergens."],
+    "234": ["nisin", "pre"], "235": ["natamycin", "pre"], "249": ["potassium nitrite", "pre"], "250": ["sodium nitrite", "pre", "Used in cured meats such as ham and bacon to prevent bacterial growth and keep the pink colour."],
+    "251": ["sodium nitrate", "pre"], "252": ["potassium nitrate", "pre"], "260": ["acetic acid", "acd"], "261": ["potassium acetates", "acd"], "262": ["sodium acetates", "pre"], "270": ["lactic acid", "acd"],
+    "280": ["propionic acid", "pre"], "281": ["sodium propionate", "pre"], "282": ["calcium propionate", "pre", "Common in packaged bread to slow mould."], "290": ["carbon dioxide", "gas"], "296": ["malic acid", "acd"], "297": ["fumaric acid", "acd"],
+    "300": ["ascorbic acid (vitamin C)", "aox"], "301": ["sodium ascorbate", "aox"], "302": ["calcium ascorbate", "aox"], "304": ["ascorbyl palmitate", "aox"], "306": ["tocopherol-rich extract (vitamin E)", "aox"], "307": ["alpha-tocopherol (vitamin E)", "aox"],
+    "310": ["propyl gallate", "aox"], "319": ["TBHQ", "aox"], "320": ["BHA", "aox"], "321": ["BHT", "aox"], "322": ["lecithins", "emu", "Usually from soy or sunflower. Lecithins help oil and water stay mixed; its presence alone does not make a product good or bad."],
+    "325": ["sodium lactate", "acd"], "326": ["potassium lactate", "acd"], "327": ["calcium lactate", "acd"], "330": ["citric acid", "acd"], "331": ["sodium citrates", "acd"], "332": ["potassium citrates", "acd"], "333": ["calcium citrates", "acd"],
+    "334": ["tartaric acid", "acd"], "336": ["potassium tartrates", "acd"], "338": ["phosphoric acid", "acd"], "339": ["sodium phosphates", "acd"], "340": ["potassium phosphates", "acd"], "341": ["calcium phosphates", "acd"], "392": ["rosemary extract", "aox"],
+    "400": ["alginic acid", "thk"], "401": ["sodium alginate", "thk"], "406": ["agar", "gel"], "407": ["carrageenan", "thk"], "407a": ["processed eucheuma seaweed", "thk"], "410": ["locust bean gum", "thk"], "412": ["guar gum", "thk"],
+    "414": ["gum arabic (acacia gum)", "thk"], "415": ["xanthan gum", "thk"], "417": ["tara gum", "thk"], "418": ["gellan gum", "gel"], "420": ["sorbitol", "swt"], "421": ["mannitol", "swt"], "422": ["glycerol", "hum"],
+    "440": ["pectins", "gel"], "450": ["diphosphates", "rai"], "451": ["triphosphates", "acd"], "452": ["polyphosphates", "acd"], "460": ["cellulose", "thk"], "461": ["methyl cellulose", "thk"], "463": ["hydroxypropyl cellulose", "thk"],
+    "464": ["hydroxypropyl methyl cellulose", "thk"], "466": ["carboxymethyl cellulose", "thk"], "471": ["mono- and diglycerides of fatty acids", "emu"], "472a": ["acetic acid esters of mono- and diglycerides", "emu"],
+    "472b": ["lactic acid esters of mono- and diglycerides", "emu"], "472c": ["citric acid esters of mono- and diglycerides", "emu"], "472e": ["DATEM (diacetyl tartaric acid esters of mono- and diglycerides)", "emu"],
+    "473": ["sucrose esters of fatty acids", "emu"], "475": ["polyglycerol esters of fatty acids", "emu"], "476": ["PGPR (polyglycerol polyricinoleate)", "emu"], "477": ["propylene glycol esters of fatty acids", "emu"],
+    "481": ["sodium stearoyl-2-lactylate", "emu"], "482": ["calcium stearoyl-2-lactylate", "emu"], "491": ["sorbitan monostearate", "emu"], "492": ["sorbitan tristearate", "emu"],
+    "500": ["sodium carbonates (incl. baking soda)", "rai"], "501": ["potassium carbonates", "acd"], "503": ["ammonium carbonates", "rai"], "504": ["magnesium carbonates", "ant"], "507": ["hydrochloric acid", "acd"],
+    "508": ["potassium chloride", "fen"], "509": ["calcium chloride", "fir"], "516": ["calcium sulphate", "fir"], "524": ["sodium hydroxide", "acd"], "551": ["silicon dioxide", "ant"], "552": ["calcium silicate", "ant"], "570": ["fatty acids", "ant"],
+    "575": ["glucono-delta-lactone", "acd"], "620": ["glutamic acid", "fen"], "621": ["monosodium glutamate (MSG)", "fen"], "627": ["disodium guanylate", "fen"], "631": ["disodium inosinate", "fen"], "635": ["disodium 5'-ribonucleotides", "fen"],
+    "640": ["glycine", "fen"], "901": ["beeswax", "glz"], "903": ["carnauba wax", "glz"], "904": ["shellac", "glz"], "920": ["L-cysteine", "flr"], "938": ["argon", "gas"], "941": ["nitrogen", "gas"], "942": ["nitrous oxide", "gas"],
+    "948": ["oxygen", "gas"], "950": ["acesulfame K", "swt"], "951": ["aspartame", "swt", "Contains a source of phenylalanine, which matters for people with phenylketonuria (PKU)."], "952": ["cyclamates", "swt"], "954": ["saccharin", "swt"],
+    "955": ["sucralose", "swt"], "960": ["steviol glycosides (stevia)", "swt"], "960a": ["steviol glycosides (stevia)", "swt"], "961": ["neotame", "swt"], "962": ["aspartame-acesulfame salt", "swt"], "965": ["maltitol", "swt"], "966": ["lactitol", "swt"],
+    "967": ["xylitol", "swt"], "968": ["erythritol", "swt"], "1103": ["invertase", "flr"], "1200": ["polydextrose", "blk"], "1404": ["oxidised starch", "mst"], "1410": ["monostarch phosphate", "mst"], "1412": ["distarch phosphate", "mst"],
+    "1414": ["acetylated distarch phosphate", "mst"], "1420": ["acetylated starch", "mst"], "1422": ["acetylated distarch adipate", "mst"], "1440": ["hydroxypropyl starch", "mst"], "1442": ["hydroxypropyl distarch phosphate", "mst"],
+    "1450": ["starch sodium octenyl succinate", "mst"], "1520": ["propylene glycol", "hum"]
+  };
+  function rangeFn(n) {
+    if (n >= 100 && n < 200) return "col"; if (n < 300) return "pre"; if (n < 400) return "aox";
+    if (n < 500) return "thk"; if (n < 600) return "acd"; if (n < 700) return "fen"; if (n >= 900 && n < 1000) return n >= 950 ? "swt" : "glz";
+    if (n >= 1400 && n < 1500) return "mst"; return null;
+  }
+
+  /* ---------- Named ingredients ----------
+     k: ok (basic food) | kitchen (NOVA group 2) | sugar | warn (additive, read the job) | sig (processing clue)
+     clue: counts as a NOVA marker. Order matters: more specific entries first. */
+  var A = "../articles/", L_SUG = A + "hidden-sugars-five-names.html", L_E = A + "e-numbers-explained.html", L_N = A + "nova-food-processing-levels.html";
+  var DICT = [
+    // industrial sugars (NOVA markers)
+    { re: /high[- ]fructose corn syrup|\bhfcs\b/, k: "sugar", clue: true, t: "High-fructose corn syrup", d: "A corn-starch syrup with part of its glucose converted to fructose. Cheap, very sweet and easy to blend. NOVA lists it as an industrial ingredient.", l: L_SUG },
+    { re: /glucose[- ]fructose syrup|fructose[- ]glucose syrup|isoglucose/, k: "sugar", clue: true, t: "Glucose-fructose syrup", d: "The EU name for syrups like high-fructose corn syrup. Sweet, liquid, cheap. An industrial sugar.", l: L_SUG },
+    { re: /glucose syrup|dried glucose|glucose solids/, k: "sugar", clue: true, t: "Glucose syrup", d: "Starch broken down into a sweet syrup. Adds sweetness, moisture and chewiness, and costs less than sugar. NOVA treats it as an industrial ingredient.", l: L_SUG },
+    { re: /corn syrup|maize syrup/, k: "sugar", clue: true, t: "Corn syrup", d: "A syrup made from corn starch. It adds sweetness and shapes texture.", l: L_SUG },
+    { re: /invert(ed)? sugar|invert syrup|golden syrup/, k: "sugar", clue: true, t: "Invert sugar syrup", d: "Sucrose split into glucose and fructose. Sweet, and keeps baked goods moist. Golden syrup is a partly inverted sugar syrup.", l: L_SUG },
+    { re: /\bdextrose\b/, k: "sugar", clue: true, t: "Dextrose", d: "Another name for glucose. Using several sugars keeps each one lower in the list.", l: L_SUG },
+    { re: /\bfructose\b/, k: "sugar", clue: true, t: "Fructose", d: "Fruit sugar, added here as a purified ingredient. NOVA lists added fructose as an industrial ingredient.", l: L_SUG },
+    { re: /\blactose\b/, k: "sugar", clue: true, t: "Lactose", d: "Milk sugar, added as an ingredient. Often a filler or carrier. Relevant if you are lactose intolerant.", l: L_SUG },
+    { re: /\bmaltose\b|malt(ose)? syrup/, k: "sugar", clue: false, t: "Malt sugar", d: "A sugar made by breaking down starch, often from barley.", l: L_SUG },
+    { re: /(fruit|apple|grape|pear|orange|pineapple)[- ]juice concentrate|concentrated (apple|grape|pear|fruit) juice/, k: "sugar", clue: true, t: "Fruit-juice concentrate", d: "Juice with most of the water removed. It can sweeten a product while the front says \"no added sugar\" in some markets. NOVA lists it as an industrial ingredient.", l: L_SUG },
+    // kitchen sugars (NOVA group 2)
+    { re: /brown rice syrup|rice syrup/, k: "sugar", t: "Rice syrup", d: "A sweet syrup made from rice starch.", l: L_SUG },
+    { re: /maple syrup/, k: "sugar", t: "Maple syrup", d: "Boiled-down maple sap. Still a sugar, however natural it sounds.", l: L_SUG },
+    { re: /agave/, k: "sugar", t: "Agave syrup", d: "A syrup from the agave plant, high in fructose.", l: L_SUG },
+    { re: /date syrup|date paste/, k: "sugar", t: "Date syrup", d: "Concentrated dates. Sweet, and counts as an added sugar in many label systems.", l: L_SUG },
+    { re: /molasses|treacle/, k: "sugar", t: "Molasses / treacle", d: "The dark syrup left over from sugar refining.", l: L_SUG },
+    { re: /\bhoney\b/, k: "sugar", t: "Honey", d: "Naturally occurring sugars. Added to a packaged food, it counts as added sugar on U.S. labels.", l: L_SUG },
+    { re: /malt extract|barley malt/, k: "sugar", t: "Malt extract", d: "A sweet extract of sprouted barley, used for flavour, colour and sweetness.", l: L_SUG },
+    { re: /caramel(i[sz]ed)? sugar|burnt sugar/, k: "sugar", t: "Caramelised sugar", d: "Sugar heated until it browns. Adds colour and flavour." },
+    { re: /coconut (blossom )?sugar/, k: "sugar", t: "Coconut sugar", d: "Sugar from coconut-palm sap. Nutritionally, still mostly sucrose.", l: L_SUG },
+    { re: /\bsucrose\b|cane sugar|beet sugar|brown sugar|raw sugar|caster sugar|icing sugar|demerara|muscovado|evaporated cane juice|cane juice|\bsugars?\b/, k: "sugar", t: "Sugar", d: "Table sugar (sucrose). A kitchen staple, so on its own it doesn't signal industrial processing, but its position in the list tells you how much is there.", l: L_SUG },
+    // industrial ingredients (NOVA markers)
+    { re: /maltodextrin/, k: "sig", clue: true, t: "Maltodextrin", d: "A starch-derived carbohydrate used as a bulking agent or flavour carrier. Not simply another name for sugar, but an industrial ingredient in NOVA.", l: L_SUG },
+    { re: /modified (maize |corn |potato |tapioca |wheat |rice )?starch/, k: "sig", clue: true, t: "Modified starch", d: "Starch treated so it thickens and stays stable through freezing, heating or long storage. An industrial ingredient." },
+    { re: /hydroly[sz]ed .*protein|hydroly[sz]ed protein|protein hydroly[sz]ate/, k: "sig", clue: true, t: "Hydrolysed protein", d: "Protein broken into pieces to give a savoury, meaty taste. An industrial ingredient." },
+    { re: /protein isolate|isolated .*protein|protein concentrate|whey protein|soy(a)? protein|pea protein|milk protein/, k: "sig", clue: true, t: "Protein isolate", d: "Protein extracted from milk, soy or peas. Adds protein or texture. An industrial ingredient in NOVA." },
+    { re: /caseinate|\bcasein\b/, k: "sig", clue: true, t: "Caseinate", d: "Milk protein extracted and used as an emulsifier or protein booster. Contains milk." },
+    { re: /\bwheat gluten\b|\bvital gluten\b|^gluten$/, k: "sig", clue: true, t: "Added gluten", d: "Wheat protein added on its own to strengthen dough or add protein. Contains gluten." },
+    { re: /(partially |fully )?hydrogenated|interesterified/, k: "sig", clue: true, t: "Hydrogenated or interesterified fat", d: "Oil chemically modified to be solid and stable. Partially hydrogenated oils can contain trans fats." },
+    { re: /mechanically (separated|recovered)/, k: "sig", clue: true, t: "Mechanically separated meat", d: "Meat recovered from bones by machine. An industrial ingredient." },
+    { re: /yeast extract/, k: "sig", clue: true, t: "Yeast extract", d: "A savoury paste made from yeast, rich in glutamate. Works as a flavour enhancer without an E-number." },
+    { re: /polydextrose/, k: "sig", clue: true, t: "Polydextrose", d: "A synthetic fibre used as a bulking agent in lower-sugar products." },
+    { re: /flavou?r(ing|ings)?\b|\baromas?\b|smoke flavou?r/, k: "sig", clue: true, t: "Flavouring", d: "Puts back or adds taste lost in processing. \"Natural flavouring\" comes from natural sources but is still made in a factory. A NOVA \"cosmetic\" additive." },
+    { re: /\bcaffeine\b/, k: "warn", t: "Added caffeine", d: "A stimulant. Worth knowing for children, pregnancy and evening drinks." },
+    { re: /carbonated water|sparkling water/, k: "ok", t: "Carbonated water", d: "Water with carbon dioxide dissolved in it." },
+    // named additives without a code on the label
+    { re: /soy(a)? lecithin|sunflower lecithin|\blecithins?\b/, e: "322" },
+    { re: /xanthan/, e: "415" }, { re: /guar gum/, e: "412" }, { re: /locust bean|carob gum/, e: "410" }, { re: /gum arabic|acacia gum/, e: "414" }, { re: /gellan/, e: "418" },
+    { re: /carrageenan/, e: "407" }, { re: /\bpectins?\b/, e: "440" }, { re: /\bagar\b/, e: "406" }, { re: /glycerol|glycerine?\b/, e: "422" }, { re: /sorbitol/, e: "420" }, { re: /maltitol/, e: "965" },
+    { re: /xylitol/, e: "967" }, { re: /erythritol/, e: "968" }, { re: /aspartame/, e: "951" }, { re: /acesulfame/, e: "950" }, { re: /sucralose/, e: "955" }, { re: /saccharin/, e: "954" }, { re: /stevia|steviol/, e: "960" },
+    { re: /mono-? ?and di-?glycerides/, e: "471" }, { re: /citric acid/, e: "330" }, { re: /ascorbic acid/, e: "300" }, { re: /phosphoric acid/, e: "338" }, { re: /lactic acid/, e: "270" }, { re: /malic acid/, e: "296" },
+    { re: /acetic acid/, e: "260" }, { re: /sodium citrate/, e: "331" }, { re: /potassium sorbate/, e: "202" }, { re: /sorbic acid/, e: "200" }, { re: /sodium benzoate/, e: "211" }, { re: /calcium propionate/, e: "282" },
+    { re: /sodium nitrite/, e: "250" }, { re: /sodium metabisulphite|sodium metabisulfite/, e: "223" }, { re: /sulphur dioxide|sulfur dioxide/, e: "220" }, { re: /tocopherols?/, e: "306" }, { re: /rosemary extract/, e: "392" },
+    { re: /sodium bicarbonate|bicarbonate of soda|baking soda/, e: "500" }, { re: /ammonium (bi)?carbonate/, e: "503" }, { re: /diphosphates?/, e: "450" }, { re: /monosodium glutamate|\bmsg\b/, e: "621" },
+    { re: /disodium (guanylate|inosinate)/, e: "627" }, { re: /silicon dioxide|silica\b/, e: "551" }, { re: /carmine|cochineal/, e: "120" }, { re: /beetroot red/, e: "162" }, { re: /annatto/, e: "160b" }, { re: /paprika extract/, e: "160c" },
+    { re: /curcumin/, e: "100" }, { re: /titanium dioxide/, e: "171" }, { re: /\bcaramel\b/, e: "150" }, { re: /carnauba/, e: "903" }, { re: /shellac/, e: "904" }, { re: /beeswax/, e: "901" }, { re: /calcium carbonate/, e: "170" },
+    { re: /cellulose/, e: "460" }, { re: /carbon dioxide/, e: "290" }, { re: /\bnitrogen\b/, e: "941" }, { re: /potassium chloride/, e: "508" }, { re: /calcium chloride/, e: "509" },
+    // kitchen staples (NOVA group 2)
+    { re: /palm (fat|oil|kernel)/, k: "kitchen", t: "Palm fat", d: "Semi-solid, cheap and stable, so it keeps products firm for months. Rich in saturated fat." },
+    { re: /coconut (oil|fat)/, k: "kitchen", t: "Coconut fat", d: "A solid plant fat, high in saturated fat." },
+    { re: /\b(sunflower|rapeseed|canola|olive|vegetable|soy(a|bean)?|corn|maize|peanut|groundnut|sesame|cottonseed|linseed)\b.*\b(oils?|fats?)\b|^(vegetable )?(oils?|fats?)$|shortening/, k: "kitchen", t: "Vegetable oil", d: "A cooking fat. On its own, a kitchen staple; check the type and how high it sits in the list." },
+    { re: /\bbutter\b(?!milk)|\bghee\b|\blard\b|\bdripping\b/, k: "kitchen", t: "Butter or animal fat", d: "A traditional cooking fat.", bf: true },
+    { re: /\bsalt\b|sea salt|rock salt/, k: "kitchen", t: "Salt", d: "Seasoning and preservative. Check the salt line on the nutrition panel to see how much." },
+    { re: /vinegar/, k: "kitchen", t: "Vinegar", d: "A kitchen ingredient used for sourness and preservation." },
+    { re: /\bflour\b|semolina/, k: "kitchen", t: "Flour", d: "Ground grain. In the UK, white wheat flour is fortified by law with calcium, iron, niacin and thiamin, which is why those often appear in brackets.", l: L_N },
+    { re: /\bstarch\b|cornflour/, k: "kitchen", t: "Starch", d: "Plain starch extracted from maize, potato or wheat. Used to thicken." },
+    // basic foods (NOVA group 1)
+    { re: /\bwater\b/, k: "ok", t: "Water", d: "Water. In drinks, sauces and bread, it is usually one of the first ingredients." },
+    { re: /\byeast\b/, k: "ok", t: "Yeast", d: "Makes bread rise. A traditional ingredient." },
+    { re: /culture|lactobacillus|streptococcus|bifidobacter|thermophilus|bulgaricus|acidophilus/, k: "ok", t: "Live cultures", d: "The bacteria that turn milk into yoghurt or cheese." },
+    { re: /chocolate|\bcoating\b|\bfilling\b|\bsauce\b|\bglaze\b|\bicing\b|\bfrosting\b|\bcrumb\b|biscuit|cookie|\bwafer\b/, k: "warn", t: "Compound ingredient", d: "A recipe inside the recipe. Always read what's inside the brackets: that's where extra sugars, fats and additives often sit." },
+    { re: /cocoa (mass|butter|powder|solids|liquor)|\bcocoa\b|cacao/, k: "ok", t: "Cocoa", d: "Part of the cocoa bean. Cocoa butter is the bean's fat; it contains no milk." },
+    { re: /(skimmed |whole |semi-skimmed )?milk powder|milk solids|whey powder|\bwhey\b|\bcream\b|\bmilk\b|yog(h)?urt|cheese|buttermilk/, k: "ok", t: "Dairy", d: "A milk ingredient. Powders and whey are dried, concentrated forms of milk." },
+    { re: /\beggs?\b|egg (white|yolk|powder)/, k: "ok", t: "Egg", d: "Whole egg or part of it." },
+    { re: /\boats?\b|oat flakes|rolled oats|wholegrain|whole grain|\brice\b|\bwheat\b|barley|\brye\b|spelt|quinoa|maize|\bcorn\b|millet|buckwheat/, k: "ok", t: "Grain", d: "A cereal grain. Look for the word \"whole\" if fibre matters to you." },
+    { re: /peanuts?|almonds?|hazelnuts?|walnuts?|cashews?|pecans?|pistachios?|macadamia|brazil nuts?|\bnuts?\b|seeds?\b|sesame/, k: "ok", t: "Nuts or seeds", d: "A whole food. Also a common allergen: check the bold words on EU and UK labels." },
+    { re: /\b(beef|pork|chicken|turkey|lamb|ham|bacon|meat|fish|salmon|tuna|cod|prawns?|shrimp)\b/, k: "ok", t: "Meat or fish", d: "Look at the percentage: it tells you how much of the product is really the named meat or fish." },
+    { re: /tomato|onion|garlic|carrot|potato|pepper|spinach|pea\b|peas\b|beans?|lentils?|chickpeas?|vegetables?|mushroom|celery|herbs?|spices?|basil|oregano|parsley|cinnamon|vanilla pod|ginger|paprika|turmeric/, k: "ok", t: "Vegetable, herb or spice", d: "A whole food or seasoning." },
+    { re: /strawberr|raspberr|blueberr|apple|banana|orange|lemon|lime|mango|pineapple|cherr|grape|raisin|sultana|date|apricot|peach|pear|fruit|coconut/, k: "ok", t: "Fruit", d: "The real fruit. Its percentage tells you how much is really in there, often less than the picture on the front suggests." },
+    { re: /vitamin|calcium|\biron\b|niacin|thiamin|riboflavin|folic acid|zinc|minerals?/, k: "ok", t: "Added nutrient", d: "A vitamin or mineral added to the food. In UK white flour some are required by law." },
+    { re: /\bjuice\b/, k: "ok", t: "Juice", d: "Fruit or vegetable juice. Concentrated juice can work as a sweetener." }
+  ];
+
+  /* ---------- Allergen word-spotting (EU 14) ---------- */
+  var ALLERGENS = [
+    ["milk", /(?<!coconut |almond |oat |soy |soya |rice |cashew )\bmilk\b|\bcream\b|(?<!cocoa |shea |peanut |nut )\bbutter\b|cheese|\bwhey\b|casein|lactose|yog(h)?urt|\bghee\b/],
+    ["eggs", /\beggs?\b/], ["cereals with gluten", /wheat|\brye\b|barley|spelt|kamut|\boats?\b|gluten|semolina/], ["soya", /\bsoy(a|bean)?\b/],
+    ["peanuts", /peanut|groundnut/], ["tree nuts", /almond|hazelnut|walnut|cashew|pecan|pistachio|macadamia|brazil nut|\bnuts\b/], ["sesame", /sesame/],
+    ["fish", /\bfish\b|salmon|tuna|\bcod\b|anchov|sardine|mackerel/], ["crustaceans", /crustacean|prawn|shrimp|\bcrab\b|lobster|langoustine/], ["molluscs", /mollusc|mussel|oyster|squid|clam|scallop|octopus/],
+    ["celery", /celery|celeriac/], ["mustard", /mustard/], ["lupin", /lupin/], ["sulphites", /sulphite|sulfite|sulphur dioxide|sulfur dioxide|\be ?22[0-8]\b/]
+  ];
+
+  /* ---------- Parsing ---------- */
+  var ECODE = /\b(?:e|ins)\s?-?\s?(\d{3,4})\s?([a-z])?(?:\s?\(?[ivx]+\)?)?(?![\d])/i;
+
+  function splitTop(s, seps) {
+    var out = [], depth = 0, cur = "";
+    for (var i = 0; i < s.length; i++) {
+      var c = s[i];
+      if (c === "(" || c === "[" || c === "{") depth++;
+      else if ((c === ")" || c === "]" || c === "}") && depth > 0) depth--;
+      if (depth === 0 && seps.indexOf(c) !== -1) {
+        // keep decimal numbers like 2.5% or 2,5% together
+        if ((c === "," || c === ".") && /\d/.test(s[i - 1] || "") && /\d/.test(s[i + 1] || "")) { cur += c; continue; }
+        if (c === "." && !/\s/.test(s[i + 1] || " ")) { cur += c; continue; }
+        out.push(cur); cur = ""; continue;
+      }
+      cur += c;
+    }
+    out.push(cur);
+    return out.map(function (x) { return x.trim().replace(/^[\s.:;*•-]+|[\s.:;*•]+$/g, ""); }).filter(Boolean);
+  }
+
+  // pull out bracket groups at depth 0: returns { head, groups[] }
+  function brackets(s) {
+    var head = "", groups = [], depth = 0, cur = "";
+    for (var i = 0; i < s.length; i++) {
+      var c = s[i];
+      if (c === "(" || c === "[") { if (depth === 0) { cur = ""; } else cur += c; depth++; continue; }
+      if ((c === ")" || c === "]") && depth > 0) { depth--; if (depth === 0) { groups.push(cur.trim()); } else cur += c; continue; }
+      if (depth > 0) cur += c; else head += c;
+    }
+    if (depth > 0 && cur) groups.push(cur.trim()); // unclosed bracket
+    return { head: head.replace(/\s+/g, " ").trim(), groups: groups };
+  }
+
+  var PCT = /(\d+(?:[.,]\d+)?)\s?%/;
+
+  function parseItem(raw, inheritedClass) {
+    var b = brackets(raw), head = b.head, pct = null, kids = [], quals = [], cls = null;
+    var m = head.match(PCT); if (m) { pct = m[1].replace(",", ".") + "%"; head = head.replace(PCT, "").trim(); }
+    // "Emulsifier: soy lecithin"
+    var colon = head.match(/^([^:]{2,40}):\s*(.*)$/);
+    if (colon) {
+      var c = findClass(colon[1].toLowerCase());
+      if (c) { cls = c; head = colon[2].trim(); }
+    }
+    var headClass = !cls && findClass(head.toLowerCase()) && head.split(/\s+/).length <= 3 ? findClass(head.toLowerCase()) : null;
+    b.groups.forEach(function (g) {
+      var gp = g.match(PCT), rest = g.replace(PCT, "").replace(/^[\s,]+|[\s,]+$/g, "");
+      if (gp && !rest) { pct = gp[1].replace(",", ".") + "%"; return; }
+      var parts = splitTop(g, ",;");
+      if (parts.length > 1 || headClass || ECODE.test(g) || (cls && !head)) {
+        parts.forEach(function (p) { kids.push(parseItem(p, headClass || cls)); });
+      } else { quals.push(g); }
+    });
+    var item = { name: head || (cls ? cls.fn : raw), raw: raw, pct: pct, kids: kids, quals: quals, cls: cls || inheritedClass || null, isClassOnly: !!headClass && !!kids.length };
+    if (!head && cls && kids.length === 0) item.name = cls.fn;
+    return item;
+  }
+
+  function classify(item) {
+    var text = (item.name + " " + item.quals.join(" ")).toLowerCase();
+    var res = { k: "unk", clue: false, t: "Not in our list", d: "This name isn't in the decoder's list yet. Most unlisted names are ordinary foods, but if it sounds like a chemical, look it up.", l: null, fn: null, e: null };
+    // class-only parent ("Emulsifiers (E471, E322)") or bare class ("flavour enhancer")
+    if (item.isClassOnly) {
+      var hc = findClass(text);
+      return { k: hc.clue ? "sig" : "warn", clue: false, t: hc.fn, d: hc.why + " The ingredients inside the brackets are listed below.", l: L_E };
+    }
+    var em = text.match(ECODE), entry = null;
+    for (var i = 0; i < DICT.length && !em; i++) { if (DICT[i].re.test(text)) { entry = DICT[i]; break; } }
+    var code = em ? (em[1] + (em[2] || "").toLowerCase()) : (entry && entry.e) || null;
+    if (code) {
+      var e = E[code] || E[em ? em[1] : code], fnKey = e ? e[1] : rangeFn(parseInt(code, 10));
+      var cls = item.cls || findClass(text.replace(ECODE, "")) || null;
+      if (!e && !fnKey && !cls) return { k: "unk", clue: false, t: "Not in our list", d: "E" + code.toUpperCase() + " isn't a code the decoder knows. Check the spelling on the pack, or look it up with your national food-safety authority.", l: L_E };
+      var fn = cls ? cls.fn : (fnKey ? F[fnKey] : "Additive");
+      var clue = cls ? cls.clue : !!CLUEF[fnKey];
+      var d = (e ? "E" + code.toUpperCase() + " is " + e[0] + ". " : "E" + code.toUpperCase() + " is an approved additive code. ") +
+        "Its job here: " + fn.toLowerCase() + ". " + (cls ? cls.why : "") + (e && e[2] ? " " + e[2] : "") +
+        (clue ? " This is one of NOVA's \"cosmetic\" additive types, so it counts as a processing clue." : " This type of additive doesn't count as an ultra-processing clue on its own.");
+      var nice = e ? e[0].charAt(0).toUpperCase() + e[0].slice(1) : item.name;
+      return { k: clue ? "sig" : "warn", clue: clue, t: fn, d: d, l: L_E, e: "E" + code.toUpperCase(), nice: nice };
+    }
+    if (entry) {
+      if (entry.bf && /cocoa butter|shea butter|peanut butter|nut butter/.test(text)) entry = DICT.filter(function (x) { return x.t === "Cocoa"; })[0];
+      res = { k: entry.k, clue: !!entry.clue, t: entry.t, d: entry.d, l: entry.l || null };
+      // functional class written on the label but ingredient is a named one we only know as food (e.g. "colour: beetroot red" without code)
+      if (item.cls && entry.k === "ok") { res.k = item.cls.clue ? "sig" : "warn"; res.clue = item.cls.clue; res.t = item.cls.fn; res.d = item.cls.why + " Here it comes from " + item.name.toLowerCase() + "."; }
+      return res;
+    }
+    if (item.cls) return { k: item.cls.clue ? "sig" : "warn", clue: item.cls.clue, t: item.cls.fn, d: item.cls.why, l: L_E };
+    var bare = findClass(text);
+    if (bare && text.split(/\s+/).length <= 3) return { k: bare.clue ? "sig" : "warn", clue: bare.clue, t: bare.fn, d: bare.why + " The label names the job but not the exact additive.", l: L_E };
+    return res;
+  }
+
+  function parseList(text) {
+    var notes = [];
+    var t = text.replace(/\r/g, "").replace(/ /g, " ");
+    t = t.replace(/^\s*(ingredients?|ingr[ée]dients?|zutaten)\s*[:.-]?\s*/i, "");
+    // advisory and allergen statements
+    var adv = t.match(/(may (also )?contain|may contain traces|made (in|on) (a )?(factory|facility|site|line)|produced in a|not suitable for)[^.\n]*/gi) || [];
+    adv.forEach(function (a) { notes.push(a.trim()); t = t.replace(a, ""); });
+    var cont = t.match(/\bcontains\s*:[^.\n]*/gi) || [];
+    cont.forEach(function (a) { notes.push(a.trim()); t = t.replace(a, ""); });
+    t = t.replace(/\n+/g, ", ");
+    var parts = splitTop(t, ",;.");
+    // "emulsifiers: E471, E472e" -> class carries over to following additive-looking items
+    var items = [], carry = null;
+    parts.forEach(function (p) {
+      var it = parseItem(p, null);
+      if (it.cls && /:\s*$|:/.test(p.split("(")[0])) carry = it.cls;
+      else if (carry && (ECODE.test(p) || DICT.some(function (d) { return d.e && d.re.test(p.toLowerCase()); }))) it.cls = carry;
+      else carry = null;
+      items.push(it);
+    });
+    return { items: items, notes: notes, body: t };
+  }
+
+  /* ---------- Analysis & rendering ---------- */
+  var $ = function (id) { return document.getElementById(id); };
+  var LABEL = { ok: "Basic ingredient", kitchen: "Kitchen staple", sugar: "Sugar name", warn: "Additive", sig: "Processing clue", unk: "Not in our list" };
+  function el(tag, cls, txt) { var x = document.createElement(tag); if (cls) x.className = cls; if (txt != null) x.textContent = txt; return x; }
+
+  function decode() {
+    var text = $("list").value.trim();
+    $("err").textContent = "";
+    if (text.length < 3) { $("err").textContent = "Paste an ingredient list first, or tap one of the examples."; $("results").hidden = true; return; }
+    var parsed = parseList(text), stats = { n: 0, sugars: {}, add: 0, clues: [], kitchen: 0, basic: 0, unk: 0, cosmetic: 0 }, top = [];
+
+    function walk(items, depth, ul) {
+      items.forEach(function (it, idx) {
+        var c = classify(it);
+        if (!it.isClassOnly) {
+          stats.n++;
+          if (c.k === "sugar") stats.sugars[c.t] = 1;
+          if (c.e || ((c.k === "warn" || c.k === "sig") && it.cls)) stats.add++;
+          if (c.clue) stats.clues.push(it.name);
+          if (c.k === "kitchen" || c.k === "sugar") stats.kitchen++;
+          if (c.k === "ok") stats.basic++;
+          if (c.k === "unk") stats.unk++;
+        }
+        if (depth === 0 && top.length < 3) top.push(it.name + (it.pct ? " (" + it.pct + ")" : ""));
+        var li = el("li", "ing " + c.k), head = el("div", "top");
+        if (depth === 0) head.appendChild(el("span", "pos", "#" + (idx + 1)));
+        var nm = it.name + (it.quals.length ? " (" + it.quals.join(", ") + ")" : "") + (it.pct ? " · " + it.pct : "");
+        if (c.e && c.nice && c.nice.toLowerCase() !== it.name.toLowerCase()) nm += "  →  " + c.nice;
+        head.appendChild(el("span", "nm", nm));
+        head.appendChild(el("span", "tag " + c.k, c.k === "warn" || (c.k === "sig" && (c.e || it.cls || it.isClassOnly)) ? c.t + (c.e ? " · " + c.e : "") : LABEL[c.k]));
+        if (c.k === "sugar" && c.clue) head.appendChild(el("span", "tag sig", "Processing clue"));
+        li.appendChild(head);
+        var d = el("div", "d", c.k === "warn" || c.k === "sig" || c.k === "unk" || c.k === "sugar" ? c.d : (c.t !== LABEL[c.k] ? c.t + ". " : "") + c.d);
+        if (c.k === "warn" || c.k === "sig" || c.k === "unk" || c.k === "sugar") { /* title already shown in tag */ }
+        if (c.l) { d.appendChild(document.createTextNode(" ")); var a = el("a", null, "Learn more →"); a.href = c.l; d.appendChild(a); }
+        li.appendChild(d);
+        if (it.kids.length) {
+          if (!it.isClassOnly && c.k !== "warn" && c.k !== "sig") d.appendChild(document.createTextNode(" Contains its own ingredients (a recipe inside the recipe):"));
+          var sub = el("ul", "kids"); walk(it.kids, depth + 1, sub); li.appendChild(sub);
+        }
+        ul.appendChild(li);
+      });
+    }
+    var ul = $("ings"); ul.innerHTML = ""; walk(parsed.items, 0, ul);
+
+    var nSug = Object.keys(stats.sugars).length, nClue = stats.clues.length;
+    $("sIng").textContent = stats.n; $("sSug").textContent = nSug; $("sAdd").textContent = stats.add; $("sSig").textContent = nClue;
+
+    // NOVA estimate
+    var g, h, p;
+    if (nClue > 0) {
+      g = 4; h = "Likely ultra-processed (NOVA group 4)";
+      var uniq = stats.clues.filter(function (x, i, arr) { return arr.indexOf(x) === i; });
+      p = "It contains " + nClue + " processing clue" + (nClue > 1 ? "s" : "") + ": " + uniq.slice(0, 5).join(", ") + (uniq.length > 5 ? " and more" : "") + ". These are ingredients or additives rarely used in a home kitchen.";
+    } else if (stats.n === 1 && stats.kitchen === 1) {
+      g = 2; h = "A kitchen ingredient (NOVA group 2)"; p = "A single culinary ingredient, like oil, sugar, salt or flour, used to cook with.";
+    } else if (stats.kitchen > 0 || stats.add > 0) {
+      g = 3; h = "Likely processed (NOVA group 3)"; p = "Foods combined with kitchen ingredients such as salt, sugar or oil" + (stats.add ? ", plus additives that preserve rather than cosmetically change the food" : "") + ". Think bread from a bakery, cheese or salted nuts.";
+    } else {
+      g = 1; h = "Looks minimally processed (NOVA group 1)"; p = "Only basic foods recognised, with no added salt, sugar, oil or cosmetic additives.";
+    }
+    if (stats.unk) p += " " + stats.unk + " name" + (stats.unk > 1 ? "s weren't" : " wasn't") + " recognised, which can change the estimate.";
+    var nova = $("nova"); nova.className = "nova g" + g; nova.innerHTML = "";
+    nova.appendChild(el("div", "g", "Processing estimate"));
+    nova.appendChild(el("h3", null, h)); nova.appendChild(el("p", null, p));
+    var sc = el("div", "scale"); for (var i = 1; i <= 4; i++) sc.appendChild(el("i", i <= g ? "on" : "")); nova.appendChild(sc);
+
+    // observations
+    var obs = $("obs"); obs.innerHTML = "";
+    function ob(txt, cls) { obs.appendChild(el("li", cls || "", txt)); }
+    if (top.length) ob("First three ingredients: " + top.join(", ") + ". Ingredients are listed from most to least by weight, so these make up most of the product.");
+    if (nSug >= 2) ob("This list uses " + nSug + " different sugar names (" + Object.keys(stats.sugars).join(", ") + "). Added together, sugars could rank higher in the list than any single one does. Check the sugars line on the nutrition panel.");
+    var anyKids = parsed.items.some(function (x) { return x.kids.length && !x.isClassOnly; });
+    if (anyKids) ob("There's at least one compound ingredient: an ingredient with its own recipe in brackets. Those inner ingredients count too, and they're decoded below.");
+    var all = parsed.body.toLowerCase(), found = [];
+    ALLERGENS.forEach(function (a) { if (a[1].test(all)) found.push(a[0]); });
+    if (found.length) ob("Allergen words spotted: " + found.join(", ") + ". This is simple word-spotting, not an allergen check. Always read the pack, where EU and UK labels show allergens in bold.", "allergen");
+    parsed.notes.forEach(function (n) {
+      var isContains = /^contains\s*:/i.test(n);
+      ob("Label statement: \"" + n + "\". " + (isContains
+        ? "A \"Contains\" line lists allergens that are part of the recipe."
+        : "Wording like this is a voluntary cross-contact warning, not a recipe ingredient."), "allergen");
+    });
+
+    $("results").hidden = false;
+    try { history.replaceState(null, "", "#list=" + encodeURIComponent(text)); } catch (e) {}
+  }
+
+  $("go").addEventListener("click", function () { decode(); $("results").scrollIntoView({ behavior: "smooth", block: "start" }); });
+  $("list").addEventListener("keydown", function (e) { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) decode(); });
+  $("clear").addEventListener("click", function () { $("list").value = ""; $("results").hidden = true; $("err").textContent = ""; try { history.replaceState(null, "", location.pathname); } catch (e) {} $("list").focus(); });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-sample]"), function (b) {
+    b.addEventListener("click", function () { $("list").value = SAMPLES[b.getAttribute("data-sample")]; decode(); });
+  });
+  $("share").addEventListener("click", function () {
+    var url = location.href, done = function () { $("toast").textContent = "Link copied. Anyone who opens it sees this result."; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, function () { prompt("Copy this link:", url); });
+    else prompt("Copy this link:", url);
+  });
+
+  // load from shared link (the list lives in the #hash, which is never sent to a server)
+  var m = location.hash.match(/^#list=(.*)$/);
+  if (m) { try { $("list").value = decodeURIComponent(m[1]); decode(); } catch (e) {} }
+})();
+</script>
+</body>
+</html>
