@@ -71,6 +71,12 @@
   h1 .acc { color: var(--accent); display: block; }
   .tagline { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.4vw, 26px); color: var(--ink-2); margin: 0 0 10px; }
   .lead { font-family: var(--serif); font-size: 19px; color: var(--ink-2); max-width: 34ch; margin: 0 0 28px; }
+  .kit { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; align-items: center; margin-top: 40px; background: var(--paper, #FFFDF8); border: 2px solid var(--gold, #F2B51C); border-radius: 22px; padding: 26px; }
+  .kit img { width: 100%; height: auto; border-radius: 12px; display: block; }
+  .kit h3 { font-size: 26px; line-height: 1.2; margin: 6px 0 10px; }
+  .kit ul { margin: 0 0 18px; padding-left: 20px; line-height: 1.6; }
+  .kit .save { display: inline-block; font-size: 13px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; background: #FBE1D7; color: #9A3519; border-radius: 999px; padding: 4px 10px; }
+  @media (max-width: 760px) { .kit { grid-template-columns: 1fr; padding: 18px; } }
   .cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
   .meta { margin-top: 18px; display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; color: var(--muted); font-weight: 600; }
   .meta span::before { content: "✓ "; color: var(--accent); font-weight: 900; }
@@ -439,6 +445,19 @@
       <div class="cta-row" style="margin-top:34px">
         <a class="btn" href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&utm_medium=website&utm_campaign=supermarket_decoder&utm_content=inside_cta" target="_blank" rel="noopener" data-gumroad-action="buy">Get Supermarket Decoder <span class="p" data-gumroad-product="supermarket-decoder" data-gumroad-field="price">$9</span></a>
       </div>
+      <div class="kit reveal" id="kit">
+        <img src="https://public-files.gumroad.com/oajowlnpnrw2wvtuf6zc4qt8qe33" alt="The Supermarket Decoder Complete Kit: the guide, the E-number pocket reference and the shelf printables" width="1280" height="720" loading="lazy">
+        <div>
+          <span class="save">Save $5</span>
+          <h3>Or get the Complete Kit</h3>
+          <ul>
+            <li><strong>The 53-page guide</strong> (everything above)</li>
+            <li><strong>The E-Number Pocket Reference:</strong> 123 codes, what each one does and which are worth a second look</li>
+            <li><strong>Shelf printables:</strong> wallet cards, two fridge posters, a kids' Label Detective game and a phone wallpaper</li>
+          </ul>
+          <a class="btn" href="https://zakarfr.gumroad.com/l/complete-kit?utm_source=github_pages&utm_medium=website&utm_campaign=complete_kit&utm_content=inside_kit" target="_blank" rel="noopener" data-gumroad-action="buy">Get the Complete Kit <span class="p">$13</span></a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -498,6 +517,7 @@
       <h2>The front sells. <span>The back tells.</span></h2>
       <p>Learn to read the back in 30 seconds, and make every shopping trip a little smarter.</p>
       <a class="btn" href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&utm_medium=website&utm_campaign=supermarket_decoder&utm_content=final_cta" target="_blank" rel="noopener" data-gumroad-action="buy">Get the guide <span class="p" data-gumroad-product="supermarket-decoder" data-gumroad-field="price">$9</span></a>
+      <a class="btn ghost" href="https://zakarfr.gumroad.com/l/complete-kit?utm_source=github_pages&utm_medium=website&utm_campaign=complete_kit&utm_content=final_kit" target="_blank" rel="noopener" style="margin-left:8px">Complete Kit · $13</a>
       <div class="small"><span class="launch" id="launchFinal">Launch offer: enter <span class="code">LAUNCH40</span> at checkout for 40% off, until 3 December. · </span>Instant ebook download (PDF) · Secure checkout by Gumroad</div>
       <div class="small">Bought the guide? <a href="https://zakarfr.gumroad.com/l/supermarket-decoder" target="_blank" rel="noopener">Leave an honest review on your Gumroad download page</a>.</div>
     </div>

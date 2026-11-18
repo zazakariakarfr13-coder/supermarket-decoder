@@ -18,6 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://zazakariakarfr13-coder.github.io/supermarket-decoder"
 OUT = ROOT / "additives"
 GUIDE = "https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&utm_medium=additive_page&utm_campaign=supermarket_decoder&utm_content={slug}"
+POCKET = "https://zakarfr.gumroad.com/l/e-number-pocket-reference?utm_source=github_pages&utm_medium=additive_page&utm_campaign=pocket_reference&utm_content={slug}"
+KIT = "https://zakarfr.gumroad.com/l/complete-kit?utm_source=github_pages&utm_medium=additive_page&utm_campaign=complete_kit&utm_content={slug}"
 E = html.escape
 
 STYLE = """
@@ -114,6 +116,7 @@ def additive_page(a):
 </div>
 <h2>Questions people ask about {E(code)}</h2>
 {faq}
+<div class="panel" style="margin-top:22px;border:2px solid var(--gold,#F2B51C)"><p><strong>Keep every code in your pocket.</strong> The E-Number Pocket Reference covers 123 additive codes: what each one does, which are worth a second look, US label names and the clean-label names that hide an additive's job. A5 PDF for your phone or kitchen.</p><div class="cta-row"><a class="pill" href="{POCKET.format(slug=slug)}" target="_blank" rel="noopener">Get the pocket reference · $5</a><a class="pill ghost" href="{KIT.format(slug=slug)}" target="_blank" rel="noopener">Complete Kit · $13</a></div></div>
 <div class="note" style="margin-top:22px"><strong>Want to read labels like this in your head?</strong> Supermarket Decoder is a 53-page illustrated ebook (PDF) with a printable cheat-sheet and a 14-day tracker. <a href="../index.html#inside">See what's inside</a> or <a href="{GUIDE.format(slug=slug)}" target="_blank" rel="noopener">get it on Gumroad ($9)</a>.</div>
 <h2>Related E-numbers</h2>
 <div class="codes">{related}</div>
@@ -132,6 +135,7 @@ def index_page():
 <h1>Common E-numbers, explained one by one</h1>
 <p class="lead">What each code is, why it's in your food, where you'll find it and what the research says, without the panic and without the marketing.</p>
 <div class="codes">{cards}</div>
+<div class="panel" style="border:2px solid var(--gold,#F2B51C)"><p><strong>Want all of them in your pocket?</strong> The E-Number Pocket Reference covers 123 codes on 16 phone-friendly pages, with traffic-light markers, US label names and the rules that differ between countries.</p><div class="cta-row"><a class="pill" href="{POCKET.format(slug='index')}" target="_blank" rel="noopener">Get the pocket reference · $5</a><a class="pill ghost" href="{KIT.format(slug='index')}" target="_blank" rel="noopener">Complete Kit · $13</a></div></div>
 <div class="panel"><p><strong>Looking for a code that isn't here?</strong> The free <a href="../decoder/">Ingredient Decoder</a> knows more than 300 E-numbers. Paste a whole ingredient list and it explains every one.</p></div>
 <div class="note">An E-number means an additive has been assessed and approved in Europe. It's an identifier, not a danger rating. <a href="../articles/e-numbers-explained.html">How to read E-numbers sensibly →</a></div>
 <p><a class="back" href="../free-resources/">← All free resources</a></p>
