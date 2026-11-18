@@ -23,6 +23,8 @@ class PageParser(HTMLParser):
         self.canonical = None
         self.h1_count = 0
         self.images_without_alt = 0
+        self.og = set()
+        self.noindex = False
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -36,6 +38,10 @@ class PageParser(HTMLParser):
             self.images_without_alt += 1
         if tag == "meta" and attrs.get("name", "").lower() == "description":
             self.description = attrs.get("content", "").strip()
+        if tag == "meta" and attrs.get("property", "").startswith("og:") and attrs.get("content", "").strip():
+            self.og.add(attrs["property"])
+        if tag == "meta" and attrs.get("name", "").lower() == "robots" and "noindex" in attrs.get("content", "").lower():
+            self.noindex = True
         if tag == "link" and "canonical" in attrs.get("rel", "").lower().split():
             self.canonical = attrs.get("href", "").strip()
         for attr in ("href", "src"):
@@ -101,6 +107,12 @@ def main():
             errors.append(f"{relative}: missing <title>.")
         if not parser.description:
             warnings.append(f"{relative}: missing meta description.")
+        elif not parser.noindex and not 110 <= len(parser.description) <= 165:
+            warnings.append(f"{relative}: meta description is {len(parser.description)} characters; aim for 110-165.")
+        if not parser.noindex:
+            missing_og = {"og:title", "og:description", "og:image", "og:url"} - parser.og
+            if missing_og:
+                errors.append(f"{relative}: missing share tags {', '.join(sorted(missing_og))} (needed for Pinterest and social previews).")
         if parser.h1_count == 0:
             warnings.append(f"{relative}: no H1 heading found.")
         elif parser.h1_count > 1:
