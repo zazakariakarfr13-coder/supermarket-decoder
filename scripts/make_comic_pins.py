@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Render 1000x1500 comic-style Pins for The Cart Chronicles Episode 02 to pins/ep02-*.png.
+"""Render comic-style Pins for The Cart Chronicles to pins/epNN-*.png (2000x3000).
 
-Reuses the episode page's CSS and SVG symbols so the Pins match the comic.
-Usage: python scripts/make_comic_pins.py
+Reuses Episode 02's panel/bubble CSS and SVG symbols; Episode 01 Pins swap in
+that episode's mint/pink/yellow palette. Usage: python scripts/make_comic_pins.py [slug ...]
 """
-import re, shutil, subprocess, tempfile
+import re, shutil, subprocess, sys, tempfile
 from PIL import Image, ImageFilter
 from pathlib import Path
 from make_pins import browser
@@ -50,6 +50,17 @@ body{margin:0;width:1000px;height:1500px;overflow:hidden;background:#fffaf0}
 .pin .sfx{font-size:64px}
 .pin-foot{background:var(--ink);color:#fff;border-radius:10px;padding:26px 32px;font:900 30px var(--body);display:flex;justify-content:space-between;align-items:center}
 .pin-foot span{color:#ffd84d}
+/* Episode 01 palette (pop-art mint / pink / yellow) */
+.ep01{--mint:#a8e0cc;--lemon:#f8cd63;--rose:#f6a5c2;--sky:#c9ece0;--coral:#ee4d87;--paper:#f5eddf}
+body.ep01{background:#f5eddf}
+.pack{width:300px;min-height:330px;background:#ee4d87;border:6px solid var(--ink);box-shadow:10px 10px 0 var(--ink);padding:18px;display:flex;flex-direction:column;justify-content:space-between;text-align:center;transform:rotate(-5deg)}
+.pack .band{font:400 30px var(--sfx);letter-spacing:.08em;border-bottom:4px solid var(--ink);padding-bottom:8px}
+.pack strong{font:400 74px/.9 var(--sfx);letter-spacing:.02em;color:#fff;-webkit-text-stroke:2px var(--ink);text-shadow:4px 4px 0 var(--ink)}
+.pack em{white-space:nowrap;font:900 18px var(--body);font-style:normal;background:#f8cd63;border:3px solid var(--ink);padding:8px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.chips span{background:#fff;border:3px solid var(--ink);border-radius:999px;padding:8px 16px;font:800 24px var(--body);box-shadow:3px 3px 0 var(--ink)}
+.pin .cube{width:84px;height:84px;border-width:5px;box-shadow:4px 4px 0 var(--ink)}
+.pin .cubes{margin:0 auto}
 """
 
 def face(name, cls=""):
@@ -79,21 +90,46 @@ PINS = {
 <div class="b r"><i>Uncle Kamil</i>U.S. rule: claim juice, state the percent.</div>
 <div class="stage">{face('mina','sm')}<span class="sfx blue">SQUINT</span></div></div>
 """, "Read the free comic: Liquid Alibis"),
+    "ep01-flirting": ("Turn It Around", "The front is advertising. The back is information.", f"""
+<div class="p w6 center lemon"><div class="pack"><span class="band">SUPER CRUNCH</span><strong>MAX<br>ENERGY!</strong><em>NATURAL · MULTI-GRAIN</em></div>
+<p class="cap" style="position:absolute;left:20px;bottom:20px;margin:0">Fictional package</p><span class="sfx" style="top:24px;right:28px">SPARKLE!</span></div>
+<div class="p w6 rose"><div class="b shout"><i>Tariq</i>So the box is flirting with me?</div>
+<div class="b r"><i>Mina</i>And you're falling for it. Turn it around, Romeo.</div>
+<div class="stage">{face('tariq','sm')}{face('mina','sm')}</div></div>
+""", "Read the free comic: The Cart Chronicles"),
+    "ep01-book-club": ("Wait, 8?!", "The numbers on the label are per serving.", f"""
+<div class="p w6 center sky"><div class="label-card" style="width:660px">
+<h3 style="font-size:50px">Nutrition Facts</h3><div class="srv" style="font-size:24px">8 servings per container<br>Serving size 1 cup (40 g)</div>
+<table class="nf" style="font-size:24px"><tbody><tr class="cal"><td style="font-size:38px">Calories</td><td style="font-size:38px">160</td></tr>
+<tr><td>Total Sugars</td><td>12 g</td></tr><tr class="ind hl"><td>Includes Added Sugars</td><td>10 g · 20% DV</td></tr></tbody></table>
+<p class="fine" style="font-size:17px">Fictional teaching example, not a real cereal.</p></div></div>
+<div class="p w6 lemon"><div class="b shout"><i>Tariq</i>Eight servings in one box? Who is this cereal feeding, a book club?</div>
+<div class="stage">{face('tariq')}<span class="sfx">WAIT, 8?!</span></div></div>
+""", "Check servings per container first"),
+    "ep01-witness-protection": ("Sugar's Aliases", "Same sugar, many names on the ingredient list.", f"""
+<div class="p w6 mint"><div class="b shout"><i>Mina</i>Why does sugar have so many aliases? Is it in witness protection?</div>
+<div class="stage">{face('mina')}<span class="sfx">PLINK!</span></div></div>
+<div class="p w6 center lemon"><div class="cubes" style="max-width:none;gap:14px"><span class="cube"></span><span class="cube"></span><span class="cube"></span><span class="cube half" style="width:42px"></span></div>
+<p class="cube-cap" style="font-size:56px;margin:22px 0 26px">10 g added sugar ≈ 2.5 teaspoons</p>
+<div class="chips"><span>dextrose</span><span>glucose syrup</span><span>honey</span><span>malt syrup</span><span>cane sugar</span></div></div>
+""", "Read the free comic: The Cart Chronicles"),
 }
 
-def page(title, hook, panels, foot):
+
+def page(ep, title, hook, panels, foot):
     return f"""<!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
-<style>{CSS}{PIN_CSS}</style></head><body>{DEFS}
-<div class="pin"><div class="pin-top"><span>The Cart Chronicles · <b>Ep 02</b></span><span>Supermarket Decoder</span></div>
+<style>{CSS}{PIN_CSS}</style></head><body class="{ep}">{DEFS}
+<div class="pin"><div class="pin-top"><span>The Cart Chronicles · <b>Ep {ep[2:]}</b></span><span>Supermarket Decoder</span></div>
 <h1>{title}</h1><p class="hook">{hook}</p><div class="grid">{panels}</div>
 <div class="pin-foot">{foot} <span>→</span></div></div></body></html>"""
 
 def main():
     prepare_cast()
     exe = browser(); tmp = Path(tempfile.mkdtemp())
-    for slug, (t, h, p, f) in PINS.items():
-        src = tmp / f"{slug}.html"; src.write_text(page(t, h, p, f), encoding="utf-8")
+    for slug in sys.argv[1:] or PINS:
+        t, h, p, f = PINS[slug]
+        src = tmp / f"{slug}.html"; src.write_text(page(slug[:4], t, h, p, f), encoding="utf-8")
         dst = ROOT / "pins" / f"{slug}.png"
         subprocess.run([exe, "--headless=new", "--disable-gpu", "--hide-scrollbars", f"--force-device-scale-factor={SCALE}",
                         "--window-size=1000,1500", "--virtual-time-budget=10000", "--allow-file-access-from-files",
