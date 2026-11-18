@@ -12,6 +12,12 @@
 <meta property="og:title" content="Liquid Alibis — The Cart Chronicles, Episode 02">
 <meta property="og:description" content="A bottle claims the power of seven waterfalls. A flamingo lawyers up. The family learns to read drink labels.">
 <meta property="og:url" content="https://zazakariakarfr13-coder.github.io/Zakaria/story/episode-02.html">
+<meta property="og:image" content="https://zazakariakarfr13-coder.github.io/Zakaria/assets/share/episode-02.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Liquid Alibis comic panel: Tariq and a Seven Falls electrolyte bottle">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zazakariakarfr13-coder.github.io/Zakaria/assets/share/episode-02.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
@@ -61,8 +67,9 @@ h1{font:400 clamp(54px,9vw,104px)/.88 var(--sfx);letter-spacing:.02em;margin:18p
 .planche-head span{font:900 11px var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 .folio{text-align:center;font:700 13px var(--letter);color:var(--muted);margin-top:12px}
 
-.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
-.p{position:relative;border:2.5px solid var(--ink);border-radius:3px;min-height:230px;padding:12px;display:flex;flex-direction:column;gap:9px;overflow:hidden;background:#fff}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:34px 12px;padding-bottom:22px}
+.p{position:relative;border:2.5px solid var(--ink);border-radius:3px;min-height:230px;padding:12px;display:flex;flex-direction:column;gap:9px;background:#fff}
+.p.art,.p.cutaway{overflow:hidden}
 .w6{grid-column:span 6}.w4{grid-column:span 4}.w3{grid-column:span 3}.w2{grid-column:span 2}
 .sky{background:var(--sky)}.lemon{background:var(--lemon)}.peach{background:var(--peach)}.mint{background:var(--mint)}.lilac{background:var(--lilac)}.rose{background:var(--rose)}
 .p.art{padding:0}.p.art svg{display:block;width:100%;height:100%}
@@ -89,6 +96,11 @@ h1{font:400 clamp(54px,9vw,104px)/.88 var(--sfx);letter-spacing:.02em;margin:18p
 .b.mascot{background:var(--rose)}.b.mascot::after{border-top-color:var(--rose)}
 .face{display:block;width:150px;height:136px;object-fit:cover;border:2.5px solid var(--ink);border-radius:10px;background:#fff;margin-top:auto;align-self:center;flex-shrink:0}
 .face.l{align-self:flex-start}.face.r{align-self:flex-end}.face.flip{transform:scaleX(-1)}.face.sm{width:112px;height:101px}
+/* portraits break out through the bottom of the frame, comic-style */
+.p>.face:last-child{position:relative;z-index:3;margin-bottom:-38px;box-shadow:3px 3px 0 var(--ink);rotate:-2deg}
+.p>.face.r:last-child{rotate:3deg;margin-right:-14px}.p>.face.l:last-child{margin-left:-14px}
+/* speaker names: one quiet colour each */
+.b i.n-t{color:#2b6cb0}.b i.n-m{color:#b83b73}.b i.n-k{color:#2f855a}.b i.n-f{color:#c05621}
 .sfx{position:absolute;z-index:3;font:400 34px/1 var(--sfx);letter-spacing:.04em;color:var(--coral);-webkit-text-stroke:1.5px var(--ink);text-shadow:2px 2px 0 var(--ink);transform:rotate(-8deg);pointer-events:none}
 .sfx.blue{color:#7fc4f2}.sfx.yellow{color:#ffd84d}.sfx.green{color:#7fe0b0}
 
@@ -160,7 +172,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   .cover-card{grid-template-columns:1fr}.cover-art{border-left:0;border-top:3px solid var(--ink);min-height:270px}
   .cover-text{padding:26px 20px 24px}
   .planche{padding:14px 12px 10px}
-  .grid{grid-template-columns:repeat(2,1fr);gap:9px}
+  .grid{grid-template-columns:repeat(2,1fr);gap:32px 9px}
   .w6,.w4,.w3{grid-column:span 2}.w2{grid-column:span 1}
   .w2 .face{width:118px;height:107px}
   .b{font-size:14px}.p{min-height:190px;padding:10px}
@@ -168,10 +180,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   .cutaway .face{width:78px!important;height:71px!important;bottom:92px!important;left:22%!important}
 }
 @media (max-width:440px){.w2{grid-column:span 2}.rule-grid{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:no-preference){
-  .sfx{animation:pop .5s ease-out both}
-  @keyframes pop{0%{transform:scale(.4) rotate(-20deg);opacity:0}70%{transform:scale(1.12) rotate(-6deg);opacity:1}100%{transform:rotate(-8deg)}}
-}
+/* scroll playback: faces jump out of the frame, bubbles pop one by one, sound effects stamp in */
+.anim .p>.face,.anim .p .b,.anim .p .sfx{opacity:0}
+.anim .p.in>.face{animation:jump .55s cubic-bezier(.2,1.6,.4,1) .05s both}
+.anim .p.in .b{animation:bub .35s cubic-bezier(.2,1.5,.4,1) both;animation-delay:calc(.25s + var(--d,0s))}
+.anim .p.in .sfx{animation:stamp .45s ease-out both;animation-delay:calc(.45s + var(--d,0s))}
+@keyframes jump{0%{opacity:0;translate:0 40px;scale:.7}100%{opacity:1}}
+@keyframes bub{0%{opacity:0;scale:.75;translate:0 8px}100%{opacity:1}}
+@keyframes stamp{0%{opacity:0;scale:2}100%{opacity:1}}
 </style>
 </head>
 <body>
@@ -341,11 +357,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
           <line x1="70" y1="250" x2="110" y2="80"/><line x1="370" y1="250" x2="410" y2="80"/><line x1="670" y1="250" x2="710" y2="80"/>
         </g>
       </svg>
-      <span class="cap over">Aisle 4. Beverages. Temperature: 3°C. Honesty: also about 3°C.</span>
+      <span class="cap over">Aisle 4. Beverages. Kept at morgue temperature.</span>
     </div>
 
     <div class="p w2 lemon">
-      <div class="b shout"><i>Tariq</i>Behold. It is <u>calling</u> to me.</div>
+      <div class="b shout"><i class="n-t">Tariq</i>Behold. It is <u>calling</u> to me.</div>
       <img class="face" src="../assets/cast/tariq.webp" alt="Tariq, wide-eyed, staring at the top shelf." width="160" height="145">
     </div>
     <div class="p w2 center bottle-hero rose">
@@ -354,18 +370,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
       <span class="cap bottom">Fictional product. No waterfalls were harmed.</span>
     </div>
     <div class="p w2 mint">
-      <div class="b"><i>Tariq</i>“Seven Falls. The power of seven waterfalls.”</div>
-      <div class="b r"><i>Mina</i>Waterfalls don't have power, Tariq. They have gravity and a gift shop.</div>
+      <div class="b"><i class="n-t">Tariq</i>“The power of seven waterfalls.”</div>
+      <div class="b r"><i class="n-m">Mina</i>Waterfalls have gravity. And a long list of guys who said “watch this.”</div>
       <img class="face r" src="../assets/cast/mina.webp" alt="Mina, unimpressed." width="160" height="145">
     </div>
 
     <div class="p w3 peach">
-      <div class="b"><i>Uncle Kamil</i>Technically, waterfalls are used in hydroelectric power generation, so in a sense—</div>
+      <div class="b"><i class="n-k">Uncle Kamil</i>Technically, hydroelectric power—</div>
       <img class="face l" src="../assets/cast/kamil.webp" alt="Uncle Kamil raising a finger to explain." width="160" height="145">
     </div>
     <div class="p w3 sky">
-      <div class="b off shout"><i>Mina</i>Don't.</div>
-      <span class="cap">Uncle Kamil did not. For eleven whole seconds.</span>
+      <div class="b off shout"><i class="n-m">Mina</i>Don't.</div>
+      <span class="cap">He didn't. For eleven seconds. A personal best.</span>
       <img class="face sm" src="../assets/cast/kamil.webp" alt="Uncle Kamil, silently holding in a fact." width="160" height="145">
     </div>
   </div>
@@ -377,22 +393,22 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   <div class="planche-head"><h2 id="h-p2">Electrolytes, Allegedly</h2><span>Page 2 / 6</span></div>
   <div class="grid">
     <div class="p w2 lemon">
-      <div class="b"><i>Tariq</i>It has <b>electrolytes</b>. That's science you can drink.</div>
+      <div class="b"><i class="n-t">Tariq</i>It has <b>electrolytes</b>. That's science you can drink.</div>
       <img class="face" src="../assets/cast/tariq.webp" alt="Tariq holding up the bottle proudly." width="160" height="145">
     </div>
     <div class="p w2 sky">
-      <div class="b r"><i>Mina</i>So does the sea. You don't drink that either.</div>
+      <div class="b r"><i class="n-m">Mina</i>So does the sea. Ask any shipwreck.</div>
       <img class="face r" src="../assets/cast/mina.webp" alt="Mina, deadpan." width="160" height="145">
     </div>
     <div class="p w2 mint">
-      <div class="b small"><i>Uncle Kamil</i>Electrolytes are minerals like sodium and potassium. Sports drinks are designed for when you've sweated a lot.</div>
-      <div class="b off"><i>Tariq</i>I sweat emotionally. Daily.</div>
+      <div class="b"><i class="n-k">Uncle Kamil</i>Sodium and potassium. Useful after heavy sweating.</div>
+      <div class="b off"><i class="n-t">Tariq</i>I sweat emotionally. Daily.</div>
       <img class="face sm" src="../assets/cast/kamil.webp" alt="Uncle Kamil explaining." width="160" height="145">
     </div>
 
     <div class="p w4 cutaway tall">
       <span class="cut-tag">Cutaway</span>
-      <span class="cap">“This is just like the time Tariq ran a marathon.”</span>
+      <span class="cap">“Like the time Tariq ran a marathon.”</span>
       <svg viewBox="0 0 400 190" style="width:100%;height:auto;margin-top:auto" role="img" aria-label="Flashback: Tariq on a sofa in front of a TV showing 'Episode 47 of 47', wearing a medal made of tinfoil.">
         <rect x="250" y="20" width="130" height="90" rx="6" fill="#23262f"/>
         <rect x="258" y="28" width="114" height="74" rx="3" fill="#b8e4ff"/>
@@ -406,11 +422,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
         <g transform="translate(360 150)"><circle r="16" fill="#cfd5dd" stroke="#23262f" stroke-width="3"/><text y="5" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="12" fill="#23262f">#1</text></g>
       </svg>
       <img class="face" src="../assets/cast/tariq.webp" alt="" width="160" height="145" style="position:absolute;left:24%;bottom:58px;width:118px;height:107px;margin:0">
-      <span class="cap bottom">He did not run a marathon. He finished a series. The medal is tinfoil.</span>
+      <span class="cap bottom">He finished a TV series. The medal is tinfoil. His legs were declared legally dead.</span>
     </div>
     <div class="p w2 peach tall">
-      <div class="b"><i>Uncle Kamil</i>For an ordinary day, water usually does the job. But let's not judge a bottle by its waterfalls.</div>
-      <div class="b r"><i>Uncle Kamil</i>Turn it around.</div>
+      <div class="b"><i class="n-k">Uncle Kamil</i>Ordinary day? Water does the job.</div>
+      <div class="b r"><i class="n-k">Uncle Kamil</i>Turn it around.</div>
       <span class="sfx" style="bottom:120px;right:14px">SWISH!</span>
       <img class="face" src="../assets/cast/kamil.webp" alt="Uncle Kamil gesturing to turn the bottle." width="160" height="145">
     </div>
@@ -443,20 +459,20 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
       </div>
     </div>
     <div class="p w2 lemon tall">
-      <div class="b"><i>Tariq</i>Ninety calories! It's basically a cloud. A hydrating cloud.</div>
-      <div class="b r small"><i>Uncle Kamil</i>Ninety per <u>serving</u>. Look at the top: about three servings per bottle.</div>
+      <div class="b"><i class="n-t">Tariq</i>Ninety calories! Basically a cloud.</div>
+      <div class="b r"><i class="n-k">Uncle Kamil</i>Per <u>serving</u>. There are about three in there.</div>
       <img class="face" src="../assets/cast/tariq.webp" alt="Tariq, delighted, then confused." width="160" height="145">
     </div>
 
     <div class="p w3 rose">
       <span class="sfx" style="bottom:16px;right:14px">WHAT?!</span>
-      <div class="b shout"><i>Tariq</i>It's ONE bottle! It has ONE cap! Who drinks a third of a bottle and puts it back?!</div>
-      <div class="b r"><i>Mina</i>Serial killers. And your uncle.</div>
+      <div class="b shout"><i class="n-t">Tariq</i>ONE bottle! ONE cap! Who drinks a third and puts it back?!</div>
+      <div class="b r"><i class="n-m">Mina</i>Serial killers. And your uncle.</div>
       <img class="face sm l" src="../assets/cast/tariq.webp" alt="Tariq, outraged." width="160" height="145">
     </div>
     <div class="p w3 mint">
       <span class="sfx green" style="bottom:16px;left:14px">DING!</span>
-      <div class="b"><i>Uncle Kamil</i>That's why bottles this size often show <u>two columns</u>: per serving and per container. If you're drinking all of it, read the second one.</div>
+      <div class="b"><i class="n-k">Uncle Kamil</i>Big bottles often show <u>two columns</u>. Drinking it all? Read the second.</div>
       <img class="face r" src="../assets/cast/kamil.webp" alt="Uncle Kamil pointing at the second column." width="160" height="145">
     </div>
 
@@ -470,8 +486,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
       <span class="sr">Fifteen sugar cubes: 61 grams of added sugars is about fifteen teaspoons, at roughly 4 grams per teaspoon.</span>
     </div>
     <div class="p w2 peach">
-      <div class="b"><i>Tariq</i>That's not a drink. That's a dessert in a disguise.</div>
-      <div class="b r"><i>Mina</i>A liquid alibi.</div>
+      <div class="b"><i class="n-t">Tariq</i>That's not a drink. That's dessert in a fake moustache.</div>
+      <div class="b r"><i class="n-m">Mina</i>A liquid alibi.</div>
       <span class="cap bottom">Roll title card.</span>
     </div>
   </div>
@@ -497,36 +513,36 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
     </div>
     <div class="p w4 rose tall">
       <span class="cap">Mascots don't talk. This one does. Don't ask.</span>
-      <div class="b mascot shout"><i>Flamboyo</i>Hey kid. <u>Real fruit</u>. Would I lie to you? I'm a flamingo in sunglasses. I'm a symbol of trust.</div>
-      <div class="b off"><i>Tariq</i>He's so confident. I love him.</div>
+      <div class="b mascot shout"><i class="n-f">Flamboyo</i><u>Real fruit</u>, kid. Would a flamingo in sunglasses lie to you?</div>
+      <div class="b off"><i class="n-t">Tariq</i>I'd die for him.</div>
       <svg viewBox="0 0 120 170" style="width:140px;height:auto;align-self:flex-end;margin-top:auto" aria-hidden="true"><use href="#flamingo"/></svg>
     </div>
 
     <div class="p w3 sky">
       <span class="sfx blue" style="bottom:16px;right:14px">SQUINT</span>
-      <div class="b"><i>Mina</i>Tiny print, bottom of the carton: “contains 5% juice.”</div>
-      <div class="b r"><i>Tariq</i>Five? What's the other ninety-five?!</div>
+      <div class="b"><i class="n-m">Mina</i>Tiny print: “contains 5% juice.”</div>
+      <div class="b r"><i class="n-t">Tariq</i>Five? What's the other ninety-five?!</div>
       <img class="face sm" src="../assets/cast/mina.webp" alt="Mina squinting at the small print." width="160" height="145">
     </div>
     <div class="p w3 mint">
-      <div class="b small"><i>Uncle Kamil</i>Ingredients go in order of weight. Here: water, sugar, and then the fruit juice, waving from the back like a guy who wasn't invited to the photo.</div>
-      <div class="b r small"><i>Uncle Kamil</i>In the U.S., a drink that claims to contain juice must state the percentage of juice. Look for it on the label.</div>
+      <div class="b"><i class="n-k">Uncle Kamil</i>Ingredients go by weight: water, sugar… then the juice, waving from the back like an ex at a wedding.</div>
+      <div class="b r"><i class="n-k">Uncle Kamil</i>U.S. rule: claim juice, state the percent.</div>
       <img class="face sm r" src="../assets/cast/kamil.webp" alt="Uncle Kamil explaining percent juice." width="160" height="145">
     </div>
 
     <div class="p w2 rose">
-      <div class="b mascot"><i>Flamboyo</i>…I'd like to speak to my lawyer.</div>
+      <div class="b mascot"><i class="n-f">Flamboyo</i>…I'd like to speak to my lawyer.</div>
       <svg viewBox="0 0 120 170" style="width:96px;height:auto;align-self:center;margin-top:auto;transform:scaleX(-1)" aria-hidden="true"><use href="#flamingo"/></svg>
     </div>
     <div class="p w2 peach">
-      <div class="b"><i>Mina</i>You're a drawing.</div>
-      <div class="b r mascot"><i>Flamboyo</i>My lawyer is ALSO a drawing. He's a very aggressive pelican.</div>
+      <div class="b"><i class="n-m">Mina</i>You're a drawing.</div>
+      <div class="b r mascot"><i class="n-f">Flamboyo</i>So's my lawyer. A pelican. His beak is full of former witnesses.</div>
       <img class="face sm" src="../assets/cast/mina.webp" alt="Mina, staring at a cartoon flamingo." width="160" height="145">
     </div>
     <div class="p w2 lemon">
       <span class="cap">Kamil picks up a different carton.</span>
-      <div class="b"><i>Uncle Kamil</i>Plot twist: this 100% juice is honest. No added sugars. Its sugars come from the fruit.</div>
-      <div class="b r small"><i>Mina</i>Still counts under Total Sugars. Honest doesn't mean unlimited. Small glass, good breakfast.</div>
+      <div class="b"><i class="n-k">Uncle Kamil</i>Plot twist: 100% juice. No added sugars, just the fruit's own.</div>
+      <div class="b r"><i class="n-m">Mina</i>Still counts as sugar. Small glass.</div>
     </div>
   </div>
   <p class="folio">— 4 —</p>
@@ -537,23 +553,23 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   <div class="planche-head"><h2 id="h-p5">The Dimension of Honest Labels</h2><span>Page 5 / 6</span></div>
   <div class="grid">
     <div class="p w2 lilac">
-      <div class="b think"><i>Tariq · thinking</i>What if there's a parallel universe where drinks just say exactly what they are?</div>
+      <div class="b think"><i class="n-t">Tariq · thinking</i>What if there's a universe where drinks are honest?</div>
       <img class="face" src="../assets/cast/tariq.webp" alt="Tariq daydreaming." width="160" height="145">
     </div>
     <div class="p w4 mint tall">
       <div class="portal" aria-hidden="true"></div>
       <span class="sfx green" style="top:12px;right:14px">ZWOOORP!</span>
       <span class="cap">Dimension H-2O. Population: honest bottles.</span>
-      <div class="honest" role="img" aria-label="Four honest bottles: 'Sugar water, but blue'. 'Mostly water, plus vibes'. 'Bitter bean juice: you will be awake'. 'Water. Just water. You're welcome.'">
+      <div class="honest" role="img" aria-label="Four honest bottles: 'Sugar water, but blue'. 'Mostly water, plus vibes'. 'Bitter bean juice: sleep when you're dead'. 'Water. Just water. You're welcome.'">
         <div class="hb c1"><span>Sugar water, but blue</span></div>
         <div class="hb c2"><span>Mostly water (plus vibes)</span></div>
-        <div class="hb c3"><span>Bitter bean juice. You will be awake.</span></div>
+        <div class="hb c3"><span>Bitter bean juice. Sleep when you're dead.</span></div>
         <div class="hb c4"><span>Water. Just water. You're welcome.</span></div>
       </div>
     </div>
 
     <div class="p w3 sky">
-      <div class="b"><i>Mina</i>Good news: you don't need a portal. You need the <u>back of the bottle</u>. The honest dimension is printed in small font.</div>
+      <div class="b"><i class="n-m">Mina</i>No portal needed. The honest dimension is on the <u>back of the bottle</u>. In tiny font.</div>
       <img class="face sm" src="../assets/cast/mina.webp" alt="Mina, pulling Tariq back to reality." width="160" height="145">
     </div>
     <div class="p w3 center peach">
@@ -562,16 +578,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
     </div>
 
     <div class="p w2 rose">
-      <div class="b shout"><i>Tariq</i>“PHENYLKETONURICS”?! Is this a spell? Is the can cursed?</div>
+      <div class="b shout"><i class="n-t">Tariq</i>“PHENYLKETONURICS”?! Is the can cursed?</div>
       <img class="face sm" src="../assets/cast/tariq.webp" alt="Tariq, alarmed by the can." width="160" height="145">
     </div>
     <div class="p w2 mint">
-      <div class="b small"><i>Uncle Kamil</i>It's a required U.S. statement on products with aspartame. People with PKU, a rare genetic condition, need to limit phenylalanine.</div>
+      <div class="b"><i class="n-k">Uncle Kamil</i>Required with aspartame in the U.S. People with PKU, a rare genetic condition, must limit phenylalanine.</div>
       <img class="face sm" src="../assets/cast/kamil.webp" alt="Uncle Kamil calmly explaining." width="160" height="145">
     </div>
     <div class="p w2 lemon">
-      <div class="b"><i>Mina</i>So: not cursed. Just extremely legally specific.</div>
-      <div class="b r small"><i>Uncle Kamil</i>Some zero-sugar drinks use non-sugar sweeteners; check the ingredient list to see what, if anything, is used. Approved sweeteners are a choice, not a scandal.</div>
+      <div class="b"><i class="n-m">Mina</i>Not cursed. Just legally specific.</div>
+      <div class="b r"><i class="n-k">Uncle Kamil</i>Zero sugar? The ingredients show which sweetener, if any. Approved ones are a choice, not a scandal.</div>
     </div>
   </div>
   <p class="folio">— 5 —</p>
@@ -586,38 +602,38 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
       <svg viewBox="0 0 110 200" style="width:min(120px,70%);height:auto" role="img" aria-label="Fictional energy drink can: VoltMoose Extreme Energy, with a moose face and a lightning bolt."><use href="#moosecan"/></svg>
     </div>
     <div class="p w2 lemon tall">
-      <div class="b"><i>Tariq</i>This one has caffeine AND taurine AND a moose. It's a complete breakfast.</div>
+      <div class="b"><i class="n-t">Tariq</i>Caffeine, taurine AND a moose. Complete breakfast.</div>
       <img class="face" src="../assets/cast/tariq.webp" alt="Tariq holding the energy drink." width="160" height="145">
     </div>
     <div class="p w2 mint tall">
-      <div class="b small"><i>Uncle Kamil</i>If caffeine is added as a stand-alone ingredient, it must be listed. If it comes from coffee or guarana, look for that source. The amount is often voluntary.</div>
-      <div class="b r"><i>Mina</i>So the moose knows. And isn't talking.</div>
+      <div class="b"><i class="n-k">Uncle Kamil</i>Added caffeine, or a source like guarana, shows in the ingredients. The milligrams? Often optional.</div>
+      <div class="b r"><i class="n-m">Mina</i>So the moose knows. And isn't talking.</div>
     </div>
 
     <div class="p w3 peach">
-      <div class="b small"><i>Uncle Kamil</i>For healthy adults, the FDA mentions about 400 mg a day as an amount not generally linked to negative effects. Teenagers are a different conversation.</div>
-      <div class="b r"><i>Mina</i>And you, my son, are a different conversation.</div>
+      <div class="b"><i class="n-k">Uncle Kamil</i>FDA: about 400 mg a day isn't generally linked to harm in healthy adults. Teens are a different conversation.</div>
+      <div class="b r"><i class="n-m">Mina</i>And you, my son, are a different conversation.</div>
       <img class="face sm" src="../assets/cast/mina.webp" alt="Mina giving Tariq a look." width="160" height="145">
     </div>
     <div class="p w3 sky">
       <span class="sfx" style="bottom:18px;right:14px">PLONK.</span>
-      <div class="b"><i>Tariq</i>Goodbye, moose. You were too powerful for this world.</div>
-      <span class="cap">Water for every day. A small 100% juice for breakfast. The moose goes back on the shelf.</span>
+      <div class="b"><i class="n-t">Tariq</i>Goodbye, moose. You were too powerful for this world.</div>
+      <span class="cap">Water daily. Small 100% juice at breakfast. Moose: back on the shelf.</span>
       <img class="face sm l" src="../assets/cast/tariq.webp" alt="Tariq putting the can back, mournfully." width="160" height="145">
     </div>
 
     <div class="p w4 fourth tall">
       <svg class="crack" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true"><path d="M250 0l-20 60 30 30-40 50 20 40-30 50 10 70M230 60l-50 10M220 140l60 20M240 230l-60 30" fill="none" stroke="#23262f" stroke-width="2.5"/></svg>
       <span class="cap">The fourth wall, briefly.</span>
-      <div class="b shout"><i>Tariq · to you</i>Wait. Are we in an advert?</div>
-      <div class="b r"><i>Mina</i>We're in a free comic that's secretly trying to sell you a 53-page label guide.</div>
-      <div class="b"><i>Tariq</i>Is it working?</div>
-      <div class="b r"><i>Mina</i>Depends. Did they learn something?</div>
+      <div class="b shout"><i class="n-t">Tariq · to you</i>Wait. Are we in an advert?</div>
+      <div class="b r"><i class="n-m">Mina</i>We're in a free comic secretly selling a 53-page label guide.</div>
+      <div class="b"><i class="n-t">Tariq</i>Is it working?</div>
+      <div class="b r"><i class="n-m">Mina</i>They're still reading, aren't they?</div>
     </div>
     <div class="p w2 lemon tall">
       <span class="sfx" style="bottom:16px;left:14px">BEEP!</span>
-      <div class="b"><i>Uncle Kamil</i>Next week: protein bars. I am fully prepared.</div>
-      <span class="cap bottom">Next week, Uncle Kamil gets fooled by a protein bar. He would like you to know this is slander.</span>
+      <div class="b"><i class="n-k">Uncle Kamil</i>Next week: protein bars. I'm ready.</div>
+      <span class="cap bottom">He is not ready. He calls this slander.</span>
       <img class="face sm" src="../assets/cast/kamil.webp" alt="Uncle Kamil, smug, unaware of what is coming." width="160" height="145">
     </div>
   </div>
@@ -681,6 +697,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 
 <script>
 (function () {
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+    document.documentElement.classList.add("anim");
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: .3 });
+    document.querySelectorAll(".p").forEach(function (panel) {
+      var bs = panel.querySelectorAll(".b");
+      bs.forEach(function (b, i) { b.style.setProperty("--d", (i * .45) + "s"); });
+      panel.querySelectorAll(".sfx").forEach(function (x) { x.style.setProperty("--d", (bs.length * .45) + "s"); });
+      io.observe(panel);
+    });
+  }
   var end = Date.UTC(2026, 11, 3, 22, 59, 0);
   if (Date.now() < end) { var p = document.getElementById("promo"); if (p) p.classList.add("on"); }
 

@@ -3,6 +3,7 @@
 
 Reuses Episode 02's panel/bubble CSS and SVG symbols; Episode 01 Pins swap in
 that episode's mint/pink/yellow palette. Usage: python scripts/make_comic_pins.py [slug ...]
+Share images (1200x630 JPG, og:image) go to assets/share/: python scripts/make_comic_pins.py share
 """
 import re, shutil, subprocess, sys, tempfile
 from PIL import Image, ImageFilter
@@ -116,6 +117,52 @@ PINS = {
 }
 
 
+SHARE_CSS = """
+body{margin:0;width:1200px;height:630px;overflow:hidden;background:#fffaf0}
+.share{box-sizing:border-box;width:1200px;height:630px;padding:40px 44px;display:grid;grid-template-columns:520px 1fr;gap:32px}
+.share .txt{display:flex;flex-direction:column;gap:18px}
+.share .kick{font:900 18px var(--body);letter-spacing:.16em;text-transform:uppercase}
+.share .kick b{color:var(--coral)}
+.share h1{font-size:104px;margin:0;line-height:.9}
+.share .hook{font:700 30px/1.3 var(--letter);margin:0}
+.share .tag{margin-top:auto;background:var(--ink);color:#fff;border-radius:10px;padding:18px 22px;font:900 22px var(--body)}
+.share .tag span{color:#ffd84d}
+.share .p{padding:18px;gap:12px;height:100%;box-sizing:border-box}
+.share .b{font-size:26px;border-width:3px;border-radius:24px;padding:12px 18px}
+.share .b i{font-size:15px}
+.share .face{width:230px;height:208px;border-width:4px;margin:0;align-self:auto}
+.share .stage svg{height:250px}
+"""
+
+SHARE = {
+    "episode-02": ("ep02", "Liquid Alibis", "A bottle claims the power of seven waterfalls. A flamingo lawyers up.", f"""
+<div class="p lemon"><div class="b shout"><i>Tariq</i>It has ELECTROLYTES. That's science you can drink.</div>
+<div class="b r"><i>Mina</i>So does the sea.</div>
+<div class="stage">{face('tariq')}<svg viewBox="0 0 120 250"><use href="#sevenfalls"/></svg></div></div>"""),
+    "episode-01": ("ep01", "The Cart Chronicles", "One family. One cart. One cereal box that is definitely flirting.", f"""
+<div class="p rose"><div class="b shout"><i>Tariq</i>So the box is flirting with me?</div>
+<div class="b r"><i>Mina</i>Turn it around, Romeo.</div>
+<div class="stage">{face('tariq','sm')}<div class="pack" style="width:220px;min-height:250px"><span class="band" style="font-size:22px">SUPER CRUNCH</span><strong style="font-size:54px">MAX<br>ENERGY!</strong><em style="font-size:12px;padding:6px">NATURAL · MULTI-GRAIN</em></div></div></div>"""),
+}
+
+
+def share_page(ep, title, hook, panel):
+    return f"""<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>{CSS}{PIN_CSS}{SHARE_CSS}</style></head><body class="{ep}">{DEFS}
+<div class="share"><div class="txt"><span class="kick">The Cart Chronicles · <b>Episode {ep[2:]}</b></span>
+<h1>{title}</h1><p class="hook">{hook}</p><div class="tag">Free comic · learn to read food labels <span>→</span></div></div>
+{panel}</div></body></html>"""
+
+
+def shoot(exe, tmp, html, dst, size, scale):
+    src = tmp / "shot.html"; src.write_text(html, encoding="utf-8")
+    subprocess.run([exe, "--headless=new", "--disable-gpu", "--hide-scrollbars", f"--force-device-scale-factor={scale}",
+                    f"--window-size={size}", "--virtual-time-budget=10000", "--allow-file-access-from-files",
+                    f"--user-data-dir={tmp / 'profile'}", f"--screenshot={dst}", src.as_uri()],
+                   check=True, capture_output=True, timeout=120)
+
+
 def page(ep, title, hook, panels, foot):
     return f"""<!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
@@ -127,15 +174,18 @@ def page(ep, title, hook, panels, foot):
 def main():
     prepare_cast()
     exe = browser(); tmp = Path(tempfile.mkdtemp())
-    for slug in sys.argv[1:] or PINS:
-        t, h, p, f = PINS[slug]
-        src = tmp / f"{slug}.html"; src.write_text(page(slug[:4], t, h, p, f), encoding="utf-8")
-        dst = ROOT / "pins" / f"{slug}.png"
-        subprocess.run([exe, "--headless=new", "--disable-gpu", "--hide-scrollbars", f"--force-device-scale-factor={SCALE}",
-                        "--window-size=1000,1500", "--virtual-time-budget=10000", "--allow-file-access-from-files",
-                        f"--user-data-dir={tmp / 'profile'}", f"--screenshot={dst}", src.as_uri()],
-                       check=True, capture_output=True, timeout=120)
-        print("rendered", dst.relative_to(ROOT), Image.open(dst).size)
+    if sys.argv[1:] == ["share"]:
+        out = ROOT / "assets" / "share"; out.mkdir(parents=True, exist_ok=True)
+        for name, (ep, t, h, panel) in SHARE.items():
+            png = tmp / f"{name}.png"; shoot(exe, tmp, share_page(ep, t, h, panel), png, "1200,630", 1)
+            dst = out / f"{name}.jpg"; Image.open(png).convert("RGB").save(dst, quality=88, optimize=True)
+            print("rendered", dst.relative_to(ROOT), Image.open(dst).size, dst.stat().st_size // 1024, "KB")
+    else:
+        for slug in sys.argv[1:] or PINS:
+            t, h, p, f = PINS[slug]
+            dst = ROOT / "pins" / f"{slug}.png"
+            shoot(exe, tmp, page(slug[:4], t, h, p, f), dst, "1000,1500", SCALE)
+            print("rendered", dst.relative_to(ROOT), Image.open(dst).size)
     shutil.rmtree(tmp, ignore_errors=True); shutil.rmtree(CAST_DIR, ignore_errors=True)
 
 if __name__ == "__main__":
