@@ -66,6 +66,14 @@
     .legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 4px; }
     .err { color: #9A3519; font-weight: 700; margin-top: 10px; }
     .toast { font-size: 14px; color: #24613D; font-weight: 700; }
+    .offer { display: grid; grid-template-columns: 120px 1fr; gap: 18px; align-items: center; background: #FCF3DC; border: 2px solid var(--gold); border-radius: 16px; padding: 18px 20px; margin: 22px 0 6px; }
+    .offer img { width: 120px; height: auto; border-radius: 6px; box-shadow: 0 6px 16px rgba(19,50,31,.18); display: block; }
+    .offer .k { font-size: 12px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; color: #8A520F; }
+    .offer h3 { margin: 4px 0 6px; font-size: 21px; line-height: 1.25; }
+    .offer p { margin: 0 0 12px; font-size: 15px; line-height: 1.55; }
+    .offer .fine { font-size: 13px; color: var(--muted); margin: 10px 0 0; }
+    @media (max-width: 560px) { .offer { grid-template-columns: 1fr; } .offer img { width: 110px; } }
+    @media print { .offer { display: none; } }
     @media (max-width: 640px) { .stats { grid-template-columns: repeat(2, 1fr); } .tool { padding: 16px; } }
     @media print { .tool .row, .samples, .privacy, .share { display: none; } }
   </style>
@@ -111,6 +119,16 @@
       <span class="tag ok">Basic ingredient</span><span class="tag kitchen">Kitchen staple</span><span class="tag sugar">Sugar name</span><span class="tag warn">Additive: read the job</span><span class="tag sig">Processing clue</span><span class="tag">Not in our list</span>
     </div>
     <ul class="ings" id="ings"></ul>
+    <aside class="offer" aria-label="Supermarket Decoder ebook">
+      <img src="https://public-files.gumroad.com/nbbfx502vssnurktwmojzb6uuqz2" alt="Cover of the Supermarket Decoder ebook" width="120" height="170" loading="lazy">
+      <div>
+        <div class="k">Next time, at the shelf</div>
+        <h3>Decode labels in 30 seconds, without your phone</h3>
+        <p id="offerLine">Supermarket Decoder teaches you the few names that matter, so you can read a label like this one in your head while you shop.</p>
+        <a class="btn" id="offerBtn" href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&amp;utm_medium=tool&amp;utm_campaign=supermarket_decoder&amp;utm_content=decoder_results" target="_blank" rel="noopener">Get the guide · $9</a>
+        <p class="fine">53-page illustrated PDF · printable cheat-sheet · 14-day tracker · <a href="../index.html#inside">See what's inside</a></p>
+      </div>
+    </aside>
     <div class="row share">
       <button type="button" class="btn ghost" id="share">🔗 Copy a link to this result</button>
       <button type="button" class="btn ghost" onclick="window.print()">🖨 Print</button>
@@ -721,6 +739,13 @@
         ? "A \"Contains\" line lists allergens that are part of the recipe."
         : "Wording like this is a voluntary cross-contact warning, not a recipe ingredient."), "allergen");
     });
+
+    // offer line that matches what this label just showed
+    var ol = "Supermarket Decoder teaches you the few names that matter, so you can read a label like this one in your head while you shop.";
+    if (nClue >= 3) ol = "This label has " + nClue + " processing clues. Supermarket Decoder shows you how to spot them in seconds, in the aisle, before the pack goes in your trolley.";
+    else if (nSug >= 2) ol = "This label hides " + nSug + " different sugar names. Supermarket Decoder teaches you the sugar names to look for, so you catch them at the shelf in seconds.";
+    else if (g <= 2) ol = "This one looks simple. Supermarket Decoder shows you how to find labels like it fast, in the 30-second scan you can do at the shelf.";
+    $("offerLine").textContent = ol;
 
     $("results").hidden = false;
     try { history.replaceState(null, "", "#list=" + encodeURIComponent(text)); } catch (e) {}
