@@ -137,7 +137,7 @@ def index_page():
 <div class="codes">{cards}</div>
 <div class="panel" style="border:2px solid var(--gold,#F2B51C)"><p><strong>Want all of them in your pocket?</strong> The E-Number Pocket Reference covers 123 codes on 16 phone-friendly pages, with traffic-light markers, US label names and the rules that differ between countries.</p><div class="cta-row"><a class="pill" href="{POCKET.format(slug='index')}" target="_blank" rel="noopener">Get the pocket reference · $5</a><a class="pill ghost" href="{KIT.format(slug='index')}" target="_blank" rel="noopener">Complete Kit · $13</a></div></div>
 <div class="panel"><p><strong>Looking for a code that isn't here?</strong> The free <a href="../decoder/">Ingredient Decoder</a> knows more than 300 E-numbers. Paste a whole ingredient list and it explains every one.</p></div>
-<div class="note">An E-number means an additive has been assessed and approved in Europe. It's an identifier, not a danger rating. <a href="../articles/e-numbers-explained.html">How to read E-numbers sensibly →</a></div>
+<div class="note">An E-number is an identifier used in the European food-additive numbering system. It does not mean the additive is currently authorised in every country or food category. Rules differ by region and can change; check local rules. The code is not a danger rating. <a href="../articles/e-numbers-explained.html">How to read E-numbers sensibly →</a></div>
 <p><a class="back" href="../free-resources/">← All free resources</a></p>
 """ + FOOT
 
