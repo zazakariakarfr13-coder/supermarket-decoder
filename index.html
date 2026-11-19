@@ -118,6 +118,16 @@
   .explain .v { display: inline-block; font-size: 12px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; margin-left: 8px; vertical-align: 2px; }
   .v.ok { background: var(--mint); color: #2E7D46; } .v.warn { background: var(--butter); color: #A06A0B; } .v.sig { background: var(--peach); color: var(--accent); }
   @media (prefers-color-scheme: dark) { .v.ok { color: #8FD3A3; } .v.warn { color: #F5C443; } }
+  .decode-duo { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 28px; align-items: center; }
+  .reel { margin: 0; }
+  .reel-frame { position: relative; aspect-ratio: 9 / 16; width: 100%; border-radius: var(--radius); overflow: hidden; background: linear-gradient(#09080B, #010101); border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .reel-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .reel-btn { position: absolute; right: 12px; bottom: 12px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.28); background: rgba(9,8,11,.62); color: #fff; font-size: 18px; line-height: 1; cursor: pointer; display: grid; place-items: center; backdrop-filter: blur(4px); }
+  .reel-btn:hover { background: rgba(9,8,11,.85); }
+  .reel-play { left: 50%; top: 50%; right: auto; bottom: auto; transform: translate(-50%, -50%); width: 68px; height: 68px; font-size: 26px; display: none; }
+  .reel.paused .reel-play { display: grid; }
+  .reel figcaption { margin-top: 10px; font-size: 13px; font-weight: 700; color: var(--muted); text-align: center; }
+  @media (max-width: 860px) { .decode-duo { grid-template-columns: 1fr; } .reel { order: -1; width: min(250px, 72%); margin-inline: auto; } }
   .score { margin-top: 16px; font-weight: 800; }
   .score span { color: var(--accent); }
 
@@ -370,11 +380,23 @@
       <div class="kicker reveal">Try it now</div>
       <h2 class="reveal">Decode a real-world label</h2>
       <p class="sub reveal">Tap each ingredient of this typical chocolate cereal bar. The guide teaches you to do this in your head, in seconds.</p>
+      <div class="decode-duo">
       <div class="decoder reveal">
         <div class="lbl">Ingredients · chocolate cereal bar</div>
         <div class="tokens" id="tokens" role="group" aria-label="Ingredients to decode"></div>
         <div class="explain" id="explain" aria-live="polite"><div class="t">Tap an ingredient above</div><div>You'll see what it is, why a factory uses it, and whether it's a signal of ultra-processing.</div></div>
         <div class="score" id="score" aria-live="polite"></div>
+      </div>
+        <figure class="reel reveal paused" id="reel">
+          <div class="reel-frame">
+            <video id="reelVideo" muted loop playsinline preload="none" poster="assets/video/crunch-box-poster.jpg" aria-label="Animation: a cereal box called Super Crunch says Natural on the front; its ingredient list opens and three claims are translated: multigrain, natural flavour and glucose syrup.">
+              <source src="assets/video/crunch-box.mp4" type="video/mp4">
+            </video>
+            <button type="button" class="reel-btn reel-play" id="reelPlay" aria-label="Play the animation">▶</button>
+            <button type="button" class="reel-btn" id="reelSound" aria-label="Turn sound on" aria-pressed="false">🔇</button>
+          </div>
+          <figcaption>What the box won't say · 23 sec</figcaption>
+        </figure>
       </div>
       <p class="reveal" style="margin-top:18px"><a class="btn" href="decoder/">Decode your own label: paste any ingredient list →</a></p>
     </div>
@@ -592,6 +614,33 @@
 
   // Sticky buy bar only once the reader reaches the guide section (mid-page), never on first sight
   var sticky = document.getElementById("sticky"), hero = document.getElementById("inside");
+  // crunch-box animation: plays muted while on screen; never autoplays for reduced-motion users
+  (function () {
+    var fig = document.getElementById("reel"), v = document.getElementById("reelVideo");
+    if (!fig || !v) return;
+    var playBtn = document.getElementById("reelPlay"), snd = document.getElementById("reelSound");
+    var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var chosen = false;
+    function play() { var p = v.play(); if (p && p.catch) p.catch(function () { fig.classList.add("paused"); }); }
+    v.addEventListener("play", function () { fig.classList.remove("paused"); });
+    v.addEventListener("pause", function () { fig.classList.add("paused"); });
+    playBtn.addEventListener("click", function () { chosen = true; play(); });
+    v.addEventListener("click", function () { chosen = true; if (v.paused) play(); else v.pause(); });
+    snd.addEventListener("click", function () {
+      v.muted = !v.muted; snd.textContent = v.muted ? "🔇" : "🔊";
+      snd.setAttribute("aria-pressed", String(!v.muted)); snd.setAttribute("aria-label", v.muted ? "Turn sound on" : "Turn sound off");
+      if (!v.muted && v.paused) { chosen = true; play(); }
+    });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.4) { if (!calm || chosen) play(); }
+          else if (!v.paused) v.pause();
+        });
+      }, { threshold: [0, 0.4] }).observe(v);
+    }
+  })();
+
   if ("IntersectionObserver" in window && sticky && hero) {
     new IntersectionObserver(function (es) {
       var show = es[0].isIntersecting || es[0].boundingClientRect.top < 0;
