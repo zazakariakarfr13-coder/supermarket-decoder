@@ -107,7 +107,7 @@ def additive_page(a):
 <ul>{where}</ul>
 <h2>Is {E(code)} safe? What the research says</h2>
 <p>{E(a['safety'])}</p>
-<div class="note">An E-number means an additive has been assessed and approved in Europe. It's an ID, not a verdict: what matters is the dose, how often you eat it, and the rest of the recipe. Rules differ between countries and can change.</div>
+<div class="note">An E-number is an identifier used in the European food-additive numbering system. It does not mean the additive is currently authorised in every country or food category. Rules differ by region and can change, so check local rules. The code is not a danger rating.</div>
 <h2>How it appears on labels</h2>
 <ul class="names">{names}</ul>
 <div class="panel">
