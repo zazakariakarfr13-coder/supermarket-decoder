@@ -228,6 +228,22 @@ def main():
         if "assets/nav.js" not in (ROOT / rel).read_text(encoding="utf-8", errors="replace"):
             errors.append(f"{rel}: missing the menu script (assets/nav.js)")
 
+    # Homepage search should expose its expanded state and announce result counts to assistive technology.
+    home_html = (ROOT / "index.html").read_text(encoding="utf-8", errors="replace")
+    nav_js = (ROOT / "assets" / "nav.js").read_text(encoding="utf-8", errors="replace")
+    for required in (
+        'aria-controls="sd-results"',
+        'aria-expanded="false"',
+        'id="sd-search-status"',
+        'role="status"',
+        'aria-live="polite"',
+    ):
+        if required not in home_html:
+            errors.append(f"index.html: accessible site-search markup is missing {required!r}.")
+    for required in ('setAttribute("aria-expanded"', 'sd-search-status', 'status.textContent'):
+        if required not in nav_js:
+            errors.append(f"assets/nav.js: accessible search behaviour is missing {required!r}.")
+
     if warnings:
         print("Site validation warnings:")
         for warning in warnings:

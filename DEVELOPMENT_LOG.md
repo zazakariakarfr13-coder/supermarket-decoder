@@ -158,3 +158,10 @@ The most recent inspected commits on 16 November 2026 refined the US Nutrition F
 - **Implementation:** one shared `assets/nav.js` plus `assets/nav.css`, with a one-line script tag per page; page HTML is otherwise unchanged. The homepage FAQ's global `details` styles are neutralised for the menu.
 - **Validation:** `check_site.py` now fails if the search index is stale (proved with a deliberately emptied index) or if a listed page lacks `assets/nav.js`. Browser-checked at 375px in light and dark mode: ranked search results ("sugar", "e471", "comic"), menu with the current page highlighted, no horizontal scroll, no overlap with the top bar.
 - **Maintenance:** after adding or renaming a page, run `python scripts/make_search_index.py`.
+
+### 2026-11-20 — accessible homepage search follow-up
+
+- **Finding:** the new site search was keyboard-usable through its native input and result links, but the results count was not announced to screen readers and the input did not expose whether its results panel was expanded.
+- **Improvement:** added a visually-hidden polite status region that announces the number of matching pages (or no matches), updates `aria-expanded` as the results panel opens/closes, and gives the results list an accessible label.
+- **Regression check:** `scripts/check_site.py` now verifies the homepage search's status/live-region markup and the corresponding JavaScript state updates.
+- **Scope:** no food guidance, product copy, prices, PDF delivery, customer data, external links or scheduled social posts were changed. GitHub Pages deployment is triggered by this maintenance commit; final deployment status is recorded in the run history.

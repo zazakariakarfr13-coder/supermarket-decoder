@@ -63,21 +63,32 @@
   function wireSearch(data) {
     var input = document.getElementById("sd-search");
     var list = document.getElementById("sd-results");
-    if (!input || !list) return;
+    var status = document.getElementById("sd-search-status");
+    if (!input || !list || !status) return;
     function render() {
-      var hits = match(data.pages, input.value, 8);
+      var query = input.value.trim();
+      var hits = match(data.pages, query, 8);
       list.innerHTML = hits.map(function (p) {
         return '<li><a href="' + esc(href(p)) + '"><span class="sd-r-t">' + esc(p.t) + '</span><span class="sd-r-g">' +
           esc(p.g) + "</span></a></li>";
-      }).join("") || (input.value.trim() ? '<li class="sd-none">No match. Try a simpler word, like “sugar” or “E471”.</li>' : "");
-      list.hidden = !input.value.trim();
+      }).join("") || (query ? '<li class="sd-none">No match. Try a simpler word, like “sugar” or “E471”.</li>' : "");
+      list.hidden = !query;
+      input.setAttribute("aria-expanded", String(!list.hidden));
+      status.textContent = !query ? "" : hits.length
+        ? "Showing " + hits.length + (hits.length === 1 ? " matching page." : " matching pages.")
+        : "No matching pages found.";
     }
     input.addEventListener("input", render);
     input.addEventListener("keydown", function (e) {
       if (e.key === "Enter") { var a = list.querySelector("a"); if (a) { e.preventDefault(); location.href = a.href; } }
       if (e.key === "Escape") { input.value = ""; render(); }
     });
-    document.addEventListener("click", function (e) { if (!e.target.closest(".sd-search")) list.hidden = true; });
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest(".sd-search")) {
+        list.hidden = true;
+        input.setAttribute("aria-expanded", "false");
+      }
+    });
     input.addEventListener("focus", render);
   }
 

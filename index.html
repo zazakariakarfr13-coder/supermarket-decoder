@@ -329,8 +329,9 @@
         </div>
         <div class="sd-search" role="search">
           <label for="sd-search">Search the site</label>
-          <input id="sd-search" type="search" placeholder="Try: E471, hidden sugars, allergens" autocomplete="off" aria-controls="sd-results">
-          <ul id="sd-results" class="sd-results" hidden></ul>
+          <input id="sd-search" type="search" placeholder="Try: E471, hidden sugars, allergens" autocomplete="off" aria-controls="sd-results" aria-expanded="false">
+          <ul id="sd-results" class="sd-results" hidden aria-label="Site search results"></ul>
+          <p id="sd-search-status" class="sd-sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
         </div>
         <div class="meta"><span>Free to read</span><span>No sign-up</span><span>Calm facts, no food fear</span></div>
       </div>
