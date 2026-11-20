@@ -1,0 +1,52 @@
+/* Supermarket Decoder menu + homepage search (loaded by assets/nav.js) */
+.sd-menu { position: fixed; top: 8px; right: 12px; z-index: 1000; font-family: inherit;
+  /* the homepage FAQ styles every <details>; undo that here */
+  background: none; border: 0; padding: 0; margin: 0; border-radius: 0; box-shadow: none; }
+.sd-menu > summary::after, .sd-menu > summary::before { content: none; display: none; }
+.sd-menu > summary {
+  list-style: none; display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none;
+  padding: 8px 14px; border-radius: 999px; font-weight: 800; font-size: 14px; letter-spacing: .02em;
+  background: var(--accent, #D9481C); color: var(--accent-ink, #fff); box-shadow: 0 6px 18px rgba(0, 0, 0, .25);
+}
+.sd-menu > summary::-webkit-details-marker { display: none; }
+.sd-menu > summary svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+.sd-menu[open] > summary { outline: 3px solid var(--gold, #F2B51C); outline-offset: 2px; }
+.sd-panel {
+  position: absolute; right: 0; top: calc(100% + 8px); width: min(340px, calc(100vw - 24px));
+  max-height: min(78vh, 680px); overflow: auto; padding: 6px 18px;
+  background: var(--paper, #FFFDF8); color: var(--ink, #13321F);
+  border: 1px solid var(--line, #E2DCCF); border-radius: 16px; box-shadow: 0 18px 50px rgba(0, 0, 0, .28);
+}
+.sd-list, .sd-list ul { list-style: none; margin: 0; padding: 0; }
+.sd-group { padding: 12px 0; border-bottom: 1px solid var(--line, #E2DCCF); }
+.sd-group:last-child { border-bottom: 0; }
+.sd-h { display: block; margin-bottom: 4px; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--accent, #D9481C); }
+.sd-list a { display: block; padding: 4px 0; color: var(--ink, #13321F); text-decoration: none; font-size: 15px; line-height: 1.35; }
+.sd-list a:hover { text-decoration: underline; }
+.sd-list a[aria-current="page"] { font-weight: 800; color: var(--accent, #D9481C); }
+/* keep the fixed button clear of existing header text */
+body.has-sd-menu > header { padding-right: 120px; }
+body.has-sd-menu .bar .r { visibility: hidden; }
+body.has-sd-menu .bar .wrap { padding-right: 130px; }
+@media (max-width: 520px) { body.has-sd-menu .bar .wrap { padding-right: 64px; } }
+
+/* homepage search (inside the hero) */
+.sd-search { margin: 22px 0 6px; max-width: 520px; position: relative; }
+.sd-search label { display: block; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px; opacity: .85; }
+.sd-search input {
+  width: 100%; box-sizing: border-box; font: inherit; font-size: 17px; padding: 14px 18px 14px 46px; border-radius: 14px;
+  border: 2px solid var(--line, #E2DCCF); background: var(--paper, #FFFDF8) no-repeat 16px 50% / 20px
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235A7363' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4'/%3E%3C/svg%3E");
+  color: var(--ink, #13321F);
+}
+.sd-search input:focus { outline: none; border-color: var(--accent, #D9481C); }
+.sd-results {
+  list-style: none; margin: 8px 0 0; padding: 6px; position: absolute; left: 0; right: 0; z-index: 50;
+  background: var(--paper, #FFFDF8); border: 1px solid var(--line, #E2DCCF); border-radius: 14px; box-shadow: 0 16px 40px rgba(0, 0, 0, .25);
+}
+.sd-results a { display: flex; justify-content: space-between; gap: 12px; padding: 10px 12px; border-radius: 10px; text-decoration: none; color: var(--ink, #13321F); }
+.sd-results a:hover, .sd-results a:focus { background: var(--bg, #F4EFE4); }
+.sd-r-t { font-weight: 700; }
+.sd-r-g { font-size: 12px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--muted, #5A7363); white-space: nowrap; align-self: center; }
+.sd-none { padding: 10px 12px; color: var(--muted, #5A7363); }
+@media (max-width: 520px) { .sd-menu > summary span { display: none; } .sd-menu > summary { padding: 9px 11px; } body.has-sd-menu > header { padding-right: 70px; } }

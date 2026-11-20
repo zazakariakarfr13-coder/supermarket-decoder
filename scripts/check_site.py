@@ -216,6 +216,18 @@ def main():
     except (OSError, UnicodeError) as exc:
         errors.append(f"robots.txt: cannot read file: {exc}")
 
+    # Menu + homepage search: the page list must be current and every listed page must load the menu.
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import make_search_index  # noqa: E402
+
+    index_file = ROOT / "assets" / "search-index.json"
+    if not index_file.is_file() or index_file.read_text(encoding="utf-8") != make_search_index.render():
+        errors.append("assets/search-index.json is out of date: run python scripts/make_search_index.py")
+    for entry in make_search_index.build_index()["pages"]:
+        rel = entry["u"] if entry["u"].endswith(".html") else entry["u"] + "index.html"
+        if "assets/nav.js" not in (ROOT / rel).read_text(encoding="utf-8", errors="replace"):
+            errors.append(f"{rel}: missing the menu script (assets/nav.js)")
+
     if warnings:
         print("Site validation warnings:")
         for warning in warnings:

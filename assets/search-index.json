@@ -1,0 +1,186 @@
+{
+ "groups": [
+  "Start here",
+  "Free guides",
+  "Articles",
+  "E-numbers",
+  "Comic & stories",
+  "About"
+ ],
+ "pages": [
+  {
+   "u": "",
+   "t": "Home",
+   "g": "Start here",
+   "k": "Supermarket Decoder — Read any food label in 30 seconds Supermarket Decoder A calm, practical 53-page ebook (PDF) guide to food labels: spot ultra-processed foods, decode E-numbers and claims, and swap for better choices on the same shelf."
+  },
+  {
+   "u": "decoder/",
+   "t": "Ingredient Decoder (free tool)",
+   "g": "Start here",
+   "k": "Ingredient Checker: Decode Any Food Label Free | Supermarket Decoder Ingredient Decoder: a free food-label checker Free ingredient checker: paste any food label to spot sugar names, explain E-numbers, flag processing clues and get a NOVA estimate. Runs in your browser."
+  },
+  {
+   "u": "free-resources/",
+   "t": "All free resources",
+   "g": "Start here",
+   "k": "Free food-label resources | Supermarket Decoder Start with the free resources. Free food-label checklists, ingredient glossary and explainers about U.S. Nutrition Facts labels, hidden sugars, E-numbers and NOVA processing groups."
+  },
+  {
+   "u": "free-resources/food-label-glossary.html",
+   "t": "A plain-language food-label glossary",
+   "g": "Free guides",
+   "k": "A plain-language food-label glossary | Supermarket Decoder A plain-language food-label glossary A plain-language food-label glossary: ingredient lists, nutrition panels, sugar names, E-numbers, emulsifiers, thickeners and NOVA, explained simply."
+  },
+  {
+   "u": "free-resources/us-nutrition-facts-label.html",
+   "t": "How to Read a Nutrition Facts Label (U.S.)",
+   "g": "Free guides",
+   "k": "How to Read a Nutrition Facts Label (U.S.) | Free Guide How to read a Nutrition Facts label Learn how to read a U.S. Nutrition Facts label: serving size, calories, sodium, added sugars and the 5% / 20% Daily Value rule, with a simple example."
+  },
+  {
+   "u": "free-resources/30-second-label-checklist.html",
+   "t": "The 30-second food-label checklist",
+   "g": "Free guides",
+   "k": "The 30-second food-label checklist | Supermarket Decoder The 30-second food-label checklist A free printable food-label checklist: turn it over, read the first three ingredients, hunt for signals like syrups and emulsifiers, then compare per 100 g."
+  },
+  {
+   "u": "free-resources/contains-vs-may-contain.html",
+   "t": "“Contains” vs “May contain” on food labels",
+   "g": "Free guides",
+   "k": "“Contains” vs “May contain” on food labels | Supermarket Decoder “Contains” vs “May contain” What the allergen “Contains” statement means, what “May contain” advisory wording means, and why you should always read the full ingredient list."
+  },
+  {
+   "u": "articles/e-numbers-explained.html",
+   "t": "E-Numbers Explained: What Each Additive Does",
+   "g": "Articles",
+   "k": "E-Numbers Explained: What Each Additive Does | Supermarket Decoder E-numbers explained: understand the additive's job An E-number identifies a food additive; it is not a danger rating. Learn what E300, E330, E440 and E500 do, and why function and context matter."
+  },
+  {
+   "u": "articles/hidden-sugars-five-names.html",
+   "t": "Hidden Sugar Names: 8 to Spot on Food Labels",
+   "g": "Articles",
+   "k": "Hidden Sugar Names: 8 to Spot on Food Labels | Supermarket Decoder Hidden sugar names: 8 to spot on food labels Recognise cane sugar, corn syrup, glucose syrup, dextrose, invert sugar, honey, fruit-juice concentrate and brown rice syrup on ingredient lists."
+  },
+  {
+   "u": "articles/read-food-labels-in-30-seconds.html",
+   "t": "How to read a food label in 30 seconds",
+   "g": "Articles",
+   "k": "How to read a food label in 30 seconds | Supermarket Decoder How to read a food label in 30 seconds A simple 30-second food-label scan: turn the pack over, read the first three ingredients, spot formulation clues and compare the nutrition panel."
+  },
+  {
+   "u": "articles/nova-food-processing-levels.html",
+   "t": "The four NOVA food-processing levels",
+   "g": "Articles",
+   "k": "The four NOVA food-processing levels | Supermarket Decoder The four NOVA food-processing levels Processed vs ultra-processed: the four NOVA groups explained with everyday examples, from fresh foods to soft drinks, and what the scale cannot tell you."
+  },
+  {
+   "u": "additives/",
+   "t": "All E-number pages",
+   "g": "E-numbers",
+   "k": "Common E-Numbers Explained: What Each Code Means | Supermarket Decoder Common E-numbers, explained one by one Plain-language pages for the E-numbers people look up most: E471, E322, E330, E415, E407, E621, E951, E250, E171, E150d, E211 and E129 (Red 40)."
+  },
+  {
+   "u": "additives/e129.html",
+   "t": "E129 (Red 40)",
+   "g": "E-numbers",
+   "k": "E129 (Red 40): What It Is, Uses and Safety | Supermarket Decoder E129: Allura red AC (Red 40) E129 is Allura red AC, called Red 40 in the US. It's a synthetic red dye used in sweets, drinks and snacks, and in the EU it carries a warning about…"
+  },
+  {
+   "u": "additives/e150d.html",
+   "t": "E150d (Caramel colour)",
+   "g": "E-numbers",
+   "k": "E150d (Caramel colour): What It Is, Uses and Safety | Supermarket Decoder E150d: Sulphite ammonia caramel E150d is sulphite ammonia caramel, the dark brown colour that makes cola look like cola. It isn't the caramel you'd make at home."
+  },
+  {
+   "u": "additives/e171.html",
+   "t": "E171 (Titanium dioxide)",
+   "g": "E-numbers",
+   "k": "E171 (Titanium dioxide): What It Is, Uses and Safety | Supermarket Decoder E171: Titanium dioxide E171 is titanium dioxide, a white colour that makes sweets, icing and chewing gum bright and opaque. It has been banned as a food additive in the EU since…"
+  },
+  {
+   "u": "additives/e211.html",
+   "t": "E211 (Sodium benzoate)",
+   "g": "E-numbers",
+   "k": "E211 (Sodium benzoate): What It Is, Uses and Safety | Supermarket Decoder E211: Sodium benzoate E211 is sodium benzoate, a preservative that stops yeasts and moulds growing in acidic foods like soft drinks, sauces and pickles."
+  },
+  {
+   "u": "additives/e250.html",
+   "t": "E250 (Sodium nitrite)",
+   "g": "E-numbers",
+   "k": "E250 (Sodium nitrite): What It Is, Uses and Safety | Supermarket Decoder E250: Sodium nitrite E250 is sodium nitrite, the preservative that cures ham and bacon. It stops dangerous bacteria, keeps the meat pink and gives it its cured taste."
+  },
+  {
+   "u": "additives/e322.html",
+   "t": "E322 (Lecithin)",
+   "g": "E-numbers",
+   "k": "E322 (Lecithin): What It Is, Uses and Safety | Supermarket Decoder E322: Lecithins E322 is lecithin, a natural emulsifier usually taken from soy or sunflower. It helps chocolate flow, keeps spreads smooth and stops ingredients separating."
+  },
+  {
+   "u": "additives/e330.html",
+   "t": "E330 (Citric acid)",
+   "g": "E-numbers",
+   "k": "E330 (Citric acid): What It Is, Uses and Safety | Supermarket Decoder E330: Citric acid E330 is citric acid, the same acid found in lemons. It adds a sour taste, controls acidity and helps foods keep their colour and freshness."
+  },
+  {
+   "u": "additives/e407.html",
+   "t": "E407 (Carrageenan)",
+   "g": "E-numbers",
+   "k": "E407 (Carrageenan): What It Is, Uses and Safety | Supermarket Decoder E407: Carrageenan E407 is carrageenan, a thickener and gelling agent extracted from red seaweed. It gives dairy desserts and plant milks a creamy texture and stops cocoa…"
+  },
+  {
+   "u": "additives/e415.html",
+   "t": "E415 (Xanthan gum)",
+   "g": "E-numbers",
+   "k": "E415 (Xanthan gum): What It Is, Uses and Safety | Supermarket Decoder E415: Xanthan gum E415 is xanthan gum, a thickener made by bacteria fermenting sugar. A pinch makes sauces thick and dressings stable, and it holds gluten-free bread together."
+  },
+  {
+   "u": "additives/e471.html",
+   "t": "E471 (Mono- and diglycerides)",
+   "g": "E-numbers",
+   "k": "E471 (Mono- and diglycerides): What It Is, Uses and Safety | Supermarket Decoder E471: Mono- and diglycerides of fatty acids E471 is an emulsifier made from fats and glycerol. It keeps bread soft for longer, makes ice cream smoother and stops spreads from separating."
+  },
+  {
+   "u": "additives/e621.html",
+   "t": "E621 (MSG)",
+   "g": "E-numbers",
+   "k": "E621 (MSG): What It Is, Uses and Safety | Supermarket Decoder E621: Monosodium glutamate (MSG) E621 is monosodium glutamate (MSG), a flavour enhancer that adds a savoury, umami taste. It's the same glutamate found naturally in tomatoes, parmesan and…"
+  },
+  {
+   "u": "additives/e951.html",
+   "t": "E951 (Aspartame)",
+   "g": "E-numbers",
+   "k": "E951 (Aspartame): What It Is, Uses and Safety | Supermarket Decoder E951: Aspartame E951 is aspartame, a low-calorie sweetener about 200 times sweeter than sugar. It's used in diet drinks, sugar-free gum and yoghurts."
+  },
+  {
+   "u": "story/",
+   "t": "Comic: Episode 01",
+   "g": "Comic & stories",
+   "k": "The Cart Chronicles — Supermarket Decoder The Cart Chronicles. A free supermarket comic: follow Mina, Tariq and Uncle Kamil through a chaotic grocery trip and learn to decode ingredients, sugars and serving sizes."
+  },
+  {
+   "u": "story/episode-02.html",
+   "t": "Comic: Episode 02, Liquid Alibis",
+   "g": "Comic & stories",
+   "k": "Liquid Alibis — The Cart Chronicles, Episode 02 | Supermarket Decoder Liquid Alibis Episode 02 of The Cart Chronicles: Mina, Tariq and Uncle Kamil take on the drink aisle. A free comic about serving columns, percent juice and caffeine."
+  },
+  {
+   "u": "stories/the-natural-cereal-mystery.html",
+   "t": "How to Read Food Labels: The Natural Cereal Mystery",
+   "g": "Comic & stories",
+   "k": "How to Read Food Labels: The Natural Cereal Mystery | Supermarket Decoder THE CEREAL THAT SAID “NATURAL” Join Detective Dee in a funny food-label mystery. Learn to read ingredient lists, check U.S. Nutrition Facts serving sizes, and compare similar cereals."
+  },
+  {
+   "u": "about.html",
+   "t": "About",
+   "g": "About",
+   "k": "About Supermarket Decoder | Food-label education Understand the label. Keep the choice yours. Who makes Supermarket Decoder, why it exists and how its food-label guidance is written: calm facts, public sources and no food fear. Your choice stays yours."
+  },
+  {
+   "u": "sources.html",
+   "t": "Sources",
+   "g": "About",
+   "k": "Sources and editorial method | Supermarket Decoder Check the source. Read the context. Explore the public-health, food-labelling and food-additive sources used to frame Supermarket Decoder's educational material."
+  }
+ ]
+}
