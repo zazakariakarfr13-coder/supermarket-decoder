@@ -258,8 +258,17 @@
   .cs-panel img { width: 100%; height: auto; }
   .cs-say { position: absolute; top: 10px; left: 8px; right: 8px; background: #fff; border: 2px solid #13321F; border-radius: 12px; padding: 7px 9px; font-size: 13px; font-weight: 800; line-height: 1.25; }
   .resource-card.all { background: var(--mint); }
-  .resource-card.sister { border-left: 5px solid #0f6e8c; }
-  .resource-card.sister strong::after { content: " ↗"; color: #0f6e8c; }
+  .kot-band { padding: 8px 0 56px; }
+  .kot-box { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; justify-content: space-between;
+    background: linear-gradient(135deg, #0f6e8c, #0b4f66); color: #fff; border-radius: 18px; padding: 26px 28px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.18); text-decoration: none; }
+  .kot-box:hover { filter: brightness(1.06); }
+  .kot-icon { font-size: 40px; line-height: 1; }
+  .kot-text { flex: 1 1 320px; }
+  .kot-text small { display: block; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; font-weight: 800; color: #bfeee0; margin-bottom: 4px; }
+  .kot-text strong { display: block; font-size: 22px; line-height: 1.25; margin-bottom: 4px; color: #fff; }
+  .kot-text span { color: #dcefF4; font-size: 15px; }
+  .kot-go { background: #d4f1e8; color: #0b2530; font-weight: 800; padding: 12px 18px; border-radius: 999px; white-space: nowrap; }
   .inside-head { display: grid; grid-template-columns: 1fr 280px; gap: 40px; align-items: center; margin-bottom: 30px; }
   .inside-head .cover img { max-width: 280px; }
   @media (max-width: 900px) {
@@ -300,7 +309,7 @@
 
 <div class="bar" role="note">
   <div class="wrap">
-    <span><a href="#free-resources" style="text-decoration:none">Free food-label guides</a> <span class="dot">●</span> <a href="story/episode-02.html" style="text-decoration:none">New comic: Episode 02</a> <span class="dot">●</span> <a href="https://zazakariakarfr13-coder.github.io/keep-or-toss/?utm_source=supermarket-decoder&amp;utm_medium=referral&amp;utm_campaign=home-bar" style="text-decoration:none">New: Is your food still OK?</a></span>
+    <span><a href="#free-resources" style="text-decoration:none">Free food-label guides</a> <span class="dot">●</span> <a href="story/episode-02.html" style="text-decoration:none">New comic: Episode 02</a></span>
     <span class="r">Read <span class="dot">●</span> Decode <span class="dot">●</span> Swap</span>
   </div>
 </div>
@@ -341,9 +350,7 @@
       <h2 class="reveal">Learn the basics before your next shop.</h2>
       <p class="sub reveal">Short guides to build confidence with ingredient lists, sugar names, allergen wording, additive codes and food-processing categories.</p>
       <div class="resource-links">
-        <a class="resource-card reveal" href="decoder/"><strong>🔍 Ingredient Decoder (new tool)</strong><span>Paste any ingredient list: sugars, E-numbers and processing clues, decoded.</span></a>
-        <a class="resource-card sister reveal" href="https://zazakariakarfr13-coder.github.io/keep-or-toss/?utm_source=supermarket-decoder&amp;utm_medium=referral&amp;utm_campaign=home-card"><strong>🧊 Keep or Toss (new sister site)</strong><span>Is it still OK to eat? How long 438 foods last in the fridge, freezer and pantry, from USDA data.</span></a>
-        <a class="resource-card reveal" href="free-resources/30-second-label-checklist.html"><strong>30-second label checklist</strong><span>A quick routine to use at the supermarket.</span></a>
+        <a class="resource-card reveal" href="decoder/"><strong>🔍 Ingredient Decoder (new tool)</strong><span>Paste any ingredient list: sugars, E-numbers and processing clues, decoded.</span></a>        <a class="resource-card reveal" href="free-resources/30-second-label-checklist.html"><strong>30-second label checklist</strong><span>A quick routine to use at the supermarket.</span></a>
         <a class="resource-card reveal" href="free-resources/us-nutrition-facts-label.html"><strong>How to read a U.S. Nutrition Facts label</strong><span>Serving size, calories, sodium, Added Sugars and % Daily Value.</span></a>
         <a class="resource-card reveal" href="free-resources/contains-vs-may-contain.html"><strong>“Contains” vs “May contain”</strong><span>What allergen statements mean, and why you still read the full list.</span></a>
         <a class="resource-card reveal" href="articles/hidden-sugars-five-names.html"><strong>Hidden sugars</strong><span>Recognise common sugars and syrups on a label.</span></a>
@@ -356,6 +363,21 @@
       </div>
     </div>
   </section>
+
+  <!-- SISTER SITE: Keep or Toss -->
+  <div class="kot-band">
+    <div class="wrap">
+      <a class="kot-box" href="https://zazakariakarfr13-coder.github.io/keep-or-toss/?utm_source=supermarket-decoder&amp;utm_medium=referral&amp;utm_campaign=home-banner">
+        <span class="kot-icon" aria-hidden="true">🧊</span>
+        <span class="kot-text">
+          <small>New sister site · Keep or Toss</small>
+          <strong>Is your food still OK to eat?</strong>
+          <span>How long 438 foods last in the fridge, freezer and pantry. Clear keep-or-toss answers from USDA data.</span>
+        </span>
+        <span class="kot-go">Check a food ↗</span>
+      </a>
+    </div>
+  </div>
 
   <!-- COMIC -->
   <section class="alt" id="comic">
