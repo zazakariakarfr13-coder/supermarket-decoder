@@ -4,6 +4,7 @@
   "Free guides",
   "Articles",
   "E-numbers",
+  "Factory vs. Kitchen",
   "Comic & stories",
   "About"
  ],
@@ -151,6 +152,102 @@
    "t": "E951 (Aspartame)",
    "g": "E-numbers",
    "k": "E951 (Aspartame): What It Is, Uses and Safety | Supermarket Decoder E951: Aspartame E951 is aspartame, a low-calorie sweetener about 200 times sweeter than sugar. It's used in diet drinks, sugar-free gum and yoghurts."
+  },
+  {
+   "u": "factory-vs-kitchen/",
+   "t": "All Factory vs. Kitchen foods",
+   "g": "Factory vs. Kitchen",
+   "k": "Factory vs. Kitchen: Can You Make It at Home? | Supermarket Decoder Can you make it at home? How 15 famous packaged foods are really made in factories, the one secret you can't copy, and whether you can make each one at home, with a verdict and a score."
+  },
+  {
+   "u": "factory-vs-kitchen/cheetos.html",
+   "t": "Can You Make Cheetos at Home?",
+   "g": "Factory vs. Kitchen",
+   "k": "Can You Make Cheetos at Home? | Supermarket Decoder Can You Make Cheetos at Home? 🧀 Sort of. The cheesy flavour is easy to copy, but the airy crunch comes from an extruder, a machine no home kitchen has. A baked cornmeal stick gets you most…"
+  },
+  {
+   "u": "factory-vs-kitchen/coca-cola.html",
+   "t": "Can You Make Coca-Cola at Home?",
+   "g": "Factory vs. Kitchen",
+   "k": "Can You Make Coca-Cola at Home? | Supermarket Decoder Can You Make Coca-Cola at Home? 🥤 No. Coca-Cola's flavour formula is a trade secret that has never been published. You can make a delicious homemade cola, but not Coke. Verdict: no way, 4/10."
+  },
+  {
+   "u": "factory-vs-kitchen/froot-loops.html",
+   "t": "Can You Make Froot Loops at Home?",
+   "g": "Factory vs. Kitchen",
+   "k": "Can You Make Froot Loops at Home? | Supermarket Decoder Can You Make Froot Loops at Home? 🥣 No. The light, puffy rings come from extrusion under high heat and pressure. Home-baked rings end up dense and crunchy instead, which makes them a different…"
+  },
+  {
+   "u": "factory-vs-kitchen/gummy-bears.html",
+   "t": "Can You Make Gummy bears at Home?",
+   "g": "Factory vs. Kitchen",
+   "k": "Can You Make Gummy bears at Home? | Supermarket Decoder Can You Make Gummy bears at Home? 🐻 Yes. Gelatin, juice and sugar in a silicone mold make real gummy bears. The step almost everyone skips is drying them, and that's where the chew comes from.…"
+  },
+  {
+   "u": "factory-vs-kitchen/instant-ramen.html",
+   "t": "Can You Make Instant ramen at Home?",
+   "g": "Factory vs. Kitchen",
+   "k": "Can You Make Instant ramen at Home? | Supermarket Decoder Can You Make Instant ramen at Home? 🍜 Sort of. You can make real fried instant noodles at home, and they work. It just takes an afternoon to save three minutes. Verdict: sort of, 7/10."
+  },
+  {
+   "u": "factory-vs-kitchen/ketchup.html",
+   "t": "Can You Make Ketchup at Home?",
+   "g": "Factory vs. Kitchen",
+   "k": "Can You Make Ketchup at Home? | Supermarket Decoder Can You Make Ketchup at Home? 🍅 Yes, in about fifteen minutes. A can of tomato paste, vinegar, sugar and a few spices gets you very close to the bottle. Verdict: yes, you can, 9/10."
+  },
+  {
+   "u": "factory-vs-kitchen/kit-kat.html",
+   "t": "Can You Make Kit Kat at Home?",
+   "g": "Factory vs. Kitchen",
+   "k": "Can You Make Kit Kat at Home? | Supermarket Decoder Can You Make Kit Kat at Home? 🍫 Sort of. With wafer sheets and good chocolate you can get close. Getting chocolate that snaps like the real bar takes practice. Verdict: sort of, 7/10."
+  },
+  {
+   "u": "factory-vs-kitchen/mms.html",
+   "t": "Can You Make M&M's at Home?",
+   "g": "Factory vs. Kitchen",
+   "k": "Can You Make M&M's at Home? | Supermarket Decoder Can You Make M&M's at Home? 🍫 No. The crunchy shell is dozens of paper-thin sugar layers built up over hours in spinning drums. At home you can make candy-coated chocolate, but not that…"
+  },
+  {
+   "u": "factory-vs-kitchen/nutella.html",
+   "t": "Can You Make Nutella at Home?",
+   "g": "Factory vs. Kitchen",
+   "k": "Can You Make Nutella at Home? | Supermarket Decoder Can You Make Nutella at Home? 🌰 Yes, and it's easier than most people think. Roasted hazelnuts blended long enough turn into butter; add cocoa, sugar and milk powder and you have a spread…"
+  },
+  {
+   "u": "factory-vs-kitchen/oreos.html",
+   "t": "Can You Make Oreos at Home?",
+   "g": "Factory vs. Kitchen",
+   "k": "Can You Make Oreos at Home? | Supermarket Decoder Can You Make Oreos at Home? 🍪 Sort of. The taste is very doable once you use the right cocoa, but the crisp embossed cookie comes from rotary molding. The real key is one ingredient most…"
+  },
+  {
+   "u": "factory-vs-kitchen/pop-rocks.html",
+   "t": "Can You Make Pop Rocks at Home?",
+   "g": "Factory vs. Kitchen",
+   "k": "Can You Make Pop Rocks at Home? | Supermarket Decoder Can You Make Pop Rocks at Home? 💥 No. Pop Rocks need hot candy mixed with carbon dioxide at around 600 psi, far beyond anything a kitchen can safely do. The closest home version is a fizzy…"
+  },
+  {
+   "u": "factory-vs-kitchen/pop-tarts.html",
+   "t": "Can You Make Pop-Tarts at Home?",
+   "g": "Factory vs. Kitchen",
+   "k": "Can You Make Pop-Tarts at Home? | Supermarket Decoder Can You Make Pop-Tarts at Home? 🍓 Yes. Pop-Tarts are pastry, jam and icing, and the homemade version is flakier and fruitier. Pie crust, jam and a simple glaze is all you need. Verdict: yes,…"
+  },
+  {
+   "u": "factory-vs-kitchen/pringles.html",
+   "t": "Can You Make Pringles at Home?",
+   "g": "Factory vs. Kitchen",
+   "k": "Can You Make Pringles at Home? | Supermarket Decoder Can You Make Pringles at Home? 🥔 Not really. Pringles are a pressed dough, not sliced potatoes, and each chip is fried on a curved mold. You can make a tasty homemade version, but it won't…"
+  },
+  {
+   "u": "factory-vs-kitchen/ritz.html",
+   "t": "Can You Make Ritz crackers at Home?",
+   "g": "Factory vs. Kitchen",
+   "k": "Can You Make Ritz crackers at Home? | Supermarket Decoder Can You Make Ritz crackers at Home? 🧈 Yes, and yours can have real butter in it. The only trick is the little holes, and a fork does that job. Verdict: yes, you can, 9/10."
+  },
+  {
+   "u": "factory-vs-kitchen/twinkies.html",
+   "t": "Can You Make Twinkies at Home?",
+   "g": "Factory vs. Kitchen",
+   "k": "Can You Make Twinkies at Home? | Supermarket Decoder Can You Make Twinkies at Home? 🧁 Sort of. Homemade Twinkies taste great, honestly. What you can't copy is the 45-day shelf life. Verdict: sort of, 8/10."
   },
   {
    "u": "story/",

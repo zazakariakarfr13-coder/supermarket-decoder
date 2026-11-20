@@ -15,18 +15,19 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "assets" / "search-index.json"
 SKIP_DIRS = {".git", "graphify-out", "node_modules", "scripts"}
 
-GROUPS = ["Start here", "Free guides", "Articles", "E-numbers", "Comic & stories", "About"]
+GROUPS = ["Start here", "Free guides", "Articles", "E-numbers", "Factory vs. Kitchen", "Comic & stories", "About"]
 FIXED = {  # path -> (group, label)
     "index.html": ("Start here", "Home"),
     "decoder/index.html": ("Start here", "Ingredient Decoder (free tool)"),
     "free-resources/index.html": ("Start here", "All free resources"),
     "additives/index.html": ("E-numbers", "All E-number pages"),
+    "factory-vs-kitchen/index.html": ("Factory vs. Kitchen", "All Factory vs. Kitchen foods"),
     "story/index.html": ("Comic & stories", "Comic: Episode 01"),
     "story/episode-02.html": ("Comic & stories", "Comic: Episode 02, Liquid Alibis"),
     "about.html": ("About", "About"),
     "sources.html": ("About", "Sources"),
 }
-FOLDER_GROUP = {"free-resources": "Free guides", "articles": "Articles", "additives": "E-numbers",
+FOLDER_GROUP = {"free-resources": "Free guides", "articles": "Articles", "additives": "E-numbers", "factory-vs-kitchen": "Factory vs. Kitchen",
                 "stories": "Comic & stories", "story": "Comic & stories"}
 
 
