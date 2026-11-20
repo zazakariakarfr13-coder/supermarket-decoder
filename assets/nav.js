@@ -73,7 +73,6 @@
           esc(p.g) + "</span></a></li>";
       }).join("") || (query ? '<li class="sd-none">No match. Try a simpler word, like “sugar” or “E471”.</li>' : "");
       list.hidden = !query;
-      input.setAttribute("aria-expanded", String(!list.hidden));
       status.textContent = !query ? "" : hits.length
         ? "Showing " + hits.length + (hits.length === 1 ? " matching page." : " matching pages.")
         : "No matching pages found.";
@@ -86,7 +85,6 @@
     document.addEventListener("click", function (e) {
       if (!e.target.closest(".sd-search")) {
         list.hidden = true;
-        input.setAttribute("aria-expanded", "false");
       }
     });
     input.addEventListener("focus", render);
