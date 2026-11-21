@@ -116,7 +116,7 @@
   <section class="tool" aria-label="Decode an ingredient list">
     <div class="scan" id="scan">
       <h2>📷 Scan the pack instead of typing</h2>
-      <p class="sub">Point your camera at the barcode (or a QR code) and the ingredient list fills in by itself.</p>
+      <p class="sub">Scan the striped barcode or a GS1 Digital Link product QR code. When the scanner identifies UPC-E, it expands it to the full UPC-A number before lookup. Other QR links are shown for you to inspect, never opened automatically.</p>
       <div class="row">
         <button type="button" class="btn gold" id="scanBtn">📷 Scan a barcode</button>
         <button type="button" class="btn line" id="photoBtn">🖼 Use a photo</button>
@@ -133,7 +133,7 @@
         <button type="button" class="btn line stop" id="camStop">✕ Cancel</button>
       </div>
       <p class="smsg" id="smsg" role="status" aria-live="polite"></p>
-      <p class="privacy">The camera picture stays on your phone. Only the barcode number is sent to <a href="https://world.openfoodfacts.org/" target="_blank" rel="noopener" style="color:inherit">Open Food Facts</a>, a free product database, to find the ingredients.</p>
+      <p class="privacy">Your camera preview and selected photo are processed on this device and are not uploaded. To look up a product, its barcode number is sent to <a href="https://world.openfoodfacts.org/" target="_blank" rel="noopener" style="color:inherit">Open Food Facts</a>. If your browser lacks built-in barcode scanning, the scanner downloads the ZXing library from <a href="https://www.jsdelivr.com/" target="_blank" rel="noopener" style="color:inherit">jsDelivr</a>.</p>
     </div>
     <div class="prod" id="prod" hidden>
       <img id="prodImg" alt="">
@@ -834,7 +834,7 @@
   var ZXING = "https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js";
   var OFF = "https://world.openfoodfacts.org/api/v2/product/";
   var FIELDS = "product_name,product_name_en,brands,ingredients_text,ingredients_text_en,ingredients_text_fr,image_front_small_url";
-  var stream = null, timer = null, zxReader = null, busy = false;
+  var stream = null, timer = null, zxReader = null, busy = false, starting = false, scanRun = 0, detecting = false;
 
   function say(html) { $("smsg").innerHTML = html; }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
@@ -845,8 +845,25 @@
     for (var i = 0; i < n - 1; i++) sum += +d[i] * ((n - 1 - i) % 2 ? 3 : 1);
     return (10 - sum % 10) % 10 === +d[n - 1];
   }
-  function toGtin(raw) {
+  function isUpceFormat(format) {
+    var zxingUpce = window.ZXing && window.ZXing.BarcodeFormat && window.ZXing.BarcodeFormat.UPC_E;
+    return format === "upc_e" || format === "UPC_E" || (zxingUpce !== undefined && format === zxingUpce);
+  }
+  function expandUpce(s) {
+    if (!/^[01]\d{6}\d$/.test(s)) return null;
+    var ns = s[0], x1 = s[1], x2 = s[2], x3 = s[3], x4 = s[4], x5 = s[5], x6 = s[6], cd = s[7];
+    var body;
+    if (+x6 <= 2) body = ns + x1 + x2 + x6 + "0000" + x3 + x4 + x5;
+    else if (+x6 === 3) body = ns + x1 + x2 + x3 + "00000" + x4 + x5;
+    else if (+x6 === 4) body = ns + x1 + x2 + x3 + x4 + "00000" + x5;
+    else body = ns + x1 + x2 + x3 + x4 + x5 + "0000" + x6;
+    var expanded = body + cd;
+    return checkDigitOk(expanded) ? expanded : null;
+  }
+  function toGtin(raw, format) {
     var s = String(raw).trim(), m;
+    // UPC-E is a zero-suppressed GTIN-12; expand it before querying Open Food Facts.
+    if (isUpceFormat(format)) return expandUpce(s);
     if (/^\d{8,14}$/.test(s)) return s;
     // GS1 Digital Link QR: https://brand.example/01/03017620422003/...
     m = s.match(/\/01\/(\d{8,14})(?:[\/?#]|$)/); if (m) return m[1];
@@ -856,12 +873,16 @@
   }
   function tidy(g) { return g.length === 14 && g[0] === "0" ? g.slice(1) : g; }
 
-  function handle(raw) {
-    var g = toGtin(raw);
+  function handle(raw, format) {
+    var g = toGtin(raw, format);
     if (g) return lookup(tidy(g));
+    if (isUpceFormat(format)) {
+      say("This UPC-E barcode could not be verified. Try scanning it again or type the full number printed on the pack.");
+      return;
+    }
     if (/^https?:\/\//i.test(String(raw).trim())) {
       say("This QR code is a link, not a product number: <a href=\"" + esc(raw.trim()) + "\" target=\"_blank\" rel=\"noopener nofollow\">" +
-          esc(raw.trim().slice(0, 70)) + "</a>. Check the address before opening it. To get the ingredients, scan the barcode (the black stripes) instead.");
+          esc(raw.trim().slice(0, 70)) + "</a>. Check the address before opening it. To get the ingredients, scan the striped barcode or a GS1 product QR code instead.");
     } else {
       say("That code doesn't look like a product barcode. Try the striped barcode on the pack, or type the numbers printed under it.");
     }
@@ -932,39 +953,56 @@
     }).catch(function () { return null; });
   }
   function stop() {
+    scanRun++;
+    starting = false;
+    detecting = false;
     if (timer) { clearInterval(timer); timer = null; }
     if (zxReader) { try { zxReader.reset(); } catch (e) {} zxReader = null; }
     if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
+    var video = $("camVideo");
+    if (video) { try { video.pause(); } catch (e) {} video.srcObject = null; }
     $("cam").hidden = true;
   }
-  function found(value) { stop(); if (navigator.vibrate) navigator.vibrate(60); handle(value); }
+  function found(value, format) { stop(); if (navigator.vibrate) navigator.vibrate(60); handle(value, format); }
 
   function start() {
+    if (starting || stream || zxReader) return;
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       say("This browser can't open the camera. Use <b>Use a photo</b>, or type the barcode number."); return;
     }
+    starting = true;
+    var run = ++scanRun;
     say("Opening the camera…");
     var video = $("camVideo");
     nativeDetector().then(function (det) {
+      if (run !== scanRun) return;
       if (det) {
         return navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false }).then(function (s) {
-          stream = s; video.srcObject = s; $("cam").hidden = false; say("");
+          if (run !== scanRun) { s.getTracks().forEach(function (t) { t.stop(); }); return; }
+          stream = s; starting = false; video.srcObject = s; $("cam").hidden = false; say("");
           return video.play().then(function () {
+            if (run !== scanRun) return;
             timer = setInterval(function () {
-              if (video.readyState < 2) return;
-              det.detect(video).then(function (codes) { if (codes.length) found(codes[0].rawValue); }).catch(function () {});
+              if (detecting || video.readyState < 2) return;
+              detecting = true;
+              det.detect(video).then(function (codes) {
+                if (run === scanRun && codes.length) found(codes[0].rawValue, codes[0].format);
+              }).catch(function () {}).then(function () { detecting = false; });
             }, 250);
           });
         });
       }
       return loadZxing().then(function () {
+        if (run !== scanRun) return;
         $("cam").hidden = false; say("");
         zxReader = new ZXing.BrowserMultiFormatReader();
+        starting = false;
         return zxReader.decodeFromConstraints({ video: { facingMode: "environment" } }, video, function (res) {
-          if (res) found(res.getText());
+          if (res && run === scanRun) found(res.getText(), res.getBarcodeFormat());
         });
       });
     }).catch(function (e) {
+      if (run !== scanRun) return;
       stop();
       var denied = e && (e.name === "NotAllowedError" || e.name === "SecurityError");
       say(denied ? "Camera access was blocked. Allow the camera for this site in your browser settings, or use <b>Use a photo</b> instead."
@@ -974,18 +1012,24 @@
 
   function fromPhoto(file) {
     if (!file) return;
+    stop();
+    if (file.type && file.type.indexOf("image/") !== 0) { say("Choose an image file to scan."); return; }
+    if (file.size > 12 * 1024 * 1024) { say("Choose a photo smaller than 12 MB, or type the barcode number."); return; }
     say("Reading the photo…");
     var url = URL.createObjectURL(file);
     var img = new Image();
     img.onload = function () {
       nativeDetector().then(function (det) {
-        if (det) return det.detect(img).then(function (c) { return c.length ? c[0].rawValue : null; });
+        if (det) return det.detect(img).then(function (c) { return c.length ? { value: c[0].rawValue, format: c[0].format } : null; });
         return loadZxing().then(function () {
-          return new ZXing.BrowserMultiFormatReader().decodeFromImageElement(img).then(function (r) { return r.getText(); }, function () { return null; });
+          return new ZXing.BrowserMultiFormatReader().decodeFromImageElement(img).then(
+            function (r) { return { value: r.getText(), format: r.getBarcodeFormat() }; },
+            function () { return null; }
+          );
         });
-      }).then(function (v) {
+      }).then(function (result) {
         URL.revokeObjectURL(url);
-        if (v) handle(v);
+        if (result) handle(result.value, result.format);
         else say("No barcode found in that photo. Take it closer, straight on and in good light, or type the numbers under the barcode.");
       }).catch(function () { URL.revokeObjectURL(url); say("Couldn't read that photo. Try another one, or type the barcode number."); });
     };
@@ -995,7 +1039,7 @@
 
   $("scanBtn").addEventListener("click", start);
   $("camStop").addEventListener("click", function () { stop(); say(""); });
-  $("photoBtn").addEventListener("click", function () { $("photo").click(); });
+  $("photoBtn").addEventListener("click", function () { stop(); $("photo").click(); });
   $("photo").addEventListener("change", function () { fromPhoto(this.files[0]); this.value = ""; });
   $("codeForm").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -1004,7 +1048,7 @@
     if (!v) { say("Type the numbers printed under the barcode."); return; }
     handle(v);
   });
-  $("clear").addEventListener("click", function () { $("prod").hidden = true; say(""); $("code").value = ""; });
+  $("clear").addEventListener("click", function () { stop(); $("prod").hidden = true; say(""); $("code").value = ""; });
   window.addEventListener("pagehide", stop);
   // shareable scan link: decoder/#code=3017620422003
   var m = location.hash.match(/^#code=(\d{8,14})$/);
