@@ -250,6 +250,8 @@ def main():
         'aria-label="Live camera preview for barcode scanning"',
         'credentials: "omit"',
         'referrerPolicy: "no-referrer"',
+        'referrerpolicy="no-referrer"',
+        's.referrerPolicy = "no-referrer"',
         'Camera ready. Hold the barcode inside the highlighted box.',
         '#sample=(bar|bread|cola|yog)',
         'Possible ultra-processed formulation (NOVA group 4)',
@@ -257,6 +259,7 @@ def main():
         'not a formal classification',
         'do not necessarily make up most of the product together',
         'standard connection data such as your IP address',
+        'image URL supplied in the community record',
     ):
         if required not in decoder_html:
             errors.append(f"decoder/index.html: expected privacy, accessibility or accuracy safeguard is missing {required!r}.")

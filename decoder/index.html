@@ -133,10 +133,10 @@
         <button type="button" class="btn line stop" id="camStop">✕ Cancel</button>
       </div>
       <p class="smsg" id="smsg" role="status" aria-live="polite"></p>
-      <p class="privacy">Your camera preview and selected photo are processed on this device and are not uploaded. A lookup sends the barcode number to <a href="https://world.openfoodfacts.org/" target="_blank" rel="noopener noreferrer" style="color:inherit">Open Food Facts</a>, which may receive standard connection data such as your IP address; an available product thumbnail may also load from its servers. The lookup omits cookies and the HTTP referrer. If your browser lacks built-in barcode scanning, the ZXing library is downloaded from <a href="https://www.jsdelivr.com/" target="_blank" rel="noopener noreferrer" style="color:inherit">jsDelivr</a>. Product records are community-contributed, so check them against the pack.</p>
+      <p class="privacy">Your camera preview and selected photo are processed on this device and are not uploaded. Open Food Facts and, on browsers that need fallback scanning, jsDelivr may receive standard connection data such as your IP address. An optional product thumbnail may load from the image URL supplied in the community record. The barcode lookup omits cookies and the HTTP referrer; thumbnail and fallback-library requests also omit the referrer. Product records are community-contributed, so check them against the pack.</p>
     </div>
     <div class="prod" id="prod" hidden>
-      <img id="prodImg" alt="">
+      <img id="prodImg" alt="" referrerpolicy="no-referrer">
       <div><b id="prodName"></b><small id="prodMeta"></small></div>
     </div>
     <label for="list">Ingredient list</label>
@@ -952,7 +952,9 @@
   function loadZxing() {
     return new Promise(function (ok, bad) {
       if (window.ZXing) return ok();
-      var s = document.createElement("script"); s.src = ZXING; s.onload = ok; s.onerror = bad; document.head.appendChild(s);
+      var s = document.createElement("script");
+      s.referrerPolicy = "no-referrer";
+      s.src = ZXING; s.onload = ok; s.onerror = bad; document.head.appendChild(s);
     });
   }
   function nativeDetector() {
