@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ingredient Checker: Decode Any Food Label Free | Supermarket Decoder</title>
-  <meta name="description" content="Free ingredient checker: paste any food label to spot sugar names, explain E-numbers, flag processing clues and get a NOVA estimate. Runs in your browser.">
+  <meta name="description" content="Free ingredient checker: paste a food label or scan a barcode to spot sugar names, explain E-numbers and review processing clues with a rough NOVA estimate.">
   <meta property="og:site_name" content="Supermarket Decoder">
   <meta property="og:image" content="https://zazakariakarfr13-coder.github.io/supermarket-decoder/assets/share/decoder.png">
   <meta property="og:image:width" content="1200">
@@ -18,7 +18,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://zazakariakarfr13-coder.github.io/supermarket-decoder/decoder/">
   <meta property="og:title" content="Ingredient Decoder: paste a food label, see what's in it">
-  <meta property="og:description" content="Sugar names, E-numbers, processing clues and a NOVA estimate, in seconds. Free, no sign-up.">
+  <meta property="og:description" content="Paste a food label or scan a barcode to review sugar names, E-numbers and processing clues. Free, no sign-up.">
   <link rel="stylesheet" href="../assets/site.css">
   <style>
     main { max-width: 900px; }
@@ -127,13 +127,13 @@
         </form>
       </div>
       <div class="cam" id="cam" hidden>
-        <video id="camVideo" playsinline muted></video>
+        <video id="camVideo" playsinline muted aria-label="Live camera preview for barcode scanning"></video>
         <div class="aim" aria-hidden="true"></div>
         <div class="hint">Hold the barcode inside the box</div>
         <button type="button" class="btn line stop" id="camStop">✕ Cancel</button>
       </div>
       <p class="smsg" id="smsg" role="status" aria-live="polite"></p>
-      <p class="privacy">Your camera preview and selected photo are processed on this device and are not uploaded. To look up a product, its barcode number is sent to <a href="https://world.openfoodfacts.org/" target="_blank" rel="noopener" style="color:inherit">Open Food Facts</a>. If your browser lacks built-in barcode scanning, the scanner downloads the ZXing library from <a href="https://www.jsdelivr.com/" target="_blank" rel="noopener" style="color:inherit">jsDelivr</a>.</p>
+      <p class="privacy">Your camera preview and selected photo are processed on this device and are not uploaded. A lookup sends the barcode number to <a href="https://world.openfoodfacts.org/" target="_blank" rel="noopener noreferrer" style="color:inherit">Open Food Facts</a>, which may receive standard connection data such as your IP address; an available product thumbnail may also load from its servers. The lookup omits cookies and the HTTP referrer. If your browser lacks built-in barcode scanning, the ZXing library is downloaded from <a href="https://www.jsdelivr.com/" target="_blank" rel="noopener noreferrer" style="color:inherit">jsDelivr</a>. Product records are community-contributed, so check them against the pack.</p>
     </div>
     <div class="prod" id="prod" hidden>
       <img id="prodImg" alt="">
@@ -765,9 +765,9 @@
     // NOVA estimate
     var g, h, p;
     if (nClue > 0) {
-      g = 4; h = "Likely ultra-processed (NOVA group 4)";
+      g = 4; h = "Possible ultra-processed formulation (NOVA group 4)";
       var uniq = stats.clues.filter(function (x, i, arr) { return arr.indexOf(x) === i; });
-      p = "It contains " + nClue + " processing clue" + (nClue > 1 ? "s" : "") + ": " + uniq.slice(0, 5).join(", ") + (uniq.length > 5 ? " and more" : "") + ". These are ingredients or additives rarely used in a home kitchen.";
+      p = "The list contains " + nClue + " processing clue" + (nClue > 1 ? "s" : "") + ": " + uniq.slice(0, 5).join(", ") + (uniq.length > 5 ? " and more" : "") + ". These can be clues associated with ultra-processed formulations, but a clue alone does not confirm NOVA group 4. The full formulation and purpose of additives matter; treat this as a screening estimate, not a formal classification.";
     } else if (stats.n === 1 && stats.kitchen === 1) {
       g = 2; h = "A kitchen ingredient (NOVA group 2)"; p = "A single culinary ingredient, like oil, sugar, salt or flour, used to cook with.";
     } else if (stats.kitchen > 0 || stats.add > 0) {
@@ -784,7 +784,7 @@
     // observations
     var obs = $("obs"); obs.innerHTML = "";
     function ob(txt, cls) { obs.appendChild(el("li", cls || "", txt)); }
-    if (top.length) ob("First three ingredients: " + top.join(", ") + ". Ingredients are listed from most to least by weight, so these make up most of the product.");
+    if (top.length) ob("First three ingredients: " + top.join(", ") + ". Ingredients are generally listed in descending order by weight. These are the largest individual ingredients, but they do not necessarily make up most of the product together.");
     if (nSug >= 2) ob("This list uses " + nSug + " different sugar names (" + Object.keys(stats.sugars).join(", ") + "). Added together, sugars could rank higher in the list than any single one does. Check the sugars line on the nutrition panel.");
     var anyKids = parsed.items.some(function (x) { return x.kids.length && !x.isClassOnly; });
     if (anyKids) ob("There's at least one compound ingredient: an ingredient with its own recipe in brackets. Those inner ingredients count too, and they're decoded below.");
@@ -821,9 +821,17 @@
     else prompt("Copy this link:", url);
   });
 
-  // load from shared link (the list lives in the #hash, which is never sent to a server)
-  var m = location.hash.match(/^#list=(.*)$/);
-  if (m) { try { $("list").value = decodeURIComponent(m[1]); decode(); } catch (e) {} }
+  // Compact demo links avoid putting a long example ingredient list in a public URL.
+  var sampleLink = location.hash.match(/^#sample=(bar|bread|cola|yog)$/);
+  if (sampleLink && SAMPLES[sampleLink[1]]) {
+    $("list").value = SAMPLES[sampleLink[1]];
+    decode();
+    try { history.replaceState(null, "", "#sample=" + sampleLink[1]); } catch (e) {}
+  } else {
+    // Custom lists remain in the URL fragment so the server does not receive the text.
+    var m = location.hash.match(/^#list=(.*)$/);
+    if (m) { try { $("list").value = decodeURIComponent(m[1]); decode(); } catch (e) {} }
+  }
 })();
 </script>
 <script>
@@ -881,7 +889,7 @@
       return;
     }
     if (/^https?:\/\//i.test(String(raw).trim())) {
-      say("This QR code is a link, not a product number: <a href=\"" + esc(raw.trim()) + "\" target=\"_blank\" rel=\"noopener nofollow\">" +
+      say("This QR code is a link, not a product number: <a href=\"" + esc(raw.trim()) + "\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">" +
           esc(raw.trim().slice(0, 70)) + "</a>. Check the address before opening it. To get the ingredients, scan the striped barcode or a GS1 product QR code instead.");
     } else {
       say("That code doesn't look like a product barcode. Try the striped barcode on the pack, or type the numbers printed under it.");
@@ -896,7 +904,9 @@
     else say("Looking up " + esc(code) + "…");
     var ctl = window.AbortController ? new AbortController() : null;
     var to = setTimeout(function () { if (ctl) ctl.abort(); }, 12000);
-    fetch(OFF + encodeURIComponent(code) + ".json?fields=" + FIELDS, ctl ? { signal: ctl.signal } : {})
+    var requestOptions = { credentials: "omit", referrerPolicy: "no-referrer" };
+    if (ctl) requestOptions.signal = ctl.signal;
+    fetch(OFF + encodeURIComponent(code) + ".json?fields=" + FIELDS, requestOptions)
       .then(function (r) { if (r.status === 404) return { status: 0 }; if (!r.ok) throw new Error("http " + r.status); return r.json(); })
       .then(function (d) { show(code, d); })
       .catch(function () {
@@ -923,17 +933,17 @@
     var inFrench = best && best[0] === "fr" && best[1] !== (p.ingredients_text_en || "").trim();
     $("prodName").textContent = name;
     $("prodMeta").innerHTML = (p.brands ? esc(p.brands.split(",")[0]) + " · " : "") + "barcode " + esc(code) +
-      "<br>Ingredients from <a href=\"" + offUrl + "\" target=\"_blank\" rel=\"noopener\">Open Food Facts</a>, entered by volunteers. Check them against the pack.";
+      "<br>Ingredients from <a href=\"" + offUrl + "\" target=\"_blank\" rel=\"noopener noreferrer\">Open Food Facts</a>, entered by volunteers. Check them against the pack.";
     if (p.image_front_small_url && /^https:\/\//.test(p.image_front_small_url)) { $("prodImg").src = p.image_front_small_url; $("prodImg").alt = name; $("prodImg").hidden = false; }
     else $("prodImg").hidden = true;
     $("prod").hidden = false;
     if (!ings) {
-      say("Found <b>" + esc(name) + "</b>, but nobody has added its ingredient list yet. Type it from the pack below, or <a href=\"" + offUrl + "\" target=\"_blank\" rel=\"noopener\">add it on Open Food Facts</a>.");
+      say("Found <b>" + esc(name) + "</b>, but nobody has added its ingredient list yet. Type it from the pack below, or <a href=\"" + offUrl + "\" target=\"_blank\" rel=\"noopener noreferrer\">add it on Open Food Facts</a>.");
       $("list").value = ""; $("list").focus();
       return;
     }
     say("✅ Found <b>" + esc(name) + "</b>. Its ingredients are decoded below." +
-        (inFrench ? " (The most complete list in the database is in French. The decoder understands French ingredient names.)" : ""));
+        (inFrench ? " (The French-language entry had the most listed items in the database; it may still be incomplete or outdated, so check it against the pack.)" : ""));
     $("list").value = ings;
     $("go").click();
   }
@@ -979,7 +989,7 @@
       if (det) {
         return navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false }).then(function (s) {
           if (run !== scanRun) { s.getTracks().forEach(function (t) { t.stop(); }); return; }
-          stream = s; starting = false; video.srcObject = s; $("cam").hidden = false; say("");
+          stream = s; starting = false; video.srcObject = s; $("cam").hidden = false; say("Camera ready. Hold the barcode inside the highlighted box.");
           return video.play().then(function () {
             if (run !== scanRun) return;
             timer = setInterval(function () {
@@ -994,7 +1004,7 @@
       }
       return loadZxing().then(function () {
         if (run !== scanRun) return;
-        $("cam").hidden = false; say("");
+        $("cam").hidden = false; say("Camera ready. Hold the barcode inside the highlighted box.");
         zxReader = new ZXing.BrowserMultiFormatReader();
         starting = false;
         return zxReader.decodeFromConstraints({ video: { facingMode: "environment" } }, video, function (res) {

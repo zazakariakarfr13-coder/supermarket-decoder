@@ -243,6 +243,28 @@ def main():
         if required not in nav_js:
             errors.append(f"assets/nav.js: accessible search behaviour is missing {required!r}.")
 
+    # Decoder safeguards: disclose the external barcode lookup, label the live preview,
+    # preserve compact demo links, and avoid overstating ingredient-order/NOVA heuristics.
+    decoder_html = (ROOT / "decoder" / "index.html").read_text(encoding="utf-8", errors="replace")
+    for required in (
+        'aria-label="Live camera preview for barcode scanning"',
+        'credentials: "omit"',
+        'referrerPolicy: "no-referrer"',
+        'Camera ready. Hold the barcode inside the highlighted box.',
+        '#sample=(bar|bread|cola|yog)',
+        'Possible ultra-processed formulation (NOVA group 4)',
+        'a clue alone does not confirm NOVA group 4',
+        'not a formal classification',
+        'do not necessarily make up most of the product together',
+        'standard connection data such as your IP address',
+    ):
+        if required not in decoder_html:
+            errors.append(f"decoder/index.html: expected privacy, accessibility or accuracy safeguard is missing {required!r}.")
+    if "these make up most of the product." in decoder_html:
+        errors.append("decoder/index.html: first-three ingredient wording overstates the combined share of the product.")
+    if "The most complete list in the database is in French." in decoder_html:
+        errors.append("decoder/index.html: language-field selection is described too confidently.")
+
     if warnings:
         print("Site validation warnings:")
         for warning in warnings:

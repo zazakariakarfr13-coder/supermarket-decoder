@@ -51,11 +51,11 @@ Use the free pages to earn attention and demonstrate the teaching style. Avoid r
 
 ## Accuracy and scope
 
-Food-label rules differ by country and can change. The EU sources on the website explain EU requirements only; they are not a substitute for current Moroccan, UK, US or other national rules. NOVA is a processing classification, not a complete nutritional or medical score. Ingredient signals and additive codes should be read in context, not treated as proof that a food is harmful.
+Food-label rules differ by country and can change. The EU sources on the website explain EU requirements only; they are not a substitute for current Moroccan, UK, US or other national rules. NOVA is a processing classification, not a complete nutritional or medical score. The Ingredient Decoder's NOVA output is a screening estimate based on ingredient names, not a formal classification; a single clue does not prove a food belongs to group 4. Ingredient signals and additive codes should be read in context, not treated as proof that a food is harmful.
 
 The site is educational and does not provide medical, dietetic or personalised nutrition advice.
 
-The barcode scanner processes camera previews and selected photos on the device; it does not upload the image. The scanned product number is sent to Open Food Facts for lookup, and its community-contributed product record should be checked against the packaging. Browsers without built-in barcode detection may download the ZXing scanning library from jsDelivr.
+The barcode scanner processes camera previews and selected photos on the device; it does not upload them. A lookup sends the product barcode to Open Food Facts, which may receive standard connection metadata such as the requester's IP address; an optional product thumbnail may also load from Open Food Facts. The lookup request omits cookies and the HTTP referrer. Browsers without native barcode detection may download the ZXing library from jsDelivr. Product records are community-contributed and should be checked against the packaging. The decoder supports compact demo links such as `decoder/#sample=bar`; custom `#list=` links still place ingredient text in the URL fragment, visible to anyone who receives the link.
 
 ## Ownership
 
