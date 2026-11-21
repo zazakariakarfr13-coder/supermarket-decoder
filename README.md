@@ -9,6 +9,7 @@ A public educational website and marketing hub by Zakaria Froud. It helps everyd
 ## What is in this repository
 
 - `index.html` — product landing page and interactive ingredient-decoder preview.
+- `decoder/` — free browser-based ingredient decoder with barcode/QR scanning and Open Food Facts product lookups.
 - `about.html` — author background, purpose and editorial principles.
 - `sources.html` — linked public-health, regulatory and scientific references.
 - `free-resources/` — checklist, glossary and an index of free learning resources.
@@ -53,6 +54,8 @@ Use the free pages to earn attention and demonstrate the teaching style. Avoid r
 Food-label rules differ by country and can change. The EU sources on the website explain EU requirements only; they are not a substitute for current Moroccan, UK, US or other national rules. NOVA is a processing classification, not a complete nutritional or medical score. Ingredient signals and additive codes should be read in context, not treated as proof that a food is harmful.
 
 The site is educational and does not provide medical, dietetic or personalised nutrition advice.
+
+The barcode scanner processes camera previews and selected photos on the device; it does not upload the image. The scanned product number is sent to Open Food Facts for lookup, and its community-contributed product record should be checked against the packaging. Browsers without built-in barcode detection may download the ZXing scanning library from jsDelivr.
 
 ## Ownership
 
