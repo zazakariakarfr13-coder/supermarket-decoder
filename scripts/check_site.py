@@ -268,6 +268,24 @@ def main():
     if "The most complete list in the database is in French." in decoder_html:
         errors.append("decoder/index.html: language-field selection is described too confidently.")
 
+    # Factory vs. Kitchen verdict filters must expose their controlled list and announce result counts.
+    factory_html = (ROOT / "factory-vs-kitchen" / "index.html").read_text(encoding="utf-8", errors="replace")
+    factory_script = factory_html[factory_html.rfind("<script>"):]
+    for required in (
+        'id="food-grid"',
+        'id="filter-status"',
+        'role="status"',
+        'aria-live="polite"',
+        'aria-controls="food-grid"',
+        'Kitchen scores are editorial judgments, not lab measurements.',
+        'Store-price and home-cost figures are illustrative estimates',
+    ):
+        if required not in factory_html:
+            errors.append(f"factory-vs-kitchen/index.html: expected accessibility or estimate disclosure is missing {required!r}.")
+    for required in ("filter-status", "status.textContent", "card.hidden"):
+        if required not in factory_script:
+            errors.append(f"factory-vs-kitchen/index.html: verdict-filter behaviour is missing {required!r}.")
+
     if warnings:
         print("Site validation warnings:")
         for warning in warnings:
