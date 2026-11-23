@@ -286,6 +286,22 @@ def main():
         if required not in factory_script:
             errors.append(f"factory-vs-kitchen/index.html: verdict-filter behaviour is missing {required!r}.")
 
+    # Every directly reachable Factory vs. Kitchen detail page must explain that
+    # scores and cost figures are editorial estimates, not official measurements.
+    fvk_details = sorted(p for p in (ROOT / "factory-vs-kitchen").glob("*.html") if p.name != "index.html")
+    if not fvk_details:
+        errors.append("factory-vs-kitchen: no product detail pages were found.")
+    for detail_page in fvk_details:
+        detail_html = detail_page.read_text(encoding="utf-8", errors="replace")
+        for required in (
+            "The kitchen score is an editorial estimate",
+            "not a lab measurement or official rating",
+            "rough US examples, not live quotes",
+            "vary by retailer, location, date, portion size and pantry assumptions",
+        ):
+            if required not in detail_html:
+                errors.append(f"{detail_page.relative_to(ROOT)}: missing estimate-method disclosure {required!r}.")
+
     if warnings:
         print("Site validation warnings:")
         for warning in warnings:

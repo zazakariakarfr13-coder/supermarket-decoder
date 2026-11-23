@@ -162,7 +162,7 @@ def product_page(p, i):
 <h2>Questions people ask</h2>
 {faq}
 {sources}
-<p style="font-size:14px;color:var(--muted)">Prices are rough US estimates and vary by store. Recipes and ingredients differ between countries, so check the pack in your hand.</p>
+<p style="font-size:14px;color:var(--muted)"><strong>How to read these estimates:</strong> The kitchen score is an editorial estimate of how closely a home version can match the packaged product; it is not a lab measurement or official rating. Store prices and homemade costs are rough US examples, not live quotes, and vary by retailer, location, date, portion size and pantry assumptions. Recipes and ingredients differ between countries, so check the package in your hand.</p>
 <div class="note" style="margin-top:22px"><strong>Want to read labels like this in your head?</strong> Supermarket Decoder is a 53-page illustrated ebook (PDF) with a printable cheat-sheet and a 14-day tracker. <a href="../index.html#inside">See what's inside</a> or <a href="{GUIDE.format(slug=p['slug'])}" target="_blank" rel="noopener">get it on Gumroad ($9)</a>.</div>
 <h2>More Factory vs. Kitchen</h2>
 <div class="grid">{more}</div>
