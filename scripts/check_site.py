@@ -267,6 +267,12 @@ def main():
         errors.append("decoder/index.html: first-three ingredient wording overstates the combined share of the product.")
     if "The most complete list in the database is in French." in decoder_html:
         errors.append("decoder/index.html: language-field selection is described too confidently.")
+    if "is an approved additive code." in decoder_html:
+        errors.append("decoder/index.html: an E-number identifier must not be described as universally approved.")
+    if "is an additive identifier." not in decoder_html:
+        errors.append("decoder/index.html: E-number fallback should describe the code as an identifier.")
+    if "not proof of current authorisation in every country or food category" not in decoder_html:
+        errors.append("decoder/index.html: add a jurisdiction caveat for E-number authorisation.")
 
     # Factory vs. Kitchen verdict filters must expose their controlled list and announce result counts.
     factory_html = (ROOT / "factory-vs-kitchen" / "index.html").read_text(encoding="utf-8", errors="replace")
