@@ -200,7 +200,7 @@
       <li><strong>Processing clues</strong> follow the NOVA framework: ingredients and "cosmetic" additives (flavourings, colours, emulsifiers, sweeteners, thickeners and similar) that are rarely used in a home kitchen. <a href="../articles/nova-food-processing-levels.html">The four NOVA groups →</a></li>
     </ul>
   </div>
-  <div class="note"><strong>Please read:</strong> this is an educational estimate from words on a label, not a lab test, a health score or an allergen check. Labels can be incomplete, translated or abbreviated, and the decoder only knows the names in its list. NOVA describes processing, not nutrition. If you have an allergy or a medical diet, always read the pack itself and follow your doctor's advice.</div>
+  <div class="note"><strong>Please read:</strong> this is an educational estimate from words on a label, not a lab test, a health score or an allergen check. Labels can be incomplete, translated or abbreviated, and the decoder only knows the names in its list. NOVA describes processing, not nutrition. An E-number is an identifier, not proof of current authorisation in every country or food category. If you have an allergy or a medical diet, always read the pack itself and follow your doctor's advice.</div>
 
   <div class="note" style="margin-top:18px"><strong>Want to do this in your head, in 30 seconds?</strong> Supermarket Decoder is a 53-page illustrated ebook (PDF) with a printable cheat-sheet and a 14-day tracker. <a href="../index.html#inside">See what's inside</a> or <a href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&amp;utm_medium=tool&amp;utm_campaign=supermarket_decoder&amp;utm_content=decoder_tool" target="_blank" rel="noopener">get it on Gumroad</a>.</div>
   <p><a class="back" href="../free-resources/">← All free resources</a></p>
@@ -669,7 +669,7 @@
       if (!e && !fnKey && !cls) return { k: "unk", clue: false, t: "Not in our list", d: "E" + code.toUpperCase() + " isn't a code the decoder knows. Check the spelling on the pack, or look it up with your national food-safety authority.", l: L_E };
       var fn = cls ? cls.fn : (fnKey ? F[fnKey] : "Additive");
       var clue = cls ? cls.clue : !!CLUEF[fnKey];
-      var d = (e ? "E" + code.toUpperCase() + " is " + e[0] + ". " : "E" + code.toUpperCase() + " is an approved additive code. ") +
+      var d = (e ? "E" + code.toUpperCase() + " is " + e[0] + ". " : "E" + code.toUpperCase() + " is an additive identifier. ") +
         "Its job here: " + fn.toLowerCase() + ". " + (cls ? cls.why : "") + (e && e[2] ? " " + e[2] : "") +
         (clue ? " This is one of NOVA's \"cosmetic\" additive types, so it counts as a processing clue." : " This type of additive doesn't count as an ultra-processing clue on its own.");
       var nice = e ? e[0].charAt(0).toUpperCase() + e[0].slice(1) : item.name;
