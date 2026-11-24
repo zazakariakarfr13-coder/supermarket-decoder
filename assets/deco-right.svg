@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="1400" viewBox="0 0 220 1400">
+  <!-- Side-margin doodles for wide screens (see site.css). Decorative only. -->
+  <g fill="none" stroke="#13321F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity=".28">
+    <!-- shopping cart -->
+    <g transform="translate(56 70)">
+      <path d="M0 0h16l14 58h64l12-42h-84"/>
+      <path d="M36 30h62M33 44h58"/>
+      <circle cx="40" cy="74" r="7"/><circle cx="86" cy="74" r="7"/>
+    </g>
+    <!-- milk carton -->
+    <g transform="translate(118 230) rotate(8)">
+      <path d="M0 34L16 0h40l16 34v96H0z"/>
+      <path d="M0 34h72M16 0l12 34"/>
+      <rect x="14" y="56" width="44" height="40" rx="5"/>
+      <path d="M22 70h28M22 82h18"/>
+    </g>
+    <!-- apple -->
+    <g transform="translate(46 450)">
+      <path d="M32 20C12 0-10 18 2 52c8 24 24 30 30 22 6 8 22 2 30-22 12-34-10-52-30-32z"/>
+      <path d="M32 20c1-12 6-18 12-20"/>
+      <path d="M40 8c8-8 20-6 22-2-6 6-16 6-22 2z"/>
+    </g>
+    <!-- factory -->
+    <g transform="translate(96 610)">
+      <path d="M0 96V46l24 14V46l24 14V46l24 14V10h16v86z"/>
+      <path d="M10 76h10M32 76h10M54 76h10"/>
+      <path d="M80 2c6-10 16-12 22-6M86-12c6-8 14-8 18-4"/>
+    </g>
+    <!-- whisk -->
+    <g transform="translate(60 800) rotate(-24)">
+      <path d="M0 0v48"/>
+      <path d="M0 48c-22 18-22 52 0 70 22-18 22-52 0-70z"/>
+      <path d="M0 48c-10 18-10 52 0 70 10-18 10-52 0-70z"/>
+    </g>
+    <!-- tomato -->
+    <g transform="translate(150 990)">
+      <path d="M0-26c18 0 32 12 32 30S18 32 0 32-32 22-32 4-18-26 0-26z"/>
+      <path d="M0-26l-10-8M0-26l10-8M0-26l-14 2M0-26l14 2M0-26v-12"/>
+    </g>
+    <!-- QR code -->
+    <g transform="translate(44 1130) rotate(-6)">
+      <rect x="0" y="0" width="28" height="28" rx="3"/>
+      <rect x="62" y="0" width="28" height="28" rx="3"/>
+      <rect x="0" y="62" width="28" height="28" rx="3"/>
+      <path d="M40 4h10M40 18h14M62 44h12M80 40v12M44 44v16M58 62h10M76 70h14M62 80v10M84 84v6" stroke-width="5"/>
+    </g>
+    <!-- sugar cube -->
+    <g transform="translate(140 1290)">
+      <path d="M0 12L24 0l24 12-24 12z"/>
+      <path d="M0 12v28l24 12V24M48 12v28L24 52"/>
+    </g>
+  </g>
+  <g fill="#13321F" opacity=".28">
+    <rect x="49" y="1137" width="10" height="10" rx="1" transform="rotate(-6 54 1142)"/>
+    <rect x="111" y="1131" width="10" height="10" rx="1" transform="rotate(-6 116 1136)"/>
+    <rect x="55" y="1199" width="10" height="10" rx="1" transform="rotate(-6 60 1204)"/>
+  </g>
+  <g fill="#F2B51C" opacity=".55">
+    <path d="M30 230l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/>
+    <path d="M180 400l2.5 7.5 7.5 2.5-7.5 2.5-2.5 7.5-2.5-7.5-7.5-2.5 7.5-2.5z"/>
+    <path d="M40 620l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/>
+    <path d="M176 860l2.5 7.5 7.5 2.5-7.5 2.5-2.5 7.5-2.5-7.5-7.5-2.5 7.5-2.5z"/>
+    <path d="M40 1010l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/>
+    <path d="M186 1150l2.5 7.5 7.5 2.5-7.5 2.5-2.5 7.5-2.5-7.5-7.5-2.5 7.5-2.5z"/>
+  </g>
+  <g fill="#D9481C" opacity=".35">
+    <circle cx="190" cy="120" r="4"/><circle cx="30" cy="370" r="5"/><circle cx="186" cy="560" r="4"/><circle cx="34" cy="920" r="4"/><circle cx="30" cy="1290" r="5"/>
+  </g>
+</svg>

@@ -65,10 +65,10 @@ def head(title, desc, path, og_type="article", extra=""):
   <meta name="theme-color" content="#13321F">
   <link rel="stylesheet" href="../assets/site.css">
   <style>{STYLE}</style>{extra}
-</head><body><header><a href="../index.html">Supermarket Decoder · Read · Decode · Swap</a></header><main>"""
+</head><body class="with-side"><header><a href="../index.html">Supermarket Decoder · Read · Decode · Swap</a></header><main>"""
 
 
-FOOT = """</main><footer>© 2026 Zakaria Froud · <a href="../about.html">About</a> · <a href="../sources.html">Sources and method</a> · Educational content only, not medical or personalised nutrition advice.</footer></body></html>
+FOOT = """</main><footer>© 2026 Zakaria Froud · <a href="../about.html">About</a> · <a href="../sources.html">Sources and method</a> · Educational content only, not medical or personalised nutrition advice.</footer><script defer src="../assets/nav.js"></script></body></html>
 """
 
 
