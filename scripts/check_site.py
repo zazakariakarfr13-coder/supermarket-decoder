@@ -338,7 +338,7 @@ def main():
                     else:
                         try:
                             header = image_path.read_bytes()[:24]
-                            if header[:8] != b"\\x89PNG\\r\\n\\x1a\\n":
+                            if header[:4] != bytes((137, 80, 78, 71)):
                                 errors.append(f"{image_path.relative_to(ROOT)}: expected a PNG image.")
                             elif int.from_bytes(header[16:20], "big") != 1000 or int.from_bytes(header[20:24], "big") != 1500:
                                 errors.append(f"{image_path.relative_to(ROOT)}: expected 1000x1500 Pinterest dimensions.")
