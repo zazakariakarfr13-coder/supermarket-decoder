@@ -4,7 +4,7 @@
 from html.parser import HTMLParser
 import csv
 from pathlib import Path
-from urllib.parse import unquote, urlsplit
+from urllib.parse import parse_qs, unquote, urlsplit
 import sys
 import xml.etree.ElementTree as ET
 
