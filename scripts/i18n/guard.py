@@ -11,9 +11,11 @@ _AR_ONE = re.compile("[ء-ي]+ (?:واحد|واحدة)(?![ء-ي])")
 _URL = re.compile(r"https?://\S+")
 _ECODE = re.compile(r"(?<![A-Za-z0-9])E ?(\d{3,4}[a-z]?)(?![A-Za-z0-9])")  # Arabic "و" may touch the E
 _NUM = re.compile(r"\d+(?:[.,]\d+)?")
+_ENTITY = re.compile(r"&#(?:x[0-9a-fA-F]+|\d+);")  # &#x27; is an apostrophe, not the number 27
 
 
 def tokens(text: str) -> Counter:
+    text = _ENTITY.sub("'", text)
     text = _AR_ONE.sub(" 1 ", _AR_TWO.sub(" 2 ", text))
     c: Counter = Counter()
     for m in _URL.findall(text):

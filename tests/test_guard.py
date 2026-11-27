@@ -30,3 +30,8 @@ if __name__ == "__main__":
 class ArabicConjunctionTests(unittest.TestCase):
     def test_waw_before_ecode(self):
         guard.same("x", "E150c and E150d", "E150c وE150d")
+
+
+class EntityTest(unittest.TestCase):
+    def test_html_entity_is_not_a_number(self):
+        guard.same("x", "Decoder&#x27;s guide", "le guide du Decoder")
