@@ -7,7 +7,12 @@
     var t = (TX && TX.text && TX.text[en]) || en;
     return v ? t.replace(/\{(\w+)\}/g, function (m, k) { return k in v ? v[k] : m; }) : t;
   }
-  function tr(en) { return en && TX && TX.text && TX.text[en] ? TX.text[en] : en; }
+  // data strings (names, explanations) are keyed by a short hash of the English text: decoder-data.<lang>.js
+  function fnv(str) { var h = 0x811c9dc5; for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return ("0000000" + h.toString(16)).slice(-8); }
+  function tr(en) {
+    if (!en || !TX) return en;
+    return (TX.text && TX.text[en]) || (TX.data && TX.data[fnv(en)]) || en;
+  }
   "use strict";
 
   /* ---------- Example labels (typical, not specific brands) ---------- */
@@ -512,6 +517,9 @@
     });
     return { items: items, notes: notes, body: t };
   }
+
+  // for the translation checks (scripts/decoder_strings.js); not used by the page
+  if (typeof window !== "undefined") window.SD_DECODER_DATA = { F: F, E: E, DICT: DICT, CLASSES: CLASSES, ALLERGENS: ALLERGENS, SAMPLES: SAMPLES };
 
   /* ---------- Analysis & rendering ---------- */
   var $ = function (id) { return document.getElementById(id); };
