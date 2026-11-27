@@ -62,6 +62,9 @@ def build(page: str, pairs, lang: str, pieces=None, sig=None) -> str:
         # the Gumroad tracking tag gets a language suffix (utm_content=x-fr): compare links without it
         guard.same(f"{lang}/{page}[{i}]", _UTM.sub("utm_content=", en), _UTM.sub("utm_content=", xx))
         text = text.replace(en, xx)
+    # Gumroad links: tag the language in utm_content so sales from French and Arabic pages can be told apart
+    text = re.sub(r'(gumroad\.com[^"]*?utm_content=)([^"&]+)',
+                  lambda m: m.group(0) if m.group(2).endswith(("-fr", "-ar")) else f"{m.group(1)}{m.group(2)}-{lang}", text)
     return _URL.sub(lambda m: m.group(1) + ("../" + m.group(2) if shared_target(page, m.group(2)) else m.group(2)) + m.group(3), text)
 
 
