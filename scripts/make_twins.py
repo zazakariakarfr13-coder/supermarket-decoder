@@ -54,6 +54,8 @@ def build(page: str, pairs, lang: str, pieces=None, sig=None) -> str:
         if len(pieces) != len(en_pieces):
             raise ValueError(f"{lang}/{page}: {len(pieces)} translated pieces for {len(en_pieces)} English pieces")
         for i, (en, xx) in enumerate(zip(en_pieces, pieces)):
+            if xx == "" and not guard.tokens(en):  # a small word another language doesn't need (English "a")
+                continue
             guard.same(f"{lang}/{page} piece {i}", en, xx)
         text = segments.apply(text, pieces)
     for i, (en, xx) in enumerate(pairs):
