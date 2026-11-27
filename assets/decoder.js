@@ -1,5 +1,13 @@
 /* Ingredient Decoder: parsing, matching and rendering (moved from decoder/index.html, unchanged). */
 (function () {
+  // Words come from assets/decoder-text.<lang>.js (window.SD_DECODER_TEXT): one map keyed by the English text,
+  // for both interface sentences (templates with {placeholders}) and data (names, explanations). English is built in.
+  var TX = window.SD_DECODER_TEXT || null;
+  function L(en, v) {
+    var t = (TX && TX.text && TX.text[en]) || en;
+    return v ? t.replace(/\{(\w+)\}/g, function (m, k) { return k in v ? v[k] : m; }) : t;
+  }
+  function tr(en) { return en && TX && TX.text && TX.text[en] ? TX.text[en] : en; }
   "use strict";
 
   /* ---------- Example labels (typical, not specific brands) ---------- */
@@ -445,11 +453,11 @@
 
   function classify(item) {
     var text = norm(item.name + " " + item.quals.join(" "));
-    var res = { k: "unk", clue: false, t: "Not in our list", d: "This name isn't in the decoder's list yet. Most unlisted names are ordinary foods, but if it sounds like a chemical, look it up.", l: null, fn: null, e: null };
+    var res = { k: "unk", clue: false, t: L("Not in our list"), d: L("This name isn't in the decoder's list yet. Most unlisted names are ordinary foods, but if it sounds like a chemical, look it up."), l: null, fn: null, e: null };
     // class-only parent ("Emulsifiers (E471, E322)") or bare class ("flavour enhancer")
     if (item.isClassOnly) {
       var hc = findClass(text);
-      return { k: hc.clue ? "sig" : "warn", clue: false, t: hc.fn, d: hc.why + " The ingredients inside the brackets are listed below.", l: L_E };
+      return { k: hc.clue ? "sig" : "warn", clue: false, t: tr(hc.fn), d: L("{why} The ingredients inside the brackets are listed below.", { why: tr(hc.why) }), l: L_E };
     }
     var em = text.match(ECODE), entry = null;
     for (var i = 0; i < DICT.length && !em; i++) { if (DICT[i].re.test(text)) { entry = DICT[i]; break; } }
@@ -457,26 +465,26 @@
     if (code) {
       var e = E[code] || E[em ? em[1] : code], fnKey = e ? e[1] : rangeFn(parseInt(code, 10));
       var cls = item.cls || findClass(text.replace(ECODE, "")) || null;
-      if (!e && !fnKey && !cls) return { k: "unk", clue: false, t: "Not in our list", d: "E" + code.toUpperCase() + " isn't a code the decoder knows. Check the spelling on the pack, or look it up with your national food-safety authority.", l: L_E };
-      var fn = cls ? cls.fn : (fnKey ? F[fnKey] : "Additive");
+      if (!e && !fnKey && !cls) return { k: "unk", clue: false, t: L("Not in our list"), d: L("E{code} isn't a code the decoder knows. Check the spelling on the pack, or look it up with your national food-safety authority.", { code: code.toUpperCase() }), l: L_E };
+      var fn = cls ? tr(cls.fn) : (fnKey ? tr(F[fnKey]) : L("Additive"));
       var clue = cls ? cls.clue : !!CLUEF[fnKey];
-      var d = (e ? "E" + code.toUpperCase() + " is " + e[0] + ". " : "E" + code.toUpperCase() + " is an additive identifier. ") +
-        "Its job here: " + fn.toLowerCase() + ". " + (cls ? cls.why : "") + (e && e[2] ? " " + e[2] : "") +
-        (clue ? " This is one of NOVA's \"cosmetic\" additive types, so it counts as a processing clue." : " This type of additive doesn't count as an ultra-processing clue on its own.");
-      var nice = e ? e[0].charAt(0).toUpperCase() + e[0].slice(1) : item.name;
+      var d = (e ? L("E{code} is {name}. ", { code: code.toUpperCase(), name: tr(e[0]) }) : L("E{code} is an additive identifier. ", { code: code.toUpperCase() })) +
+        L("Its job here: {job}. ", { job: fn.toLowerCase() }) + (cls ? tr(cls.why) : "") + (e && e[2] ? " " + tr(e[2]) : "") +
+        (clue ? L(" This is one of NOVA's \"cosmetic\" additive types, so it counts as a processing clue.") : L(" This type of additive doesn't count as an ultra-processing clue on its own."));
+      var nice = e ? tr(e[0]).charAt(0).toUpperCase() + tr(e[0]).slice(1) : item.name;
       var page = PAGES.indexOf(code) !== -1 ? "../additives/e" + code + ".html" : L_E;
       return { k: clue ? "sig" : "warn", clue: clue, t: fn, d: d, l: page, e: "E" + code.toUpperCase(), nice: nice };
     }
     if (entry) {
       if (entry.bf && /cocoa butter|shea butter|peanut butter|nut butter/.test(text)) entry = DICT.filter(function (x) { return x.t === "Cocoa"; })[0];
-      res = { k: entry.k, clue: !!entry.clue, t: entry.t, d: entry.d, l: entry.l || null };
+      res = { k: entry.k, clue: !!entry.clue, t: tr(entry.t), d: tr(entry.d), l: entry.l || null };
       // functional class written on the label but ingredient is a named one we only know as food (e.g. "colour: beetroot red" without code)
-      if (item.cls && entry.k === "ok") { res.k = item.cls.clue ? "sig" : "warn"; res.clue = item.cls.clue; res.t = item.cls.fn; res.d = item.cls.why + " Here it comes from " + item.name.toLowerCase() + "."; }
+      if (item.cls && entry.k === "ok") { res.k = item.cls.clue ? "sig" : "warn"; res.clue = item.cls.clue; res.t = tr(item.cls.fn); res.d = L("{why} Here it comes from {name}.", { why: tr(item.cls.why), name: item.name.toLowerCase() }); }
       return res;
     }
-    if (item.cls) return { k: item.cls.clue ? "sig" : "warn", clue: item.cls.clue, t: item.cls.fn, d: item.cls.why, l: L_E };
+    if (item.cls) return { k: item.cls.clue ? "sig" : "warn", clue: item.cls.clue, t: tr(item.cls.fn), d: tr(item.cls.why), l: L_E };
     var bare = findClass(text);
-    if (bare && text.split(/\s+/).length <= 3) return { k: bare.clue ? "sig" : "warn", clue: bare.clue, t: bare.fn, d: bare.why + " The label names the job but not the exact additive.", l: L_E };
+    if (bare && text.split(/\s+/).length <= 3) return { k: bare.clue ? "sig" : "warn", clue: bare.clue, t: tr(bare.fn), d: L("{why} The label names the job but not the exact additive.", { why: tr(bare.why) }), l: L_E };
     return res;
   }
 
@@ -507,13 +515,13 @@
 
   /* ---------- Analysis & rendering ---------- */
   var $ = function (id) { return document.getElementById(id); };
-  var LABEL = { ok: "Basic ingredient", kitchen: "Kitchen staple", sugar: "Sugar name", warn: "Additive", sig: "Processing clue", unk: "Not in our list" };
+  var LABEL = { ok: L("Basic ingredient"), kitchen: L("Kitchen staple"), sugar: L("Sugar name"), warn: L("Additive"), sig: L("Processing clue"), unk: L("Not in our list") };
   function el(tag, cls, txt) { var x = document.createElement(tag); if (cls) x.className = cls; if (txt != null) x.textContent = txt; return x; }
 
   function decode() {
     var text = $("list").value.trim();
     $("err").textContent = "";
-    if (text.length < 3) { $("err").textContent = "Paste an ingredient list first, or tap one of the examples."; $("results").hidden = true; return; }
+    if (text.length < 3) { $("err").textContent = L("Paste an ingredient list first, or tap one of the examples."); $("results").hidden = true; return; }
     var parsed = parseList(text), stats = { n: 0, sugars: {}, add: 0, clues: [], kitchen: 0, basic: 0, unk: 0, cosmetic: 0 }, top = [];
 
     function walk(items, depth, ul) {
@@ -535,14 +543,14 @@
         if (c.e && c.nice && c.nice.toLowerCase() !== it.name.toLowerCase()) nm += "  →  " + c.nice;
         head.appendChild(el("span", "nm", nm));
         head.appendChild(el("span", "tag " + c.k, c.k === "warn" || (c.k === "sig" && (c.e || it.cls || it.isClassOnly)) ? c.t + (c.e ? " · " + c.e : "") : LABEL[c.k]));
-        if (c.k === "sugar" && c.clue) head.appendChild(el("span", "tag sig", "Processing clue"));
+        if (c.k === "sugar" && c.clue) head.appendChild(el("span", "tag sig", L("Processing clue")));
         li.appendChild(head);
         var d = el("div", "d", c.k === "warn" || c.k === "sig" || c.k === "unk" || c.k === "sugar" ? c.d : (c.t !== LABEL[c.k] ? c.t + ". " : "") + c.d);
         if (c.k === "warn" || c.k === "sig" || c.k === "unk" || c.k === "sugar") { /* title already shown in tag */ }
-        if (c.l) { d.appendChild(document.createTextNode(" ")); var a = el("a", null, "Learn more →"); a.href = c.l; d.appendChild(a); }
+        if (c.l) { d.appendChild(document.createTextNode(" ")); var a = el("a", null, L("Learn more →")); a.href = c.l; d.appendChild(a); }
         li.appendChild(d);
         if (it.kids.length) {
-          if (!it.isClassOnly && c.k !== "warn" && c.k !== "sig") d.appendChild(document.createTextNode(" Contains its own ingredients (a recipe inside the recipe):"));
+          if (!it.isClassOnly && c.k !== "warn" && c.k !== "sig") d.appendChild(document.createTextNode(L(" Contains its own ingredients (a recipe inside the recipe):")));
           var sub = el("ul", "kids"); walk(it.kids, depth + 1, sub); li.appendChild(sub);
         }
         ul.appendChild(li);
@@ -556,44 +564,46 @@
     // NOVA estimate
     var g, h, p;
     if (nClue > 0) {
-      g = 4; h = "Possible ultra-processed formulation (NOVA group 4)";
+      g = 4; h = L("Possible ultra-processed formulation (NOVA group 4)");
       var uniq = stats.clues.filter(function (x, i, arr) { return arr.indexOf(x) === i; });
-      p = "The list contains " + nClue + " processing clue" + (nClue > 1 ? "s" : "") + ": " + uniq.slice(0, 5).join(", ") + (uniq.length > 5 ? " and more" : "") + ". These can be clues associated with ultra-processed formulations, but a clue alone does not confirm NOVA group 4. The full formulation and purpose of additives matter; treat this as a screening estimate, not a formal classification.";
+      p = (nClue > 1 ? L("The list contains {n} processing clues: {list}", { n: nClue, list: uniq.slice(0, 5).join(", ") })
+                     : L("The list contains {n} processing clue: {list}", { n: nClue, list: uniq.slice(0, 5).join(", ") })) +
+        (uniq.length > 5 ? L(" and more") : "") + L(". These can be clues associated with ultra-processed formulations, but a clue alone does not confirm NOVA group 4. The full formulation and purpose of additives matter; treat this as a screening estimate, not a formal classification.");
     } else if (stats.n === 1 && stats.kitchen === 1) {
-      g = 2; h = "A kitchen ingredient (NOVA group 2)"; p = "A single culinary ingredient, like oil, sugar, salt or flour, used to cook with.";
+      g = 2; h = L("A kitchen ingredient (NOVA group 2)"); p = L("A single culinary ingredient, like oil, sugar, salt or flour, used to cook with.");
     } else if (stats.kitchen > 0 || stats.add > 0) {
-      g = 3; h = "Likely processed (NOVA group 3)"; p = "Foods combined with kitchen ingredients such as salt, sugar or oil" + (stats.add ? ", plus additives that preserve rather than cosmetically change the food" : "") + ". Think bread from a bakery, cheese or salted nuts.";
+      g = 3; h = L("Likely processed (NOVA group 3)"); p = L("Foods combined with kitchen ingredients such as salt, sugar or oil") + (stats.add ? L(", plus additives that preserve rather than cosmetically change the food") : "") + L(". Think bread from a bakery, cheese or salted nuts.");
     } else {
-      g = 1; h = "Looks minimally processed (NOVA group 1)"; p = "Only basic foods recognised, with no added salt, sugar, oil or cosmetic additives.";
+      g = 1; h = L("Looks minimally processed (NOVA group 1)"); p = L("Only basic foods recognised, with no added salt, sugar, oil or cosmetic additives.");
     }
-    if (stats.unk) p += " " + stats.unk + " name" + (stats.unk > 1 ? "s weren't" : " wasn't") + " recognised, which can change the estimate.";
+    if (stats.unk) p += stats.unk > 1 ? L(" {n} names weren't recognised, which can change the estimate.", { n: stats.unk }) : L(" {n} name wasn't recognised, which can change the estimate.", { n: stats.unk });
     var nova = $("nova"); nova.className = "nova g" + g; nova.innerHTML = "";
-    nova.appendChild(el("div", "g", "Processing estimate"));
+    nova.appendChild(el("div", "g", L("Processing estimate")));
     nova.appendChild(el("h3", null, h)); nova.appendChild(el("p", null, p));
     var sc = el("div", "scale"); for (var i = 1; i <= 4; i++) sc.appendChild(el("i", i <= g ? "on" : "")); nova.appendChild(sc);
 
     // observations
     var obs = $("obs"); obs.innerHTML = "";
     function ob(txt, cls) { obs.appendChild(el("li", cls || "", txt)); }
-    if (top.length) ob("First three ingredients: " + top.join(", ") + ". Ingredients are generally listed in descending order by weight. These are the largest individual ingredients, but they do not necessarily make up most of the product together.");
-    if (nSug >= 2) ob("This list uses " + nSug + " different sugar names (" + Object.keys(stats.sugars).join(", ") + "). Added together, sugars could rank higher in the list than any single one does. Check the sugars line on the nutrition panel.");
+    if (top.length) ob(L("First three ingredients: {list}. Ingredients are generally listed in descending order by weight. These are the largest individual ingredients, but they do not necessarily make up most of the product together.", { list: top.join(", ") }));
+    if (nSug >= 2) ob(L("This list uses {n} different sugar names ({list}). Added together, sugars could rank higher in the list than any single one does. Check the sugars line on the nutrition panel.", { n: nSug, list: Object.keys(stats.sugars).join(", ") }));
     var anyKids = parsed.items.some(function (x) { return x.kids.length && !x.isClassOnly; });
-    if (anyKids) ob("There's at least one compound ingredient: an ingredient with its own recipe in brackets. Those inner ingredients count too, and they're decoded below.");
+    if (anyKids) ob(L("There's at least one compound ingredient: an ingredient with its own recipe in brackets. Those inner ingredients count too, and they're decoded below."));
     var all = norm(parsed.body), found = [];
-    ALLERGENS.forEach(function (a) { if (a[1].test(all)) found.push(a[0]); });
-    if (found.length) ob("Allergen words spotted: " + found.join(", ") + ". This is simple word-spotting, not an allergen check. Always read the pack, where EU and UK labels show allergens in bold.", "allergen");
+    ALLERGENS.forEach(function (a) { if (a[1].test(all)) found.push(tr(a[0])); });
+    if (found.length) ob(L("Allergen words spotted: {list}. This is simple word-spotting, not an allergen check. Always read the pack, where EU and UK labels show allergens in bold.", { list: found.join(", ") }), "allergen");
     parsed.notes.forEach(function (n) {
       var isContains = /^contains\s*:/i.test(n);
-      ob("Label statement: \"" + n + "\". " + (isContains
-        ? "A \"Contains\" line lists allergens that are part of the recipe."
-        : "Wording like this is a voluntary cross-contact warning, not a recipe ingredient."), "allergen");
+      ob(L("Label statement: \"{text}\". ", { text: n }) + (isContains
+        ? L("A \"Contains\" line lists allergens that are part of the recipe.")
+        : L("Wording like this is a voluntary cross-contact warning, not a recipe ingredient.")), "allergen");
     });
 
     // offer line that matches what this label just showed
-    var ol = "Supermarket Decoder teaches you the few names that matter, so you can read a label like this one in your head while you shop.";
-    if (nClue >= 3) ol = "This label has " + nClue + " processing clues. Supermarket Decoder shows you how to spot them in seconds, in the aisle, before the pack goes in your trolley.";
-    else if (nSug >= 2) ol = "This label hides " + nSug + " different sugar names. Supermarket Decoder teaches you the sugar names to look for, so you catch them at the shelf in seconds.";
-    else if (g <= 2) ol = "This one looks simple. Supermarket Decoder shows you how to find labels like it fast, in the 30-second scan you can do at the shelf.";
+    var ol = L("Supermarket Decoder teaches you the few names that matter, so you can read a label like this one in your head while you shop.");
+    if (nClue >= 3) ol = L("This label has {n} processing clues. Supermarket Decoder shows you how to spot them in seconds, in the aisle, before the pack goes in your trolley.", { n: nClue });
+    else if (nSug >= 2) ol = L("This label hides {n} different sugar names. Supermarket Decoder teaches you the sugar names to look for, so you catch them at the shelf in seconds.", { n: nSug });
+    else if (g <= 2) ol = L("This one looks simple. Supermarket Decoder shows you how to find labels like it fast, in the 30-second scan you can do at the shelf.");
     $("offerLine").textContent = ol;
 
     $("results").hidden = false;
@@ -604,18 +614,18 @@
   $("list").addEventListener("keydown", function (e) { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) decode(); });
   $("clear").addEventListener("click", function () { $("list").value = ""; $("results").hidden = true; $("err").textContent = ""; try { history.replaceState(null, "", location.pathname); } catch (e) {} $("list").focus(); });
   Array.prototype.forEach.call(document.querySelectorAll("[data-sample]"), function (b) {
-    b.addEventListener("click", function () { $("list").value = SAMPLES[b.getAttribute("data-sample")]; decode(); });
+    b.addEventListener("click", function () { $("list").value = (TX && TX.samples && TX.samples[b.getAttribute("data-sample")]) || SAMPLES[b.getAttribute("data-sample")]; decode(); });
   });
   $("share").addEventListener("click", function () {
-    var url = location.href, done = function () { $("toast").textContent = "Link copied. Anyone who opens it sees this result."; };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, function () { prompt("Copy this link:", url); });
-    else prompt("Copy this link:", url);
+    var url = location.href, done = function () { $("toast").textContent = L("Link copied. Anyone who opens it sees this result."); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, function () { prompt(L("Copy this link:"), url); });
+    else prompt(L("Copy this link:"), url);
   });
 
   // Compact demo links avoid putting a long example ingredient list in a public URL.
   var sampleLink = location.hash.match(/^#sample=(bar|bread|cola|yog)$/);
   if (sampleLink && SAMPLES[sampleLink[1]]) {
-    $("list").value = SAMPLES[sampleLink[1]];
+    $("list").value = (TX && TX.samples && TX.samples[sampleLink[1]]) || SAMPLES[sampleLink[1]];
     decode();
     try { history.replaceState(null, "", "#sample=" + sampleLink[1]); } catch (e) {}
   } else {
