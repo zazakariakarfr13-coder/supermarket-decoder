@@ -10,6 +10,12 @@
  ],
  "pages": [
   {
+   "u": "fr/decoder/",
+   "t": "Décodeur d’ingrédients (outil gratuit)",
+   "g": "Pour commencer",
+   "k": "Décodeur d’ingrédients : décodez n’importe quelle étiquette, gratuitement | Supermarket Decoder Décodeur d’ingrédients : un vérificateur d’étiquettes gratuit Décodeur gratuit : collez une étiquette ou scannez un code-barres pour repérer les sucres, comprendre les additifs E et voir les indices de transformation (NOVA)."
+  },
+  {
    "u": "fr/additives/",
    "t": "Toutes les fiches additifs",
    "g": "Additifs (E)",

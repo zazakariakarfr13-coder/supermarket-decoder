@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url><loc>https://zazakariakarfr13-coder.github.io/supermarket-decoder/</loc></url>
-  <url><loc>https://zazakariakarfr13-coder.github.io/supermarket-decoder/decoder/</loc></url>
+  <url><loc>https://zazakariakarfr13-coder.github.io/supermarket-decoder/decoder/</loc><xhtml:link rel="alternate" hreflang="en" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/decoder/"/><xhtml:link rel="alternate" hreflang="fr" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/fr/decoder/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/decoder/"/></url>
+  <url><loc>https://zazakariakarfr13-coder.github.io/supermarket-decoder/fr/decoder/</loc><xhtml:link rel="alternate" hreflang="en" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/decoder/"/><xhtml:link rel="alternate" hreflang="fr" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/fr/decoder/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/decoder/"/></url>
   <url><loc>https://zazakariakarfr13-coder.github.io/supermarket-decoder/story/</loc></url>
   <url><loc>https://zazakariakarfr13-coder.github.io/supermarket-decoder/story/episode-02.html</loc></url>
   <url><loc>https://zazakariakarfr13-coder.github.io/supermarket-decoder/about.html</loc></url>

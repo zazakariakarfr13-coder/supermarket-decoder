@@ -50,7 +50,7 @@
     // French: common ingredients
     [/sirop de glucose[- ]fructose/g, "glucose-fructose syrup"], [/sirop de fructose[- ]glucose/g, "fructose-glucose syrup"], [/sirop de glucose/g, "glucose syrup"],
     [/sirop de (mais|ble)/g, "corn syrup"], [/(sirop de )?sucre inverti/g, "invert sugar syrup"], [/sirop d'agave/g, "agave syrup"], [/sirop d'erable/g, "maple syrup"],
-    [/amidons? (modifies?|transformes?)/g, "modified starch"], [/\bamidons?\b|\bfecules?\b/g, "starch"],
+    [/amidons? de (\w+) (modifies?|transformes?)/g, "modified $1 starch"], [/amidons? (modifies?|transformes?)/g, "modified starch"], [/\bamidons?\b|\bfecules?\b/g, "starch"],
     [/beurre de cacao/g, "cocoa butter"], [/(pate|masse) de cacao/g, "cocoa mass"], [/(cacao maigre en poudre|poudre de cacao|cacao en poudre)/g, "cocoa powder"],
     [/beurre de karite/g, "shea butter"], [/lait (entier |ecreme |demi-ecreme )?en poudre/g, "milk powder"], [/lactoserum/g, "whey"], [/proteines? de lait/g, "milk protein"],
     [/proteines? de soja/g, "soy protein"], [/proteines? de pois/g, "pea protein"], [/proteines?/g, "protein"], [/extrait de levure/g, "yeast extract"],
@@ -500,9 +500,9 @@
     // "Red No. 40", "FD&C Yellow No. 5": keep the dot from splitting the name
     t = t.replace(/\b(no)\.\s?(\d)/gi, "$1 $2");
     // advisory and allergen statements
-    var adv = t.match(/(may (also )?contain|may contain traces|made (in|on) (a )?(factory|facility|site|line)|produced in a|not suitable for)[^.\n]*/gi) || [];
+    var adv = t.match(/(may (also )?contain|may contain traces|made (in|on) (a )?(factory|facility|site|line)|produced in a|not suitable for|peut contenir|traces [eé]ventuelles|fabriqu[eé] dans (un|une) (atelier|usine)|ne convient pas)[^.\n]*/gi) || [];
     adv.forEach(function (a) { notes.push(a.trim()); t = t.replace(a, ""); });
-    var cont = t.match(/\bcontains\s*:[^.\n]*/gi) || [];
+    var cont = t.match(/\b(contains|contient)\s*:[^.\n]*/gi) || [];
     cont.forEach(function (a) { notes.push(a.trim()); t = t.replace(a, ""); });
     t = t.replace(/\n+/g, ", ");
     var parts = splitTop(t, ",;.");
@@ -601,7 +601,7 @@
     ALLERGENS.forEach(function (a) { if (a[1].test(all)) found.push(tr(a[0])); });
     if (found.length) ob(L("Allergen words spotted: {list}. This is simple word-spotting, not an allergen check. Always read the pack, where EU and UK labels show allergens in bold.", { list: found.join(", ") }), "allergen");
     parsed.notes.forEach(function (n) {
-      var isContains = /^contains\s*:/i.test(n);
+      var isContains = /^(contains|contient)\s*:/i.test(n);
       ob(L("Label statement: \"{text}\". ", { text: n }) + (isContains
         ? L("A \"Contains\" line lists allergens that are part of the recipe.")
         : L("Wording like this is a voluntary cross-contact warning, not a recipe ingredient.")), "allergen");
