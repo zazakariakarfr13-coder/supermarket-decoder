@@ -49,11 +49,11 @@
     .nova .scale i { flex: 1; height: 6px; border-radius: 3px; background: rgba(255,255,255,.25); }
     .nova .scale i.on { background: var(--gold); }
     .obs { margin: 0 0 18px; padding: 0; list-style: none; }
-    .obs li { border-left: 5px solid var(--gold); background: #FCF3DC; padding: 10px 14px; margin: 8px 0; border-radius: 0 10px 10px 0; font-size: 15px; line-height: 1.55; }
+    .obs li { border-inline-start: 5px solid var(--gold); background: #FCF3DC; padding: 10px 14px; margin: 8px 0; border-radius: 10px; border-start-start-radius: 0; border-end-start-radius: 0; font-size: 15px; line-height: 1.55; }
     .obs li.allergen { border-color: #6A4BA8; background: #F1ECFA; }
     .ings { list-style: none; margin: 0; padding: 0; }
-    .ing { background: #fff; border: 1px solid var(--line); border-left: 6px solid #B9B2A3; border-radius: 10px; padding: 10px 14px; margin: 8px 0; }
-    .ing.ok, .ing.kitchen { border-left-color: #3E8E5E; } .ing.sugar { border-left-color: #D58A1E; } .ing.warn { border-left-color: var(--gold); } .ing.sig { border-left-color: var(--accent); }
+    .ing { background: #fff; border: 1px solid var(--line); border-inline-start: 6px solid #B9B2A3; border-radius: 10px; padding: 10px 14px; margin: 8px 0; }
+    .ing.ok, .ing.kitchen { border-inline-start-color: #3E8E5E; } .ing.sugar { border-inline-start-color: #D58A1E; } .ing.warn { border-inline-start-color: var(--gold); } .ing.sig { border-inline-start-color: var(--accent); }
     .ing .top { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; }
     .ing .nm { font-weight: 800; font-size: 16px; }
     .ing .pos { font-size: 12px; color: var(--muted); font-weight: 700; min-width: 1.6em; }
@@ -61,7 +61,7 @@
     .tag.ok, .tag.kitchen { background: #E2F1E7; color: #24613D; } .tag.sugar { background: #FBEBD3; color: #8A520F; } .tag.warn { background: #FCF0C8; color: #6E5408; } .tag.sig { background: #FBE1D7; color: #9A3519; }
     .ing .d { font-size: 14.5px; line-height: 1.55; color: #2B4A37; margin-top: 3px; }
     .ing .d a { font-weight: 700; }
-    .ing .kids { list-style: none; margin: 8px 0 2px; padding: 0 0 0 14px; border-left: 2px dashed var(--line); }
+    .ing .kids { list-style: none; margin: 8px 0 2px; padding: 0; padding-inline-start: 14px; border-inline-start: 2px dashed var(--line); }
     .ing .kids .ing { margin: 6px 0; }
     .legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 4px; }
     .err { color: #9A3519; font-weight: 700; margin-top: 10px; }
@@ -94,7 +94,7 @@
     .cam .aim::after { content: ""; position: absolute; left: 6px; right: 6px; top: 50%; height: 2px; background: #ff5a3c; animation: sweep 1.6s ease-in-out infinite alternate; }
     @keyframes sweep { from { transform: translateY(-34px); } to { transform: translateY(34px); } }
     .cam .hint { position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font-size: 14px; font-weight: 700; text-shadow: 0 1px 3px #000; }
-    .cam .stop { position: absolute; top: 8px; right: 8px; padding: 8px 14px; font-size: 13px; }
+    .cam .stop { position: absolute; top: 8px; inset-inline-end: 8px; padding: 8px 14px; font-size: 13px; }
     .smsg { margin: 12px 0 0; font-size: 15px; line-height: 1.5; }
     .smsg:empty { display: none; }
     .smsg a { color: var(--gold); font-weight: 700; }
@@ -105,8 +105,8 @@
     .prod small { display: block; color: var(--muted); font-size: 13px; line-height: 1.45; margin-top: 2px; }
     @media print { .scan { display: none; } }
   </style>
-<!--i18n:head--><link rel="alternate" hreflang="en" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/decoder/"><link rel="alternate" hreflang="fr" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/fr/decoder/"><link rel="alternate" hreflang="x-default" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/decoder/"><meta property="og:locale" content="fr_FR"><link rel="stylesheet" href="../../assets/i18n.css"><!--/i18n:head--></head>
-<body><!--i18n:switch--><nav class="lang-switch" aria-label="Langue"><a href="../../decoder/index.html" hreflang="en" lang="en">EN</a><span aria-current="true">FR</span></nav><!--/i18n:switch-->
+<!--i18n:head--><link rel="alternate" hreflang="en" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/decoder/"><link rel="alternate" hreflang="fr" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/fr/decoder/"><link rel="alternate" hreflang="ar" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/ar/decoder/"><link rel="alternate" hreflang="x-default" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/decoder/"><meta property="og:locale" content="fr_FR"><link rel="stylesheet" href="../../assets/i18n.css"><!--/i18n:head--></head>
+<body><!--i18n:switch--><nav class="lang-switch" aria-label="Langue"><a href="../../decoder/index.html" hreflang="en" lang="en">EN</a><span aria-current="true">FR</span><a href="../../ar/decoder/index.html" hreflang="ar" lang="ar">عربي</a></nav><!--/i18n:switch-->
 <header><a href="../index.html">Supermarket Decoder · Lire · Décoder · Remplacer</a></header>
 <main>
   <div class="kicker">Outil gratuit · Listes d’ingrédients</div>

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>مفكّك المكوّنات: افهم أي ملصق طعام مجانًا | Supermarket Decoder</title>
+  <meta name="description" content="أداة مجانية: الصق ملصق طعام أو امسح الرمز الشريطي لتكتشف أسماء السكّر، وتفهم أرقام E، وترى علامات المعالجة مع تقدير تقريبي حسب NOVA.">
+  <meta property="og:site_name" content="Supermarket Decoder">
+  <meta property="og:image" content="https://zazakariakarfr13-coder.github.io/supermarket-decoder/assets/share/decoder.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Supermarket Decoder: مفكّك المكوّنات المجاني">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://zazakariakarfr13-coder.github.io/supermarket-decoder/assets/share/decoder.png">
+  <link rel="canonical" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/ar/decoder/">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#13321F">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zazakariakarfr13-coder.github.io/supermarket-decoder/ar/decoder/">
+  <meta property="og:title" content="مفكّك المكوّنات: الصق الملصق وانظر ما بداخله">
+  <meta property="og:description" content="الصق ملصق طعام أو امسح الرمز الشريطي لترى أسماء السكّر وأرقام E وعلامات المعالجة. مجاني ودون تسجيل.">
+  <link rel="stylesheet" href="../../assets/site.css">
+  <style>
+    main { max-width: 900px; }
+    .tool { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 22px; margin: 26px 0; box-shadow: 0 10px 30px rgba(19,50,31,.07); }
+    .tool label { display: block; font-size: 12px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    textarea { width: 100%; min-height: 150px; resize: vertical; font: 16px/1.55 Inter, system-ui, sans-serif; color: var(--ink); background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 14px; }
+    textarea:focus { outline: none; border-color: var(--ink); }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+    .btn { appearance: none; border: 0; cursor: pointer; background: var(--accent); color: #fff; font: 800 16px/1 Inter, system-ui, sans-serif; padding: 14px 22px; border-radius: 999px; text-decoration: none; display: inline-block; }
+    .btn:hover { filter: brightness(1.05); }
+    .btn.ghost { background: transparent; color: var(--ink); border: 2px solid var(--line); padding: 12px 18px; font-size: 14px; }
+    .samples { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; font-size: 14px; color: var(--muted); }
+    .samples button { appearance: none; cursor: pointer; border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 999px; padding: 6px 12px; font: 600 13px/1.2 Inter, system-ui, sans-serif; }
+    .samples button:hover { border-color: var(--ink); }
+    .privacy { font-size: 13px; color: var(--muted); margin: 12px 0 0; }
+    #results[hidden] { display: none; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 8px 0 18px; }
+    .stat { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+    .stat b { display: block; font-size: 30px; line-height: 1.1; letter-spacing: -.03em; }
+    .stat span { font-size: 13px; color: var(--muted); line-height: 1.3; display: block; }
+    .stat.sugar b { color: #A0611A; } .stat.sig b { color: var(--accent); }
+    .nova { border-radius: 14px; padding: 18px 20px; margin: 0 0 18px; color: #fff; background: var(--ink); }
+    .nova .g { font-size: 12px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; opacity: .8; }
+    .nova h3 { margin: 4px 0 6px; font-size: 24px; line-height: 1.2; }
+    .nova p { margin: 0; font-size: 15px; line-height: 1.55; opacity: .92; }
+    .nova.g4 { background: #8E2F12; } .nova.g3 { background: #7A5A12; } .nova.g2 { background: #2F5A41; } .nova.g1 { background: #13321F; }
+    .nova .scale { display: flex; gap: 4px; margin-top: 12px; }
+    .nova .scale i { flex: 1; height: 6px; border-radius: 3px; background: rgba(255,255,255,.25); }
+    .nova .scale i.on { background: var(--gold); }
+    .obs { margin: 0 0 18px; padding: 0; list-style: none; }
+    .obs li { border-inline-start: 5px solid var(--gold); background: #FCF3DC; padding: 10px 14px; margin: 8px 0; border-radius: 10px; border-start-start-radius: 0; border-end-start-radius: 0; font-size: 15px; line-height: 1.55; }
+    .obs li.allergen { border-color: #6A4BA8; background: #F1ECFA; }
+    .ings { list-style: none; margin: 0; padding: 0; }
+    .ing { background: #fff; border: 1px solid var(--line); border-inline-start: 6px solid #B9B2A3; border-radius: 10px; padding: 10px 14px; margin: 8px 0; }
+    .ing.ok, .ing.kitchen { border-inline-start-color: #3E8E5E; } .ing.sugar { border-inline-start-color: #D58A1E; } .ing.warn { border-inline-start-color: var(--gold); } .ing.sig { border-inline-start-color: var(--accent); }
+    .ing .top { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; }
+    .ing .nm { font-weight: 800; font-size: 16px; }
+    .ing .pos { font-size: 12px; color: var(--muted); font-weight: 700; min-width: 1.6em; }
+    .tag { font-size: 11px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; border-radius: 999px; padding: 3px 9px; background: #EEEAE0; color: #4C5E52; white-space: nowrap; }
+    .tag.ok, .tag.kitchen { background: #E2F1E7; color: #24613D; } .tag.sugar { background: #FBEBD3; color: #8A520F; } .tag.warn { background: #FCF0C8; color: #6E5408; } .tag.sig { background: #FBE1D7; color: #9A3519; }
+    .ing .d { font-size: 14.5px; line-height: 1.55; color: #2B4A37; margin-top: 3px; }
+    .ing .d a { font-weight: 700; }
+    .ing .kids { list-style: none; margin: 8px 0 2px; padding: 0; padding-inline-start: 14px; border-inline-start: 2px dashed var(--line); }
+    .ing .kids .ing { margin: 6px 0; }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 4px; }
+    .err { color: #9A3519; font-weight: 700; margin-top: 10px; }
+    .toast { font-size: 14px; color: #24613D; font-weight: 700; }
+    .offer { display: grid; grid-template-columns: 120px 1fr; gap: 18px; align-items: center; background: #FCF3DC; border: 2px solid var(--gold); border-radius: 16px; padding: 18px 20px; margin: 22px 0 6px; }
+    .offer img { width: 120px; height: auto; border-radius: 6px; box-shadow: 0 6px 16px rgba(19,50,31,.18); display: block; }
+    .offer .k { font-size: 12px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; color: #8A520F; }
+    .offer h3 { margin: 4px 0 6px; font-size: 21px; line-height: 1.25; }
+    .offer p { margin: 0 0 12px; font-size: 15px; line-height: 1.55; }
+    .offer .fine { font-size: 13px; color: var(--muted); margin: 10px 0 0; }
+    @media (max-width: 560px) { .offer { grid-template-columns: 1fr; } .offer img { width: 110px; } }
+    @media print { .offer { display: none; } }
+    @media (max-width: 640px) { .stats { grid-template-columns: repeat(2, 1fr); } .tool { padding: 16px; } }
+    @media print { .tool .row, .samples, .privacy, .share { display: none; } }
+    /* barcode / QR scan */
+    .scan { background: #13321F; color: #fff; border-radius: 14px; padding: 16px 18px; margin: 0 0 18px; }
+    .scan h2 { font-size: 18px; margin: 0 0 4px; color: #fff; }
+    .scan p.sub { margin: 0 0 12px; font-size: 14px; color: #CFE0D4; line-height: 1.5; }
+    .scan .row { margin-top: 0; }
+    .scan .btn.gold { background: var(--gold); color: #13321F; }
+    .scan .btn.line { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.4); padding: 12px 18px; font-size: 14px; }
+    .scan form { display: flex; gap: 8px; flex: 1 1 260px; min-width: 0; max-width: 100%; }
+    .scan form .btn { flex: none; padding: 12px 14px; }
+    .scan input { flex: 1; min-width: 0; font: 16px Inter, system-ui, sans-serif; padding: 11px 14px; border-radius: 999px; border: 2px solid rgba(255,255,255,.35); background: #fff; color: var(--ink); }
+    .scan .privacy { color: #CFE0D4; }
+    .cam { position: relative; margin-top: 14px; border-radius: 12px; overflow: hidden; background: #000; max-width: 520px; }
+    .cam[hidden] { display: none; }
+    .cam video { display: block; width: 100%; max-height: 60vh; object-fit: cover; }
+    .cam .aim { position: absolute; left: 10%; right: 10%; top: 32%; bottom: 32%; border: 3px solid var(--gold); border-radius: 10px; box-shadow: 0 0 0 999px rgba(0,0,0,.35); pointer-events: none; }
+    .cam .aim::after { content: ""; position: absolute; left: 6px; right: 6px; top: 50%; height: 2px; background: #ff5a3c; animation: sweep 1.6s ease-in-out infinite alternate; }
+    @keyframes sweep { from { transform: translateY(-34px); } to { transform: translateY(34px); } }
+    .cam .hint { position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font-size: 14px; font-weight: 700; text-shadow: 0 1px 3px #000; }
+    .cam .stop { position: absolute; top: 8px; inset-inline-end: 8px; padding: 8px 14px; font-size: 13px; }
+    .smsg { margin: 12px 0 0; font-size: 15px; line-height: 1.5; }
+    .smsg:empty { display: none; }
+    .smsg a { color: var(--gold); font-weight: 700; }
+    .prod { display: flex; gap: 14px; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin: 0 0 14px; }
+    .prod[hidden] { display: none; }
+    .prod img { width: 64px; height: 64px; object-fit: contain; border-radius: 8px; background: #F4EFE4; flex: none; }
+    .prod b { display: block; font-size: 17px; line-height: 1.3; }
+    .prod small { display: block; color: var(--muted); font-size: 13px; line-height: 1.45; margin-top: 2px; }
+    @media print { .scan { display: none; } }
+  </style>
+<!--i18n:head--><link rel="alternate" hreflang="en" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/decoder/"><link rel="alternate" hreflang="fr" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/fr/decoder/"><link rel="alternate" hreflang="ar" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/ar/decoder/"><link rel="alternate" hreflang="x-default" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/decoder/"><meta property="og:locale" content="ar_AR"><link rel="stylesheet" href="../../assets/i18n.css"><link rel="stylesheet" href="../../assets/lang-ar.css"><!--/i18n:head--></head>
+<body><!--i18n:switch--><nav class="lang-switch" aria-label="اللغة"><a href="../../decoder/index.html" hreflang="en" lang="en">EN</a><a href="../../fr/decoder/index.html" hreflang="fr" lang="fr">FR</a><span aria-current="true">عربي</span></nav><!--/i18n:switch-->
+<header><a href="../index.html">Supermarket Decoder · اقرأ · فكّك · استبدل</a></header>
+<main>
+  <div class="kicker">أداة مجانية · قوائم المكوّنات</div>
+  <h1>مفكّك المكوّنات: أداة مجانية لفحص ملصقات الطعام</h1>
+  <p class="lead">الصق قائمة المكوّنات من أي عبوة. وفي ثانية سترى أسماء السكّر، ووظيفة كل إضافة، والعلامات التي تشير إلى المعالجة الصناعية، وتقديرًا لدرجة المعالجة حسب NOVA. يقرأ المفكّك القوائم المكتوبة بالفرنسية أو الإنجليزية، كما على العبوات في المغرب.</p>
+
+  <section class="tool" aria-label="فكّك قائمة مكوّنات">
+    <div class="scan" id="scan">
+      <h2>📷 امسح العبوة بدل الكتابة</h2>
+      <p class="sub">امسح الرمز الشريطي المخطّط أو رمز QR للمنتج من نوع GS1 Digital Link. وحين يتعرّف الماسح على رمز UPC-E، يحوّله إلى رقم UPC-A الكامل قبل البحث. أما روابط QR الأخرى فتُعرض عليك لتتحقّق منها، ولا تُفتح تلقائيًّا أبدًا.</p>
+      <div class="row">
+        <button type="button" class="btn gold" id="scanBtn">📷 امسح رمزًا شريطيًّا</button>
+        <button type="button" class="btn line" id="photoBtn">🖼 استعمل صورة</button>
+        <input type="file" id="photo" accept="image/*" hidden>
+        <form id="codeForm" autocomplete="off">
+          <input id="code" inputmode="numeric" aria-label="رقم الرمز الشريطي" placeholder="أو اكتب رقم الرمز الشريطي">
+          <button type="submit" class="btn line">ابحث</button>
+        </form>
+      </div>
+      <div class="cam" id="cam" hidden>
+        <video id="camVideo" playsinline muted aria-label="معاينة مباشرة من الكاميرا لمسح الرمز الشريطي"></video>
+        <div class="aim" aria-hidden="true"></div>
+        <div class="hint">ضع الرمز الشريطي داخل الإطار</div>
+        <button type="button" class="btn line stop" id="camStop">✕ إلغاء</button>
+      </div>
+      <p class="smsg" id="smsg" role="status" aria-live="polite"></p>
+      <p class="privacy">تُعالَج معاينة الكاميرا والصورة التي تختارها على هذا الجهاز ولا تُرفع. وقد تتلقّى Open Food Facts، وكذلك jsDelivr في المتصفّحات التي تحتاج إلى ماسح احتياطي، بيانات اتصال عادية مثل عنوان IP. وقد تُحمَّل صورة مصغّرة اختيارية للمنتج من عنوان الصورة المذكور في سجلّ المجتمع. والبحث بالرمز الشريطي لا يرسل ملفات تعريف الارتباط ولا مُحيل HTTP؛ وطلبات الصورة المصغّرة والمكتبة الاحتياطية لا ترسل المُحيل أيضًا. سجلّات المنتجات يُدخلها المجتمع، فقارنها بالعبوة.</p>
+    </div>
+    <div class="prod" id="prod" hidden>
+      <img id="prodImg" alt="" referrerpolicy="no-referrer">
+      <div><b id="prodName"></b><small id="prodMeta"></small></div>
+    </div>
+    <label for="list">قائمة المكوّنات</label>
+    <textarea id="list" spellcheck="false" placeholder="مثلًا: Flocons d’avoine (25 %), sirop de glucose, chocolat au lait (sucre, beurre de cacao, lait entier en poudre, pâte de cacao, émulsifiant : lécithine de soja), graisse de palme, dextrose, arôme."></textarea>
+    <div class="samples"><span>جرّب مثالًا:</span>
+      <button type="button" data-sample="bar">لوح حبوب بالشوكولاتة</button>
+      <button type="button" data-sample="bread">خبز توست أبيض</button>
+      <button type="button" data-sample="cola">كولا</button>
+      <button type="button" data-sample="yog">زبادي بالفراولة</button>
+      <button type="button" data-sample="nuts">فول سوداني مملّح</button>
+      <button type="button" data-sample="plain">زبادي طبيعي</button>
+    </div>
+    <div class="row">
+      <button type="button" class="btn" id="go">فكّك القائمة</button>
+      <button type="button" class="btn ghost" id="clear">امسح</button>
+    </div>
+    <p class="privacy">🔒 يجري التفكيك بالكامل داخل متصفّحك. لا يُرسَل ولا يُحفظ أي شيء تلصقه.</p>
+    <div class="err" id="err" role="alert"></div>
+  </section>
+
+  <section id="results" hidden aria-live="polite">
+    <h2>ماذا يقول هذا الملصق</h2>
+    <div class="stats">
+      <div class="stat"><b id="sIng">0</b><span>مكوّنات<br>(بما فيها ما بين القوسين)</span></div>
+      <div class="stat sugar"><b id="sSug">0</b><span>أسماء مختلفة<br>للسكّر</span></div>
+      <div class="stat"><b id="sAdd">0</b><span>إضافات<br>(أرقام E ووظائف)</span></div>
+      <div class="stat sig"><b id="sSig">0</b><span>علامات على<br>المعالجة</span></div>
+    </div>
+    <div class="nova" id="nova"></div>
+    <ul class="obs" id="obs"></ul>
+    <h2>مكوّنًا مكوّنًا</h2>
+    <div class="legend">
+      <span class="tag ok">مكوّن أساسي</span><span class="tag kitchen">مكوّن مطبخ</span><span class="tag sugar">اسم من أسماء السكّر</span><span class="tag warn">إضافة: اقرأ وظيفتها</span><span class="tag sig">علامة على المعالجة</span><span class="tag">غير موجود في قائمتنا</span>
+    </div>
+    <ul class="ings" id="ings"></ul>
+    <aside class="offer" aria-label="كتاب Supermarket Decoder الإلكتروني">
+      <img src="https://public-files.gumroad.com/nbbfx502vssnurktwmojzb6uuqz2" alt="غلاف كتاب Supermarket Decoder الإلكتروني" width="120" height="170" loading="lazy">
+      <div>
+        <div class="k">في المرة القادمة، عند الرفّ</div>
+        <h3>افهم الملصقات في 30 ثانية، دون هاتفك</h3>
+        <p id="offerLine">يعلّمك Supermarket Decoder الأسماء القليلة المهمّة، لتقرأ ملصقًا كهذا في ذهنك وأنت تتسوّق.</p>
+        <a class="btn" id="offerBtn" href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&amp;utm_medium=tool&amp;utm_campaign=supermarket_decoder&amp;utm_content=decoder_results-ar" target="_blank" rel="noopener">الدليل (بالإنجليزية) · 9 $</a>
+        <p class="fine">ملف PDF مصوّر من 53 صفحة، بالإنجليزية · ورقة ملخّص للطباعة · متابعة لمدة 14 يومًا · <a href="../index.html#inside">اطّلع على محتواه</a></p>
+        <p class="fine">أو احصل على <a href="https://zakarfr.gumroad.com/l/complete-kit?utm_source=github_pages&amp;utm_medium=tool&amp;utm_campaign=complete_kit&amp;utm_content=decoder_results-ar" target="_blank" rel="noopener"><strong>المجموعة الكاملة (13 $)</strong></a>: الدليل مع مرجع جيب لأرقام E وأوراق للطباعة (بالإنجليزية).</p>
+      </div>
+    </aside>
+    <div class="row share">
+      <button type="button" class="btn ghost" id="share">🔗 انسخ رابطًا لهذه النتيجة</button>
+      <button type="button" class="btn ghost" onclick="window.print()">🖨 اطبع</button>
+      <span class="toast" id="toast" aria-live="polite"></span>
+    </div>
+    <p class="privacy">رابط النتيجة المنسوخ يتضمّن قائمة مكوّناتك في الجزء الذي بعد علامة # من العنوان. لا يُرسَل إلى الموقع، لكن كل من ترسل إليه الرابط يستطيع قراءتها.</p>
+  </section>
+
+  <h2>كيف يعمل المفكّك</h2>
+  <div class="panel">
+    <p><strong>يقرأ القائمة كما تقرؤها أنت عند الرفّ.</strong> يقسم القائمة عند الفواصل، ويفتح كل قوسين («وصفة داخل الوصفة»)، ويحتفظ بكل نسبة مئوية، ويقارن كل مكوّن بقائمة مكتوبة يدويًّا فيها أكثر من 600 اسم مكوّن ووظيفة إضافة ورقم E، منها أسماء الأصباغ الأمريكية (مثل Red 40)، والأسماء «النظيفة» التي تُخفي وظيفة الإضافة (مثل مسحوق الكرفس أو الدكستروز المُخمَّر)، والأخطاء الإملائية الشائعة. ويقرأ القوائم بالفرنسية والإنجليزية؛ أما القوائم المكتوبة بالعربية فلا يقرؤها بعد.</p>
+    <ul>
+      <li><strong>أسماء السكّر</strong> تُحسب كلٌّ على حدة، لأن الوصفة التي تستعمل عدّة سكّريات تستطيع أن تُبقي كلًّا منها أدنى في القائمة. <a href="../articles/hidden-sugars-five-names.html">تعلّم أسماء السكّر ←</a></li>
+      <li><strong>أرقام E</strong> تُشرح حسب وظيفتها: ملوّن، مادة حافظة، مستحلب، مادة رافعة، وغيرها. والرمز معرّف، لا حكم. <a href="../articles/e-numbers-explained.html">أرقام E بشرح مبسّط ←</a></li>
+      <li><strong>علامات المعالجة</strong> تتبع تصنيف NOVA: مكوّنات وإضافات «تجميلية» (مُنكّهات، ملوّنات، مستحلبات، مُحلّيات، مكثّفات وما شابه) نادرًا ما تُستعمل في مطبخ البيت. <a href="../articles/nova-food-processing-levels.html">مجموعات NOVA الأربع ←</a></li>
+    </ul>
+  </div>
+  <div class="note"><strong>يُرجى القراءة:</strong> هذا تقدير تعليمي مبني على كلمات الملصق، وليس تحليلًا مخبريًّا ولا تقييمًا صحيًّا ولا فحصًا لمسبّبات الحساسية. قد تكون الملصقات ناقصة أو مترجمة أو مختصرة، والمفكّك لا يعرف إلا الأسماء التي في قائمته. ويصف NOVA درجة المعالجة لا القيمة الغذائية. ورقم E معرّف، وليس دليلًا على ترخيص حالي في كل بلد أو في كل فئة من الأطعمة. وإذا كانت لديك حساسية أو حمية طبية، فاقرأ العبوة نفسها دائمًا واتّبع نصيحة طبيبك.</div>
+
+  <div class="note" style="margin-top:18px"><strong>تريد أن تفعل هذا في ذهنك، في 30 ثانية؟</strong> Supermarket Decoder كتاب إلكتروني مصوّر من 53 صفحة (PDF، بالإنجليزية) مع ورقة ملخّص للطباعة ومتابعة لمدة 14 يومًا. <a href="../index.html#inside">اطّلع على محتواه</a> أو <a href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&amp;utm_medium=tool&amp;utm_campaign=supermarket_decoder&amp;utm_content=decoder_tool-ar" target="_blank" rel="noopener">احصل عليه من Gumroad</a>.</div>
+  <p><a class="back" href="../free-resources/">→ كل الموارد المجانية</a></p>
+</main>
+<footer>© 2026 Zakaria Froud · <a href="../about.html">من نحن</a> · <a href="../sources.html">المصادر والمنهج</a> · محتوى تعليمي، وليس نصيحة طبية.</footer>
+
+<script src="../../assets/decoder-text.ar.js"></script><script src="../../assets/decoder-data.ar.js"></script><script src="../../assets/decoder.js"></script>
+<script src="../../assets/decoder-scan.js"></script>
+<script defer src="../../assets/nav.js"></script></body>
+</html>
