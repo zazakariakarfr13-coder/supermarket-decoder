@@ -12,7 +12,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from fvk_data import GLOSS, PRODUCTS  # noqa: E402
-from make_additives import head, SITE  # noqa: E402
+from make_additives import head, SITE, PREFIX  # noqa: E402
+from i18n.fvk_ui import UI  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "factory-vs-kitchen"
@@ -63,6 +64,8 @@ dl.gloss dt{font-weight:900;margin-top:12px}dl.gloss dd{margin:2px 0 0}
 @media (max-width:560px){.verdict,.faceoff{grid-template-columns:1fr}}
 """
 
+STYLE_INDEX = STYLE.replace("dl.gloss dt{", ".filter-status{margin:10px 0 0;color:var(--muted);font-size:14px}\ndl.gloss dt{", 1)
+
 HEAD_JS = '\n  <script>document.documentElement.classList.add("js")</script>'
 FOOT_JS = """<script>
 document.querySelectorAll(".term").forEach(function (b) {
@@ -74,17 +77,62 @@ document.querySelectorAll(".term").forEach(function (b) {
   });
 });
 </script>"""
-FOOT = ("</main><footer>© 2026 Zakaria Froud · <a href=\"../about.html\">About</a> · <a href=\"../sources.html\">Sources and method</a> · "
-        "Educational content only, not medical or personalised nutrition advice.</footer>" + FOOT_JS +
-        "<script defer src=\"../assets/nav.js\"></script></body></html>\n")
+TEXT_FIELDS = ["cost", "gear", "answer", "factory", "steps", "secret", "home", "home_tip", "label", "faq"]
+
+
+def foot(lang="en"):
+    up = "../" if lang == "en" else "../../"
+    return f"</main><footer>{UI[lang]['foot']}</footer>" + FOOT_JS + f"<script defer src=\"{up}assets/nav.js\"></script></body></html>\n"
+
+
+FOOT = foot("en")
+
+
+def localized(lang, overlay=None):
+    """Products in `lang`: English entries with text from scripts/i18n/<lang>/fvk.py (numbers guarded)."""
+    if lang == "en":
+        return PRODUCTS
+    if overlay is None:
+        import importlib
+        overlay = importlib.import_module(f"i18n.{lang}.fvk").TR
+    from i18n import guard
+    out = []
+    for p in PRODUCTS:
+        tr = overlay.get(p["slug"])
+        if tr is None:
+            raise ValueError(f"{lang}/{p['slug']}: missing translation")
+        q = dict(p)
+        for f in TEXT_FIELDS:
+            where = f"{lang}/{p['slug']}.{f}"
+            if f not in tr:
+                raise ValueError(f"{where}: missing")
+            if isinstance(p[f], (list, tuple)):
+                guard.same_list(where, list(p[f]), list(tr[f]))
+            else:
+                guard.same(where, p[f], tr[f])
+            q[f] = [tuple(x) for x in tr[f]] if f == "faq" else (tuple(tr[f]) if isinstance(p[f], tuple) else tr[f])
+        q["name"] = tr.get("name", p["name"])
+        out.append(q)
+    return out
+
+
+def gloss_for(lang):
+    if lang == "en":
+        return GLOSS
+    import importlib
+    return importlib.import_module(f"i18n.{lang}.fvk").GLOSS
 
 
 class Terms:
     """Turns glossary words into clickable explanations, once per page."""
-    def __init__(self):
+    def __init__(self, gloss=None, lang="en"):
+        self.gloss, self.lang = (GLOSS if gloss is None else gloss), lang
         self.used, self.tokens = set(), []
-        self.patterns = [(t, re.compile(r"(?<![\w-])" + re.escape(t) + r"(?:s|es)?(?!\w)", re.I))
-                         for t in sorted(GLOSS, key=len, reverse=True)]
+        # Arabic glues "the", "and", "with" to the word (المِبثق، والمبثق، بالمبثق): allow those prefixes.
+        pre = r"(?<![\w-])(?:و?[بلفك]?(?:ال)?)?" if lang == "ar" else r"(?<![\w-])"
+        self.patterns = [(t, re.compile(pre + re.escape(t) + r"(?:s|es)?(?!\w)", re.I))
+                         for t in sorted(self.gloss, key=len, reverse=True)]
+        self.ids = {t: (re.sub(r"[^a-z]+", "-", t) if lang == "en" else str(i)) for i, t in enumerate(sorted(self.gloss))}
 
     def __call__(self, text):
         out = E(text)
@@ -97,10 +145,10 @@ class Terms:
         notes = []
         for s, e, term in sorted(hits, reverse=True):
             self.used.add(term)
-            tid = "t-" + re.sub(r"[^a-z]+", "-", term)
+            tid = "t-" + self.ids[term]
             self.tokens.append(f'<button type="button" class="term" aria-expanded="false" aria-controls="{tid}">{out[s:e]}</button>')
             out = out[:s] + f"\x00{len(self.tokens) - 1}\x00" + out[e:]
-            notes.insert(0, f'<span class="term-note" id="{tid}" role="note"><b>{E(term.capitalize())}:</b> {E(GLOSS[term])}</span>')
+            notes.insert(0, f'<span class="term-note" id="{tid}" role="note"><b>{E(term.capitalize())}{" :" if self.lang == "fr" else ":"}</b> {E(self.gloss[term])}</span>')
         if notes:  # explanations open after the sentence, so they never split it
             self.tokens.append("".join(notes))
             out += f"\x00{len(self.tokens) - 1}\x00"
@@ -110,13 +158,15 @@ class Terms:
         return re.sub(r"\x00(\d+)\x00", lambda m: self.tokens[int(m.group(1))], page)
 
 
-def meta_desc(p):
-    d = f"{p['answer']} Verdict: {VTEXT[p['verdict']].lower()}, {p['score']}/10."
+def meta_desc(p, lang="en"):
+    d = UI[lang]["meta"].format(answer=p["answer"], verdict=UI[lang]["vtext"][p["verdict"]].lower(), score=p["score"])
     return d if len(d) <= 160 else d[:157].rsplit(" ", 1)[0] + "…"
 
 
-def product_page(p, i):
-    T = Terms()
+def product_page(p, i, lang="en", items=None, gloss=None):
+    U = UI[lang]
+    items = items or PRODUCTS
+    T = Terms(gloss, lang) if lang != "en" or gloss is not None else Terms()
     v = VCLASS[p["verdict"]]
     cells = "".join(f'<i class="{"on" if k < p["score"] else ""}"></i>' for k in range(10))
     factory = T(p["factory"])  # page order: the first mention gets the explanation
@@ -124,68 +174,84 @@ def product_page(p, i):
     secret = T(p["secret"])
     home = "".join(f"<li>{T(s)}</li>" for s in p["home"])
     faq = "".join(f"<h3>{E(q)}</h3><p>{E(a)}</p>" for q, a in p["faq"])
-    sources = ("<h2>Sources</h2><ul>" + "".join(
+    sources = (f"<h2>{U['sources_h']}</h2><ul>" + "".join(
         f'<li><a href="{E(u)}" target="_blank" rel="noopener">{E(t)}</a></li>' for t, u in p["sources"]) + "</ul>") if p["sources"] else ""
-    others = [PRODUCTS[(i + k) % len(PRODUCTS)] for k in (1, 2, 3)]
-    more = "".join(card(o) for o in others)
+    others = [items[(i + k) % len(items)] for k in (1, 2, 3)]
+    more = "".join(card(o, lang=lang) for o in others)
     faq_ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
         {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in p["faq"]]}
     extra = HEAD_JS + f'\n  <script type="application/ld+json">{json.dumps(faq_ld, ensure_ascii=False)}</script>'
-    title = f"Can You Make {p['name']} at Home?"
-    body = head(title, meta_desc(p), f"factory-vs-kitchen/{p['slug']}.html", extra=extra).replace(
+    title = U["title"].format(name=p["name"])
+    u = p["slug"] if lang == "en" else f"{p['slug']}-{lang}"
+    stamp = U["stamp"][p["verdict"]]
+    body = head(title, meta_desc(p, lang), f"factory-vs-kitchen/{p['slug']}.html", extra=extra, lang=lang).replace(
         "</head>", f"<style>{STYLE}</style></head>", 1) + f"""
-<div class="kicker">Factory vs. Kitchen · {E(p['name'])}</div>
+<div class="kicker">{E(U['kicker'].format(name=p['name']))}</div>
 <h1>{E(title)} {p['emoji']}</h1>
 <p class="lead">{E(p['answer'])}</p>
-<p style="font-size:14px;color:var(--muted)">Tip: tap any <button type="button" class="term" tabindex="-1" aria-hidden="true">underlined word</button> for a quick explanation.</p>
+<p style="font-size:14px;color:var(--muted)">{U['tip']}</p>
 <div class="verdict {v}">
-  <div class="stamp">{E(p['verdict'])}</div>
-  <div class="score"><b>Kitchen score</b><div class="cells">{cells}</div><span class="num">{p['score']}/10</span></div>
+  <div class="stamp">{E(stamp)}</div>
+  <div class="score"><b>{U['score']}</b><div class="cells">{cells}</div><span class="num">{p['score']}/10</span></div>
 </div>
 <div class="faceoff">
-  <div class="f"><small>🏭 The factory uses</small><strong>{E(p['gear'][0])}</strong></div>
-  <div class="k"><small>🍳 You use</small><strong>{E(p['gear'][1])}</strong></div>
-  <div><small>Store price</small><strong>{E(p['cost'][0])}</strong></div>
-  <div><small>Homemade cost</small><strong>{E(p['cost'][1])}</strong></div>
+  <div class="f"><small>{U['factory_uses']}</small><strong>{E(p['gear'][0])}</strong></div>
+  <div class="k"><small>{U['you_use']}</small><strong>{E(p['gear'][1])}</strong></div>
+  <div><small>{U['store']}</small><strong>{E(p['cost'][0])}</strong></div>
+  <div><small>{U['homemade']}</small><strong>{E(p['cost'][1])}</strong></div>
 </div>
-<h2>How the factory makes {E(p['name'])}</h2>
+<h2>{E(U['how_factory'].format(name=p['name']))}</h2>
 <p>{factory}</p>
 <ol class="steps">{steps}</ol>
-<h2>The factory secret</h2>
-<div class="secret"><b>🔒 What you can't easily copy</b>{secret}</div>
-<h2>How to make {E(p['name'])} at home</h2>
+<h2>{U['secret_h']}</h2>
+<div class="secret"><b>{U['secret_b']}</b>{secret}</div>
+<h2>{E(U['how_home'].format(name=p['name']))}</h2>
 <ol class="steps home">{home}</ol>
 <p>{T(p['home_tip'])}</p>
-<h2>What the label tells you</h2>
+<h2>{U['label_h']}</h2>
 <p>{T(p['label'])}</p>
-<div class="panel"><p><strong>Read any ingredient list in seconds.</strong> Paste a label into the free <a href="../decoder/">Ingredient Decoder</a> and every ingredient gets explained in plain words.</p></div>
-<h2>Questions people ask</h2>
+<div class="panel"><p>{U['decoder']}</p></div>
+<h2>{U['faq_h']}</h2>
 {faq}
 {sources}
-<p style="font-size:14px;color:var(--muted)"><strong>How to read these estimates:</strong> The kitchen score is an editorial estimate of how closely a home version can match the packaged product; it is not a lab measurement or official rating. Store prices and homemade costs are rough US examples, not live quotes, and vary by retailer, location, date, portion size and pantry assumptions. Recipes and ingredients differ between countries, so check the package in your hand.</p>
-<div class="note" style="margin-top:22px"><strong>Want to read labels like this in your head?</strong> Supermarket Decoder is a 53-page illustrated ebook (PDF) with a printable cheat-sheet and a 14-day tracker. <a href="../index.html#inside">See what's inside</a> or <a href="{GUIDE.format(slug=p['slug'])}" target="_blank" rel="noopener">get it on Gumroad ($9)</a>.</div>
-<h2>More Factory vs. Kitchen</h2>
+<p style="font-size:14px;color:var(--muted)">{U['estimates']}</p>
+<div class="note" style="margin-top:22px">{U['guide'].format(guide=GUIDE.format(slug=u))}</div>
+<h2>{U['more_h']}</h2>
 <div class="grid">{more}</div>
-<p><a class="back" href="index.html">← All Factory vs. Kitchen foods</a></p>
-""" + FOOT
+<p><a class="back" href="index.html">{U['back']}</a></p>
+""" + foot(lang)
     return T.finish(body)
 
 
-def card(p, href=None):
+def card(p, href=None, lang="en"):
     v = VCLASS[p["verdict"]]
+    stamp = UI[lang]["stamp"][p["verdict"]]
     parts = p["answer"].split(". ")
     short = parts[0] if len(parts[0]) >= 25 or len(parts) == 1 else parts[0] + ". " + parts[1]
     short = short.rstrip(".") + "."
     return (f'<a class="card" data-v="{v}" href="{href or p["slug"] + ".html"}"><div class="e">{p["emoji"]}</div>'
-            f'<div class="n">{E(p["name"])}</div><span class="badge {v}">{E(p["verdict"])} · {p["score"]}/10</span>'
+            f'<div class="n">{E(p["name"])}</div><span class="badge {v}">{E(stamp)} · {p["score"]}/10</span>'
             f'<div class="j">{E(short)}</div></a>')
 
 
-def index_page():
-    cards = "".join(card(p) for p in PRODUCTS)
-    gloss = "".join(f'<dt id="g-{re.sub(r"[^a-z]+", "-", t)}">{E(t.capitalize())}</dt><dd>{E(GLOSS[t])}</dd>' for t in sorted(GLOSS))
-    chips = "".join(f'<button type="button" data-f="{f}" aria-pressed="{"true" if f == "all" else "false"}">{lab}</button>'
-                    for f, lab in (("all", "All"), ("yes", "✅ Yes"), ("sortof", "🟡 Sort of"), ("noway", "⛔ No way")))
+
+FILTER_JS_EN = '<script>\n(function () {\n  var buttons = Array.prototype.slice.call(document.querySelectorAll(".chips button"));\n  var cards = Array.prototype.slice.call(document.querySelectorAll("#food-grid .card"));\n  var status = document.getElementById("filter-status");\n\n  function applyFilter(button) {\n    var filter = button.getAttribute("data-f");\n    var visible = 0;\n\n    buttons.forEach(function (item) {\n      item.setAttribute("aria-pressed", item === button ? "true" : "false");\n    });\n\n    cards.forEach(function (card) {\n      var show = filter === "all" || card.getAttribute("data-v") === filter;\n      card.hidden = !show;\n      if (show) visible += 1;\n    });\n\n    status.textContent = filter === "all"\n      ? "Showing all " + visible + " foods."\n      : "Showing " + visible + (visible === 1 ? " food" : " foods") + " in this category.";\n  }\n\n  buttons.forEach(function (button) {\n    button.addEventListener("click", function () {\n      applyFilter(button);\n    });\n  });\n})();\n</script>'
+_STATUS_EN = '      ? "Showing all " + visible + " foods."\n      : "Showing " + visible + (visible === 1 ? " food" : " foods") + " in this category.";'
+_STATUS = {'fr': '      ? "Les " + visible + " produits sont affichés."\n      : (visible === 1 ? "1 produit affiché" : visible + " produits affichés") + " dans cette catégorie.";', 'ar': '      ? "تُعرض كل المنتجات: " + visible + "."\n      : "عدد المنتجات المعروضة في هذه الفئة: " + visible + ".";'}
+
+
+def filter_js(lang="en"):
+    return FILTER_JS_EN if lang == "en" else FILTER_JS_EN.replace(_STATUS_EN, _STATUS[lang])
+
+def index_page(lang="en", items=None, gloss=None):
+    U = UI[lang]
+    items = items or PRODUCTS
+    G = GLOSS if gloss is None else gloss
+    cards = "".join(card(p, lang=lang) for p in items)
+    gid = (lambda t, i: re.sub(r"[^a-z]+", "-", t)) if lang == "en" else (lambda t, i: str(i))
+    gloss_html = "".join(f'<dt id="g-{gid(t, i)}">{E(t.capitalize())}</dt><dd>{E(G[t])}</dd>' for i, t in enumerate(sorted(G)))
+    chips = "".join(f'<button type="button" data-f="{f}" aria-controls="food-grid" aria-pressed="{"true" if f == "all" else "false"}">{U["chips"][f]}</button>'
+                    for f in ("all", "yes", "sortof", "noway"))
     js = """<script>
 document.querySelectorAll(".chips button").forEach(function (b) {
   b.addEventListener("click", function () {
@@ -195,22 +261,22 @@ document.querySelectorAll(".chips button").forEach(function (b) {
   });
 });
 </script>"""
-    return head("Factory vs. Kitchen: Can You Make It at Home?",
-                "How 15 famous packaged foods are really made in factories, the one secret you can't copy, and whether you can make each one at home, with a verdict and a score.",
-                "factory-vs-kitchen/", og_type="website", extra=HEAD_JS).replace(
-        "</head>", f"<style>{STYLE}</style></head>", 1) + f"""
-<div class="kicker">Factory vs. Kitchen</div>
-<h1>Can you make it at home?</h1>
-<p class="lead">How famous packaged foods are really made, the one factory secret you can't easily copy, and an honest verdict on whether your kitchen can do it.</p>
-<div class="panel"><p><strong>How the verdicts work.</strong> <span class="badge yes">Yes</span> means a homemade version is as good or better. <span class="badge sortof">Sort of</span> means you can get most of the way, but one factory trick is missing. <span class="badge noway">No way</span> means the machine or the secret recipe makes it impossible at home. The kitchen score (out of 10) is how close a careful home cook can get.</p></div>
-<div class="chips" role="group" aria-label="Filter by verdict">{chips}</div>
-<div class="grid">{cards}</div>
-<h2>Factory words, explained</h2>
-<p>The words you'll meet on these pages, in plain English.</p>
-<dl class="gloss">{gloss}</dl>
-<div class="panel"><p><strong>Curious what's in the pack itself?</strong> Paste any ingredient list into the free <a href="../decoder/">Ingredient Decoder</a>, or look up additive codes in the <a href="../additives/">E-number pages</a>.</p></div>
-<p><a class="back" href="../free-resources/">← All free resources</a></p>
-""" + FOOT.replace(FOOT_JS, FOOT_JS + js)
+    return head(U["idx_title"], U["idx_desc"], "factory-vs-kitchen/", og_type="website", extra=HEAD_JS, lang=lang).replace(
+        "</head>", f"<style>{STYLE_INDEX}</style></head>", 1) + f"""
+<div class="kicker">{U['idx_kicker']}</div>
+<h1>{U['idx_h1']}</h1>
+<p class="lead">{U['idx_lead']}</p>
+<div class="panel"><p>{U['idx_how']}</p></div>
+<p class="method-note">{U['method']}</p>
+<div class="chips" role="group" aria-label="{U['filter']}">{chips}</div>
+<p class="filter-status" id="filter-status" role="status" aria-live="polite" aria-atomic="true">{U['status_all'].format(n=len(items))}</p>
+<div class="grid" id="food-grid">{cards}</div>
+<h2>{U['words_h']}</h2>
+<p>{U['words_p']}</p>
+<dl class="gloss">{gloss_html}</dl>
+<div class="panel"><p>{U['idx_more']}</p></div>
+<p><a class="back" href="../free-resources/">{U['idx_back']}</a></p>
+""" + foot(lang).replace(FOOT_JS, FOOT_JS + filter_js(lang))
 
 
 def update_sitemap():
@@ -222,13 +288,24 @@ def update_sitemap():
         sm.write_text(text.replace("</urlset>", add + "</urlset>"), encoding="utf-8", newline="\n")
 
 
+def available_langs():
+    import importlib.util
+    return ["en"] + [l for l in ("fr", "ar") if importlib.util.find_spec(f"i18n.{l}.fvk")]
+
+
 def main():
-    OUT.mkdir(exist_ok=True)
-    for i, p in enumerate(PRODUCTS):
-        (OUT / f"{p['slug']}.html").write_text(product_page(p, i), encoding="utf-8", newline="\n")
-    (OUT / "index.html").write_text(index_page(), encoding="utf-8", newline="\n")
+    import i18n_pages
     update_sitemap()
-    print(f"wrote {len(PRODUCTS) + 1} pages to factory-vs-kitchen/")
+    for lang in available_langs():
+        items, gloss = localized(lang), (None if lang == "en" else gloss_for(lang))
+        out = ROOT / PREFIX[lang] / "factory-vs-kitchen"
+        out.mkdir(parents=True, exist_ok=True)
+        for i, p in enumerate(items):
+            html_ = product_page(p, i) if lang == "en" else product_page(p, i, lang, items, gloss)
+            (out / f"{p['slug']}.html").write_text(html_, encoding="utf-8", newline="\n")
+        (out / "index.html").write_text(index_page() if lang == "en" else index_page(lang, items, gloss), encoding="utf-8", newline="\n")
+        print(f"wrote {len(items) + 1} pages to {PREFIX[lang]}factory-vs-kitchen/")
+    i18n_pages.main([])
 
 
 if __name__ == "__main__":

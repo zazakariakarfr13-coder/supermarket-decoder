@@ -1,0 +1,327 @@
+"""Français : Usine ou cuisine. Mêmes chiffres que l’anglais (vérifié par i18n/guard.py).
+GLOSS : mots techniques de cette langue, tels qu’ils apparaissent dans le texte (première occurrence cliquable)."""
+
+GLOSS = {
+    "extrudeuse": "Une machine qui pousse une pâte à travers un trou en forme, comme une presse à pâte à modeler géante.",
+    "filière": "Le trou en forme au bout d’une extrudeuse. C’est lui qui décide de la forme du snack.",
+    "selle": "Une forme de chips incurvée : relevée sur deux côtés, abaissée sur les deux autres. C’est pour ça qu’elles s’empilent.",
+    "psi": "Livres par pouce carré, une unité de pression. Un pneu de voiture tient environ 32 psi.",
+    "affiné aux rouleaux": "Écrasé entre des rouleaux d’acier jusqu’à ce que les grains soient trop petits pour être sentis sur la langue.",
+    "pâte à choux": "La pâte des éclairs et des choux. La vapeur la fait gonfler au four.",
+    "dragéification": "Enrober des confiseries en les faisant rouler dans un tambour qui tourne, une fine couche à la fois.",
+    "lentilles": "De petits morceaux ronds et plats, en forme de lentille.",
+    "ligne de laminage": "Des machines qui étalent la pâte en une longue feuille parfaitement régulière.",
+    "moulage rotatif": "Presser la pâte dans un rouleau de métal qui tourne, où la forme du biscuit est gravée.",
+    "cacao noir": "Du cacao traité à l’alcali jusqu’à devenir presque noir. Couleur plus foncée, goût plus doux.",
+    "concentré": "La base aromatique avec presque toute l’eau en moins. L’eau est ajoutée plus tard.",
+    "piqués": "Percés de petits trous pour que la vapeur s’échappe et que la pâte cuise à plat.",
+    "alcalines": "Faites avec des sels minéraux qui rendent les nouilles élastiques, fermes et un peu jaunes.",
+    "kansui": "Eau minérale alcaline utilisée pour les nouilles ramen. Elle leur donne leur ressort.",
+    "bicarbonate cuit": "Du bicarbonate de soude chauffé au four pendant une heure. Il devient plus fort, proche des sels à ramen.",
+    "mogul à amidon": "Une machine qui imprime des formes de bonbons dans des plateaux d’amidon de maïs, puis les remplit.",
+    "enrobés": "Entièrement recouverts en passant sous un rideau de chocolat fondu.",
+    "recyclage": "Mot d’usine pour les produits cassés qui repartent dans la recette.",
+    "tempéré": "Fondu et refroidi avec soin pour que le chocolat durcisse brillant et casse net.",
+    "broyé": "Moulu si finement qu’il devient parfaitement lisse.",
+    "moule canoë": "Un moule à gâteau aux alvéoles longues, étroites et arrondies.",
+    "acide citrique": "Une poudre acide tirée des agrumes. Mélangée au bicarbonate et à l’eau, elle pétille.",
+    "lécithine": "Un émulsifiant, souvent tiré du soja ou du tournesol, qui garde l’huile et les autres ingrédients mélangés.",
+    "secret commercial": "Une information gardée secrète au lieu d’être brevetée, pour ne jamais devoir la publier.",
+    "gazéifiée": "De l’eau où du gaz carbonique est dissous. Ce sont les bulles.",
+}
+
+TR = {
+    "pringles": dict(
+        cost=("2,50 $ la boîte", "environ 1,50 $ la fournée"), gear=("Une ligne de friture sur moules en selle", "Deux louches emboîtées"),
+        answer="Pas vraiment. Les Pringles sont une pâte pressée, pas des tranches de pomme de terre, et chaque chips est frite sur un moule incurvé. "
+               "Vous pouvez faire une bonne version maison, mais elle n’aura ni la forme ni l’empilement de l’original.",
+        factory="Les Pringles commencent par une pâte, pas par des tranches de pomme de terre. De la pomme de terre déshydratée est mélangée à de la farine de maïs, "
+                "de la farine de riz et de l’amidon de blé, étalée en une seule feuille fine et continue, puis découpée en ovales. Chaque ovale est pressé sur un moule "
+                "en selle incurvé et frit quelques secondes, puis assaisonné et empilé directement dans la boîte.",
+        steps=["Pomme de terre déshydratée, farine de maïs, farine de riz et amidon de blé deviennent une pâte",
+               "La pâte est étalée en une immense feuille fine",
+               "Des ovales sont découpés dans la feuille",
+               "Chaque ovale est frit sur un moule en selle, assaisonné et empilé"],
+        secret="Toute l’astuce est dans la forme. Comme chaque chips est frite maintenue sur le même moule incurvé, elles sortent identiques, "
+               "et des selles identiques s’emboîtent les unes dans les autres. C’est pour ça qu’elles tiennent dans un tube sans se casser.",
+        home=["Mélangez des flocons de purée instantanée avec un peu de farine et d’eau pour obtenir une pâte ferme",
+              "Étalez-la très finement entre deux feuilles de papier cuisson et découpez des ovales",
+              "Faites frire chaque ovale pressé entre deux louches pour qu’il prenne une forme courbe, puis salez"],
+        home_tip="Comptez environ une heure de travail pour un bol. Le goût s’en approche ; la forme régulière et l’empilement, non.",
+        label="Lors d’une affaire fiscale au Royaume-Uni en 2008, un juge de la High Court a estimé que les Pringles ne contenaient qu’environ 42 % de pomme de terre "
+              "et qu’elles n’étaient pas des chips. La Cour d’appel a annulé cette décision en 2009. Aux États-Unis, elles sont vendues comme « potato crisps » et non « chips ».",
+        faq=[("Les Pringles sont-elles de vraies chips ?", "Elles sont faites de pomme de terre déshydratée mélangée à d’autres farines et amidons, pressés en pâte. "
+                                                         "Un juge britannique a estimé qu’elles contenaient environ 42 % de pomme de terre, décision annulée ensuite en appel."),
+             ("Pourquoi les Pringles s’empilent-elles si bien ?", "Chaque chips est frite sur le même moule incurvé en forme de selle : elles sont identiques et s’emboîtent.")],
+    ),
+    "pop-rocks": dict(
+        cost=("environ 1 $ le sachet", "impossible sans danger"), gear=("Une cuve sous pression", "Une casserole, et ça ne suffit pas"),
+        answer="Non. Les Pop Rocks demandent un sucre chaud mélangé à du gaz carbonique à environ 600 psi, bien au-delà de ce qu’une cuisine peut faire sans danger. "
+               "La version maison la plus proche est un bonbon qui pétille, pas un bonbon qui éclate.",
+        factory="La liste d’ingrédients est banale : sucre, lactose, sirop de maïs et arôme. Le secret, c’est le procédé. "
+                "Un sirop de sucre chaud est mélangé à du gaz carbonique à environ 600 psi, le chiffre donné dans les brevets d’origine du « bonbon gazéifié » "
+                "(certaines sources disent 730). Il refroidit et durcit sous pression, puis se brise en petits cailloux quand on relâche la pression.",
+        steps=["Sucre, lactose et sirop de maïs sont cuits en un sirop chaud",
+               "Du gaz carbonique est injecté à environ 600 psi",
+               "Le bonbon refroidit et durcit sous pression",
+               "Relâcher la pression le brise en cailloux"],
+        secret="Chaque caillou contient de minuscules bulles de gaz comprimé. Quand la salive fait fondre la paroi de sucre autour d’une bulle, le gaz s’échappe avec un craquement audible. "
+               "C’est près de vingt fois la pression d’un pneu de voiture, enfermée dans un bonbon.",
+        home=["N’essayez pas la partie sous pression : les cuves sous pression sont dangereuses sans équipement adapté",
+              "Faites un simple bonbon dur et cassez-le en petits morceaux",
+              "Enrobez les morceaux d’acide citrique et d’un peu de bicarbonate pour un pétillement sur la langue"],
+        home_tip="Vous obtenez un pétillement façon poudre acidulée. Ça n’éclatera pas, car il n’y a pas de gaz piégé à l’intérieur.",
+        label="L’ingrédient magique, le gaz carbonique, n’apparaît même pas dans la liste. C’est un procédé, pas un ingrédient.",
+        faq=[("Comment éclatent les Pop Rocks ?", "De minuscules bulles de gaz carbonique sont piégées sous pression dans le bonbon. La salive dissout le sucre autour d’elles et le gaz s’échappe d’un coup."),
+             ("Peut-on faire des Pop Rocks à la maison ?", "Pas sans danger. Le procédé demande une pression de gaz d’environ 600 psi. À la maison, on peut seulement faire un bonbon pétillant avec de l’acide citrique et du bicarbonate.")],
+    ),
+    "nutella": dict(
+        cost=("environ 4 $ le pot", "environ 5-6 $ le pot"), gear=("Des broyeuses à rouleaux", "Un robot mixeur"),
+        answer="Oui, et c’est plus facile qu’on ne le croit. Des noisettes grillées mixées assez longtemps deviennent une purée ; ajoutez cacao, sucre et lait en poudre "
+               "et vous avez une pâte à tartiner avec bien plus de noisettes que le pot.",
+        factory="L’usine grille les noisettes et les broie en pâte avec du sucre, de l’huile végétale, du cacao, du lait écrémé en poudre, de la lécithine et de la vanilline. "
+                "Le mélange est ensuite affiné aux rouleaux jusqu’à ce que les grains soient impossibles à sentir : c’est de là que vient la texture soyeuse.",
+        steps=["Les noisettes sont grillées et broyées",
+               "On y mélange sucre, huile, cacao et lait en poudre",
+               "La pâte est affinée aux rouleaux jusqu’à être parfaitement lisse"],
+        secret="L’étiquette dit tout. Le sucre est le premier ingrédient et les noisettes font 13 % du pot. C’est une pâte de sucre au goût de noisette.",
+        home=["Faites griller les noisettes à 180°C environ 10 minutes, puis frottez-les dans un torchon pour retirer la peau",
+              "Mixez 8-12 minutes en raclant les bords, jusqu’à obtenir une purée coulante",
+              "Ajoutez cacao, sucre glace, lait en poudre, une pincée de sel et un filet d’huile neutre"],
+        home_tip="La vôtre sera un peu plus granuleuse, car un robot ne broie pas aussi finement que les rouleaux d’usine. Elle coûte un peu plus cher, les noisettes étant chères.",
+        label="Les ingrédients varient selon les pays : certains pots indiquent huile de palme, d’autres huile végétale. Lisez le pot que vous avez en main : sucre en premier, noisettes 13 %.",
+        faq=[("Combien de noisettes y a-t-il dans le Nutella ?", "13 %, comme indiqué sur l’étiquette. Le sucre est cité en premier : c’est l’ingrédient le plus important en poids."),
+             ("Le Nutella maison est-il plus sain ?", "Il contient en général beaucoup plus de noisettes et moins de sucre, car vous choisissez les quantités. Ça reste une pâte sucrée.")],
+    ),
+    "cheetos": dict(
+        cost=("environ 4,50 $ le sachet", "environ 2 $ la fournée"), gear=("Une extrudeuse", "Une poche à douille"),
+        answer="Plus ou moins. Le goût de fromage est facile à copier, mais le croquant aérien vient d’une extrudeuse, une machine qu’aucune cuisine n’a. "
+               "Un bâtonnet de semoule de maïs cuit au four fait la plus grande partie du chemin.",
+        factory="De la semoule de maïs humide est poussée dans une extrudeuse sous chaleur et pression. En sortant de la filière, la chute brutale de pression transforme l’eau "
+                "en vapeur, et le snack gonfle en une fraction de seconde. Les morceaux sont coupés, frits ou cuits au four, puis roulés dans un assaisonnement au fromage.",
+        steps=["La semoule de maïs humide entre dans la machine",
+               "Elle est poussée dans une extrudeuse sous chaleur et pression",
+               "La vapeur la fait gonfler dès qu’elle sort de la machine",
+               "Les morceaux sont cuits et roulés dans la poudre de fromage"],
+        secret="Le gonflement se fait en une fraction de seconde, quand la pression chute à la filière. Cette expansion instantanée donne aux Cheetos leur croquant léger et aéré.",
+        home=["Faites une pâte à choux en remplaçant une partie de la farine par de la semoule de maïs",
+              "Pochez de fins bâtonnets sur une plaque et faites-les cuire jusqu’à ce qu’ils soient bien croustillants",
+              "Roulez-les dans du beurre fondu et de la poudre de fromage (le sachet des macaronis au fromage en boîte convient)"],
+        home_tip="Le goût est parfait. Le croquant est plus dense, à environ 80 % du résultat.",
+        label="Ce orange vif ne vient pas que du fromage. Les Crunchy Cheetos américains citent le Yellow 6 parmi leurs colorants (E110 en Europe). Les recettes varient selon le parfum et le pays.",
+        faq=[("Comment fabrique-t-on les Cheetos ?", "De la semoule de maïs humide passe dans une extrudeuse ; la chute de pression à la sortie la fait gonfler à la vapeur. Puis elle est cuite et enrobée d’assaisonnement au fromage."),
+             ("Pourquoi les Cheetos sont-ils si orange ?", "Assaisonnement au fromage plus colorant ajouté : la saveur Crunchy fromage américaine cite le Yellow 6.")],
+    ),
+    "mms": dict(
+        cost=("environ 4 $ le sachet", "pas cher, mais des heures de travail"), gear=("D’énormes tambours rotatifs", "Un saladier et des bras fatigués"),
+        answer="Non. La coque croquante, ce sont des dizaines de couches de sucre fines comme du papier, construites pendant des heures dans des tambours rotatifs. "
+               "À la maison, vous pouvez enrober du chocolat de sucre, mais pas obtenir cette coque.",
+        factory="Le chocolat est façonné en petites lentilles, puis passe en dragéification : il roule dans de grands tambours rotatifs pendant qu’on ajoute du sirop de sucre, "
+                "qu’on sèche, puis qu’on rajoute, couche après couche. Viennent ensuite la couleur, le lustrage et la lettre imprimée.",
+        steps=["Le chocolat est façonné en petites lentilles",
+               "Elles passent en dragéification dans de grands tambours rotatifs",
+               "Le sirop de sucre est ajouté couche après couche, avec séchage entre chaque",
+               "Couleur, lustrage et le m imprimé viennent à la fin"],
+        secret="La coque n’est pas une seule couche. Dans ce type de dragéification, une lentille de chocolat reçoit en général 40 à 60 couches en 6 à 8 heures. "
+               "Mars n’a pas publié son propre nombre, mais le principe est le même : des dizaines de couches très fines.",
+        home=["Congelez des pépites de chocolat pour qu’elles ne fondent pas pendant le travail",
+              "Roulez-les dans un saladier avec une cuillerée de sirop de sucre épais, puis laissez sécher",
+              "Recommencez encore et encore, puis ajoutez du colorant alimentaire aux dernières couches"],
+        home_tip="Vous obtiendrez un enrobage fin et irrégulier. Une coque lisse et croquante demande la machine et des heures de rotation.",
+        label="Chaque couleur est listée à part sur le paquet, d’où une liste d’ingrédients si longue pour une confiserie si simple.",
+        faq=[("Comment est faite la coque des M&M’s ?", "Par dragéification : le chocolat roule dans des tambours rotatifs et reçoit de fines couches de sirop de sucre, chacune séchant à son tour."),
+             ("Combien de couches dans la coque d’un M&M’s ?", "Mars n’a pas publié de chiffre. Les lentilles de chocolat dragéifiées similaires reçoivent 40 à 60 couches.")],
+    ),
+    "pop-tarts": dict(
+        cost=("environ 4 $ les 8", "environ 3 $ les 8"), gear=("Une ligne de laminage", "Un rouleau à pâtisserie"),
+        answer="Oui. Les Pop-Tarts, c’est de la pâte, de la confiture et du glaçage, et la version maison est plus feuilletée et plus fruitée. "
+               "Pâte brisée, confiture et un glaçage simple suffisent.",
+        factory="La pâte avance sur une ligne de laminage, la garniture est déposée en rangées, une deuxième feuille vient dessus, "
+                "et des machines soudent, découpent, cuisent et glacent les tartelettes.",
+        steps=["La pâte est étalée à plat sur une ligne de laminage",
+               "La garniture est déposée en rangées régulières",
+               "Une feuille vient dessus, puis tout est soudé et découpé",
+               "Les tartelettes sont cuites, puis glacées"],
+        secret="Les premières Pop-Tarts, lancées en 1964, n’avaient pas de glaçage du tout. Les glacées sont arrivées en 1967, quand Kellogg’s a mis au point un glaçage qui résiste au grille-pain.",
+        home=["Étalez une pâte brisée et découpez-la en rectangles",
+              "Ajoutez une cuillerée de confiture, posez un second rectangle dessus et pincez les bords à la fourchette",
+              "Faites cuire jusqu’à ce qu’elles soient dorées, puis glacez avec du sucre glace et du lait, et ajoutez des vermicelles"],
+        home_tip="Percez quelques trous sur le dessus pour que la vapeur s’échappe, sinon la confiture débordera sur les côtés.",
+        label="Comparez la quantité de fruits dans la garniture avec la confiture que vous utilisez chez vous. Le paquet l’indique dans les ingrédients.",
+        faq=[("Depuis quand les Pop-Tarts ont-elles un glaçage ?", "Depuis 1967, trois ans après leur lancement. Les premières Pop-Tarts de 1964 n’étaient pas glacées."),
+             ("Que faut-il pour faire des Pop-Tarts maison ?", "De la pâte brisée, de la confiture, du sucre glace et du lait pour le glaçage. Les vermicelles sont facultatifs.")],
+    ),
+    "oreos": dict(
+        cost=("environ 5 $ le paquet", "environ 4 $ la fournée"), gear=("Des moules rotatifs gravés", "Un tampon à biscuits"),
+        answer="Plus ou moins. Le goût est très faisable avec le bon cacao, mais le biscuit croustillant et gravé vient du moulage rotatif. "
+               "La vraie clé est un ingrédient que presque tout le monde se trompe à choisir.",
+        factory="La pâte à biscuit est façonnée par moulage rotatif : pressée dans des rouleaux de métal qui tournent, où le célèbre motif est gravé, "
+                "puis cuite jusqu’à être croustillante. La garniture est déposée sur un biscuit et un second biscuit vient dessus.",
+        steps=["Une pâte au cacao très foncé est mélangée",
+               "Des rouleaux gravés y impriment le motif",
+               "Les biscuits sont cuits jusqu’à être croustillants",
+               "La garniture va sur un biscuit, le second vient dessus"],
+        secret="La couleur presque noire vient du cacao noir. Le cacao ordinaire donne un biscuit brun au goût de brownie. "
+               "Le cacao noir donne la vraie couleur et cette petite pointe d’amertume.",
+        home=["Faites une pâte avec du cacao noir, du beurre, du sucre et de la farine",
+              "Étalez-la finement, découpez des ronds et faites cuire jusqu’à ce qu’ils soient croustillants",
+              "Assemblez-les avec du beurre (ou de la graisse végétale), du sucre glace et de la vanille"],
+        home_tip="Étalez plus fin que ce qui vous semble juste. Des biscuits maison épais deviennent mous au lieu de casser net.",
+        label="La garniture ne contient aucun produit laitier : c’est surtout du sucre et de l’huile végétale. C’est pourquoi elle s’écrit « creme » et non « cream ».",
+        faq=[("Pourquoi les Oreo sont-ils si foncés ?", "Ils utilisent du cacao noir fortement alcalinisé. Le cacao ordinaire donne un biscuit plus clair, façon brownie."),
+             ("Y a-t-il de la crème dans la garniture des Oreo ?", "Non. C’est surtout du sucre et de l’huile végétale, d’où le nom « creme ».")],
+    ),
+    "coca-cola": dict(
+        cost=("environ 0,75 $ la canette", "environ 0,50 $ le verre"), gear=("Un concentré secret", "Une machine à soda"),
+        answer="Non. La formule aromatique de Coca-Cola est un secret commercial jamais publié. "
+               "Vous pouvez faire un délicieux cola maison, mais pas du Coca.",
+        factory="Coca-Cola n’expédie pas de soda prêt à boire dans chaque ville. L’entreprise fabrique un concentré et l’envoie aux embouteilleurs, "
+                "qui ajoutent l’édulcorant et l’eau gazéifiée et remplissent bouteilles et canettes sur place.",
+        steps=["L’entreprise fabrique le concentré secret",
+               "Le concentré est expédié aux embouteilleurs locaux",
+               "Les embouteilleurs ajoutent l’édulcorant et l’eau gazéifiée"],
+        secret="L’étiquette dit seulement « arômes naturels ». La formule écrite a passé 86 ans dans le coffre d’une banque, et depuis 2011 elle est gardée "
+               "dans un coffre du musée World of Coca-Cola à Atlanta.",
+        home=["Faites frémir sucre et eau avec des zestes d’orange, de citron et de citron vert",
+              "Ajoutez cannelle, un peu de muscade, de la vanille et une pincée d’acide citrique",
+              "Colorez au caramel ou au sucre brûlé, filtrez et mélangez à de l’eau pétillante"],
+        home_tip="Le cola maison est frais et épicé, plus proche d’un soda artisanal que du Coca.",
+        label="C’est dans « arômes naturels » que se cache le secret. Les entreprises n’ont pas à dire quels arômes composent ce mélange.",
+        faq=[("Où est gardée la recette du Coca-Cola ?", "Dans un coffre du World of Coca-Cola à Atlanta depuis 2011. Avant, elle était dans le coffre d’une banque pendant 86 ans."),
+             ("Peut-on faire du Coca-Cola à la maison ?", "Pas le vrai. Vous pouvez faire un cola maison avec agrumes, épices, vanille et caramel.")],
+    ),
+    "ritz": dict(
+        cost=("environ 4,50 $ la boîte", "environ 1,50 $ la fournée"), gear=("Des rouleaux à piquer", "Une fourchette"),
+        answer="Oui, et les vôtres peuvent contenir du vrai beurre. La seule astuce, ce sont les petits trous, et une fourchette s’en charge.",
+        factory="La pâte est étalée finement et découpée avec un emporte-pièce rond cannelé. Les crackers sont piqués de petits trous, "
+                "cuits, puis vaporisés d’huile et saupoudrés de sel.",
+        steps=["La pâte est étalée finement",
+               "Un emporte-pièce cannelé façonne chaque cracker",
+               "Les crackers sont piqués de petits trous",
+               "Ils sont cuits, huilés et salés"],
+        secret="Les trous ne sont pas décoratifs. Ils laissent la vapeur s’échapper pendant la cuisson. Sans eux, chaque cracker gonflerait en petit coussin.",
+        home=["Mélangez farine, levure chimique, un peu de sucre et de sel, sablez avec du beurre froid, ajoutez de l’eau",
+              "Étalez finement, découpez des ronds et piquez-les avec une fourchette ou une paille",
+              "Faites cuire jusqu’à ce qu’ils soient dorés, puis badigeonnez de beurre fondu et salez"],
+        home_tip="Badigeonnez de beurre tant qu’ils sont chauds, pour qu’il pénètre.",
+        label="Les Ritz Original américains ne contiennent pas de beurre. La matière grasse est de l’huile de colza et de palme, et le goût de beurre vient d’un « arôme naturel ».",
+        faq=[("Pourquoi les crackers Ritz ont-ils des trous ?", "Pour que la vapeur s’échappe à la cuisson et que les crackers restent plats au lieu de gonfler."),
+             ("Y a-t-il du beurre dans les Ritz ?", "Pas dans les Ritz Original américains. Ils sont faits avec de l’huile de colza et de palme plus un arôme naturel.")],
+    ),
+    "instant-ramen": dict(
+        cost=("environ 0,50 $ le paquet", "environ 0,40 $ le paquet"), gear=("Un tunnel vapeur et friture", "Une casserole et une poêle d’huile"),
+        answer="Plus ou moins. Vous pouvez faire de vraies nouilles instantanées frites à la maison, et ça marche. "
+               "Il faut juste un après-midi pour gagner trois minutes.",
+        factory="Des nouilles de blé alcalines sont coupées, cuites à la vapeur, pressées en blocs et frites rapidement. La friture chasse l’eau et laisse de minuscules trous, "
+                "si bien que l’eau bouillante réhydrate les nouilles en trois minutes environ. Momofuku Ando a inventé la méthode au Japon en 1958.",
+        steps=["Des nouilles de blé alcalines sont coupées",
+               "Les nouilles sont cuites à la vapeur",
+               "Elles sont pressées en blocs",
+               "Les blocs sont frits rapidement jusqu’à être secs"],
+        secret="La friture n’est pas là pour le goût, c’est une astuce de séchage. L’huile chaude chasse l’eau et laisse la nouille pleine de minuscules trous. "
+               "L’eau chaude revient s’y engouffrer, c’est pourquoi le dîner prend trois minutes.",
+        home=["Faites des nouilles avec de la farine, de l’eau et du bicarbonate cuit, une version maison du kansui",
+              "Faites cuire les nouilles à la vapeur, puis tordez-les en petits nids",
+              "Faites frire les nids jusqu’à ce qu’ils soient secs et dorés, puis laissez refroidir"],
+        home_tip="Faites cuire le bicarbonate sur une plaque recouverte de papier à environ 120°C pendant une heure, et portez des gants : il devient fortement alcalin.",
+        label="Environ les trois quarts du sodium sont dans le sachet d’assaisonnement, et les nouilles portent le reste. La répartition varie selon la marque ; certaines étiquettes les indiquent séparément.",
+        faq=[("Pourquoi les ramen instantanées cuisent-elles si vite ?", "Les nouilles sont cuites à la vapeur puis frites. La friture laisse de minuscules trous qui laissent l’eau chaude revenir vite."),
+             ("Le sel est-il surtout dans le sachet ?", "Oui, environ les trois quarts dans la plupart des marques. Les nouilles en contiennent quand même.")],
+    ),
+    "froot-loops": dict(
+        cost=("environ 5 $ la boîte", "une autre céréale"), gear=("Une extrudeuse", "Un emporte-pièce à beignets, qui ne servira à rien"),
+        answer="Non. Les anneaux légers et soufflés viennent d’une extrusion à haute température et haute pression. "
+               "Des anneaux cuits au four à la maison sont denses et croquants : c’est une autre céréale.",
+        factory="Une pâte de céréales sucrée est cuite et poussée à travers une filière en anneau dans une extrudeuse. Les anneaux gonflent dès qu’ils sortent de la machine, "
+                "puis sont séchés, colorés et enrobés de sucre.",
+        steps=["Une pâte de céréales sucrée est cuite",
+               "Elle est poussée à travers une filière en anneau",
+               "Les anneaux gonflent instantanément",
+               "Ils sont colorés et enrobés de sucre"],
+        secret="Toutes les couleurs auraient le même goût. Kellogg’s l’a dit en 1999 dans un entretien avec The Straight Dope, et les tests à l’aveugle le confirment. Ce sont vos yeux qui goûtent.",
+        home=["Faites une pâte sucrée avec farine, sucre et zeste de fruit",
+              "Formez de petits anneaux à la main ou à la poche à douille",
+              "Faites-les cuire jusqu’à ce qu’ils croquent, avec du colorant si vous voulez"],
+        home_tip="Ils sont bons, mais plus proches de petits biscuits que de céréales soufflées.",
+        label="Le sucre est en haut de la liste d’ingrédients, et les colorants sont listés un par un.",
+        faq=[("Tous les Froot Loops ont-ils le même goût ?", "Apparemment oui. Kellogg’s l’a dit en 1999, et les tests à l’aveugle ne distinguent pas les couleurs."),
+             ("Comment sont faits les Froot Loops ?", "Une pâte de céréales sucrée passe dans une filière en anneau d’une extrudeuse, gonfle, puis est colorée et enrobée de sucre.")],
+    ),
+    "gummy-bears": dict(
+        cost=("environ 3 $ le sachet", "environ 2 $ la fournée"), gear=("Une ligne mogul à amidon", "Un moule en silicone"),
+        answer="Oui. Gélatine, jus et sucre dans un moule en silicone font de vrais oursons. "
+               "L’étape que presque tout le monde saute, c’est le séchage, et c’est de là que vient la mâche.",
+        factory="Un mogul à amidon imprime des formes d’oursons dans des plateaux plats remplis d’amidon de maïs. Un sirop de gélatine chaud est versé dans les creux, "
+                "et les plateaux reposent un jour ou plus. Puis les oursons sont secoués pour les sortir et reçoivent une fine couche de cire pour ne pas coller.",
+        steps=["Un mogul à amidon imprime des formes d’oursons dans l’amidon de maïs",
+               "Le sirop de gélatine chaud remplit les formes",
+               "Les oursons sèchent un jour ou plus",
+               "Une fine couche de cire les empêche de coller"],
+        secret="Les moules sont en amidon, et l’amidon aspire l’humidité des oursons pendant qu’ils prennent. C’est ce séchage qui leur donne leur mâche ferme.",
+        home=["Saupoudrez la gélatine sur le jus et laissez gonfler 5 minutes",
+              "Chauffez avec le sucre, un peu de sirop de maïs et d’acide citrique jusqu’à dissolution",
+              "Remplissez un moule en silicone, mettez au frais, puis laissez sécher les oursons à l’air un jour"],
+        home_tip="À la sortie du frigo, ils sont mous comme de la gelée. Un jour sur le plan de travail les rend fermes.",
+        label="Cherchez la cire en fin de liste, souvent de la cire de carnauba ou d’abeille. C’est elle qui fait briller.",
+        faq=[("Comment fabrique-t-on les oursons en usine ?", "Un sirop de gélatine chaud est versé dans des formes d’oursons imprimées dans des plateaux d’amidon de maïs, séché un jour ou plus, puis légèrement ciré."),
+             ("Pourquoi les oursons maison sont-ils mous ?", "Ils n’ont pas séché. Laissez-les à l’air environ un jour pour qu’ils raffermissent.")],
+    ),
+    "kit-kat": dict(
+        cost=("environ 1,50 $ la barre", "environ 1 $ la barre"), gear=("Des fours à gaufrettes", "Des feuilles de gaufrette du commerce"),
+        answer="Plus ou moins. Avec des feuilles de gaufrette et du bon chocolat, on s’en approche. "
+               "Obtenir un chocolat qui casse net comme la vraie barre demande de l’entraînement.",
+        factory="Une pâte à gaufrette fine est cuite entre des plaques chaudes en grandes feuilles. Les feuilles sont empilées avec une garniture sucrée, "
+                "coupées en bâtonnets, et les bâtonnets sont enrobés de chocolat au lait.",
+        steps=["Les gaufrettes cuisent entre des plaques chaudes",
+               "Les feuilles sont empilées avec la garniture",
+               "La pile est coupée en bâtonnets",
+               "Les bâtonnets sont enrobés de chocolat"],
+        secret="À l’usine Nestlé d’York, au Royaume-Uni, les barres abîmées sont broyées et repartent dans la garniture : c’est le recyclage. Nestlé décrit la garniture comme "
+               "de la pâte de cacao, du sucre et une petite quantité de Kit Kat retravaillé. Les Kit Kat américains sont faits par Hershey, qui dit que son procédé est confidentiel.",
+        home=["Achetez des feuilles de gaufrette nature, ou faites des gaufrettes fines dans un fer à pizzelle",
+              "Tartinez les couches d’un mélange de gaufrettes écrasées et de chocolat fondu",
+              "Coupez en bâtonnets et trempez-les dans du chocolat au lait tempéré"],
+        home_tip="Mettez la pile au frais avant de couper, sinon les couches glissent.",
+        label="Les Kit Kat diffèrent selon les pays : la liste d’ingrédients d’une barre britannique et d’une barre américaine ne sera pas la même.",
+        faq=[("Qu’y a-t-il dans un Kit Kat ?", "Des couches de gaufrette avec une garniture au cacao et au sucre. À l’usine britannique, cette garniture contient un peu de Kit Kat broyé et retravaillé."),
+             ("Les Kit Kat américains et britanniques sont-ils identiques ?", "Non. Les Kit Kat américains sont faits par Hershey sous licence, et la recette et le procédé diffèrent.")],
+    ),
+    "ketchup": dict(
+        cost=("environ 4 $ la bouteille", "environ 1,50 $ le bocal"), gear=("Des cuves à vapeur", "Une casserole"),
+        answer="Oui, en une quinzaine de minutes. Une boîte de concentré de tomate, du vinaigre, du sucre et quelques épices vous rapprochent beaucoup de la bouteille.",
+        factory="Du concentré de tomate est mélangé à du vinaigre, un édulcorant, du sel, de l’oignon en poudre et des épices, cuit, broyé jusqu’à être lisse et mis en bouteille chaud.",
+        steps=["Le concentré de tomate va dans une cuve à vapeur",
+               "Vinaigre, édulcorant, sel et épices sont ajoutés",
+               "Le tout est cuit et broyé jusqu’à être lisse"],
+        secret="Le « 57 » des bouteilles Heinz était du marketing, pas un compte. Henry Heinz aurait combiné son chiffre porte-bonheur 5 et le 7 de sa femme, "
+               "à une époque où l’entreprise vendait déjà plus de 60 produits.",
+        home=["Fouettez le concentré de tomate avec du vinaigre, un peu de sucre et de sel",
+              "Ajoutez de l’oignon en poudre et une pincée de clou de girofle et de piment de la Jamaïque",
+              "Laissez mijoter 15 minutes, puis refroidissez et mettez au frais"],
+        home_tip="Gardez-le au réfrigérateur et utilisez-le dans les quelques semaines.",
+        label="Comparez le sucre par cuillère à soupe sur la bouteille avec votre fournée. C’est vous qui décidez du sucre.",
+        faq=[("Que veut dire 57 sur le ketchup Heinz ?", "C’était un slogan. Henry Heinz aurait choisi 57 à partir de son chiffre porte-bonheur et de celui de sa femme ; l’entreprise avait déjà plus de 60 produits."),
+             ("Comment faire du ketchup avec du concentré de tomate ?", "Fouettez le concentré avec vinaigre, sucre, sel, oignon en poudre et épices, puis laissez mijoter environ 15 minutes.")],
+    ),
+    "twinkies": dict(
+        cost=("environ 5 $ les 10", "environ 4 $ les 10"), gear=("Des injecteurs de garniture", "Une poche à douille"),
+        answer="Plus ou moins. Les Twinkies maison sont vraiment bons. Ce qu’on ne peut pas copier, c’est la conservation de 45 jours.",
+        factory="Une pâte à génoise est cuite dans des moules en forme de canoë. Une fois refroidis, les gâteaux sont retournés et la crème est injectée par "
+                "trois petits trous dans le dessous.",
+        steps=["La pâte à génoise est mélangée",
+               "Elle cuit dans un moule canoë",
+               "Les gâteaux sont retournés",
+               "La crème est injectée par trois trous"],
+        secret="Retournez-en un et vous verrez les trois trous d’injection. La durée de conservation est de 45 jours, fixée en 2013 (contre environ 26 avant) : l’histoire du gâteau « éternel » est un mythe.",
+        home=["Faites cuire une pâte à génoise dans un moule canoë (ou de l’aluminium plié en canoës)",
+              "Fouettez du beurre avec de la crème de guimauve pour la garniture",
+              "Percez trois trous dessous et injectez la garniture à la poche"],
+        home_tip="Les maison sont meilleurs dans les trois jours environ.",
+        label="Une longue liste d’ingrédients fait partie de ce qui permet à un gâteau moelleux de durer des semaines en rayon.",
+        faq=[("Combien de temps se gardent les Twinkies ?", "45 jours, depuis le relancement de 2013. L’idée que les Twinkies durent éternellement est un mythe."),
+             ("Comment la crème entre-t-elle dans un Twinkie ?", "Elle est injectée par en dessous à travers trois petits trous.")],
+    ),
+}
+
+for _slug, _name in {"instant-ramen": "Ramen instantanées", "gummy-bears": "Oursons gélifiés", "ritz": "Crackers Ritz"}.items():
+    TR[_slug]["name"] = _name
