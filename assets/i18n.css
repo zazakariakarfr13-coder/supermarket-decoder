@@ -1,1 +1,11 @@
-/* Language switcher (all pages). Filled in by the RTL task. */
+/* Language switcher (every page): a slim strip at the very top, on the side opposite the menu.
+   Written by scripts/i18n_pages.py right after <body>; works without JavaScript. */
+.lang-switch{display:flex;justify-content:flex-start;align-items:center;gap:2px;margin:0;padding:2px 12px;
+  background:#0D2416;font:700 13px/1 Inter,system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif}
+.lang-switch a,.lang-switch span{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:32px;
+  padding:0 8px;border-radius:999px;color:#F4EFE4;text-decoration:none}
+.lang-switch a:hover,.lang-switch a:focus-visible{background:rgba(242,181,28,.22);outline:none}
+.lang-switch span[aria-current]{color:#F2B51C;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.lang-switch [lang="ar"]{font-family:"Noto Naskh Arabic","Segoe UI",Tahoma,"Geeza Pro",sans-serif;font-size:15px}
+.guide-lang{font-size:13px;opacity:.8}
+@media print{.lang-switch{display:none}}

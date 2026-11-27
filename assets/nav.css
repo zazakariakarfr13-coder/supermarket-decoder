@@ -1,5 +1,5 @@
 /* Supermarket Decoder menu + homepage search (loaded by assets/nav.js) */
-.sd-menu { position: fixed; top: 8px; right: 12px; z-index: 1000; font-family: inherit;
+.sd-menu { position: fixed; top: 8px; inset-inline-end: 12px; z-index: 1000; font-family: inherit;
   /* the homepage FAQ styles every <details>; undo that here */
   background: none; border: 0; padding: 0; margin: 0; border-radius: 0; box-shadow: none; }
 .sd-menu > summary::after, .sd-menu > summary::before { content: none; display: none; }
@@ -12,7 +12,7 @@
 .sd-menu > summary svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
 .sd-menu[open] > summary { outline: 3px solid var(--gold, #F2B51C); outline-offset: 2px; }
 .sd-panel {
-  position: absolute; right: 0; top: calc(100% + 8px); width: min(340px, calc(100vw - 24px));
+  position: absolute; inset-inline-end: 0; top: calc(100% + 8px); width: min(340px, calc(100vw - 24px));
   max-height: min(78vh, 680px); overflow: auto; padding: 6px 18px;
   background: var(--paper, #FFFDF8); color: var(--ink, #13321F);
   border: 1px solid var(--line, #E2DCCF); border-radius: 16px; box-shadow: 0 18px 50px rgba(0, 0, 0, .28);
@@ -25,10 +25,10 @@
 .sd-list a:hover { text-decoration: underline; }
 .sd-list a[aria-current="page"] { font-weight: 800; color: var(--accent, #D9481C); }
 /* keep the fixed button clear of existing header text */
-body.has-sd-menu > header { padding-right: 120px; }
+body.has-sd-menu > header { padding-inline-end: 120px; }
 body.has-sd-menu .bar .r { visibility: hidden; }
-body.has-sd-menu .bar .wrap { padding-right: 130px; }
-@media (max-width: 520px) { body.has-sd-menu .bar .wrap { padding-right: 64px; } }
+body.has-sd-menu .bar .wrap { padding-inline-end: 130px; }
+@media (max-width: 520px) { body.has-sd-menu .bar .wrap { padding-inline-end: 64px; } }
 
 .sd-sr-only {
   position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -54,4 +54,4 @@ body.has-sd-menu .bar .wrap { padding-right: 130px; }
 .sd-r-t { font-weight: 700; }
 .sd-r-g { font-size: 12px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--muted, #5A7363); white-space: nowrap; align-self: center; }
 .sd-none { padding: 10px 12px; color: var(--muted, #5A7363); }
-@media (max-width: 520px) { .sd-menu > summary span { display: none; } .sd-menu > summary { padding: 9px 11px; } body.has-sd-menu > header { padding-right: 70px; } }
+@media (max-width: 520px) { .sd-menu > summary span { display: none; } .sd-menu > summary { padding: 9px 11px; } body.has-sd-menu > header { padding-inline-end: 70px; } }

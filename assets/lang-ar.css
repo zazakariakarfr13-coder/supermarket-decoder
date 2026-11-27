@@ -1,0 +1,15 @@
+/* Arabic pages only (<html lang="ar" dir="rtl">). The layout mirrors through logical properties in
+   site.css and nav.css; this file sets the Arabic font and spacing.
+   Noto Naskh Arabic, SIL Open Font License 1.1 (fonts/OFL.txt), served from this site: no outside requests. */
+@font-face{font-family:"Noto Naskh Arabic";font-style:normal;font-weight:400;font-display:swap;
+  src:url(fonts/NotoNaskhArabic-400.woff2) format("woff2");
+  unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+@font-face{font-family:"Noto Naskh Arabic";font-style:normal;font-weight:700 900;font-display:swap;
+  src:url(fonts/NotoNaskhArabic-700.woff2) format("woff2");
+  unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+html[lang="ar"] body{font-family:"Noto Naskh Arabic",Inter,system-ui,-apple-system,"Segoe UI",Tahoma,"Geeza Pro",sans-serif;line-height:1.85}
+html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3{line-height:1.45;font-family:"Noto Naskh Arabic",Inter,system-ui,sans-serif}
+html[lang="ar"] .lead{font-family:"Noto Naskh Arabic",Georgia,serif}
+/* letter-spacing breaks the joins between Arabic letters, and Arabic has no capitals */
+html[lang="ar"] *{letter-spacing:0!important;text-transform:none!important}
+html[lang="ar"] bdi,html[lang="ar"] [dir="ltr"]{unicode-bidi:isolate}
