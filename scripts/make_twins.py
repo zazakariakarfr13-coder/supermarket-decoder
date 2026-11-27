@@ -35,8 +35,27 @@ def shared_target(page: str, url: str) -> bool:
     return target.startswith(SHARED) or target in SHARED
 
 
-def build(page: str, pairs, lang: str) -> str:
-    text = (ROOT / page).read_text(encoding="utf-8").replace("\r\n", "\n")
+_BLOCKS = re.compile(r"<!--i18n:(head|switch)-->.*?<!--/i18n:\1-->", re.S)
+
+
+def english(page: str) -> str:
+    """The English page without the language blocks (i18n_pages.py adds the right ones to each twin)."""
+    return _BLOCKS.sub("", (ROOT / page).read_text(encoding="utf-8").replace("\r\n", "\n"))
+
+
+def build(page: str, pairs, lang: str, pieces=None, sig=None) -> str:
+    text = english(page)
+    if pieces is not None:
+        import segments
+        _, en_pieces = segments.pieces(text)
+        if sig != segments.signature(en_pieces):
+            raise ValueError(f"{lang}/{page}: the English page changed (SIG {segments.signature(en_pieces)} != {sig}): "
+                             f"run py -3 scripts/segments.py dump {page} and update the translation")
+        if len(pieces) != len(en_pieces):
+            raise ValueError(f"{lang}/{page}: {len(pieces)} translated pieces for {len(en_pieces)} English pieces")
+        for i, (en, xx) in enumerate(zip(en_pieces, pieces)):
+            guard.same(f"{lang}/{page} piece {i}", en, xx)
+        text = segments.apply(text, pieces)
     for i, (en, xx) in enumerate(pairs):
         if en not in text:
             raise ValueError(f"{lang}/{page}: piece {i} not found in the English page (it changed?): {en[:70]!r}")
@@ -61,7 +80,7 @@ def main(argv) -> int:
     for lang in ("fr", "ar"):
         for mod in translations(lang):
             out = ROOT / lang / mod.PAGE
-            html = build(mod.PAGE, mod.R, lang)
+            html = build(mod.PAGE, getattr(mod, "R", []), lang, getattr(mod, "T", None), getattr(mod, "SIG", None))
             if "--check" in argv:
                 import i18n_pages
                 site = i18n_pages.Site()
