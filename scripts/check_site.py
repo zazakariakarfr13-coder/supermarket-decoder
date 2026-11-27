@@ -14,6 +14,9 @@ SITE_URL = "https://zazakariakarfr13-coder.github.io/supermarket-decoder"
 PROJECT_PREFIX = "/supermarket-decoder/"
 
 
+CSS_URL = re.compile(r"""url\(\s*["']?([^"')\s]+)""")
+
+
 class PageParser(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -27,6 +30,7 @@ class PageParser(HTMLParser):
         self.images_without_alt = 0
         self.og = set()
         self.noindex = False
+        self.in_style = False
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -34,6 +38,8 @@ class PageParser(HTMLParser):
             self.ids.add(attrs["id"])
         if tag == "title":
             self.in_title = True
+        if tag == "style":
+            self.in_style = True
         if tag == "h1":
             self.h1_count += 1
         if tag == "img" and "alt" not in attrs:
@@ -46,18 +52,24 @@ class PageParser(HTMLParser):
             self.noindex = True
         if tag == "link" and "canonical" in attrs.get("rel", "").lower().split():
             self.canonical = attrs.get("href", "").strip()
-        for attr in ("href", "src"):
+        for attr in ("href", "src", "poster"):
             value = attrs.get(attr)
             if value:
                 self.targets.append(value)
+        if attrs.get("style"):
+            self.targets.extend(CSS_URL.findall(attrs["style"]))
 
     def handle_endtag(self, tag):
         if tag == "title":
             self.in_title = False
+        if tag == "style":
+            self.in_style = False
 
     def handle_data(self, data):
         if self.in_title:
             self.title_parts.append(data)
+        if self.in_style:  # images referenced from CSS, e.g. the comic avatars
+            self.targets.extend(CSS_URL.findall(data))
 
     @property
     def title(self):

@@ -21,6 +21,14 @@ class TwinTests(unittest.TestCase):
         self.assertIn('href="../../assets/site.css"', html)
         self.assertIn('href="../additives/e471.html"', html)
 
+    def test_css_url_and_poster_paths_get_one_more_level(self):
+        # the comic avatars live in CSS url(), the home animation's still frame in poster=""
+        story = mt.build("story/index.html", [], "fr")
+        self.assertIn("--av:url(../../assets/cast/mina.webp)", story)
+        self.assertNotIn("--av:url(../assets/cast/", story)
+        home = mt.build("index.html", [], "fr")
+        self.assertIn('poster="../assets/video/crunch-box-poster.jpg"', home)
+
     def test_missing_piece_fails(self):
         with self.assertRaisesRegex(ValueError, "not found"):
             mt.build("articles/e-numbers-explained.html", [("No such English text", "x")], "fr")

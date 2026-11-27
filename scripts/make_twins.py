@@ -5,7 +5,7 @@ Each translation lives in scripts/i18n/<lang>/pages/<name>.py:
     PAGE = "articles/e-numbers-explained.html"      # the English page
     R = [("English text", "texte français"), ...]     # replacements, applied in order (all occurrences)
 The twin is written to <lang>/<PAGE>. Links to other pages stay relative (they point to the twins); links to
-shared files (assets/, favicon.svg, gallery/, pins/) get one more "../". The build fails if an English piece
+shared files (assets/, favicon.svg, gallery/, pins/) in href, src, poster and CSS url() get one more "../". The build fails if an English piece
 is no longer on the page (the English page changed: update the translation) or if a pair changes a number.
 
 Usage: py -3 scripts/make_twins.py [--check]     (--check: exit 1 if any twin is out of date)
@@ -24,7 +24,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from i18n import guard  # noqa: E402
 
 SHARED = ("assets/", "favicon.svg", "gallery/", "pins/", "robots.txt")
-_URL = re.compile(r'((?:href|src)=")([^"#?]*)([^"]*")')
+_URL = re.compile(r'((?:href|src|poster)=")([^"#?]*)([^"]*")')
+_CSS_URL = re.compile(r"""(url\(\s*["']?)([^"')#?\s]*)()""")  # inline CSS, e.g. the comic avatars
 _UTM = re.compile(r"utm_content=[^&\"]*")
 
 
@@ -67,7 +68,8 @@ def build(page: str, pairs, lang: str, pieces=None, sig=None) -> str:
     # Gumroad links: tag the language in utm_content so sales from French and Arabic pages can be told apart
     text = re.sub(r'(gumroad\.com[^"]*?utm_content=)([^"&]+)',
                   lambda m: m.group(0) if m.group(2).endswith(("-fr", "-ar")) else f"{m.group(1)}{m.group(2)}-{lang}", text)
-    return _URL.sub(lambda m: m.group(1) + ("../" + m.group(2) if shared_target(page, m.group(2)) else m.group(2)) + m.group(3), text)
+    deeper = lambda m: m.group(1) + ("../" + m.group(2) if shared_target(page, m.group(2)) else m.group(2)) + m.group(3)
+    return _CSS_URL.sub(deeper, _URL.sub(deeper, text))
 
 
 def translations(lang: str):
