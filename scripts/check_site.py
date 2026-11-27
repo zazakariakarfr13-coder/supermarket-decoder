@@ -297,8 +297,7 @@ def main():
 
     # Decoder safeguards: disclose the external barcode lookup, label the live preview,
     # preserve compact demo links, and avoid overstating ingredient-order/NOVA heuristics.
-    decoder_html = "
-".join((ROOT / f).read_text(encoding="utf-8", errors="replace")
+    decoder_html = "\n".join((ROOT / f).read_text(encoding="utf-8", errors="replace")
                              for f in ("decoder/index.html", "assets/decoder.js", "assets/decoder-scan.js"))
     for required in (
         'aria-label="Live camera preview for barcode scanning"',

@@ -71,6 +71,10 @@ if (process.argv[2] === "check") {
   for (const s of Object.keys(X.samples || {})) if (!(s in D.SAMPLES)) { console.log("unknown sample", s); bad++; }
   console.log(`${lang}: ${keys.length + data.length - bad} ok, ${bad} problems`);
   process.exit(bad ? 1 : 0);
+} else if (process.argv[2] === "names") {
+  // hashes of the E-number chemical names (Arabic pages show them in their French form, as on Moroccan labels)
+  const names = new Set(Object.values(D.E).map((e) => e[0]));
+  [...names].forEach((n) => console.log(fnv(n)));
 } else if (process.argv[2] === "list") {
   // work list for translators: hash | English, in the order the data appears
   data.forEach((k) => console.log(fnv(k) + " | " + k));
