@@ -1,5 +1,5 @@
 PAGE = "free-resources/index.html"
-SIG = "44d661ca3db1"
+SIG = "46925cec50a9"
 T = [
     "Ressources gratuites sur les étiquettes | Supermarket Decoder",
     "Listes de contrôle gratuites, glossaire et explications sur l’étiquette américaine, les sucres cachés, les numéros E et les groupes NOVA.",
@@ -15,6 +15,10 @@ T = [
     "— collez n’importe quelle liste d’ingrédients pour repérer les noms de sucre, comprendre les numéros E et voir une estimation de transformation NOVA.",
     "Les numéros E courants, un par un",
     "— ce que sont E471, E330, E621, E951, E129 (Red 40) et d’autres codes courants, pourquoi on les ajoute et ce que dit la recherche.",
+    "7 remplacements à envisager au supermarché",
+    "— des exemples souples pour comparer des produits du quotidien.",
+    "Défi : la liste d’ingrédients",
+    "— entraînez-vous sur une étiquette clairement fictive et vérifiez le raisonnement.",
     "La liste de contrôle des 30 secondes",
     "— une routine à faire en rayon pour la liste d’ingrédients et le tableau nutritionnel.",
     "Glossaire de l’étiquette",

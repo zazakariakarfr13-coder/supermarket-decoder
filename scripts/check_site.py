@@ -3,8 +3,9 @@
 
 from html.parser import HTMLParser
 import re
+import csv
 from pathlib import Path
-from urllib.parse import unquote, urlsplit
+from urllib.parse import parse_qs, unquote, urlsplit
 import sys
 import xml.etree.ElementTree as ET
 
@@ -372,6 +373,63 @@ def main():
                 errors.append(f"{detail_page.relative_to(ROOT)}: missing estimate-method disclosure {required!r}.")
 
     errors.extend(check_languages())
+    # Pinterest Factory-vs-Kitchen campaign: keep the public creative manifest
+    # complete, accessible, correctly linked and measurable before assets are reused.
+    pin_dir = ROOT / "pins" / "fvk"
+    pin_manifest = pin_dir / "pins.csv"
+    pin_files = set()
+    if not pin_manifest.is_file():
+        errors.append("pins/fvk/pins.csv: campaign manifest is missing.")
+    else:
+        try:
+            with pin_manifest.open(encoding="utf-8-sig", newline="") as handle:
+                reader = csv.DictReader(handle)
+                required_columns = {"file", "title", "description", "link", "alt_text"}
+                if not required_columns.issubset(set(reader.fieldnames or [])):
+                    errors.append("pins/fvk/pins.csv: required campaign columns are missing.")
+                for row_number, row in enumerate(reader, start=2):
+                    filename = (row.get("file") or "").strip()
+                    if not filename or filename in pin_files:
+                        errors.append(f"pins/fvk/pins.csv:{row_number}: missing or duplicate image filename.")
+                        continue
+                    pin_files.add(filename)
+                    for field in ("title", "description", "alt_text"):
+                        if not (row.get(field) or "").strip():
+                            errors.append(f"pins/fvk/pins.csv:{row_number}: {field} is empty.")
+                    image_path = pin_dir / filename
+                    if not image_path.is_file():
+                        errors.append(f"pins/fvk/pins.csv:{row_number}: missing creative {filename}.")
+                    else:
+                        try:
+                            header = image_path.read_bytes()[:24]
+                            if header[:4] != bytes((137, 80, 78, 71)):
+                                errors.append(f"{image_path.relative_to(ROOT)}: expected a PNG image.")
+                            elif int.from_bytes(header[16:20], "big") != 1000 or int.from_bytes(header[20:24], "big") != 1500:
+                                errors.append(f"{image_path.relative_to(ROOT)}: expected 1000x1500 Pinterest dimensions.")
+                        except OSError as exc:
+                            errors.append(f"{image_path.relative_to(ROOT)}: cannot read creative: {exc}")
+                    raw_link = (row.get("link") or "").strip()
+                    parsed_link = urlsplit(raw_link)
+                    if parsed_link.scheme != "https" or parsed_link.netloc != "zazakariakarfr13-coder.github.io":
+                        errors.append(f"pins/fvk/pins.csv:{row_number}: link is not a secure link to this project's Pages site.")
+                        continue
+                    if not parsed_link.path.startswith(PROJECT_PREFIX + "factory-vs-kitchen/"):
+                        errors.append(f"pins/fvk/pins.csv:{row_number}: Pin does not link directly to Factory vs. Kitchen.")
+                        continue
+                    expected_page = ROOT / parsed_link.path[len(PROJECT_PREFIX):]
+                    if not expected_page.is_file():
+                        errors.append(f"pins/fvk/pins.csv:{row_number}: linked product page does not exist.")
+                    if expected_page.stem != Path(filename).stem:
+                        errors.append(f"pins/fvk/pins.csv:{row_number}: image and destination product do not match.")
+                    query = parse_qs(parsed_link.query)
+                    if query.get("utm_source") != ["pinterest"] or query.get("utm_campaign") != ["factory_vs_kitchen"] or query.get("utm_content") != [Path(filename).stem]:
+                        errors.append(f"pins/fvk/pins.csv:{row_number}: Pinterest UTM parameters are missing or inconsistent.")
+        except (OSError, UnicodeError, csv.Error) as exc:
+            errors.append(f"pins/fvk/pins.csv: cannot parse campaign manifest: {exc}")
+    if pin_dir.is_dir():
+        actual_pin_files = {p.name for p in pin_dir.glob("*.png") if p.name != "_contact-sheet.png"}
+        if actual_pin_files != pin_files:
+            errors.append("pins/fvk: PNG campaign assets and pins.csv rows do not match.")
 
     if warnings:
         print("Site validation warnings:")
