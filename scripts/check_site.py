@@ -220,10 +220,11 @@ def main():
     sys.path.insert(0, str(ROOT / "scripts"))
     import make_search_index  # noqa: E402
 
-    index_file = ROOT / "assets" / "search-index.json"
-    if not index_file.is_file() or index_file.read_text(encoding="utf-8") != make_search_index.render():
-        errors.append("assets/search-index.json is out of date: run python scripts/make_search_index.py")
-    for entry in make_search_index.build_index()["pages"]:
+    for lang in make_search_index.LANGS:
+        index_file = make_search_index.out_file(lang)
+        if not index_file.is_file() or index_file.read_text(encoding="utf-8") != make_search_index.render(lang):
+            errors.append(f"{index_file.relative_to(ROOT).as_posix()} is out of date: run python scripts/make_search_index.py")
+    for entry in [e for lang in make_search_index.LANGS for e in make_search_index.build_index(lang)["pages"]]:
         rel = entry["u"] if entry["u"].endswith(".html") else entry["u"] + "index.html"
         if "assets/nav.js" not in (ROOT / rel).read_text(encoding="utf-8", errors="replace"):
             errors.append(f"{rel}: missing the menu script (assets/nav.js)")
