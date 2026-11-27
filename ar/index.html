@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supermarket Decoder — اقرأ أي ملصق طعام في 30 ثانية</title>
+<meta name="description" content="دليل هادئ وعملي في كتاب إلكتروني (PDF) من 53 صفحة عن ملصقات الطعام: تعرّف على الأطعمة فائقة المعالجة، وفكّ رموز أرقام E والادعاءات، واختر الأفضل من الرفّ نفسه. الدليل بالإنجليزية.">
+<meta name="author" content="Zakaria Froud">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/ar/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#13321F">
+<meta property="og:url" content="https://zazakariakarfr13-coder.github.io/supermarket-decoder/ar/">
+<meta property="og:title" content="Supermarket Decoder — اقرأ أي ملصق طعام في 30 ثانية">
+<meta property="og:description" content="كتاب إلكتروني عملي من 53 صفحة (بالإنجليزية) عن قوائم المكوّنات والسكّريات الخفية وأرقام E والادعاءات التسويقية والبدائل الذكية في السوبرماركت.">
+<meta property="og:type" content="product">
+<meta property="og:image" content="https://public-files.gumroad.com/nbbfx502vssnurktwmojzb6uuqz2">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Supermarket Decoder — اقرأ أي ملصق طعام في 30 ثانية">
+<meta name="twitter:description" content="دليل عملي ومتوازن عن المكوّنات وأرقام E والسكّريات الخفية والبدائل في السوبرماركت.">
+<style>
+  :root {
+    --bg: #F4EFE4; --paper: #FFFDF8; --ink: #13321F; --ink-2: #2B4A37; --muted: #5A7363;
+    --line: #E2DCCF; --accent: #D9481C; --accent-ink: #ffffff; --gold: #F2B51C;
+    --mint: #DCEBDD; --peach: #FBE9E1; --butter: #FCF3DC; --card: #FFFFFF;
+    --shadow: 0 10px 30px rgba(19,50,31,.10);
+    --radius: 16px;
+    --serif: "Lora", Georgia, "Times New Roman", serif;
+    --sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0E1F15; --paper: #13281B; --ink: #F1ECE0; --ink-2: #D7D1C3; --muted: #A9B8AD;
+      --line: #27402F; --accent: #F06A3E; --accent-ink: #1A0E08; --gold: #F5C443;
+      --mint: #1C3B27; --peach: #3A2219; --butter: #36301A; --card: #172F21;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  .wrap { width: min(1120px, 100% - 40px); margin-inline: auto; }
+  .skip { position: absolute; inset-inline-start: -999px; top: 8px; background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 8px; z-index: 100; }
+  .skip:focus { inset-inline-start: 8px; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+
+  /* top bar */
+  .bar { background: var(--ink); color: var(--bg); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; }
+  @media (prefers-color-scheme: dark) { .bar { background: #07130C; color: var(--ink); } }
+  .bar .wrap { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; flex-wrap: wrap; }
+  .bar .dot { color: var(--gold); }
+  .launch { display: none; }
+  .launch.on { display: inline; }
+  .launch b { color: var(--gold); }
+
+  /* buttons */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: var(--accent-ink); font-weight: 800; font-size: 17px; padding: 16px 26px; border-radius: 999px; text-decoration: none; border: 0; cursor: pointer; box-shadow: 0 8px 20px rgba(217,72,28,.28); transition: transform .15s ease, box-shadow .15s ease; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(217,72,28,.34); }
+  .btn .p { background: rgba(255,255,255,.22); padding: 3px 10px; border-radius: 999px; font-size: 15px; }
+  @media (prefers-color-scheme: dark) { .btn .p { background: rgba(0,0,0,.18); } }
+  .btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
+
+  /* hero */
+  .hero { padding: 64px 0 40px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  .kicker { color: var(--accent); font-weight: 800; letter-spacing: .2em; text-transform: uppercase; font-size: 13px; }
+  h1 { font-size: clamp(42px, 7vw, 84px); line-height: .92; letter-spacing: -.035em; margin: 14px 0 18px; font-weight: 900; }
+  h1 .acc { color: var(--accent); display: block; }
+  .tagline { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.4vw, 26px); color: var(--ink-2); margin: 0 0 10px; }
+  .lead { font-family: var(--serif); font-size: 19px; color: var(--ink-2); max-width: 34ch; margin: 0 0 28px; }
+  .kit { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; align-items: center; margin-top: 40px; background: var(--paper, #FFFDF8); border: 2px solid var(--gold, #F2B51C); border-radius: 22px; padding: 26px; }
+  .kit img { width: 100%; height: auto; border-radius: 12px; display: block; }
+  .kit h3 { font-size: 26px; line-height: 1.2; margin: 6px 0 10px; }
+  .kit ul { margin: 0 0 18px; padding-inline-start: 20px; line-height: 1.6; }
+  .kit .save { display: inline-block; font-size: 13px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; background: #FBE1D7; color: #9A3519; border-radius: 999px; padding: 4px 10px; }
+  @media (max-width: 760px) { .kit { grid-template-columns: 1fr; padding: 18px; } }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .meta { margin-top: 18px; display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; color: var(--muted); font-weight: 600; }
+  .meta span::before { content: "✓ "; color: var(--accent); font-weight: 900; }
+  .rating { font-size: 14px; color: var(--muted); margin-top: 10px; }
+  .cover { position: relative; }
+  .cover img { border-radius: 14px; box-shadow: var(--shadow); transform: rotate(2deg); transition: transform .4s ease; width: 100%; height: auto; max-width: 420px; margin-inline: auto; background: #F4EFE4; }
+  .cover:hover img { transform: rotate(0deg) scale(1.01); }
+  .cover .badge { position: absolute; left: 0; bottom: 30px; background: var(--gold); color: #13321F; font-weight: 900; font-size: 14px; padding: 10px 14px; border-radius: 12px; box-shadow: var(--shadow); transform: rotate(-4deg); }
+
+  /* sections */
+  section { padding: 72px 0; }
+  .alt { background: var(--paper); border-block: 1px solid var(--line); }
+  h2 { font-size: clamp(30px, 4vw, 46px); line-height: 1.05; letter-spacing: -.025em; margin: 10px 0 14px; font-weight: 900; }
+  .sub { font-family: var(--serif); font-size: 19px; color: var(--ink-2); max-width: 60ch; margin: 0 0 34px; }
+
+  /* problem */
+  .problem { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .pack { border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
+  .pack.front { background: var(--ink); color: var(--bg); }
+  @media (prefers-color-scheme: dark) { .pack.front { background: #07130C; color: var(--ink); } }
+  .pack.back { background: var(--card); border: 1px solid var(--line); }
+  .pack h3 { margin: 0 0 6px; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; }
+  .pack .big { font-size: 34px; font-weight: 900; letter-spacing: -.02em; margin: 6px 0 16px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { background: var(--gold); color: #13321F; font-weight: 800; font-size: 13px; padding: 6px 12px; border-radius: 999px; }
+  .ing { font-size: 15px; line-height: 1.8; }
+
+  /* interactive decoder */
+  .decoder { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
+  .decoder .lbl { font-size: 12px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .tokens { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .tok { font: inherit; font-size: 15px; font-weight: 600; padding: 8px 12px; border-radius: 10px; border: 2px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; transition: background .15s, border-color .15s; }
+  .tok:hover { border-color: var(--ink-2); }
+  .tok[aria-pressed="true"] { border-color: var(--accent); background: var(--peach); }
+  .tok.ok[aria-pressed="true"] { border-color: #2E7D46; background: var(--mint); }
+  .tok.warn[aria-pressed="true"] { border-color: #C7861A; background: var(--butter); }
+  .explain { min-height: 92px; border-radius: 12px; padding: 16px 18px; background: var(--bg); border: 1px dashed var(--line); }
+  .explain .t { font-weight: 900; margin-bottom: 4px; }
+  .explain .v { display: inline-block; font-size: 12px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; margin-inline-start: 8px; vertical-align: 2px; }
+  .v.ok { background: var(--mint); color: #2E7D46; } .v.warn { background: var(--butter); color: #A06A0B; } .v.sig { background: var(--peach); color: var(--accent); }
+  @media (prefers-color-scheme: dark) { .v.ok { color: #8FD3A3; } .v.warn { color: #F5C443; } }
+  .decode-duo { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 28px; align-items: center; }
+  .reel { margin: 0; }
+  .reel-frame { position: relative; aspect-ratio: 9 / 16; width: 100%; border-radius: var(--radius); overflow: hidden; background: linear-gradient(#09080B, #010101); border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .reel-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .reel-btn { position: absolute; right: 12px; bottom: 12px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.28); background: rgba(9,8,11,.62); color: #fff; font-size: 18px; line-height: 1; cursor: pointer; display: grid; place-items: center; backdrop-filter: blur(4px); }
+  .reel-btn:hover { background: rgba(9,8,11,.85); }
+  .reel-play { left: 50%; top: 50%; right: auto; bottom: auto; transform: translate(-50%, -50%); width: 68px; height: 68px; font-size: 26px; display: none; }
+  .reel.paused .reel-play { display: grid; }
+  .reel figcaption { margin-top: 10px; font-size: 13px; font-weight: 700; color: var(--muted); text-align: center; }
+  @media (max-width: 860px) { .decode-duo { grid-template-columns: 1fr; } .reel { order: -1; width: min(250px, 72%); margin-inline: auto; } }
+  .score { margin-top: 16px; font-weight: 800; }
+  .score span { color: var(--accent); }
+
+  /* steps */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .step { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+  .step .n { width: 46px; height: 46px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-weight: 900; font-size: 22px; }
+  .step .time { float: inline-end; font-size: 12px; font-weight: 900; letter-spacing: .12em; color: var(--muted); }
+  .step h3 { margin: 16px 0 6px; font-size: 21px; }
+  .step p { margin: 0; color: var(--ink-2); }
+
+  /* inside grid */
+  .inside { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .item { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: start; transition: transform .2s ease; }
+  .item:hover { transform: translateY(-3px); }
+  .item .ic { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; font-size: 20px; background: var(--bg); }
+  .item h3 { margin: 0 0 4px; font-size: 16px; }
+  .item p { margin: 0; font-size: 14px; color: var(--muted); }
+
+  /* who */
+  .who { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .list { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+  .list h3 { margin: 0 0 12px; }
+  .list ul { margin: 0; padding: 0; list-style: none; }
+  .list li { padding-block: 9px; padding-inline: 30px 0; border-top: 1px solid var(--line); position: relative; }
+  .list li:first-child { border-top: 0; }
+  .list.yes li::before { content: "✓"; position: absolute; inset-inline-start: 0; color: #2E7D46; font-weight: 900; }
+  .list.no li::before { content: "✕"; position: absolute; inset-inline-start: 0; color: var(--accent); font-weight: 900; }
+  @media (prefers-color-scheme: dark) { .list.yes li::before { color: #8FD3A3; } }
+
+  /* author */
+  .author { display: grid; grid-template-columns: 90px 1fr; gap: 22px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; max-width: 820px; }
+  .mono { width: 90px; height: 90px; border-radius: 50%; background: var(--ink); color: var(--gold); display: grid; place-items: center; font-weight: 900; font-size: 30px; letter-spacing: -.02em; }
+  @media (prefers-color-scheme: dark) { .mono { background: #07130C; } }
+  .author p { margin: 0; font-family: var(--serif); font-size: 17px; color: var(--ink-2); }
+  .author b { font-family: var(--sans); color: var(--ink); }
+
+  /* faq */
+  .faq { max-width: 820px; }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 0 22px; margin-bottom: 12px; }
+  summary { cursor: pointer; list-style: none; padding: 18px 0; font-weight: 800; font-size: 17px; display: flex; justify-content: space-between; gap: 12px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--accent); font-weight: 900; font-size: 22px; line-height: 1; transition: transform .2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin: 0 0 18px; color: var(--ink-2); }
+
+  .resource-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .resource-card { display: block; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; text-decoration: none; transition: transform .18s ease, box-shadow .18s ease; }
+  .resource-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .resource-card strong { display: block; font-size: 17px; margin-bottom: 6px; }
+  .resource-card span { color: var(--muted); font-size: 14px; }
+  @media (max-width: 900px) { .resource-links { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .resource-links { grid-template-columns: 1fr; } }
+
+  /* final */
+  .final { background: var(--ink); color: var(--bg); text-align: center; padding: 84px 0; }
+  @media (prefers-color-scheme: dark) { .final { background: #07130C; color: var(--ink); } }
+  .final h2 { font-size: clamp(36px, 6vw, 68px); }
+  .final h2 span { color: var(--gold); display: block; }
+  .final p { font-family: var(--serif); font-size: 19px; opacity: .9; max-width: 52ch; margin: 0 auto 30px; }
+  .final .small { font-family: var(--sans); font-size: 13px; opacity: .7; margin-top: 18px; }
+  .code { display: inline-block; font-family: ui-monospace, Menlo, monospace; background: var(--gold); color: #13321F; padding: 2px 8px; border-radius: 6px; font-weight: 800; }
+
+  footer { padding: 30px 0 110px; font-size: 13px; color: var(--muted); }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* sticky buy bar (mobile) */
+  .sticky { position: fixed; left: 12px; right: 12px; bottom: 12px; display: none; align-items: center; justify-content: space-between; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding-block: 10px; padding-inline: 16px 10px; box-shadow: var(--shadow); z-index: 50; transform: translateY(140%); transition: transform .3s ease; }
+  .sticky.show { transform: translateY(0); }
+  .sticky .nm { font-weight: 900; font-size: 15px; line-height: 1.2; }
+  .sticky .nm small { display: block; font-weight: 600; color: var(--muted); font-size: 12px; }
+  .sticky .btn { padding: 12px 18px; font-size: 15px; }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  .no-js .reveal { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) {
+    .hero .wrap, .problem, .who { grid-template-columns: 1fr; }
+    .hero { padding-top: 40px; }
+    .cover { order: -1; }
+    .cover img { max-width: 300px; }
+    .steps, .inside { grid-template-columns: 1fr 1fr; }
+    .sticky { display: flex; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 54px 0; }
+    .steps, .inside { grid-template-columns: 1fr; }
+    .author { grid-template-columns: 1fr; text-align: center; }
+    .mono { margin-inline: auto; }
+    .bar .wrap { justify-content: center; text-align: center; }
+    .bar .r { display: none; }
+    /* Keep the headline and checkout button on the first phone screen. */
+    .hero { padding-top: 24px; }
+    .hero .wrap { gap: 20px; }
+    .cover img { max-width: 170px; }
+    .cover .badge { font-size: 12px; padding: 7px 10px; bottom: 14px; }
+  }
+
+  /* ---- free-first hero + comic ---- */
+  :root { --comic: #EE4D87; }
+  .btn.comic-btn { background: var(--gold); color: #13321F; box-shadow: 4px 4px 0 #13321F; border: 2px solid #13321F; }
+  .btn.comic-btn:hover { box-shadow: 6px 6px 0 #13321F; }
+  .hero .cover { display: none; }
+  .hero-comic { display: block; position: relative; text-decoration: none; color: #13321F; background: #7BCBB0; border: 4px solid #13321F; box-shadow: 10px 10px 0 var(--comic); padding: 22px 22px 26px; transform: rotate(1.2deg); transition: transform .25s ease, box-shadow .25s ease; background-image: radial-gradient(rgba(19,50,31,.18) 1px, transparent 1.5px); background-size: 9px 9px; }
+  .hero-comic:hover { transform: rotate(0deg) translateY(-3px); box-shadow: 14px 14px 0 var(--comic); }
+  .hc-tag { display: inline-block; background: var(--comic); border: 3px solid #13321F; padding: 5px 10px; font-weight: 900; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; transform: rotate(-2deg); }
+  .hc-title { display: block; font-weight: 900; font-size: clamp(28px, 3.4vw, 40px); line-height: 1; letter-spacing: -.03em; margin: 14px 0 16px; }
+  .hc-cast { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .hc-cast img { width: 100%; height: auto; border: 3px solid #13321F; background: #F2B51C; }
+  .hc-cast img:nth-child(2) { background: var(--comic); transform: translateY(-8px); }
+  .hc-bubble { position: relative; display: block; margin-block: 18px 14px; margin-inline: 8% 0; background: #fff; border: 3px solid #13321F; border-radius: 18px; padding: 12px 16px; font-weight: 800; font-size: 16px; line-height: 1.35; box-shadow: 4px 4px 0 #13321F; }
+  .hc-bubble::before { content: ""; position: absolute; top: -16px; left: 46%; border: 8px solid transparent; border-bottom: 10px solid #13321F; }
+  .hc-go { display: inline-block; background: #13321F; color: #fff; padding: 10px 16px; font-weight: 900; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; }
+  .comic-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .episodes { display: grid; gap: 12px; margin-top: 22px; }
+  .ep-card { display: block; background: #fff; border: 3px solid #13321F; border-radius: 12px; padding: 14px 16px; text-decoration: none; color: #13321F; box-shadow: 4px 4px 0 #13321F; transition: transform .15s ease; }
+  .ep-card:hover { transform: translate(-2px, -2px); }
+  .ep-card.new { background: var(--comic); }
+  .ep-card .ep-no { display: block; font-weight: 900; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
+  .ep-card strong { display: block; font-size: 22px; margin: 4px 0; }
+  .ep-card span { display: block; font-size: 15px; line-height: 1.45; }
+  .ep-card .ep-go { margin-top: 8px; font-weight: 900; font-size: 14px; }
+  .comic-strip { display: grid; grid-template-columns: repeat(3, 1fr); background: #13321F; border: 4px solid #13321F; gap: 6px; box-shadow: 8px 8px 0 var(--comic); text-decoration: none; color: #13321F; transform: rotate(-1deg); }
+  .cs-panel { position: relative; background: #F2B51C; display: flex; flex-direction: column; justify-content: flex-end; min-height: 230px; overflow: hidden; }
+  .cs-panel:nth-child(2) { background: #7BCBB0; } .cs-panel:nth-child(3) { background: var(--comic); }
+  .cs-panel img { width: 100%; height: auto; }
+  .cs-say { position: absolute; top: 10px; left: 8px; right: 8px; background: #fff; border: 2px solid #13321F; border-radius: 12px; padding: 7px 9px; font-size: 13px; font-weight: 800; line-height: 1.25; }
+  .resource-card.all { background: var(--mint); }
+  .kot-band { padding: 8px 0 56px; }
+  .kot-box { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; justify-content: space-between;
+    background: linear-gradient(135deg, #0f6e8c, #0b4f66); color: #fff; border-radius: 18px; padding: 26px 28px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.18); text-decoration: none; }
+  .kot-box:hover { filter: brightness(1.06); }
+  .kot-icon { font-size: 40px; line-height: 1; }
+  .kot-text { flex: 1 1 320px; }
+  .kot-text small { display: block; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; font-weight: 800; color: #bfeee0; margin-bottom: 4px; }
+  .kot-text strong { display: block; font-size: 22px; line-height: 1.25; margin-bottom: 4px; color: #fff; }
+  .kot-text span { color: #dcefF4; font-size: 15px; }
+  .kot-go { background: #d4f1e8; color: #0b2530; font-weight: 800; padding: 12px 18px; border-radius: 999px; white-space: nowrap; }
+  .inside-head { display: grid; grid-template-columns: 1fr 280px; gap: 40px; align-items: center; margin-bottom: 30px; }
+  .inside-head .cover img { max-width: 280px; }
+  @media (max-width: 900px) {
+    .comic-row { grid-template-columns: 1fr; }
+    .inside-head { grid-template-columns: 1fr; }
+    .inside-head .cover { order: 0; }
+    .inside-head .cover img { max-width: 220px; margin: 0; }
+    .hero-comic { max-width: 460px; }
+  }
+  @media (max-width: 600px) {
+    .hero-comic { padding: 16px; transform: none; box-shadow: 6px 6px 0 var(--comic); }
+    .hc-bubble { font-size: 14px; margin-inline-start: 0; }
+    .cs-panel { min-height: 170px; } .cs-say { font-size: 11px; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Supermarket Decoder: Read Any Food Label in 30 Seconds",
+  "description": "دليل عملي في كتاب إلكتروني من 53 صفحة (PDF، بالإنجليزية) عن ملصقات الطعام والمكوّنات والسكّريات الخفية وأرقام E والادعاءات التسويقية والبدائل في السوبرماركت.",
+  "image": "https://public-files.gumroad.com/nbbfx502vssnurktwmojzb6uuqz2",
+  "brand": { "@type": "Brand", "name": "Supermarket Decoder" },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://zakarfr.gumroad.com/l/supermarket-decoder",
+    "priceCurrency": "USD",
+    "price": "9.00",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+<meta name="google-site-verification" content="22frQLYIcDKtjQjE_yuZalE0WwsjUTLDCAKYygo-eMA" />
+<meta name="p:domain_verify" content="e77834675cc08d8ddba0aafaafe430e9"/>
+<!--i18n:head--><link rel="alternate" hreflang="en" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/"><link rel="alternate" hreflang="fr" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/fr/"><link rel="alternate" hreflang="ar" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/ar/"><link rel="alternate" hreflang="x-default" href="https://zazakariakarfr13-coder.github.io/supermarket-decoder/"><meta property="og:locale" content="ar_AR"><link rel="stylesheet" href="../assets/i18n.css"><link rel="stylesheet" href="../assets/lang-ar.css"><!--/i18n:head--></head>
+<body class="no-js"><!--i18n:switch--><nav class="lang-switch" aria-label="اللغة"><a href="../index.html" hreflang="en" lang="en">EN</a><a href="../fr/index.html" hreflang="fr" lang="fr">FR</a><span aria-current="true">عربي</span></nav><!--/i18n:switch-->
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+
+<div class="bar" role="note">
+  <div class="wrap">
+    <span><a href="#free-resources" style="text-decoration:none">أدلّة مجانية لملصقات الطعام</a> <span class="dot">●</span> <a href="story/episode-02.html" style="text-decoration:none">قصة مصوّرة جديدة: الحلقة 02</a></span>
+    <span class="r">اقرأ <span class="dot">●</span> فكّك <span class="dot">●</span> استبدل</span>
+  </div>
+</div>
+
+<main id="main">
+  <!-- HERO: free learning first -->
+  <header class="hero">
+    <div class="wrap">
+      <div>
+        <div class="kicker">مدرسة الملصقات المجانية</div>
+        <h1>Supermarket <span class="acc">Decoder</span></h1>
+        <p class="tagline">الواجهة تبيع. والظهر يخبرك.</p>
+        <p class="lead">قوائم فحص مجانية، وشروح بلغة بسيطة، وقصة مصوّرة في السوبرماركت تساعدك على قراءة أي ملصق طعام في 30 ثانية. لا تحتاج إلى شهادة في التغذية.</p>
+        <div class="cta-row">
+          <a class="btn" href="#free-resources">ابدأ بالأدلّة المجانية ↓</a>
+          <a class="btn comic-btn" href="story/episode-02.html">📖 اقرأ القصة المصوّرة الجديدة</a>
+        </div>
+        <div class="sd-search" role="search">
+          <label for="sd-search">ابحث في الموقع</label>
+          <input id="sd-search" type="search" placeholder="جرّب: E471، السكّريات الخفية، مسبّبات الحساسية" autocomplete="off" aria-controls="sd-results">
+          <ul id="sd-results" class="sd-results" hidden aria-label="نتائج البحث في الموقع"></ul>
+          <p id="sd-search-status" class="sd-sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+        </div>
+        <div class="meta"><span>مجاني</span><span>بلا تسجيل</span><span>حقائق هادئة، بلا تخويف من الطعام</span></div>
+      </div>
+      <a class="hero-comic" href="story/episode-02.html" aria-label="اقرأ القصة المصوّرة الجديدة: The Cart Chronicles، الحلقة 02، Liquid Alibis">
+        <span class="hc-tag">جديد · الحلقة 02</span>
+        <span class="hc-title">Liquid Alibis</span>
+        <span class="hc-cast">
+          <img src="../assets/cast/mina.webp" alt="" width="160" height="145">
+          <img src="../assets/cast/tariq.webp" alt="" width="160" height="145">
+          <img src="../assets/cast/kamil.webp" alt="" width="160" height="145">
+        </span>
+        <span class="hc-bubble">«فيه إلكتروليتات!» «والبحر أيضًا. اسأل أي سفينة غارقة.»</span>
+        <span class="hc-go">اقرأ الحلقة ←</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- FREE RESOURCES -->
+  <section id="free-resources">
+    <div class="wrap">
+      <div class="kicker reveal">ابدأ هنا مجانًا</div>
+      <h2 class="reveal">تعلّم الأساسيات قبل تسوّقك القادم.</h2>
+      <p class="sub reveal">أدلّة قصيرة تمنحك الثقة في قراءة قوائم المكوّنات وأسماء السكّر وعبارات مسبّبات الحساسية ورموز المواد المضافة ودرجات معالجة الطعام.</p>
+      <div class="resource-links">
+        <a class="resource-card reveal" href="decoder/"><strong>🔍 مفكّك المكوّنات (أداة جديدة)</strong><span>الصق أي قائمة مكوّنات: السكّريات وأرقام E وعلامات المعالجة، مفكَّكة.</span></a>        <a class="resource-card reveal" href="free-resources/30-second-label-checklist.html"><strong>قائمة فحص الملصق في 30 ثانية</strong><span>روتين سريع تستعمله في السوبرماركت.</span></a>
+        <a class="resource-card reveal" href="free-resources/us-nutrition-facts-label.html"><strong>كيف تقرأ ملصق Nutrition Facts الأمريكي</strong><span>الحصّة، والسعرات، والصوديوم، والسكّريات المضافة، ونسبة % من القيمة اليومية.</span></a>
+        <a class="resource-card reveal" href="free-resources/contains-vs-may-contain.html"><strong>«يحتوي على» أم «قد يحتوي على»</strong><span>ماذا تعني عبارات مسبّبات الحساسية، ولماذا تقرأ القائمة كاملة مع ذلك.</span></a>
+        <a class="resource-card reveal" href="articles/hidden-sugars-five-names.html"><strong>السكّريات الخفية</strong><span>تعرّف على السكّريات وأنواع الشراب الشائعة على الملصق.</span></a>
+        <a class="resource-card reveal" href="additives/"><strong>البحث عن أرقام E</strong><span>E471 وE621 وRed 40 وغيرها: ماذا يفعل كل رمز وماذا تقول الأبحاث.</span></a>
+        <a class="resource-card reveal" href="articles/e-numbers-explained.html"><strong>أرقام E بشرح مبسّط</strong><span>افهم رموز المواد المضافة دون اختصارات قائمة على الخوف.</span></a>
+        <a class="resource-card reveal" href="articles/nova-food-processing-levels.html"><strong>مجموعات المعالجة في تصنيف NOVA</strong><span>ما يستطيع هذا التصنيف أن يخبرك به، وما لا يستطيع.</span></a>
+        <a class="resource-card reveal" href="free-resources/food-label-glossary.html"><strong>قاموس الملصقات</strong><span>تعريفات بلغة بسيطة للمصطلحات الشائعة.</span></a>
+        <a class="resource-card reveal" href="articles/read-food-labels-in-30-seconds.html"><strong>اقرأ الملصق في 30 ثانية</strong><span>خطوات بسيطة للمقارنة بين المنتجات.</span></a>
+        <a class="resource-card reveal" href="factory-vs-kitchen/"><strong>المصنع مقابل المطبخ</strong><span>هل يمكنك صنع Pringles أو Oreo أو Nutella في البيت؟ كيف تصنعها المصانع، مع حكم صريح.</span></a>
+        <a class="resource-card all reveal" href="free-resources/"><strong>تصفّح كل الموارد المجانية ←</strong><span>المكتبة الكاملة لقوائم الفحص والشروح.</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SISTER SITE: Keep or Toss -->
+  <div class="kot-band">
+    <div class="wrap">
+      <a class="kot-box" href="https://zazakariakarfr13-coder.github.io/keep-or-toss/ar/?utm_source=supermarket-decoder&amp;utm_medium=referral&amp;utm_campaign=home-banner">
+        <span class="kot-icon" aria-hidden="true">🧊</span>
+        <span class="kot-text">
+          <small>موقع شقيق جديد · Keep or Toss</small>
+          <strong>هل ما زال طعامك صالحًا للأكل؟</strong>
+          <span>كم تدوم 438 مادة غذائية في الثلاجة والمجمّد والخزانة. أجوبة واضحة: احتفظ أو تخلّص، من بيانات USDA.</span>
+        </span>
+        <span class="kot-go">تحقّق من طعام ↗</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- COMIC -->
+  <section class="alt" id="comic">
+    <div class="wrap comic-row">
+      <div>
+        <div class="kicker reveal">تعلّم وأنت تضحك</div>
+        <h2 class="reveal">The Cart Chronicles: قصة مصوّرة في السوبرماركت</h2>
+        <p class="sub reveal">مينا وطارق والعم كامل في مواجهة السوبرماركت. كل حلقة قصة مصوّرة قصيرة ومضحكة تعلّمك جزءًا من الملصق، مع اختبار في النهاية.</p>
+        <div class="episodes reveal">
+          <a class="ep-card new" href="story/episode-02.html"><span class="ep-no">جديد · الحلقة 02</span><strong>Liquid Alibis</strong><span>رفّ المشروبات: أعمدة الحصص، و«فاكهة حقيقية» بنسبة 5%، وعلبة تبدو ملعونة، وموظ يرفض أن يقول كم فيه من الكافيين.</span><span class="ep-go">اقرأ الحلقة 02 ←</span></a>
+          <a class="ep-card" href="story/"><span class="ep-no">الحلقة 01</span><strong>The Cart Chronicles</strong><span>رفّ حبوب الإفطار: علبة تغازل، و8 حصص في العبوة، وأسماء السكّر المستعارة الكثيرة.</span><span class="ep-go">ابدأ من الحلقة 01 ←</span></a>
+        </div>
+      </div>
+      <a class="comic-strip reveal" href="story/" aria-label="افتح القصة المصوّرة">
+        <span class="cs-panel"><img src="../assets/cast/tariq.webp" alt="" width="160" height="145"><span class="cs-say">مكتوب «طبيعي»! ثلاثة ادعاءات!</span></span>
+        <span class="cs-panel"><img src="../assets/cast/kamil.webp" alt="" width="160" height="145"><span class="cs-say">الواجهة إعلان. اقلبها.</span></span>
+        <span class="cs-panel"><img src="../assets/cast/mina.webp" alt="" width="160" height="145"><span class="cs-say">استدر يا روميو.</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE -->
+  <section>
+    <div class="wrap">
+      <div class="kicker reveal">جرّب الآن</div>
+      <h2 class="reveal">فكّك ملصقًا حقيقيًّا</h2>
+      <p class="sub reveal">المس كل مكوّن في لوح الحبوب بالشوكولاتة هذا. يعلّمك الدليل أن تفعل ذلك في ذهنك، في ثوانٍ.</p>
+      <div class="decode-duo">
+      <div class="decoder reveal">
+        <div class="lbl">المكوّنات · لوح حبوب بالشوكولاتة</div>
+        <div class="tokens" id="tokens" role="group" aria-label="مكوّنات لفكّها"></div>
+        <div class="explain" id="explain" aria-live="polite"><div class="t">المس مكوّنًا من الأعلى</div><div>سترى ما هو، ولماذا يستعمله المصنع، وهل هو علامة على المعالجة الفائقة.</div></div>
+        <div class="score" id="score" aria-live="polite"></div>
+      </div>
+        <figure class="reel reveal paused" id="reel">
+          <div class="reel-frame">
+            <video id="reelVideo" muted loop playsinline preload="none" poster="assets/video/crunch-box-poster.jpg" aria-label="رسوم متحركة: علبة حبوب اسمها Super Crunch مكتوب على واجهتها Natural؛ تنفتح قائمة مكوّناتها وتُترجم ثلاثة ادعاءات: متعدّد الحبوب، ونكهة طبيعية، وشراب الغلوكوز.">
+              <source src="../assets/video/crunch-box.mp4" type="video/mp4">
+            </video>
+            <button type="button" class="reel-btn reel-play" id="reelPlay" aria-label="شغّل الرسوم المتحركة">▶</button>
+            <button type="button" class="reel-btn" id="reelSound" aria-label="شغّل الصوت" aria-pressed="false">🔇</button>
+          </div>
+          <figcaption>ما لن تقوله العلبة · 23 ث</figcaption>
+        </figure>
+      </div>
+      <p class="reveal" style="margin-top:18px"><a class="btn" href="decoder/">فكّك ملصقك أنت: الصق أي قائمة مكوّنات ←</a></p>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="kicker reveal">الطريقة</div>
+      <h2 class="reveal">الفحص في 30 ثانية</h2>
+      <p class="sub reveal">ثلاث خطوات، دائمًا بالترتيب نفسه. بعد أسبوع من التمرين، ستفعلها دون تفكير.</p>
+      <div class="steps">
+        <div class="step reveal"><span class="time">2 ث</span><div class="n">1</div><h3>اقلب العبوة</h3><p>تجاهل الواجهة. الظهر هو المعلومات: اذهب مباشرة إلى قائمة المكوّنات.</p></div>
+        <div class="step reveal"><span class="time">10 ث</span><div class="n">2</div><h3>اقرأ أول ثلاثة</h3><p>تُرتَّب المكوّنات عادة تنازليًّا حسب الوزن. وأول ثلاثة نقطة بداية مفيدة، لا القصة كلها؛ اقرأ القائمة كاملة.</p></div>
+        <div class="step reveal"><span class="time">15 ث</span><div class="n">3</div><h3>ابحث عن العلامات</h3><p>ابحث عن علامات التركيب الصناعي، مثل بعض المنكّهات أو الملوّنات أو المستحلبات. وجودها قد يدعوك إلى نظرة أدقّ، لكن لا يوجد مكوّن بعينه يصنّف المنتج تلقائيًّا على أنه فائق المعالجة.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM: the paid-guide story starts here, mid-page -->
+  <section>
+    <div class="wrap">
+      <div class="kicker reveal">هل يبدو هذا مألوفًا؟</div>
+      <h2 class="reveal">تأخذ علبة زبادي. هل هي اختيار جيد؟</h2>
+      <p class="sub reveal">واجهة العبوة أغلى إعلان في المتجر. والظهر هو مكان الحقيقة، لكنه مكتوب للمصانع والجهات الرقابية، لا لك.</p>
+      <div class="problem">
+        <div class="pack front reveal">
+          <h3>الواجهة</h3>
+          <div class="big">زبادي بالفراولة</div>
+          <div class="chips"><span class="chip">طبيعي</span><span class="chip">مصنوع بفاكهة حقيقية</span><span class="chip">مصدر للكالسيوم</span></div>
+        </div>
+        <div class="pack back reveal">
+          <h3>الظهر</h3>
+          <div class="ing">حليب، <b>سكّر</b>، فراولة <b>(8%)</b>، قشدة، <b>نشا ذرة معدَّل</b>، <b>منكّه</b>، عصير جزر مركّز، مثبّت (بكتين)، خمائر حيّة.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIDE -->
+  <section class="alt" id="inside">
+    <div class="wrap">
+      <div class="inside-head">
+        <div>
+          <div class="kicker reveal">تريد الدليل الكامل؟</div>
+          <h2 class="reveal">الكتاب الإلكتروني: 10 فصول. 53 صفحة. بلا خوف.</h2>
+          <p class="sub reveal">Supermarket Decoder كتاب إلكتروني مصوّر (PDF، بالإنجليزية). كل ما في الموارد المجانية وأكثر: قصير، ومصوّر، وكل كلمة تقنية مشروحة بلغة بسيطة. يضمّ ورقة ملخّص للطباعة وخطة لمدة 14 يومًا.</p>
+          <div class="cta-row reveal">
+            <a class="btn" href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&utm_medium=website&utm_campaign=supermarket_decoder&utm_content=hero_cta-ar" target="_blank" rel="noopener" data-gumroad-action="buy">احصل على الدليل <span class="p" data-gumroad-product="supermarket-decoder" data-gumroad-field="price">$9</span></a>
+          </div>
+        </div>
+        <div class="cover reveal">
+          <img src="https://public-files.gumroad.com/nbbfx502vssnurktwmojzb6uuqz2" alt="غلاف Supermarket Decoder: ملصق مكوّنات تحت عدسة مكبّرة تُبرز شراب الغلوكوز والمستحلب E471 والمنكّه." width="420" height="594" loading="lazy">
+          <div class="badge">اقرأ أي ملصق في 30 ث</div>
+        </div>
+      </div>
+      <div class="inside">
+        <div class="item reveal"><div class="ic" aria-hidden="true">🧭</div><div><h3>ماذا تعني «فائقة المعالجة» حقًّا</h3><p>السلّم ذو المستويات الـ4 الذي يستعمله العلماء، وما تثبته الأبحاث وما لا تثبته.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">⏱️</div><div><h3>الفحص في 30 ثانية</h3><p>فحص أوّلي بسيط للأطعمة المعبّأة، مع أمثلة ملصقات من عدّة بلدان في الدليل.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">🍬</div><div><h3>أسماء السكّر الكثيرة</h3><p>أنواع الشراب والدكستروز والمالتوديكسترين وحيلة «التقسيم» التي تُخفي السكّر.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">🔢</div><div><h3>كل عائلات أرقام E</h3><p>ما تدلّ عليه رموز المواد المضافة، وما وظائفها، وكيف تقيّمها في سياقها.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">🏷️</div><div><h3>الادعاءات التسويقية مفكَّكة</h3><p>ماذا تعني «لايت» و«غني بالبروتين» قانونيًّا، ومتى يكون ادعاء «طبيعي» محدَّدًا أو مجرّد تسويق.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">🛒</div><div><h3>بدائل في 7 أروقة</h3><p>الخبز، وحبوب الإفطار، والألبان، والمشروبات، والوجبات الخفيفة، والصلصات، والوجبات الجاهزة: اختيارات أفضل بالميزانية نفسها.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">🧒</div><div><h3>طعام الأطفال وعلب الغداء</h3><p>السكّر معروضًا بمكعّبات السكّر، وأفكار لعلب الغداء، وبطاقة «محقّق الملصقات».</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">🌍</div><div><h3>الملصقات حول العالم</h3><p>الولايات المتحدة، والاتحاد الأوروبي/المملكة المتحدة، والمغرب، والشرق الأوسط: الفحص نفسه، وتصاميم مختلفة.</p></div></div>
+        <div class="item reveal"><div class="ic" aria-hidden="true">📅</div><div><h3>خطة 14 يومًا + ورقة ملخّص</h3><p>استبدال صغير كل يوم، وجدول متابعة للطباعة، وورقة ملخّص في صفحة.</p></div></div>
+      </div>
+      <div class="cta-row" style="margin-top:34px">
+        <a class="btn" href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&utm_medium=website&utm_campaign=supermarket_decoder&utm_content=inside_cta-ar" target="_blank" rel="noopener" data-gumroad-action="buy">احصل على Supermarket Decoder <span class="p" data-gumroad-product="supermarket-decoder" data-gumroad-field="price">$9</span></a>
+      </div>
+      <div class="kit reveal" id="kit">
+        <img src="https://public-files.gumroad.com/oajowlnpnrw2wvtuf6zc4qt8qe33" alt="Complete Kit من Supermarket Decoder: الدليل، ومرجع الجيب لأرقام E، وأوراق مطبوعة للرفوف" width="1280" height="720" loading="lazy">
+        <div>
+          <span class="save">وفّر $5</span>
+          <h3>أو احصل على Complete Kit</h3>
+          <ul>
+            <li><strong>الدليل من 53 صفحة</strong> (كل ما سبق)</li>
+            <li><strong>مرجع الجيب لأرقام E:</strong> 123 رمزًا، ماذا يفعل كل منها وأيّها يستحق نظرة ثانية</li>
+            <li><strong>أوراق مطبوعة للرفوف:</strong> بطاقات للمحفظة، وملصقان للثلاجة، ولعبة «محقّق الملصقات» للأطفال، وخلفية للهاتف</li>
+          </ul>
+          <a class="btn" href="https://zakarfr.gumroad.com/l/complete-kit?utm_source=github_pages&utm_medium=website&utm_campaign=complete_kit&utm_content=inside_kit-ar" target="_blank" rel="noopener" data-gumroad-action="buy">احصل على Complete Kit <span class="p">$13</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section>
+    <div class="wrap">
+      <div class="kicker reveal">هل هو مناسب لك؟</div>
+      <h2 class="reveal">مصنوع للمشغولين الذين يريدون أن يأكلوا أفضل قليلًا</h2>
+      <div class="who" style="margin-top:28px">
+        <div class="list yes reveal"><h3>مثالي إذا كنت…</h3><ul>
+          <li>تريد أن تفهم الملصقات دون شهادة في التغذية</li>
+          <li>أبًا أو أمًّا تعبت من التخمين في رفّ الأطفال</li>
+          <li>تتسوّق بميزانية محدودة ولا وقت لديك لطبخ كل شيء</li>
+          <li>تشتري منتجات مستوردة بملصقات بعدّة لغات</li>
+          <li>تفضّل الحقائق الهادئة على العناوين المخيفة</li>
+        </ul></div>
+        <div class="list no reveal"><h3>ليس لك إذا كنت تريد…</h3><ul>
+          <li>حمية أو وعدًا بإنقاص الوزن</li>
+          <li>نصيحة طبية لحالة صحية محدّدة</li>
+          <li>قائمة أطعمة «ممنوعة»</li>
+          <li>كتابًا مدرسيًّا من 300 صفحة</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTHOR -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="kicker reveal">من داخل الصناعة</div>
+      <h2 class="reveal">لماذا تثق بهذا الدليل؟</h2>
+      <div class="author reveal" style="margin-top:24px">
+        <div class="mono" aria-hidden="true">ZF</div>
+        <p><b>كتبه Zakaria Froud</b>، وهو تقني في طور التكوين في الصناعات الغذائية. لا يشرح الدليل ما على الملصق فقط، بل <em>لماذا</em> تضيفه المصانع: مدّة الصلاحية، والقوام، والتكلفة. ويستند الدليل إلى مواد منظمة الصحة العالمية وEFSA، والقانون الأوروبي، ودراسات محكَّمة، مع قائمة كاملة بالمصادر في الفصل 10.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="wrap">
+      <div class="kicker reveal">أسئلة</div>
+      <h2 class="reveal">من المفيد أن تعرف</h2>
+      <div class="faq" style="margin-top:24px">
+        <details><summary>ما شكله؟</summary><p>كتاب إلكتروني: ملف PDF من 53 صفحة (A4)، بالإنجليزية، مصمَّم للقراءة على الهاتف أو اللوحي أو القارئ الإلكتروني أو الحاسوب. ورقة الملخّص وجدول المتابعة لـ14 يومًا قابلان للطباعة.</p></details>
+        <details><summary>هل سيقول لي ماذا آكل؟</summary><p>لا. يعلّمك قراءة الملصقات والمقارنة بين المنتجات، ثم يقترح بدائل بسيطة. والقرار لك. وهو للتثقيف فقط، وليس نصيحة طبية أو غذائية.</p></details>
+        <details><summary>هل يفيد خارج أوروبا؟</summary><p>نعم. يقارن الفصل 8 بين ملصقات الولايات المتحدة والاتحاد الأوروبي/المملكة المتحدة والمغرب/الشرق الأوسط، ويبيّن كيف تحوّل الصوديوم إلى ملح، والقيم لكل حصّة إلى قيم لكل 100 g، وغير ذلك.</p></details>
+        <details><summary>هل عليّ شراء طعام عضوي غالٍ؟</summary><p>لا. كل بديل في الدليل موسوم بأنه أرخص، أو مماثل، أو أغلى قليلًا ممّا تشتريه الآن. ومعظمها أرخص.</p></details>
+        <details><summary>كيف أحصل عليه؟</summary><p>بعد الدفع مباشرة، تصلك إمكانية التحميل فورًا على Gumroad وعبر البريد الإلكتروني.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="final">
+    <div class="wrap">
+      <h2>الواجهة تبيع. <span>والظهر يخبرك.</span></h2>
+      <p>تعلّم قراءة الظهر في 30 ثانية، واجعل كل جولة تسوّق أذكى قليلًا.</p>
+      <a class="btn" href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&utm_medium=website&utm_campaign=supermarket_decoder&utm_content=final_cta-ar" target="_blank" rel="noopener" data-gumroad-action="buy">احصل على الدليل <span class="p" data-gumroad-product="supermarket-decoder" data-gumroad-field="price">$9</span></a>
+      <a class="btn ghost" href="https://zakarfr.gumroad.com/l/complete-kit?utm_source=github_pages&utm_medium=website&utm_campaign=complete_kit&utm_content=final_kit-ar" target="_blank" rel="noopener" style="margin-inline-start:8px">Complete Kit · $13</a>
+      <div class="small"><span class="launch" id="launchFinal">عرض الإطلاق: أدخل <span class="code">LAUNCH40</span> عند الدفع لخصم 40%، حتى 3 ديسمبر. · </span>تحميل فوري للكتاب الإلكتروني (PDF، بالإنجليزية) · دفع آمن عبر Gumroad</div>
+      <div class="small">اشتريت الدليل؟ <a href="https://zakarfr.gumroad.com/l/supermarket-decoder" target="_blank" rel="noopener">اترك تقييمًا صادقًا في صفحة التحميل على Gumroad</a>.</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Zakaria Froud · Supermarket Decoder</span>
+    <span><a href="decoder/">مفكّك المكوّنات</a> · <a href="https://zazakariakarfr13-coder.github.io/keep-or-toss/ar/?utm_source=supermarket-decoder&amp;utm_medium=referral&amp;utm_campaign=home-footer">Keep or Toss: حفظ الطعام</a> · <a href="story/">القصة المصوّرة: الحلقة 01</a> · <a href="story/episode-02.html">الحلقة 02</a> · <a href="stories/the-natural-cereal-mystery.html">لغز حبوب الإفطار «الطبيعية»</a> · <a href="free-resources/">الموارد المجانية</a> · <a href="about.html">من نحن</a> · <a href="sources.html">المصادر</a></span>
+    <span>للتثقيف فقط، وليس نصيحة طبية.</span>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky" aria-hidden="true">
+  <div class="nm">Supermarket Decoder<small>كتاب إلكتروني من 53 صفحة + ورقة ملخّص</small></div>
+  <a class="btn" href="https://zakarfr.gumroad.com/l/supermarket-decoder?utm_source=github_pages&utm_medium=website&utm_campaign=supermarket_decoder&utm_content=sticky_cta-ar" target="_blank" rel="noopener" data-gumroad-action="buy" tabindex="-1">احصل عليه <span class="p" data-gumroad-product="supermarket-decoder" data-gumroad-field="price">$9</span></a>
+</div>
+
+<script>
+(function () {
+  document.body.classList.remove("no-js");
+
+  // Launch-offer messages, shown only until the code expires (3 Dec 2026, 23:59 Paris)
+  var end = Date.UTC(2026, 11, 3, 22, 59, 0);
+  if (Date.now() < end) {
+    ["launchBar", "launchFinal"].forEach(function (id) { var el = document.getElementById(id); if (el) el.classList.add("on"); });
+    var d = document.getElementById("defaultBar"); if (d) d.style.display = "none";
+  }
+
+  // Interactive decoder
+  var items = [
+    { n: "رقائق الشوفان (25%)", k: "ok", t: "طعام مطبخ", d: "شوفان كامل، المستوى 1. الطعام الحقيقي في اللوح، لكنه ربعه فقط." },
+    { n: "شراب الغلوكوز", k: "sig", t: "سكّر صناعي", d: "نشا مفكَّك إلى شراب حلو. أرخص من السكّر ويُبقي الألواح طريّة. علامة على المعالجة الفائقة." },
+    { n: "شوكولاتة بالحليب", k: "warn", t: "مكوّن مركّب", d: "وصفة داخل الوصفة: سكّر، وزبدة كاكاو، وحليب مجفّف، وكتلة كاكاو، ومستحلب. اقرأ دائمًا ما بين القوسين." },
+    { n: "دهن النخيل", k: "warn", t: "دهن مصانع", d: "شبه صلب، ورخيص، وثابت. يُبقي اللوح متماسكًا لأشهر. غني بالدهون المشبعة." },
+    { n: "مرطِّب: غليسيرول", k: "sig", t: "مادة مضافة للقوام", d: "يحبس الماء ليبقى اللوح طريًّا. لن تضيفه أبدًا في البيت. علامة على المعالجة الفائقة." },
+    { n: "دكستروز", k: "sig", t: "سكّر آخر", d: "اسم آخر للغلوكوز. استعمال عدّة سكّريات يُنزل كلًّا منها في القائمة: حيلة «التقسيم»." },
+    { n: "مستحلب: ليسيتين الصويا", k: "ok", t: "مستحلب (E322)", d: "تساعد الليسيتينات مكوّنات مثل الزيت والماء على البقاء ممتزجة. يدلّ E322 على الليسيتينات؛ ووجوده وحده لا يجعل المنتج جيدًا أو سيئًا." },
+    { n: "منكّه", k: "sig", t: "بديل للطعم", d: "يُعيد الطعم الذي ضاع أثناء المعالجة. كلمة «منكّه» وحدها قد تعني مادة مصنوعة بالتخليق الكيميائي. علامة على المعالجة الفائقة." }
+  ];
+  var box = document.getElementById("tokens"), ex = document.getElementById("explain"), sc = document.getElementById("score");
+  var seen = {};
+  var label = { ok: "مكوّن أساسي", warn: "اقرأ السياق", sig: "علامة معالجة" };
+  items.forEach(function (it, i) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "tok " + it.k; b.textContent = it.n; b.setAttribute("aria-pressed", "false");
+    b.addEventListener("click", function () {
+      Array.prototype.forEach.call(box.children, function (c) { c.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true");
+      seen[i] = it.k;
+      ex.innerHTML = '<div class="t"></div><div class="d"></div>';
+      ex.querySelector(".t").textContent = it.t;
+      var v = document.createElement("span"); v.className = "v " + it.k; v.textContent = label[it.k]; ex.querySelector(".t").appendChild(v);
+      ex.querySelector(".d").textContent = it.d;
+      var keys = Object.keys(seen), sig = keys.filter(function (k) { return seen[k] === "sig"; }).length;
+      if (keys.length === items.length) {
+        sc.innerHTML = 'النتيجة: <span>علامات المعالجة: ' + sig + '.</span> قارن قائمة المكوّنات كاملة والقيم الغذائية والسعر قبل أن تقرّر.';
+      } else {
+        sc.textContent = "فُكّك " + keys.length + " من " + items.length + " · علامات المعالجة: " + sig;
+      }
+    });
+    box.appendChild(b);
+  });
+
+  // Reveal on scroll
+  var els = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: 0.12 });
+    els.forEach(function (el) { io.observe(el); });
+  } else { els.forEach(function (el) { el.classList.add("in"); }); }
+
+  // Sticky buy bar only once the reader reaches the guide section (mid-page), never on first sight
+  var sticky = document.getElementById("sticky"), hero = document.getElementById("inside");
+  // crunch-box animation: plays muted while on screen; never autoplays for reduced-motion users
+  (function () {
+    var fig = document.getElementById("reel"), v = document.getElementById("reelVideo");
+    if (!fig || !v) return;
+    var playBtn = document.getElementById("reelPlay"), snd = document.getElementById("reelSound");
+    var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var chosen = false;
+    function play() { var p = v.play(); if (p && p.catch) p.catch(function () { fig.classList.add("paused"); }); }
+    v.addEventListener("play", function () { fig.classList.remove("paused"); });
+    v.addEventListener("pause", function () { fig.classList.add("paused"); });
+    playBtn.addEventListener("click", function () { chosen = true; play(); });
+    v.addEventListener("click", function () { chosen = true; if (v.paused) play(); else v.pause(); });
+    snd.addEventListener("click", function () {
+      v.muted = !v.muted; snd.textContent = v.muted ? "🔇" : "🔊";
+      snd.setAttribute("aria-pressed", String(!v.muted)); snd.setAttribute("aria-label", v.muted ? "Turn sound on" : "Turn sound off");
+      if (!v.muted && v.paused) { chosen = true; play(); }
+    });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.4) { if (!calm || chosen) play(); }
+          else if (!v.paused) v.pause();
+        });
+      }, { threshold: [0, 0.4] }).observe(v);
+    }
+  })();
+
+  if ("IntersectionObserver" in window && sticky && hero) {
+    new IntersectionObserver(function (es) {
+      var show = es[0].isIntersecting || es[0].boundingClientRect.top < 0;
+      sticky.classList.toggle("show", show);
+      sticky.setAttribute("aria-hidden", show ? "false" : "true");
+      sticky.querySelector("a").tabIndex = show ? 0 : -1;
+    }).observe(hero);
+  }
+})();
+</script>
+<script defer src="../assets/nav.js"></script></body>
+</html>
