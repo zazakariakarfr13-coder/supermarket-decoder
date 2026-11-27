@@ -275,6 +275,16 @@ def main():
         index_file = make_search_index.out_file(lang)
         if not index_file.is_file() or index_file.read_text(encoding="utf-8") != make_search_index.render(lang):
             errors.append(f"{index_file.relative_to(ROOT).as_posix()} is out of date: run python scripts/make_search_index.py")
+    # French and Arabic twins of the hand-written pages must match their English page + translation.
+    import make_twins  # noqa: E402
+    try:
+        import contextlib, io
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            stale = make_twins.main(["--check"])
+        if stale:
+            errors.extend(line for line in out.getvalue().splitlines() if line.strip())
+    except ValueError as exc:  # an English page changed under its translation, or a number differs
+        errors.append(f"translations: {exc}")
     for entry in [e for lang in make_search_index.LANGS for e in make_search_index.build_index(lang)["pages"]]:
         rel = entry["u"] if entry["u"].endswith(".html") else entry["u"] + "index.html"
         if "assets/nav.js" not in (ROOT / rel).read_text(encoding="utf-8", errors="replace"):

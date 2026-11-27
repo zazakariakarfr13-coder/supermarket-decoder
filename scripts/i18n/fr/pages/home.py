@@ -3,7 +3,7 @@ SIG = "bd5f22fdb117"
 T = [
     # 0-5 head
     "Supermarket Decoder — Lire n’importe quelle étiquette en 30 secondes",
-    "Un guide ebook (PDF) de 53 pages, posé et pratique, sur les étiquettes : repérer les aliments ultra-transformés, décoder les numéros E et les allégations, et choisir mieux dans le même rayon. Le guide est en anglais.",
+    "Ebook pratique de 53 pages (PDF, en anglais) : repérer l’ultra-transformé, décoder numéros E et allégations, et mieux choisir dans le même rayon.",
     "Supermarket Decoder — Lire n’importe quelle étiquette en 30 secondes",
     "Un ebook pratique de 53 pages (en anglais) sur les listes d’ingrédients, les sucres cachés, les numéros E, les allégations marketing et les remplacements malins au supermarché.",
     "Supermarket Decoder — Lire n’importe quelle étiquette en 30 secondes",

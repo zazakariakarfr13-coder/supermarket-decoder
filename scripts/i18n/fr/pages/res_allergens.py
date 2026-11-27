@@ -2,9 +2,9 @@ PAGE = "free-resources/contains-vs-may-contain.html"
 SIG = "65a79f330e1b"
 T = [
     "« Contient » ou « Peut contenir » sur les étiquettes | Supermarket Decoder",
-    "Ce que veut dire la mention d’allergènes « Contient », ce que veut dire l’avertissement « Peut contenir », et pourquoi il faut toujours lire toute la liste d’ingrédients.",
+    "Ce que veulent dire les mentions d’allergènes « Contient » et « Peut contenir », et pourquoi il faut toujours lire toute la liste d’ingrédients.",
     "« Contient » ou « Peut contenir » sur les étiquettes",
-    "Ce que veut dire la mention d’allergènes « Contient », ce que veut dire l’avertissement « Peut contenir », et pourquoi il faut toujours lire toute la liste d’ingrédients.",
+    "Ce que veulent dire les mentions d’allergènes « Contient » et « Peut contenir », et pourquoi il faut toujours lire toute la liste d’ingrédients.",
     "Supermarket Decoder : « Contient » ou « Peut contenir »",
     "Supermarket Decoder · Lire · Décoder · Remplacer",
     "Explication gratuite · Allergènes sur l’étiquette",

@@ -2,7 +2,7 @@ PAGE = "free-resources/us-nutrition-facts-label.html"
 SIG = "7f230143e157"
 T = [
     "Lire l’étiquette nutritionnelle américaine (Nutrition Facts) | Guide gratuit",
-    "Comment lire l’étiquette Nutrition Facts américaine : portion, calories, sodium, sucres ajoutés et la règle des 5 % / 20 % de la valeur quotidienne, avec un exemple simple.",
+    "Lire l’étiquette Nutrition Facts américaine : portion, calories, sodium, sucres ajoutés et la règle des 5 % / 20 % de valeur quotidienne.",
     "Supermarket Decoder : lire l’étiquette nutritionnelle américaine",
     "Lire l’étiquette nutritionnelle américaine (Nutrition Facts)",
     "Un guide pratique sur la portion, les calories, le % de valeur quotidienne, le sodium et les sucres ajoutés sur les étiquettes américaines.",

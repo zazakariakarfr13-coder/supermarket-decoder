@@ -3,9 +3,9 @@ SIG = "1725a5b4c8d3"
 _SEP = ["·"] * 11
 T = [
     "Les numéros E expliqués : à quoi sert chaque additif | Supermarket Decoder",
-    "Un numéro E identifie un additif alimentaire ; ce n’est pas une note de danger. Découvrez le rôle d’E300, E330, E440 et E500, et pourquoi la fonction et le contexte comptent.",
+    "Un numéro E identifie un additif ; ce n’est pas une note de danger. Le rôle d’E300, E330, E440 et E500, et pourquoi le contexte compte.",
     "Les numéros E expliqués : à quoi sert chaque additif",
-    "Un numéro E identifie un additif alimentaire ; ce n’est pas une note de danger. Découvrez le rôle d’E300, E330, E440 et E500, et pourquoi la fonction et le contexte comptent.",
+    "Un numéro E identifie un additif ; ce n’est pas une note de danger. Le rôle d’E300, E330, E440 et E500, et pourquoi le contexte compte.",
     "Supermarket Decoder : les numéros E expliqués",
     "Supermarket Decoder · Lire · Décoder · Remplacer",
     "Les additifs sans panique",

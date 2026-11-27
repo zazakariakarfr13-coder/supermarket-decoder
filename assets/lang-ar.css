@@ -13,3 +13,12 @@ html[lang="ar"] .lead{font-family:"Noto Naskh Arabic",Georgia,serif}
 /* letter-spacing breaks the joins between Arabic letters, and Arabic has no capitals */
 html[lang="ar"] *{letter-spacing:0!important;text-transform:none!important}
 html[lang="ar"] bdi,html[lang="ar"] [dir="ltr"]{unicode-bidi:isolate}
+/* Comics: the U.S. "Nutrition Facts" panels stay in English, so they stay left-to-right
+   (.facts[aria-label] is the cereal-mystery panel; additive pages use .facts without aria-label) */
+html[lang="ar"] .nf,html[lang="ar"] .nutrition-card,html[lang="ar"] .facts[aria-label]{direction:ltr}
+/* Comic episode 01: speech-bubble tails point back to the speaker once the row is mirrored */
+html[dir="rtl"] .dialogue .line p::before{left:auto;right:-15px;border-width:9px 0 9px 15px;border-color:transparent transparent transparent var(--ink)}
+html[dir="rtl"] .dialogue .line p::after{left:auto;right:-9px;border-width:7px 0 7px 11px;border-color:transparent transparent transparent var(--white)}
+html[dir="rtl"] .dialogue .line:has(.kamil) p::after{border-left-color:#e8f6ef}
+html[dir="rtl"] .dialogue .line:has(.tariq) p::before{right:auto;left:-15px;border-width:9px 15px 9px 0;border-color:transparent var(--ink) transparent transparent}
+html[dir="rtl"] .dialogue .line:has(.tariq) p::after{right:auto;left:-9px;border-width:7px 11px 7px 0;border-color:transparent #fff3cf transparent transparent}

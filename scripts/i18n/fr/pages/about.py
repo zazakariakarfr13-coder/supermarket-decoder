@@ -2,9 +2,9 @@ PAGE = "about.html"
 SIG = "c8ddf388e13d"
 T = [
     "À propos de Supermarket Decoder | Comprendre les étiquettes",
-    "Qui fait Supermarket Decoder, pourquoi le projet existe et comment ses explications sont écrites : des faits posés, des sources publiques et aucune peur de la nourriture. Le choix reste le vôtre.",
+    "Qui fait Supermarket Decoder, pourquoi, et comment les explications sont écrites : des faits posés, des sources publiques, sans peur de la nourriture.",
     "À propos de Supermarket Decoder | Comprendre les étiquettes",
-    "Qui fait Supermarket Decoder, pourquoi le projet existe et comment ses explications sont écrites : des faits posés, des sources publiques et aucune peur de la nourriture. Le choix reste le vôtre.",
+    "Qui fait Supermarket Decoder, pourquoi, et comment les explications sont écrites : des faits posés, des sources publiques, sans peur de la nourriture.",
     "Supermarket Decoder : À propos de Supermarket Decoder | Comprendre les étiquettes",
     "Supermarket Decoder · Lire · Décoder · Remplacer",
     "À propos du projet",

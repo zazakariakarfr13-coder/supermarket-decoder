@@ -2,9 +2,9 @@ PAGE = "free-resources/index.html"
 SIG = "44d661ca3db1"
 T = [
     "Ressources gratuites sur les étiquettes | Supermarket Decoder",
-    "Listes de contrôle gratuites, glossaire des ingrédients et explications sur l’étiquette nutritionnelle américaine, les sucres cachés, les numéros E et les groupes NOVA.",
+    "Listes de contrôle gratuites, glossaire et explications sur l’étiquette américaine, les sucres cachés, les numéros E et les groupes NOVA.",
     "Ressources gratuites sur les étiquettes",
-    "Listes de contrôle gratuites, glossaire des ingrédients et explications sur l’étiquette nutritionnelle américaine, les sucres cachés, les numéros E et les groupes NOVA.",
+    "Listes de contrôle gratuites, glossaire et explications sur l’étiquette américaine, les sucres cachés, les numéros E et les groupes NOVA.",
     "Supermarket Decoder : ressources gratuites sur les étiquettes",
     "Supermarket Decoder · Lire · Décoder · Remplacer",
     "Bibliothèque gratuite",

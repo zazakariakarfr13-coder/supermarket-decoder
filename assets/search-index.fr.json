@@ -10,10 +10,70 @@
  ],
  "pages": [
   {
+   "u": "fr/",
+   "t": "Accueil",
+   "g": "Pour commencer",
+   "k": "Supermarket Decoder — Lire n’importe quelle étiquette en 30 secondes Supermarket Decoder Ebook pratique de 53 pages (PDF, en anglais) : repérer l’ultra-transformé, décoder numéros E et allégations, et mieux choisir dans le même rayon."
+  },
+  {
    "u": "fr/decoder/",
    "t": "Décodeur d’ingrédients (outil gratuit)",
    "g": "Pour commencer",
    "k": "Décodeur d’ingrédients : décodez n’importe quelle étiquette, gratuitement | Supermarket Decoder Décodeur d’ingrédients : un vérificateur d’étiquettes gratuit Décodeur gratuit : collez une étiquette ou scannez un code-barres pour repérer les sucres, comprendre les additifs E et voir les indices de transformation (NOVA)."
+  },
+  {
+   "u": "fr/free-resources/",
+   "t": "Toutes les ressources gratuites",
+   "g": "Pour commencer",
+   "k": "Ressources gratuites sur les étiquettes | Supermarket Decoder Commencez par les ressources gratuites. Listes de contrôle gratuites, glossaire et explications sur l’étiquette américaine, les sucres cachés, les numéros E et les groupes NOVA."
+  },
+  {
+   "u": "fr/free-resources/food-label-glossary.html",
+   "t": "Glossaire de l’étiquette alimentaire en mots simples",
+   "g": "Guides gratuits",
+   "k": "Glossaire de l’étiquette alimentaire en mots simples | Supermarket Decoder Glossaire de l’étiquette alimentaire en mots simples Un glossaire de l’étiquette en mots simples : liste d’ingrédients, tableau nutritionnel, noms du sucre, numéros E, émulsifiants, épaississants et NOVA."
+  },
+  {
+   "u": "fr/free-resources/30-second-label-checklist.html",
+   "t": "La liste de contrôle des 30 secondes",
+   "g": "Guides gratuits",
+   "k": "La liste de contrôle des 30 secondes | Supermarket Decoder La liste de contrôle des 30 secondes Liste gratuite à imprimer : retournez le paquet, lisez les trois premiers ingrédients, repérez sirops et émulsifiants, puis comparez pour 100 g."
+  },
+  {
+   "u": "fr/free-resources/us-nutrition-facts-label.html",
+   "t": "Lire l’étiquette nutritionnelle américaine (Nutrition Facts)",
+   "g": "Guides gratuits",
+   "k": "Lire l’étiquette nutritionnelle américaine (Nutrition Facts) | Guide gratuit Comment lire une étiquette Nutrition Facts Lire l’étiquette Nutrition Facts américaine : portion, calories, sodium, sucres ajoutés et la règle des 5 % / 20 % de valeur quotidienne."
+  },
+  {
+   "u": "fr/free-resources/contains-vs-may-contain.html",
+   "t": "« Contient » ou « Peut contenir » sur les étiquettes",
+   "g": "Guides gratuits",
+   "k": "« Contient » ou « Peut contenir » sur les étiquettes | Supermarket Decoder « Contient » ou « Peut contenir » Ce que veulent dire les mentions d’allergènes « Contient » et « Peut contenir », et pourquoi il faut toujours lire toute la liste d’ingrédients."
+  },
+  {
+   "u": "fr/articles/hidden-sugars-five-names.html",
+   "t": "Les noms cachés du sucre : 8 à repérer sur les étiquettes",
+   "g": "Articles",
+   "k": "Les noms cachés du sucre : 8 à repérer sur les étiquettes | Supermarket Decoder Les noms cachés du sucre : 8 à repérer sur les étiquettes Reconnaître le sucre de canne, le sirop de maïs, le sirop de glucose, le dextrose, le sucre inverti, le miel, le jus de fruits concentré et le sirop de riz complet."
+  },
+  {
+   "u": "fr/articles/e-numbers-explained.html",
+   "t": "Les numéros E expliqués : à quoi sert chaque additif",
+   "g": "Articles",
+   "k": "Les numéros E expliqués : à quoi sert chaque additif | Supermarket Decoder Les numéros E expliqués : comprendre le rôle de l’additif Un numéro E identifie un additif ; ce n’est pas une note de danger. Le rôle d’E300, E330, E440 et E500, et pourquoi le contexte compte."
+  },
+  {
+   "u": "fr/articles/nova-food-processing-levels.html",
+   "t": "Les quatre niveaux de transformation NOVA",
+   "g": "Articles",
+   "k": "Les quatre niveaux de transformation NOVA | Supermarket Decoder Les quatre niveaux de transformation NOVA Transformé ou ultra-transformé : les quatre groupes NOVA expliqués avec des exemples du quotidien, des aliments frais aux sodas, et ce que l’échelle ne dit pas."
+  },
+  {
+   "u": "fr/articles/read-food-labels-in-30-seconds.html",
+   "t": "Lire une étiquette alimentaire en 30 secondes",
+   "g": "Articles",
+   "k": "Lire une étiquette alimentaire en 30 secondes | Supermarket Decoder Lire une étiquette alimentaire en 30 secondes Un tour d’œil de 30 secondes : retournez l’emballage, lisez les trois premiers ingrédients, repérez les indices de formulation et comparez le tableau nutritionnel."
   },
   {
    "u": "fr/additives/",
@@ -188,6 +248,36 @@
    "t": "Twinkies : peut-on le faire maison ?",
    "g": "Usine ou cuisine",
    "k": "Twinkies : peut-on le faire maison ? | Supermarket Decoder Twinkies : peut-on le faire maison ? 🧁 Plus ou moins. Les Twinkies maison sont vraiment bons. Ce qu’on ne peut pas copier, c’est la conservation de 45 jours. Verdict : plus ou moins, 8/10."
+  },
+  {
+   "u": "fr/story/",
+   "t": "BD : épisode 01",
+   "g": "BD et histoires",
+   "k": "The Cart Chronicles — Supermarket Decoder The Cart Chronicles. Une BD de supermarché gratuite : suivez Mina, Tariq et l’oncle Kamil dans des courses chaotiques et apprenez à décoder les ingrédients, les sucres et les portions."
+  },
+  {
+   "u": "fr/story/episode-02.html",
+   "t": "BD : épisode 02, Alibis liquides",
+   "g": "BD et histoires",
+   "k": "Liquid Alibis — The Cart Chronicles, épisode 02 | Supermarket Decoder Liquid Alibis Épisode 02 : Mina, Tariq et l’oncle Kamil au rayon boissons. Une BD gratuite sur les colonnes par portion, le pourcentage de jus et la caféine."
+  },
+  {
+   "u": "fr/stories/the-natural-cereal-mystery.html",
+   "t": "Lire les étiquettes : le mystère des céréales « naturelles »",
+   "g": "BD et histoires",
+   "k": "Lire les étiquettes : le mystère des céréales « naturelles » | Supermarket Decoder LES CÉRÉALES QUI DISAIENT « NATUREL » Une enquête drôle de la détective Dee : lire la liste d’ingrédients, vérifier les portions d’une étiquette Nutrition Facts et comparer des céréales."
+  },
+  {
+   "u": "fr/about.html",
+   "t": "À propos",
+   "g": "À propos",
+   "k": "À propos de Supermarket Decoder | Comprendre les étiquettes Comprendre l’étiquette. Garder le choix. Qui fait Supermarket Decoder, pourquoi, et comment les explications sont écrites : des faits posés, des sources publiques, sans peur de la nourriture."
+  },
+  {
+   "u": "fr/sources.html",
+   "t": "Sources",
+   "g": "À propos",
+   "k": "Sources et méthode éditoriale | Supermarket Decoder Vérifier la source. Lire le contexte. Les sources de santé publique, d’étiquetage et d’additifs alimentaires utilisées pour construire les contenus éducatifs de Supermarket Decoder."
   }
  ]
 }

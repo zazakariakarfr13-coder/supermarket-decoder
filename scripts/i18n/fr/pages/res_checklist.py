@@ -2,9 +2,9 @@ PAGE = "free-resources/30-second-label-checklist.html"
 SIG = "9d5b76c80667"
 T = [
     "La liste de contrôle des 30 secondes | Supermarket Decoder",
-    "Une liste gratuite à imprimer : retournez l’emballage, lisez les trois premiers ingrédients, cherchez les signaux comme sirops et émulsifiants, puis comparez pour 100 g.",
+    "Liste gratuite à imprimer : retournez le paquet, lisez les trois premiers ingrédients, repérez sirops et émulsifiants, puis comparez pour 100 g.",
     "La liste de contrôle des 30 secondes",
-    "Une liste gratuite à imprimer : retournez l’emballage, lisez les trois premiers ingrédients, cherchez les signaux comme sirops et émulsifiants, puis comparez pour 100 g.",
+    "Liste gratuite à imprimer : retournez le paquet, lisez les trois premiers ingrédients, repérez sirops et émulsifiants, puis comparez pour 100 g.",
     "Supermarket Decoder : la liste de contrôle des 30 secondes",
     "Supermarket Decoder · Lire · Décoder · Remplacer",
     "Liste gratuite à imprimer",
