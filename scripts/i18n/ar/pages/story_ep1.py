@@ -296,11 +296,11 @@ T = [
 ]
 
 R = [
-    ("Correct. In the U.S., ingredients are generally listed from greatest to least by weight.",
+    ("In the U.S., ingredients are generally listed from greatest to least by weight.",
      "في الولايات المتحدة، تُرتَّب المكوّنات عادة من الأكبر إلى الأصغر حسب الوزن."),
-    ("Right. Four grams is roughly one teaspoon, so ten grams is about two and a half teaspoons.",
+    ("Four grams is roughly one teaspoon, so ten grams is about two and a half teaspoons.",
      "أربعة غرامات تقارب ملعقة صغيرة، إذن عشرة غرامات نحو ملعقتين ونصف."),
-    ("Exactly. On the U.S. label, 20% Daily Value or more is generally considered high for a nutrient; 5% or less is low.",
+    ("On the U.S. label, 20% Daily Value or more is generally considered high for a nutrient; 5% or less is low.",
      "على الملصق الأمريكي، تُعدّ 20% من القيمة اليومية أو أكثر مرتفعة عادة للعنصر الغذائي؛ و5% أو أقل منخفضة."),
     ("The marketing team sends you a thank-you card. Better move: flip the pack and check the ingredient list and Nutrition Facts panel.",
      "فريق التسويق يرسل لك بطاقة شكر. الحركة الأفضل: اقلب العبوة وتحقّق من قائمة المكوّنات وجدول Nutrition Facts."),
