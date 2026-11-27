@@ -25,6 +25,17 @@ A public educational website and marketing hub by Zakaria Froud. It helps everyd
 - `robots.txt` and `sitemap.xml` — search-engine discovery files.
 - `.github/workflows/` — automatic GitHub Pages deployment and scheduled site-quality checks.
 
+## Languages (English, French, Arabic)
+
+Every public page has a French twin under `fr/` and an Arabic twin under `ar/` (right-to-left), with the same file names. A language switcher sits at the top of each page; hreflang links and `sitemap.xml` alternates tell search engines about the three versions. The paid guide and the sources stay in English, and every number, E-code and source link is identical in all three languages.
+
+- **Generated pages** (additives, Factory vs. Kitchen) translate through `scripts/i18n/<lang>/additives.py` and `fvk.py`; rerun `make_additives.py` / `make_fvk.py`.
+- **Hand-written pages** (home, articles, free resources, comics, about, sources) are built from the English page plus `scripts/i18n/<lang>/pages/<name>.py` by `py -3 scripts/make_twins.py`. After editing an English page, run `py -3 scripts/segments.py dump <page>` and update both translations; the build stops if the English page changed or if a translation drops or changes a number.
+- **Ingredient Decoder:** interface text is in `assets/decoder-text.{fr,ar}.js`; ingredient explanations are generated into `assets/decoder-data.{fr,ar}.js` by `scripts/build_decoder_text.py`. Check them with `node scripts/decoder_strings.js check fr` (and `ar`).
+- **Language markup and search:** `py -3 scripts/i18n_pages.py` (hreflang, switcher, sitemap) and `py -3 scripts/make_search_index.py` (one index per language).
+- `scripts/check_site.py` fails if a twin is missing or out of date, a page links into another language, or the sitemap or search indexes are stale.
+- Arabic uses the self-hosted Noto Naskh Arabic font (SIL OFL, `assets/fonts/`) and `assets/lang-ar.css`. Use CSS logical properties (`margin-inline-start`, `inset-inline-end`…) in new styles so pages mirror correctly.
+
 ## Paid product protection
 
 The complete 53-page paid PDF is **not included** in this public repository. Do not upload the paid PDF, customer information, order exports, credentials, or private Gumroad files here.
