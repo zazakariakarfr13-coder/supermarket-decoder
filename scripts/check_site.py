@@ -2,6 +2,7 @@
 """Validate local links, fragments, sitemap targets and basic page metadata."""
 
 from html.parser import HTMLParser
+import re
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 import sys
@@ -83,6 +84,56 @@ def resolve_local_target(page: Path, raw_url: str):
     except (ValueError, OSError):
         return None, parsed.fragment
     return target, parsed.fragment
+
+
+_A_HREF = re.compile(r'<a\b[^>]*\shref="([^"]+)"', re.I)
+_SWITCH_BLOCK = re.compile(r"<!--i18n:switch-->.*?<!--/i18n:switch-->", re.S)
+
+
+def check_languages(root: Path = ROOT, pages=None) -> list:
+    """French and Arabic twins: every language present once a page is translated, right lang/dir,
+    marker blocks current (scripts/i18n_pages.py), and no links from one language into another
+    (the language switcher excepted)."""
+    import i18n_pages as ip
+    site = ip.Site(root, pages)
+    errors = []
+    for base in site.pages:
+        have = site.langs_for(base)
+        if len(have) > 1:
+            for lang in ip.LANGS:
+                if lang not in have:
+                    errors.append(f"missing {lang} twin: {base}")
+    for path in site.all_paths():
+        f = root / path
+        text = f.read_text(encoding="utf-8", errors="replace")
+        lang = ip.lang_of(path)
+        m = re.search(r"<html\b[^>]*>", text)
+        tag = m.group(0) if m else ""
+        if f'lang="{lang}"' not in tag:
+            errors.append(f'{path}: needs <html lang="{lang}">')
+        if lang == "ar" and 'dir="rtl"' not in tag:
+            errors.append(f'{path}: needs dir="rtl" on <html>')
+        if site.apply(text, path) != text:
+            errors.append(f"{path}: language markup out of date (run py -3 scripts/i18n_pages.py)")
+        for href in _A_HREF.findall(_SWITCH_BLOCK.sub("", text)):
+            parsed = urlsplit(href)
+            if parsed.scheme or parsed.netloc or href.startswith(("#", "//", "mailto:")) or not parsed.path:
+                continue
+            target = (f.parent / unquote(parsed.path)).resolve()
+            if target.is_dir() or parsed.path.endswith("/"):
+                target = target / "index.html"
+            try:
+                rel = target.relative_to(Path(root).resolve()).as_posix()
+            except ValueError:
+                continue
+            if not rel.endswith(".html") or rel == "404.html" or rel.startswith("assets/"):
+                continue
+            if ip.lang_of(rel) != lang:
+                errors.append(f"{path}: links to another language: {href}")
+    sm = root / "sitemap.xml"
+    if sm.is_file() and sm.read_text(encoding="utf-8") != site.sitemap():
+        errors.append("sitemap.xml: out of date (run py -3 scripts/i18n_pages.py)")
+    return errors
 
 
 def main():
@@ -308,6 +359,8 @@ def main():
         ):
             if required not in detail_html:
                 errors.append(f"{detail_page.relative_to(ROOT)}: missing estimate-method disclosure {required!r}.")
+
+    errors.extend(check_languages())
 
     if warnings:
         print("Site validation warnings:")
