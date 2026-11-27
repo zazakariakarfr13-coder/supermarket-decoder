@@ -9,7 +9,7 @@ from collections import Counter
 _AR_TWO = re.compile("(?:ساعت|يوم|أسبوع|شهر|سنت|مرت|دقيقت|درجت)(?:ين|ان)(?![ء-ي])")
 _AR_ONE = re.compile("[ء-ي]+ (?:واحد|واحدة)(?![ء-ي])")
 _URL = re.compile(r"https?://\S+")
-_ECODE = re.compile(r"\bE ?(\d{3,4}[a-z]?)\b")
+_ECODE = re.compile(r"(?<![A-Za-z0-9])E ?(\d{3,4}[a-z]?)(?![A-Za-z0-9])")  # Arabic "و" may touch the E
 _NUM = re.compile(r"\d+(?:[.,]\d+)?")
 
 

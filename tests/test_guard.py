@@ -25,3 +25,8 @@ class GuardTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ArabicConjunctionTests(unittest.TestCase):
+    def test_waw_before_ecode(self):
+        guard.same("x", "E150c and E150d", "E150c وE150d")
