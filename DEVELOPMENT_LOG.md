@@ -300,3 +300,14 @@ The most recent inspected commits on 16 November 2026 refined the US Nutrition F
 - **Checks:** `check_site.py` passes with no warnings on 137 pages; 37 Python tests, the menu/search JS tests and the decoder-string checks pass; the English decoder output is unchanged (golden test).
 - **Gumroad tracking:** links on French and Arabic pages add `-fr` / `-ar` to `utm_content`, so sales by language can be told apart.
 - **Known limits:** the decoder does not read Arabic-script ingredient labels yet; pins, videos and marketing stay English. Keep or Toss links to the decoder in the reader's language (separate branch `decoder-lang` there, to push after this site).
+
+
+### 2026-11-28 — Daily development review
+
+- Compared active `main` from `216842c1` to `ee5a07e3`: 25 commits ahead, 0 behind, 241 changed paths. Main development is the French/Arabic site and Decoder localization, RTL support, barcode/QR scan integration, language-aware search/UTM tracking and automated translation/path tests.
+- Latest upstream fix corrects French/Arabic comic avatar CSS URLs and video poster paths; site validator now checks CSS `url()` and `poster=` as well as ordinary links. The compare manifest and detailed risk review are recorded in [`DAILY_REVIEW_2026-11-28.md`](DAILY_REVIEW_2026-11-28.md).
+- Repository-scoped open issue and PR searches returned none. Original `Zakaria` remains redirect-only.
+- Gumroad main guide remains published at $9; 21–28 Nov analytics returned 2 views, 0 sales, $0 revenue (small sample). No product edits. Pinterest queue remains unchanged; upcoming 28 Nov swaps Pin, 1 Dec swaps Pin and 2 Dec ingredient challenge Pin still have non-matching destinations despite the new pages existing.
+- Deployment limitation: push-triggered Pages run status could not be retrieved through the connected GitHub actions interface; commit combined status returned no checks. Latest commit deployment is not claimed as confirmed. Check Actions before declaring it live.
+- No code change was warranted because upstream fixed the discovered path regression and added tests. This review adds a dated repository report and exact changed-path manifest. Paid PDF/customer data stayed private; no social posts, queue edits or purchases.
+- Next: confirm deployment; audit language/jurisdiction accuracy; test RTL, scanner permissions/privacy and accessibility on devices; approve any external Gumroad/Metricool edits.
